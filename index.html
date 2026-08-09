@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipeFish Labs — AI Infrastructure That Actually Works</title>
+  <meta name="description" content="PipeFish Labs is not your average AI automation agency. We combine autonomous multi-agent systems, post-quantum cryptography, fintech engineering, InfoSec, and management consulting into one weaponized platform for businesses that refuse to fail.">
+  <meta name="author" content="PipeFish Labs">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#00D4FF">
+  <meta name="keywords" content="AI automation agency, multi-agent orchestration, post-quantum cryptography migration, autonomous AI agents, loop engineering, fintech AI engineering, algorithmic trading systems, EU AI Act compliance, management consulting, cybersecurity InfoSec, ML-KEM Kyber, ML-DSA Dilithium, SLH-DSA SPHINCS+, NIST PQC standards, AI agency enterprise">
+  <link rel="canonical" href="https://pipefishlabs.com/">
+  <meta property="og:site_name" content="PipeFish Labs">
+  <meta property="og:title" content="PipeFish Labs — AI Infrastructure That Actually Works">
+  <meta property="og:description" content="AI automation, PQC migration, autonomous multi-agent systems, fintech engineering, InfoSec, loop engineering, and management consulting — under one roof. Built for businesses that refuse to fail.">
+  <meta property="og:url" content="https://pipefishlabs.com">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://pipefishlabs.com/logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PipeFish Labs — AI Automation Agency">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@pipefishlabs">
+  <meta name="twitter:creator" content="@pipefishlabs">
+  <meta name="twitter:title" content="PipeFish Labs — AI Infrastructure That Actually Works">
+  <meta name="twitter:description" content="AI automation, PQC migration, autonomous multi-agent systems, fintech engineering, InfoSec, and management consulting — built for businesses that refuse to fail.">
+  <meta name="twitter:image" content="https://pipefishlabs.com/logo.png">
+  <meta name="twitter:image:alt" content="PipeFish Labs Logo">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img, svg { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:            #06070C;
+      --surface:       #0C0E18;
+      --elevated:      #111524;
+      --border:        rgba(0, 212, 255, 0.10);
+      --border-strong: rgba(0, 212, 255, 0.22);
+
+      --cyan:          #00D4FF;
+      --cyan-glow:     rgba(0, 212, 255, 0.35);
+      --cyan-dim:      rgba(0, 212, 255, 0.07);
+      --cyan-mid:      rgba(0, 212, 255, 0.15);
+
+      --magenta:       #E040FF;
+      --magenta-glow:  rgba(224, 64, 255, 0.35);
+      --magenta-dim:   rgba(224, 64, 255, 0.07);
+      --magenta-mid:   rgba(224, 64, 255, 0.15);
+
+      --violet:        #7B3FE4;
+      --orange:        #FF6B35;
+      --orange-dim:    rgba(255, 107, 53, 0.10);
+
+      --text-strong:   #D8E2F5;
+      --text-body:     #6E80A2;
+      --text-dim:      #344059;
+
+      --font-display:  'Orbitron', 'Courier New', monospace;
+      --font-body:     'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono:     'JetBrains Mono', 'Courier New', monospace;
+
+      --r-sm:  6px;
+      --r-md:  12px;
+      --r-lg:  20px;
+
+      --nav-h: 72px;
+      --max-w: 1280px;
+      --pad-x: clamp(1.5rem, 5vw, 4rem);
+      --sec-y: clamp(80px, 10vw, 130px);
+    }
+
+    /* ── BASE ── */
+    body {
+      background: var(--bg);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--pad-x);
+    }
+    section { padding-block: var(--sec-y); }
+
+    /* ── TYPE SCALE ── */
+    .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      color: var(--text-strong);
+    }
+    .h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      text-wrap: balance;
+      color: var(--text-strong);
+    }
+    .h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.35rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--text-strong);
+    }
+    .lead {
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-body);
+    }
+
+    /* ── UTIL ── */
+    .cyan     { color: var(--cyan); }
+    .magenta  { color: var(--magenta); }
+    .center   { text-align: center; }
+
+    .glow-c {
+      color: var(--cyan);
+      text-shadow: 0 0 24px var(--cyan-glow), 0 0 64px rgba(0,212,255,0.15);
+    }
+    .glow-m {
+      color: var(--magenta);
+      text-shadow: 0 0 24px var(--magenta-glow), 0 0 64px rgba(224,64,255,0.15);
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: var(--r-md);
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-p {
+      background: linear-gradient(135deg, var(--cyan), #0099CC);
+      color: #000;
+      box-shadow: 0 0 24px var(--cyan-glow);
+    }
+    .btn-p:hover { box-shadow: 0 0 48px var(--cyan-glow); transform: translateY(-2px); }
+    .btn-m {
+      background: linear-gradient(135deg, var(--magenta), #9920BB);
+      color: #fff;
+      box-shadow: 0 0 24px var(--magenta-glow);
+    }
+    .btn-m:hover { box-shadow: 0 0 48px var(--magenta-glow); transform: translateY(-2px); }
+    .btn-o {
+      border: 1px solid var(--border-strong);
+      color: var(--text-strong);
+      background: var(--cyan-dim);
+    }
+    .btn-o:hover { border-color: var(--cyan); background: var(--cyan-mid); color: var(--cyan); }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 32px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 4px 40px rgba(0,212,255,0.06);
+      transform: translateY(-3px);
+    }
+    .card-icon {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--r-sm);
+      background: var(--cyan-dim);
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    .sec-head { margin-bottom: 60px; }
+    .sec-head .label { margin-bottom: 14px; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    }
+
+    /* ── BADGES ── */
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge {
+      padding: 5px 13px;
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--text-body);
+      transition: all 0.2s;
+    }
+    .badge:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ───────── NAV ───────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h); z-index: 100;
+      transition: background 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    #nav.scrolled {
+      background: rgba(6, 7, 12, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+    }
+    .nav-inner {
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 17px; font-weight: 900; letter-spacing: 0.04em;
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo img { height: 38px; width: auto; }
+    .logo span:first-of-type { color: var(--cyan); }
+    .logo span:last-of-type  { color: var(--magenta); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.03em;
+      color: var(--text-body); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    .ham {
+      display: none; flex-direction: column; gap: 5px; padding: 8px;
+    }
+    .ham span { display: block; width: 22px; height: 2px; background: var(--text-strong); transition: all 0.3s; }
+
+    .mob-nav {
+      display: none; position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: rgba(6,7,12,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 20px var(--pad-x);
+      flex-direction: column; gap: 4px; z-index: 99;
+    }
+    .mob-nav.open { display: flex; }
+    .mob-nav a {
+      font-size: 15px; font-weight: 500;
+      color: var(--text-strong); padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ───────── HERO ───────── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: var(--nav-h); overflow: hidden;
+    }
+    #hcanvas {
+      position: absolute; inset: 0; opacity: 0.45;
+    }
+    .hero-grad {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 50% at 15% 45%, rgba(0,212,255,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 45% at 85% 55%, rgba(224,64,255,0.05) 0%, transparent 70%);
+    }
+    .hero-body {
+      position: relative; z-index: 2;
+      padding-block: 80px 100px; width: 100%;
+    }
+    .hero-eye {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+    }
+    .hero-eye-line { height: 1px; width: 36px; background: var(--cyan); }
+
+    .hero-h1 { margin-bottom: 8px; }
+    .hero-h1-b { margin-bottom: 28px; }
+
+    .hero-lead { max-width: 56ch; margin-bottom: 44px; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 72px; }
+
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 36px; }
+    .hstat { border-left: 2px solid var(--border-strong); padding-left: 14px; }
+    .hstat-n {
+      font-family: var(--font-display);
+      font-size: 1.55rem; font-weight: 700;
+      color: var(--text-strong); line-height: 1.1;
+    }
+    .hstat-l { font-size: 11px; color: var(--text-dim); letter-spacing: 0.05em; margin-top: 4px; }
+
+    /* ───────── MARQUEE ───────── */
+    .marquee-wrap {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding-block: 14px; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 56px;
+      animation: marquee 32s linear infinite;
+      width: max-content;
+    }
+    .mi {
+      display: flex; align-items: center; gap: 9px;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+    .mi .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+    /* ───────── PROBLEM ───────── */
+    #problem { background: var(--surface); position: relative; overflow: hidden; }
+    #problem::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%); width: 500px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+    .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .prob-list { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
+    .prob-item { display: flex; gap: 14px; }
+    .prob-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; width: 28px; }
+    .prob-text strong { display: block; color: var(--text-strong); font-size: 15px; margin-bottom: 3px; }
+    .prob-text p { font-size: 13.5px; line-height: 1.65; }
+
+    .callout-box {
+      background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(224,64,255,0.04));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-lg); padding: 36px;
+    }
+    .callout-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-weight: 600; line-height: 1.45;
+      color: var(--text-strong); margin-bottom: 20px;
+    }
+    .callout-quote em { color: var(--cyan); font-style: normal; }
+
+    /* ───────── PILLARS ───────── */
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 34px 30px;
+      position: relative; overflow: hidden;
+      transition: all 0.3s;
+    }
+    .pillar::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .pillar:hover::before { opacity: 1; }
+    .pillar:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: 0 8px 48px rgba(0,212,255,0.08); }
+    .pillar-num { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em; margin-bottom: 18px; }
+    .pillar-icon { font-size: 30px; margin-bottom: 18px; display: block; }
+
+    /* ───────── SERVICES ───────── */
+    #services { background: var(--surface); }
+    .svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .svc {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 26px 22px;
+      transition: all 0.3s;
+    }
+    .svc:hover { border-color: var(--border-strong); background: var(--surface); box-shadow: 0 4px 28px rgba(0,212,255,0.07); }
+    .svc-icon { font-size: 26px; margin-bottom: 14px; }
+    .svc-name {
+      font-family: var(--font-display);
+      font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em;
+      color: var(--text-strong); margin-bottom: 9px; line-height: 1.35;
+    }
+    .svc-desc { font-size: 12.5px; line-height: 1.65; color: var(--text-body); }
+    .svc-tag {
+      display: inline-block; margin-top: 14px;
+      padding: 3px 10px; border-radius: 100px;
+      font-size: 10px; font-family: var(--font-mono);
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .t-core { background: var(--cyan-dim); color: var(--cyan); }
+    .t-excl { background: var(--magenta-dim); color: var(--magenta); }
+    .t-qant { background: var(--orange-dim); color: var(--orange); }
+
+    /* ───────── INDUSTRIES ───────── */
+    .ind-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+    .ind {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 22px 18px; text-align: center;
+      transition: all 0.25s;
+    }
+    .ind:hover { border-color: var(--cyan); background: var(--cyan-dim); transform: translateY(-3px); }
+    .ind-icon { font-size: 26px; margin-bottom: 10px; }
+    .ind-name { font-size: 12.5px; font-weight: 500; color: var(--text-strong); }
+
+    /* ───────── QUANTUM ───────── */
+    #quantum {
+      background: linear-gradient(135deg, #07050E 0%, #06070C 60%, #09060D 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    #quantum::before {
+      content: ''; position: absolute; top: -150px; left: 50%;
+      transform: translateX(-50%); width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(224,64,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .q-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .q-warn {
+      display: flex; gap: 14px;
+      background: rgba(255,107,53,0.07);
+      border: 1px solid rgba(255,107,53,0.18);
+      border-radius: var(--r-md);
+      padding: 18px 22px; margin-top: 28px;
+    }
+    .q-warn p { font-size: 13.5px; color: rgba(255,150,100,0.85); line-height: 1.65; }
+    .q-warn strong { color: var(--orange); }
+    .q-cards { display: flex; flex-direction: column; gap: 14px; }
+    .q-card {
+      background: rgba(224,64,255,0.04);
+      border: 1px solid rgba(224,64,255,0.13);
+      border-radius: var(--r-md); padding: 22px;
+      transition: all 0.3s;
+    }
+    .q-card:hover { border-color: rgba(224,64,255,0.3); background: rgba(224,64,255,0.07); }
+    .q-card-t { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--magenta); margin-bottom: 7px; }
+    .q-card-d { font-size: 13px; line-height: 1.65; color: var(--text-body); }
+
+    /* ───────── AGENTS ───────── */
+    .agents-viz {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; flex-wrap: wrap; margin-block: 44px;
+    }
+    .a-node {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+      font-family: var(--font-mono); font-size: 11.5px; color: var(--cyan);
+      transition: all 0.25s;
+    }
+    .a-node:hover { background: var(--cyan-dim); transform: scale(1.04); }
+    .a-center {
+      background: linear-gradient(135deg, var(--cyan-dim), var(--magenta-dim));
+      border-color: var(--cyan);
+      color: var(--text-strong);
+      font-family: var(--font-display);
+      font-size: 12px; font-weight: 700;
+    }
+    .a-arrow { font-size: 18px; color: var(--text-dim); }
+    .agents-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+    /* ───────── TECH ───────── */
+    #tech { background: var(--surface); }
+    .tech-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+    /* ───────── PROCESS ───────── */
+    .proc-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    .proc-steps::before {
+      content: ''; position: absolute; top: 35px;
+      left: 12.5%; right: 12.5%; height: 1px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    }
+    .proc-step { text-align: center; padding: 20px; }
+    .proc-n {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: var(--elevated);
+      border: 2px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 20px; font-weight: 700;
+      color: var(--cyan); margin: 0 auto 22px;
+      position: relative; z-index: 2;
+      transition: all 0.3s;
+    }
+    .proc-step:hover .proc-n { background: var(--cyan-dim); border-color: var(--cyan); box-shadow: 0 0 24px var(--cyan-glow); }
+    .proc-t { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--text-strong); margin-bottom: 10px; }
+    .proc-d { font-size: 13px; line-height: 1.65; color: var(--text-body); }
+
+    /* ───────── STATS ───────── */
+    #stats { padding-block: 72px; }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden;
+    }
+    .stat-b { background: var(--surface); padding: 36px 28px; text-align: center; transition: background 0.3s; }
+    .stat-b:hover { background: var(--elevated); }
+    .stat-n {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900; color: var(--cyan); line-height: 1.0;
+      margin-bottom: 7px; font-variant-numeric: tabular-nums;
+    }
+    .stat-l { font-size: 12.5px; color: var(--text-body); line-height: 1.45; }
+
+    /* ───────── CTA ───────── */
+    #cta { position: relative; overflow: hidden; }
+    #cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,212,255,0.05) 0%, transparent 70%);
+    }
+    .cta-in { position: relative; z-index: 2; text-align: center; max-width: 820px; margin: 0 auto; }
+    .cta-lbl-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 28px; }
+    .cta-line { flex: 1; max-width: 72px; height: 1px; background: linear-gradient(90deg, transparent, var(--border-strong)); }
+    .cta-line:last-child { background: linear-gradient(270deg, transparent, var(--border-strong)); }
+    .cta-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 36px; }
+    .cta-note { margin-top: 18px; font-size: 13px; color: var(--text-dim); }
+
+    /* ───────── FOOTER ───────── */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding-block: 60px 28px; }
+    .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+    .ft-brand-name { font-family: var(--font-display); font-size: 20px; font-weight: 900; }
+    .ft-brand-name span:first-child { color: var(--cyan); }
+    .ft-brand-name span:last-child  { color: var(--magenta); }
+    .ft-brand p { font-size: 13.5px; line-height: 1.75; margin-top: 14px; max-width: 28ch; }
+    .ft-col h4 { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-strong); margin-bottom: 18px; }
+    .ft-col a { display: block; font-size: 13.5px; color: var(--text-body); padding-block: 5px; transition: color 0.2s; }
+    .ft-col a:hover { color: var(--cyan); }
+    .ft-bot { border-top: 1px solid var(--border); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+    .ft-bot p { font-size: 12.5px; color: var(--text-dim); }
+
+    /* ───────── ANIMATION ───────── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+
+    .ai { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .ai.vis { opacity: 1; transform: translateY(0); }
+
+    /* ───────── RESPONSIVE ───────── */
+    @media (max-width: 1100px) {
+      .svc-grid { grid-template-columns: repeat(3,1fr); }
+      .ft-grid  { grid-template-columns: 1fr 1fr; }
+      .tech-cols { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 900px) {
+      :root { --sec-y: 72px; }
+      .pillars-grid { grid-template-columns: repeat(2,1fr); }
+      .prob-grid, .q-grid { grid-template-columns: 1fr; gap: 44px; }
+      .proc-steps { grid-template-columns: repeat(2,1fr); }
+      .proc-steps::before { display: none; }
+      .svc-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-row { grid-template-columns: repeat(2,1fr); }
+      .agents-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 660px) {
+      :root { --sec-y: 56px; }
+      .nav-links, #nav .btn { display: none; }
+      .ham { display: flex; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .proc-steps { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .ft-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero-btns { flex-direction: column; }
+      .hero-btns .btn { justify-content: center; }
+      .tech-cols { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ai { opacity:1; transform:none; transition:none; }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pipefishlabs.com/#organization",
+      "name": "PipeFish Labs",
+      "url": "https://pipefishlabs.com",
+      "logo": {"@type": "ImageObject", "url": "https://pipefishlabs.com/logo.png", "width": 512, "height": 512},
+      "description": "AI automation agency specializing in autonomous multi-agent orchestration, post-quantum cryptography migration, fintech engineering, InfoSec/cybersecurity, loop engineering, and management consulting for businesses across every industry.",
+      "email": "hello@pipefishlabs.com",
+      "areaServed": "Worldwide",
+      "knowsAbout": ["AI Automation", "Post-Quantum Cryptography", "Multi-Agent Orchestration", "Algorithmic Trading", "EU AI Act Compliance", "Cybersecurity", "Management Consulting", "Loop Engineering", "Fintech Development", "ML-KEM Kyber", "ML-DSA Dilithium", "SLH-DSA SPHINCS+"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Automation & Security Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Automation & Workflow Engineering"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Multi-Agent Orchestration Systems"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Post-Quantum Cryptography Migration"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Algorithmic Trading Systems"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "EU AI Act Compliance"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Management Consulting & Operational Auditing"}}
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pipefishlabs.com/#website",
+      "url": "https://pipefishlabs.com",
+      "name": "PipeFish Labs",
+      "description": "The most comprehensive AI automation agency — multi-agent orchestration, post-quantum cryptography, fintech engineering, cybersecurity, and management consulting.",
+      "publisher": {"@id": "https://pipefishlabs.com/#organization"}
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://pipefishlabs.com",
+      "name": "PipeFish Labs — AI Infrastructure That Actually Works",
+      "isPartOf": {"@id": "https://pipefishlabs.com/#website"}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="PipeFish Labs">
+        <img src="./logo.png" alt="PipeFish Labs" onerror="this.style.display='none'">
+        <span>PipeFish</span><span> Labs</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#quantum">Quantum</a></li>
+        <li><a href="#agents">Multi-Agent</a></li>
+        <li><a href="#process">Process</a></li>
+      </ul>
+      <a href="#cta" class="btn btn-p" style="flex-shrink:0">Free Audit →</a>
+      <button class="ham" aria-label="Open menu" aria-expanded="false" id="ham">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mob-nav" id="mobnav">
+  <a href="#services"   onclick="closeNav()">Services</a>
+  <a href="#industries" onclick="closeNav()">Industries</a>
+  <a href="#quantum"    onclick="closeNav()">Quantum Ready</a>
+  <a href="#agents"     onclick="closeNav()">Multi-Agent</a>
+  <a href="#process"    onclick="closeNav()">Process</a>
+  <a href="#cta"        onclick="closeNav()" class="btn btn-p" style="margin-top:8px;justify-content:center">Free Audit →</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero" role="banner">
+  <canvas id="hcanvas" aria-hidden="true"></canvas>
+  <div class="hero-grad" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-body">
+      <div class="hero-eye ai">
+        <div class="hero-eye-line"></div>
+        <span class="label">AI Infrastructure · Quantum-Ready · Zero Compromise</span>
+      </div>
+      <h1 class="h1 hero-h1 ai" style="transition-delay:.08s">
+        Your Competitors Bought a Chatbot.
+      </h1>
+      <div class="h1 hero-h1-b ai" style="transition-delay:.14s">
+        <span class="glow-c">You're About to Buy</span>
+        <span class="glow-m"> the Future.</span>
+      </div>
+      <p class="lead hero-lead ai" style="transition-delay:.20s">
+        PipeFish Labs is the only firm combining autonomous AI agents, post-quantum cryptography,
+        fintech engineering, InfoSec, and management consulting into one devastating platform.
+        We don't automate your business — we <em style="color:var(--text-strong);font-style:normal">reinvent it.</em>
+      </p>
+      <div class="hero-btns ai" style="transition-delay:.26s">
+        <a href="#cta"      class="btn btn-p">Get a Free Operational Audit ↗</a>
+        <a href="#services" class="btn btn-o">Explore the Arsenal</a>
+      </div>
+      <div class="hero-stats ai" style="transition-delay:.32s">
+        <div class="hstat">
+          <div class="hstat-n glow-c">15+</div>
+          <div class="hstat-l">Core Disciplines</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n glow-c">20+</div>
+          <div class="hstat-l">Industries Served</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n glow-c">Q-Day</div>
+          <div class="hstat-l">Ready. Are You?</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n glow-m">∞</div>
+          <div class="hstat-l">Customization Depth</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mi"><span class="dot"></span>AI Automation</span>
+    <span class="mi"><span class="dot"></span>Loop Engineering</span>
+    <span class="mi"><span class="dot"></span>Post-Quantum Cryptography</span>
+    <span class="mi"><span class="dot"></span>Autonomous Multi-Agent Systems</span>
+    <span class="mi"><span class="dot"></span>Management Consulting</span>
+    <span class="mi"><span class="dot"></span>InfoSec &amp; Encryption</span>
+    <span class="mi"><span class="dot"></span>Fintech Engineering</span>
+    <span class="mi"><span class="dot"></span>Algorithmic Trading</span>
+    <span class="mi"><span class="dot"></span>EU AI Act Compliance</span>
+    <span class="mi"><span class="dot"></span>Operational Auditing</span>
+    <span class="mi"><span class="dot"></span>Data Governance</span>
+    <span class="mi"><span class="dot"></span>Quantum Computing</span>
+    <span class="mi"><span class="dot"></span>Workflow Orchestration</span>
+    <span class="mi"><span class="dot"></span>Custom Middleware</span>
+    <!-- duplicate for seamless loop -->
+    <span class="mi"><span class="dot"></span>AI Automation</span>
+    <span class="mi"><span class="dot"></span>Loop Engineering</span>
+    <span class="mi"><span class="dot"></span>Post-Quantum Cryptography</span>
+    <span class="mi"><span class="dot"></span>Autonomous Multi-Agent Systems</span>
+    <span class="mi"><span class="dot"></span>Management Consulting</span>
+    <span class="mi"><span class="dot"></span>InfoSec &amp; Encryption</span>
+    <span class="mi"><span class="dot"></span>Fintech Engineering</span>
+    <span class="mi"><span class="dot"></span>Algorithmic Trading</span>
+    <span class="mi"><span class="dot"></span>EU AI Act Compliance</span>
+    <span class="mi"><span class="dot"></span>Operational Auditing</span>
+    <span class="mi"><span class="dot"></span>Data Governance</span>
+    <span class="mi"><span class="dot"></span>Quantum Computing</span>
+    <span class="mi"><span class="dot"></span>Workflow Orchestration</span>
+    <span class="mi"><span class="dot"></span>Custom Middleware</span>
+  </div>
+</div>
+
+<!-- ─── PROBLEM ─── -->
+<section id="problem">
+  <div class="container">
+    <div class="prob-grid">
+      <div>
+        <div class="label ai">The Industry Problem</div>
+        <h2 class="h2 ai" style="margin-top:14px">The AI Agency Graveyard<br>Is Getting Crowded.</h2>
+        <p class="ai" style="margin-top:16px;font-size:15px;line-height:1.75">
+          Every week, another shop slaps "AI-powered" on their deck and starts selling automation
+          they barely understand. They'll wrap a no-code tool in a logo, charge you a retainer,
+          and disappear when you need actual strategic depth.
+        </p>
+        <div class="prob-list">
+          <div class="prob-item ai">
+            <div class="prob-icon">❌</div>
+            <div class="prob-text">
+              <strong>They automate tasks. We automate entire operations.</strong>
+              <p>Most agencies focus on a single tool. PipeFish Labs architects end-to-end operational intelligence — from intake to outcome, across every business unit.</p>
+            </div>
+          </div>
+          <div class="prob-item ai">
+            <div class="prob-icon">❌</div>
+            <div class="prob-text">
+              <strong>They ignore security. We bake it into the foundation.</strong>
+              <p>AI without InfoSec is a liability. We design compliance, encryption, and data governance into every system — not as an afterthought, as a load-bearing wall.</p>
+            </div>
+          </div>
+          <div class="prob-item ai">
+            <div class="prob-icon">❌</div>
+            <div class="prob-text">
+              <strong>They offer templates. We build custom infrastructure.</strong>
+              <p>Your business is not a template. Every PipeFish engagement is purpose-built for your exact industry, tech stack, regulatory environment, and growth trajectory.</p>
+            </div>
+          </div>
+          <div class="prob-item ai">
+            <div class="prob-icon">❌</div>
+            <div class="prob-text">
+              <strong>They don't know what Q-Day is. We're already prepared.</strong>
+              <p>Post-quantum encryption isn't optional — it's a ticking clock every CISO should be losing sleep over. We migrate you before the window closes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ai" style="transition-delay:.1s">
+        <div class="callout-box">
+          <div class="label" style="margin-bottom:18px;color:var(--magenta)">The PipeFish Difference</div>
+          <div class="callout-quote">
+            "We're not selling you a tool. We're <em>deploying intelligence</em> across your
+            entire operation — and making sure it stays ahead of every threat, regulatory shift,
+            and competitive edge. Including the ones that don't exist yet."
+          </div>
+          <p style="font-size:13.5px;margin-bottom:24px;line-height:1.7">
+            PipeFish Labs was built by engineers and strategists who got tired of watching
+            companies fall behind because their vendors couldn't see the full picture.
+            So we built the full picture.
+          </p>
+          <div class="label" style="color:var(--text-dim);margin-bottom:10px">Capabilities others can't match</div>
+          <div class="badges" style="margin-bottom:28px">
+            <span class="badge">Middleware Architecture</span>
+            <span class="badge">AI/ML Orchestration</span>
+            <span class="badge">PQC Migration</span>
+            <span class="badge">Multi-Agent Systems</span>
+            <span class="badge">Loop Engineering</span>
+            <span class="badge">Quant Finance</span>
+            <span class="badge">AI Act Compliance</span>
+            <span class="badge">InfoSec Integration</span>
+          </div>
+          <a href="#cta" class="btn btn-m" style="width:100%;justify-content:center">Audit Your Current Setup — Free</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PILLARS ─── -->
+<section id="pillars">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">What Makes Us Untouchable</div>
+      <h2 class="h2" style="margin-top:14px">Six Pillars. Zero Competition.</h2>
+      <p class="lead" style="margin:14px auto 0;max-width:56ch">
+        These aren't features. These are the categories where every other AI firm taps out.
+        PipeFish Labs doesn't just check the boxes — we wrote the rubric.
+      </p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar ai">
+        <div class="pillar-num">// 01</div>
+        <span class="pillar-icon">🔩</span>
+        <h3 class="h3" style="margin-bottom:10px">Full-Stack AI Orchestration</h3>
+        <p style="font-size:13.5px;line-height:1.7">From single-task automation to organization-wide autonomous orchestration. We architect multi-layered AI pipelines that think, adapt, and self-optimize across your entire operation — not just one department's inbox.</p>
+      </div>
+      <div class="pillar ai" style="transition-delay:.05s">
+        <div class="pillar-num">// 02</div>
+        <span class="pillar-icon">🧬</span>
+        <h3 class="h3" style="margin-bottom:10px">Exclusive Middleware Platform</h3>
+        <p style="font-size:13.5px;line-height:1.7">Our proprietary all-in-one platform unifies business development, management consulting, and operational auditing under one intelligent roof — custom-built for your tech stack and deeply integrated into your workflows from day one.</p>
+      </div>
+      <div class="pillar ai" style="transition-delay:.10s">
+        <div class="pillar-num">// 03</div>
+        <span class="pillar-icon">🛡️</span>
+        <h3 class="h3" style="margin-bottom:10px">Security-First Architecture</h3>
+        <p style="font-size:13.5px;line-height:1.7">InfoSec, encryption, data governance, AI Act compliance, and post-quantum cryptography aren't add-ons here — they're structural. Every system we build is engineered to withstand the threats of today and tomorrow.</p>
+      </div>
+      <div class="pillar ai" style="transition-delay:.05s">
+        <div class="pillar-num">// 04</div>
+        <span class="pillar-icon">🤖</span>
+        <h3 class="h3" style="margin-bottom:10px">Autonomous Multi-Agent Systems</h3>
+        <p style="font-size:13.5px;line-height:1.7">We deploy asynchronously independent, self-coordinating AI agents that work around the clock without supervision. A team of elite digital specialists that never sleep, never miss a deadline, and never call in sick.</p>
+      </div>
+      <div class="pillar ai" style="transition-delay:.10s">
+        <div class="pillar-num">// 05</div>
+        <span class="pillar-icon">⚗️</span>
+        <h3 class="h3" style="margin-bottom:10px">Fintech &amp; Quant Engineering</h3>
+        <p style="font-size:13.5px;line-height:1.7">Algorithmic trading systems, quant finance models, financial automation, and risk infrastructure — built by engineers who understand that in finance, precision isn't a luxury, it's a fiduciary responsibility.</p>
+      </div>
+      <div class="pillar ai" style="transition-delay:.15s">
+        <div class="pillar-num">// 06</div>
+        <span class="pillar-icon">🚀</span>
+        <h3 class="h3" style="margin-bottom:10px">Turnaround Engineering</h3>
+        <p style="font-size:13.5px;line-height:1.7">We specialize in reviving struggling and failing businesses with precision diagnostics, radical operational redesign, and AI-powered execution engines. If your business is bleeding, we're the surgical team — not the PR firm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── SERVICES ─── -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head ai">
+      <div class="label">Full Service Catalog</div>
+      <h2 class="h2" style="margin-top:14px">The Complete Arsenal</h2>
+      <p class="lead" style="margin-top:10px;max-width:54ch">Every discipline you need. Under one roof. Deeply integrated. Ruthlessly effective.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc ai">
+        <div class="svc-icon">⚡</div>
+        <div class="svc-name">AI Automation &amp; Workflow Orchestration</div>
+        <p class="svc-desc">End-to-end workflow automation with intelligent routing, conditional logic, and adaptive execution across every system in your stack.</p>
+        <span class="svc-tag t-core">Core</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.04s">
+        <div class="svc-icon">🤖</div>
+        <div class="svc-name">Autonomous Multi-Agent Integration</div>
+        <p class="svc-desc">Deploy fleets of asynchronously independent AI agents that coordinate, communicate, and execute complex tasks without human supervision.</p>
+        <span class="svc-tag t-excl">Exclusive</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.08s">
+        <div class="svc-icon">🔗</div>
+        <div class="svc-name">Custom Integration &amp; Middleware</div>
+        <p class="svc-desc">Bespoke API architecture and middleware that bridges your existing tools, legacy systems, and new AI infrastructure — seamlessly.</p>
+        <span class="svc-tag t-core">Core</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.12s">
+        <div class="svc-icon">📊</div>
+        <div class="svc-name">Management Consulting &amp; Operational Audit</div>
+        <p class="svc-desc">Strategic analysis and operational redesign — we find the leaks, eliminate the waste, and rebuild your architecture for scale.</p>
+        <span class="svc-tag t-excl">Exclusive</span>
+      </div>
+      <div class="svc ai">
+        <div class="svc-icon">⚖️</div>
+        <div class="svc-name">Data Ethics &amp; Governance</div>
+        <p class="svc-desc">Policy frameworks, compliance infrastructure, and governance programs that keep your AI deployments ethical, auditable, and litigation-proof.</p>
+        <span class="svc-tag t-core">Core</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.04s">
+        <div class="svc-icon">📜</div>
+        <div class="svc-name">EU AI Act &amp; Regulatory Compliance</div>
+        <p class="svc-desc">Full-stack AI Act compliance: risk classification, documentation, monitoring, and certification support before regulators come knocking.</p>
+        <span class="svc-tag t-core">Core</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.08s">
+        <div class="svc-icon">🔐</div>
+        <div class="svc-name">InfoSec, Cybersecurity &amp; Encryption</div>
+        <p class="svc-desc">Threat modeling, security architecture, zero-trust implementation, and encryption strategies purpose-built for AI-native organizations.</p>
+        <span class="svc-tag t-core">Core</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.12s">
+        <div class="svc-icon">🔮</div>
+        <div class="svc-name">Post-Quantum Cryptography Migration</div>
+        <p class="svc-desc">NIST PQC-standard migration planning and execution. We harden your cryptographic infrastructure before quantum computers make your encryption obsolete.</p>
+        <span class="svc-tag t-qant">Quantum-Critical</span>
+      </div>
+      <div class="svc ai">
+        <div class="svc-icon">📈</div>
+        <div class="svc-name">Fintech &amp; Algorithmic Trading</div>
+        <p class="svc-desc">High-performance trading systems, risk models, backtesting infrastructure, and financial automation built on quantitative rigor.</p>
+        <span class="svc-tag t-excl">Exclusive</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.04s">
+        <div class="svc-icon">🌀</div>
+        <div class="svc-name">Loop Engineering</div>
+        <p class="svc-desc">Design and implementation of self-reinforcing feedback loops that allow AI systems to learn, adapt, and continuously optimize their own performance over time.</p>
+        <span class="svc-tag t-excl">Exclusive</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.08s">
+        <div class="svc-icon">⚛️</div>
+        <div class="svc-name">Quantum Computing &amp; Quant Algorithms</div>
+        <p class="svc-desc">Quantum algorithm development, optimization models, and quantum-classical hybrid architectures for next-generation computational challenges.</p>
+        <span class="svc-tag t-qant">Emerging</span>
+      </div>
+      <div class="svc ai" style="transition-delay:.12s">
+        <div class="svc-icon">🏗️</div>
+        <div class="svc-name">Business Development &amp; Growth Strategy</div>
+        <p class="svc-desc">AI-augmented business development: market intelligence, pipeline optimization, and growth strategy executed with the precision of a quant model.</p>
+        <span class="svc-tag t-excl">Exclusive</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── INDUSTRIES ─── -->
+<section id="industries">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">Industry Reach</div>
+      <h2 class="h2" style="margin-top:14px">We Speak Every Industry's Language.</h2>
+      <p class="lead" style="margin:14px auto 0;max-width:54ch">
+        The problems are different. The physics are the same. Whether you're trading derivatives
+        or diagnosing patients, we deploy intelligence that understands your domain.
+      </p>
+    </div>
+    <div class="ind-grid">
+      <div class="ind ai"><div class="ind-icon">🏦</div><div class="ind-name">Finance &amp; Banking</div></div>
+      <div class="ind ai"><div class="ind-icon">🏥</div><div class="ind-name">Healthcare &amp; MedTech</div></div>
+      <div class="ind ai"><div class="ind-icon">⚖️</div><div class="ind-name">Legal &amp; Compliance</div></div>
+      <div class="ind ai"><div class="ind-icon">🛍️</div><div class="ind-name">Retail &amp; eCommerce</div></div>
+      <div class="ind ai"><div class="ind-icon">🏭</div><div class="ind-name">Manufacturing</div></div>
+      <div class="ind ai"><div class="ind-icon">🏗️</div><div class="ind-name">Construction &amp; Real Estate</div></div>
+      <div class="ind ai"><div class="ind-icon">🚚</div><div class="ind-name">Logistics &amp; Supply Chain</div></div>
+      <div class="ind ai"><div class="ind-icon">🎓</div><div class="ind-name">Education &amp; EdTech</div></div>
+      <div class="ind ai"><div class="ind-icon">🌱</div><div class="ind-name">AgriTech &amp; Food</div></div>
+      <div class="ind ai"><div class="ind-icon">⚡</div><div class="ind-name">Energy &amp; Utilities</div></div>
+      <div class="ind ai"><div class="ind-icon">🎮</div><div class="ind-name">Gaming &amp; Entertainment</div></div>
+      <div class="ind ai"><div class="ind-icon">🔬</div><div class="ind-name">Biotech &amp; Pharma</div></div>
+      <div class="ind ai"><div class="ind-icon">🛡️</div><div class="ind-name">Defense &amp; GovTech</div></div>
+      <div class="ind ai"><div class="ind-icon">🚀</div><div class="ind-name">Startups &amp; Scale-ups</div></div>
+      <div class="ind ai"><div class="ind-icon">📡</div><div class="ind-name">Telecom &amp; Connectivity</div></div>
+      <div class="ind ai"><div class="ind-icon">✈️</div><div class="ind-name">Aviation &amp; Aerospace</div></div>
+      <div class="ind ai"><div class="ind-icon">🏛️</div><div class="ind-name">Government &amp; Public Sector</div></div>
+      <div class="ind ai"><div class="ind-icon">🎨</div><div class="ind-name">Media &amp; Creative</div></div>
+      <div class="ind ai"><div class="ind-icon">🌍</div><div class="ind-name">NGO &amp; Impact</div></div>
+      <div class="ind ai"><div class="ind-icon">🔧</div><div class="ind-name">Professional Services</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUANTUM ─── -->
+<section id="quantum">
+  <div class="container">
+    <div class="q-grid">
+      <div class="q-content">
+        <div class="label ai" style="color:var(--magenta)">The Quantum Threat</div>
+        <h2 class="h2 ai" style="margin-top:14px;margin-bottom:18px">
+          Q-Day Isn't Coming.<br><span class="glow-m">It's Scheduled.</span>
+        </h2>
+        <p class="ai" style="font-size:15px;line-height:1.8;margin-bottom:18px">
+          When a sufficiently powerful quantum computer comes online — and it will — every RSA key,
+          every elliptic curve signature, every TLS handshake becomes retroactively breakable.
+          "Harvest Now, Decrypt Later" attacks are already underway. Your encrypted data from 2024
+          may be decrypted in 2031. You can't go back and re-encrypt it.
+        </p>
+        <p class="ai" style="font-size:15px;line-height:1.8;margin-bottom:0">
+          NIST finalized its first PQC standards in 2024. Federal mandates are active. Your competitors
+          are starting to migrate. PipeFish Labs has been building quantum-ready infrastructure
+          since before the standards were finalized — and we're ready to move yours.
+        </p>
+        <div class="q-warn ai" style="margin-top:28px">
+          <span style="font-size:20px;flex-shrink:0;margin-top:1px">⚠️</span>
+          <p>
+            <strong>Every day of delay is another day of exposure you can't walk back.</strong>
+            The cryptographic attack surface you have today is exactly the attack surface an adversary
+            will exploit the moment quantum capability crosses the threshold.
+          </p>
+        </div>
+        <div style="margin-top:28px" class="ai">
+          <a href="#cta" class="btn btn-m">Start Your PQC Readiness Assessment</a>
+        </div>
+      </div>
+      <div class="q-cards ai" style="transition-delay:.1s">
+        <div class="q-card">
+          <div class="q-card-t">🔐 Cryptographic Inventory Audit</div>
+          <div class="q-card-d">We map every cryptographic asset in your infrastructure — certificates, keys, protocols, libraries — and classify by quantum vulnerability severity.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-card-t">🔄 Migration Roadmap &amp; Execution</div>
+          <div class="q-card-d">Phased migration to NIST-approved algorithms (ML-KEM, ML-DSA, SLH-DSA) with zero-downtime deployment strategies and rollback protection.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-card-t">🛡️ Crypto-Agility Architecture</div>
+          <div class="q-card-d">We build systems to be algorithm-agnostic from the ground up — so when standards evolve (they will), you swap algorithms, not entire systems.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-card-t">⚛️ Quantum Algorithm Development</div>
+          <div class="q-card-d">Quantum-classical hybrid algorithms, Grover's &amp; Shor's algorithm analysis, and quantum advantage assessment for your specific use cases.</div>
+        </div>
+        <div class="q-card">
+          <div class="q-card-t">📋 Compliance Documentation</div>
+          <div class="q-card-d">Full documentation for regulators, auditors, and board-level reporting. We make your quantum readiness provable — not just claimed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AGENTS ─── -->
+<section id="agents">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">Autonomous Intelligence</div>
+      <h2 class="h2" style="margin-top:14px">One Agent Is a Tool.<br><span class="glow-c">A Thousand Is a Revolution.</span></h2>
+      <p class="lead" style="margin:14px auto 0;max-width:56ch">
+        PipeFish Labs builds asynchronously independent, autonomous multi-agent systems
+        that coordinate like a precision-engineered workforce — without the overhead,
+        the drama, or the out-of-office messages.
+      </p>
+    </div>
+    <div class="agents-viz" aria-label="Agent orchestration diagram">
+      <div class="a-node">research_agent</div>
+      <div class="a-arrow">→</div>
+      <div class="a-node">analysis_agent</div>
+      <div class="a-arrow">→</div>
+      <div class="a-node a-center">PIPEFISH ORCHESTRATOR</div>
+      <div class="a-arrow">→</div>
+      <div class="a-node">execution_agent</div>
+      <div class="a-arrow">→</div>
+      <div class="a-node">audit_agent</div>
+    </div>
+    <div class="agents-cards">
+      <div class="card ai">
+        <div class="card-icon">🔁</div>
+        <h3 class="h3" style="margin-bottom:9px">Asynchronous Independence</h3>
+        <p style="font-size:13.5px;line-height:1.7">Each agent operates on its own timeline without blocking others. Parallel execution, zero wait states, maximum throughput — across every business function simultaneously.</p>
+      </div>
+      <div class="card ai" style="transition-delay:.05s">
+        <div class="card-icon">🧠</div>
+        <h3 class="h3" style="margin-bottom:9px">Intelligent Coordination</h3>
+        <p style="font-size:13.5px;line-height:1.7">Agents share context, delegate tasks, and escalate intelligently. The PipeFish orchestration layer ensures every agent knows exactly what it needs to know — when it needs it.</p>
+      </div>
+      <div class="card ai" style="transition-delay:.10s">
+        <div class="card-icon">🔄</div>
+        <h3 class="h3" style="margin-bottom:9px">Self-Optimizing Loops</h3>
+        <p style="font-size:13.5px;line-height:1.7">Our loop engineering methodology creates feedback cycles where agents measure their own performance and improve execution strategies over time — without manual retraining.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── TECH ─── -->
+<section id="tech">
+  <div class="container">
+    <div class="sec-head ai">
+      <div class="label">Under the Hood</div>
+      <h2 class="h2" style="margin-top:14px">The Technical Arsenal</h2>
+      <p class="lead" style="margin-top:10px;max-width:54ch">
+        We work across every major platform, framework, and infrastructure layer.
+        We meet you where you are — and build toward where you need to be.
+      </p>
+    </div>
+    <div class="tech-cols">
+      <div class="card ai">
+        <div class="label" style="margin-bottom:14px">AI &amp; ML Frameworks</div>
+        <div class="badges" style="flex-direction:column;align-items:flex-start;gap:7px">
+          <span class="badge">OpenAI / GPT-4o</span>
+          <span class="badge">Anthropic Claude</span>
+          <span class="badge">LangChain / LangGraph</span>
+          <span class="badge">CrewAI / AutoGen</span>
+          <span class="badge">Hugging Face</span>
+          <span class="badge">Ollama (Local LLMs)</span>
+        </div>
+      </div>
+      <div class="card ai" style="transition-delay:.05s">
+        <div class="label" style="margin-bottom:14px">Automation &amp; Integration</div>
+        <div class="badges" style="flex-direction:column;align-items:flex-start;gap:7px">
+          <span class="badge">n8n</span>
+          <span class="badge">Make (Integromat)</span>
+          <span class="badge">Zapier Enterprise</span>
+          <span class="badge">REST / GraphQL APIs</span>
+          <span class="badge">Webhooks &amp; SSE</span>
+          <span class="badge">Custom MCP Servers</span>
+        </div>
+      </div>
+      <div class="card ai" style="transition-delay:.10s">
+        <div class="label" style="margin-bottom:14px">Security &amp; Cryptography</div>
+        <div class="badges" style="flex-direction:column;align-items:flex-start;gap:7px">
+          <span class="badge">ML-KEM (Kyber)</span>
+          <span class="badge">ML-DSA (Dilithium)</span>
+          <span class="badge">SLH-DSA (SPHINCS+)</span>
+          <span class="badge">Zero-Trust Architecture</span>
+          <span class="badge">HSM Integration</span>
+          <span class="badge">OpenSSL / BouncyCastle</span>
+        </div>
+      </div>
+      <div class="card ai" style="transition-delay:.15s">
+        <div class="label" style="margin-bottom:14px">Cloud &amp; Infrastructure</div>
+        <div class="badges" style="flex-direction:column;align-items:flex-start;gap:7px">
+          <span class="badge">AWS / Azure / GCP</span>
+          <span class="badge">Kubernetes / Docker</span>
+          <span class="badge">Supabase / PostgreSQL</span>
+          <span class="badge">Redis / Kafka</span>
+          <span class="badge">Terraform / Pulumi</span>
+          <span class="badge">Edge Computing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section id="process" style="background:var(--surface)">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">How We Operate</div>
+      <h2 class="h2" style="margin-top:14px">From First Call to Full Deployment</h2>
+      <p class="lead" style="margin:14px auto 0;max-width:52ch">
+        No bloated discovery phases. No vague strategy documents. We move fast, build precisely,
+        and deliver systems that outlive the engagement.
+      </p>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step ai">
+        <div class="proc-n">01</div>
+        <div class="proc-t">Operational Autopsy</div>
+        <p class="proc-d">A comprehensive audit of your current operations, tech stack, security posture, and growth blockers. No assumptions. All receipts.</p>
+      </div>
+      <div class="proc-step ai" style="transition-delay:.08s">
+        <div class="proc-n">02</div>
+        <div class="proc-t">Architecture Blueprint</div>
+        <p class="proc-d">Custom architecture designed for your specific industry, scale, and trajectory — with security, compliance, and quantum-readiness from line one.</p>
+      </div>
+      <div class="proc-step ai" style="transition-delay:.16s">
+        <div class="proc-n">03</div>
+        <div class="proc-t">Precision Deployment</div>
+        <p class="proc-d">Phased rollout with live monitoring, zero-downtime integration, and comprehensive testing at every layer. We don't hand off until it's bulletproof.</p>
+      </div>
+      <div class="proc-step ai" style="transition-delay:.24s">
+        <div class="proc-n">04</div>
+        <div class="proc-t">Continuous Evolution</div>
+        <p class="proc-d">Our systems learn, adapt, and self-optimize. Our team stays close — not as a vendor, but as an embedded intelligence partner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-row ai">
+      <div class="stat-b">
+        <div class="stat-n">15+</div>
+        <div class="stat-l">Technical Disciplines Under One Roof</div>
+      </div>
+      <div class="stat-b">
+        <div class="stat-n">20+</div>
+        <div class="stat-l">Industries Actively Served</div>
+      </div>
+      <div class="stat-b">
+        <div class="stat-n" style="color:var(--magenta)">2024</div>
+        <div class="stat-l">PQC-Ready Since NIST Finalization</div>
+      </div>
+      <div class="stat-b">
+        <div class="stat-n">∞</div>
+        <div class="stat-l">Customization Depth — Zero Templates</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-in">
+      <div class="cta-lbl-row ai">
+        <div class="cta-line"></div>
+        <span class="label">Ready to Get Serious?</span>
+        <div class="cta-line"></div>
+      </div>
+      <h2 class="h2 ai" style="margin-bottom:18px">
+        Your Business Deserves More Than<br><span class="glow-c">Another AI Agency.</span>
+      </h2>
+      <p class="lead center ai" style="margin:0 auto">
+        Whether you're a scaling startup that needs intelligent infrastructure from day one,
+        an enterprise navigating AI Act compliance, a financial firm building quant systems,
+        or a business that's quietly falling behind — PipeFish Labs has a weapon with your name on it.
+      </p>
+      <div class="cta-btns ai">
+        <a href="mailto:hello@pipefishlabs.com" class="btn btn-p">Get a Free Operational Audit</a>
+        <a href="mailto:hello@pipefishlabs.com" class="btn btn-m">PQC Readiness Assessment</a>
+        <a href="mailto:hello@pipefishlabs.com" class="btn btn-o">Just Talk to Us First</a>
+      </div>
+      <p class="cta-note ai">No pitch decks. No retainer traps. We tell you exactly where your gaps are — then you decide if you want us to fix them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ft-brand-name"><span>PipeFish</span><span> Labs</span></div>
+        <p>The only firm delivering AI automation, quantum-ready security, autonomous agents, fintech engineering, and strategic consulting as a single integrated platform.</p>
+        <div class="badges" style="margin-top:18px">
+          <span class="badge">pipefishlabs.com</span>
+          <span class="badge">hello@pipefishlabs.com</span>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Services</h4>
+        <a href="#services">AI Automation</a>
+        <a href="#services">Multi-Agent Systems</a>
+        <a href="#services">PQC Migration</a>
+        <a href="#services">InfoSec &amp; Encryption</a>
+        <a href="#services">Fintech &amp; Algo Trading</a>
+        <a href="#services">Loop Engineering</a>
+      </div>
+      <div class="ft-col">
+        <h4>Solutions</h4>
+        <a href="#pillars">Business Turnaround</a>
+        <a href="#services">AI Act Compliance</a>
+        <a href="#services">Data Governance</a>
+        <a href="#services">Consulting &amp; Audit</a>
+        <a href="#services">Middleware Platform</a>
+        <a href="#services">Quantum Computing</a>
+      </div>
+      <div class="ft-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello@pipefishlabs.com">hello@pipefishlabs.com</a>
+        <a href="#cta">Free Audit Request</a>
+        <a href="#cta">PQC Assessment</a>
+        <a href="#cta">Partner With Us</a>
+      </div>
+    </div>
+    <div class="ft-trust" aria-label="Trust and security certifications">
+      <div class="trust-badge" title="SSL/TLS 256-bit encryption protects all data"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div class="trust-badge-label"><span class="trust-badge-title">SSL Secured</span><span class="trust-badge-sub">256-bit TLS Encryption</span></div></div>
+      <div class="trust-badge" title="GDPR &amp; CCPA compliant privacy architecture"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div class="trust-badge-label"><span class="trust-badge-title">Privacy Protected</span><span class="trust-badge-sub">GDPR &amp; CCPA Compliant</span></div></div>
+      <div class="trust-badge" title="Verified and accredited business"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><div class="trust-badge-label"><span class="trust-badge-title">Verified Business</span><span class="trust-badge-sub">Accredited &amp; Trusted</span></div></div>
+      <div class="trust-badge" title="All client engagements covered by mutual NDA"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E040FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div class="trust-badge-label"><span class="trust-badge-title">NDA Protected</span><span class="trust-badge-sub">Default Confidentiality</span></div></div>
+      <div class="trust-badge" title="NIST Post-Quantum Cryptography standards implemented"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div class="trust-badge-label"><span class="trust-badge-title">PQC Ready</span><span class="trust-badge-sub">NIST Compliant</span></div></div>
+    </div>
+    <div class="ft-bot">
+      <p>© 2026 PipeFish Labs. All rights reserved. Built with precision, deployed with purpose.</p>
+      <p><a href="./legal-privacy-policy/" style="color:var(--text-dim);text-decoration:none;transition:color .2s">Privacy Policy</a> · <a href="./legal-privacy-policy/#tos" style="color:var(--text-dim);text-decoration:none;transition:color .2s">Terms of Service</a> · <a href="./legal-privacy-policy/#security" style="color:var(--text-dim);text-decoration:none;transition:color .2s">Security Disclosure</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ── MOBILE NAV ── */
+const ham    = document.getElementById('ham');
+const mobnav = document.getElementById('mobnav');
+ham.addEventListener('click', () => {
+  const open = mobnav.classList.toggle('open');
+  ham.setAttribute('aria-expanded', open);
+});
+function closeNav() {
+  mobnav.classList.remove('open');
+  ham.setAttribute('aria-expanded', false);
+}
+
+/* ── SCROLL ANIMATIONS ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+document.querySelectorAll('.ai').forEach(el => io.observe(el));
+
+/* ── HERO CANVAS PIPELINE ANIMATION ── */
+(function () {
+  const canvas = document.getElementById('hcanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes, packets = [], rafId;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    buildNodes();
+  }
+
+  function buildNodes() {
+    const count = Math.max(14, Math.floor(W * H / 24000));
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
+      r: Math.random() * 1.8 + 1.2,
+    }));
+    packets = [];
+  }
+
+  function spawnPacket() {
+    if (nodes.length < 2) return;
+    const ai = Math.floor(Math.random() * nodes.length);
+    let bi   = Math.floor(Math.random() * nodes.length);
+    while (bi === ai) bi = Math.floor(Math.random() * nodes.length);
+    const a = nodes[ai], b = nodes[bi];
+    const dx = b.x - a.x, dy = b.y - a.y;
+    if (Math.sqrt(dx*dx + dy*dy) > 340) return;
+    packets.push({ x: a.x, y: a.y, tx: b.x, ty: b.y, ox: a.x, oy: a.y, t: 0,
+                   spd: 0.006 + Math.random() * 0.009,
+                   col: Math.random() > 0.28 ? '0,212,255' : '224,64,255' });
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    });
+
+    // edges
+    nodes.forEach((a, i) => {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d > 260) continue;
+        const alpha = (1 - d / 260) * 0.22;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(0,180,220,${alpha})`; ctx.lineWidth = 0.7; ctx.stroke();
+      }
+    });
+
+    // nodes
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,212,255,0.55)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 3.5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,212,255,0.06)'; ctx.fill();
+    });
+
+    // packets
+    packets = packets.filter(p => p.t <= 1);
+    packets.forEach(p => {
+      p.t += p.spd;
+      p.x = p.ox + (p.tx - p.ox) * p.t;
+      p.y = p.oy + (p.ty - p.oy) * p.t;
+      ctx.beginPath(); ctx.arc(p.x, p.y, 2.2, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${p.col},0.92)`; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${p.col},0.12)`; ctx.fill();
+    });
+
+    if (Math.random() < 0.055) spawnPacket();
+    rafId = requestAnimationFrame(frame);
+  }
+
+  // pause off-screen
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { if (!rafId) frame(); }
+    else { cancelAnimationFrame(rafId); rafId = null; }
+  }).observe(canvas);
+
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(rafId); rafId = null;
+    resize(); frame();
+  }, { passive: true });
+
+  resize(); frame();
+})();
+</script>
+</body>
+</html>
