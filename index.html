@@ -1179,7 +1179,7 @@
       <div class="demo-status-bar">
         <div id="demo-status-bar-text">Idle — press Run agents to trigger the orchestration graph.</div>
         <div class="demo-channels" id="demo-channels-text">
-          Channels Enabled: Voice (Retell / ElevenLabs) · Text / SMS · Webchat · Email · Calendar APIs
+          Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs
         </div>
       </div>
     </div>
@@ -1205,7 +1205,7 @@
         <div class="arch-tag">Voice &amp; Text Front Desk</div>
         <h3 class="arch-title">AI Receptionist Agent</h3>
         <p class="arch-desc">
-          Features <strong>Voice Receptionist Agent</strong> (powered by Retell AI &amp; ElevenLabs voice engine) and <strong>Text Receptionist Agent</strong> (SMS/Webchat/Email). Every call, voicemail, form and text becomes one qualified record: practice area classified, conflicts cleared, attorney availability checked, consults booked, retainers requested, intake forms and e-signatures chased to completion.
+          Features <strong>Voice Receptionist Agent</strong> (Phone, Email, UCC/VTC integration) and <strong>Text Receptionist Agent</strong> (SMS/Webchat/Email). Every call, voicemail, form and text becomes one qualified record: practice area classified, conflicts cleared, attorney availability checked, consults booked, retainers requested, intake forms and e-signatures chased to completion.
         </p>
         <div class="arch-metrics">
           <div>
@@ -1320,7 +1320,7 @@
         <div class="cap-icon">🎛️</div>
         <h3 class="cap-h3">Service &amp; Orchestration Layering</h3>
         <p class="cap-p">
-          A control plane laid over carrier systems, Retell AI / ElevenLabs voice engines, and legacy software so phone, email, SMS and UCC/VTC channels execute as one coordinated pipeline instead of four disconnected inboxes.
+          A control plane laid over carrier systems and legacy software so phone, email, SMS and UCC/VTC channels execute as one coordinated pipeline instead of four disconnected inboxes.
         </p>
       </div>
 
@@ -1683,9 +1683,9 @@ document.querySelectorAll('.ai').forEach(el => io.observe(el));
 const demoScenarios = {
   receptionist: {
     payload: 'INBOUND VOICE / TEXT — "Hi, I need to schedule a consult for an urgent legal matter, check attorney availability for tomorrow afternoon, and confirm consultation fees."',
-    channel: 'Channels Enabled: Voice (Retell / ElevenLabs) · Text / SMS · Webchat · Email · Calendar APIs',
+    channel: 'Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs',
     nodes: [
-      { n: '01', name: 'Voice Receptionist Agent', sub: '(Retell / ElevenLabs)', status: 'awaiting upstream signal…' },
+      { n: '01', name: 'Voice Receptionist Agent', sub: '(Phone & UCC/VTC)', status: 'awaiting upstream signal…' },
       { n: '02', name: 'Text Receptionist Agent', sub: '(SMS & Webchat)', status: 'awaiting upstream signal…' },
       { n: '03', name: 'Intent Classifier Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '04', name: 'Availability & Calendar Agent', sub: '', status: 'awaiting upstream signal…' },
