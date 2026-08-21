@@ -996,6 +996,7 @@
         We don't automate your business — we <em style="color:var(--text-strong);font-style:normal">reinvent it.</em>
       </p>
       <div class="hero-btns ai" style="transition-delay:.26s">
+        <a href="#demo" class="btn btn-m">See Live Agent Chain ⚡</a>
         <a href="/book-a-demo-contact/?intent=audit" class="btn btn-p">Get an Operational Audit ↗</a>
         <a href="#services" class="btn btn-o">Explore the Arsenal</a>
       </div>
@@ -1115,6 +1116,60 @@
         <div class="b-card-num">04 · SIMULATOR BREAKDOWN</div>
         <h3 class="b-card-h3">Live 8-Node Chain Run</h3>
         <p class="b-card-p">Summarizes the live interactive graph rendered below — from initial inbound signal to calendar verification, CRM sync, and notification.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── INTERACTIVE DEMO (POSITION 2) ─── -->
+<section id="demo">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">Live Graph Execution</div>
+      <h2 class="h2" style="margin-top:14px">Interactive Demo<br><span class="glow-c">Trigger a Real Agent Chain</span></h2>
+      <p class="lead" style="margin:14px auto 0;max-width:62ch">
+        Pick a scenario and run it. Each row is an independent agent handing structured state to the next — the same graph pattern we deploy into receptionist desks, sales operations, and intake teams.
+      </p>
+    </div>
+
+    <!-- Scenario Selector Tabs -->
+    <div class="demo-tabs ai">
+      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
+      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations AI Agent</button>
+    </div>
+
+    <!-- Demo Container -->
+    <div class="demo-container ai">
+      <!-- Inbound Payload Display -->
+      <div class="demo-payload-box">
+        <div class="demo-payload-header">
+          <span>Inbound Telemetry Payload</span>
+          <span id="demo-payload-type" style="color:var(--magenta)">LIVE INBOUND SIGNAL</span>
+        </div>
+        <div class="demo-payload-text" id="demo-payload-text">
+          INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."
+        </div>
+      </div>
+
+      <!-- Action Controls -->
+      <div class="demo-controls">
+        <button id="run-demo-btn" onclick="runDemoGraph()" class="btn btn-p">Run Agents →</button>
+        <button id="reset-demo-btn" onclick="resetDemoGraph()" class="btn btn-o">Reset</button>
+      </div>
+
+      <!-- Agent Chain Rows (Nodes 01 - 08) -->
+      <div class="demo-rows" id="demo-rows-container">
+        <!-- Rendered dynamically via JS -->
+      </div>
+
+      <!-- Live Execution Status Bar -->
+      <div class="demo-status-bar">
+        <div id="demo-status-bar-text">Idle — press Run agents to trigger the orchestration graph.</div>
+        <div class="demo-channels" id="demo-channels-text">
+          Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs
+        </div>
       </div>
     </div>
   </div>
@@ -1417,61 +1472,7 @@
   </div>
 </section>
 
-<div class="divider"></div>
 
-<!-- ─── INTERACTIVE DEMO ─── -->
-<section id="demo">
-  <div class="container">
-    <div class="sec-head center ai">
-      <div class="label">Live Graph Execution</div>
-      <h2 class="h2" style="margin-top:14px">Interactive Demo<br><span class="glow-c">Trigger a Real Agent Chain</span></h2>
-      <p class="lead" style="margin:14px auto 0;max-width:62ch">
-        Pick a scenario and run it. Each row is an independent agent handing structured state to the next — the same graph pattern we deploy into receptionist desks, sales operations, and intake teams.
-      </p>
-    </div>
-
-    <!-- Scenario Selector Tabs -->
-    <div class="demo-tabs ai">
-      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
-      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations AI Agent</button>
-    </div>
-
-    <!-- Demo Container -->
-    <div class="demo-container ai">
-      <!-- Inbound Payload Display -->
-      <div class="demo-payload-box">
-        <div class="demo-payload-header">
-          <span>Inbound Telemetry Payload</span>
-          <span id="demo-payload-type" style="color:var(--magenta)">LIVE INBOUND SIGNAL</span>
-        </div>
-        <div class="demo-payload-text" id="demo-payload-text">
-          INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."
-        </div>
-      </div>
-
-      <!-- Action Controls -->
-      <div class="demo-controls">
-        <button id="run-demo-btn" onclick="runDemoGraph()" class="btn btn-p">Run Agents →</button>
-        <button id="reset-demo-btn" onclick="resetDemoGraph()" class="btn btn-o">Reset</button>
-      </div>
-
-      <!-- Agent Chain Rows (Nodes 01 - 08) -->
-      <div class="demo-rows" id="demo-rows-container">
-        <!-- Rendered dynamically via JS -->
-      </div>
-
-      <!-- Live Execution Status Bar -->
-      <div class="demo-status-bar">
-        <div id="demo-status-bar-text">Idle — press Run agents to trigger the orchestration graph.</div>
-        <div class="demo-channels" id="demo-channels-text">
-          Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- ─── WORKFLOW ARCHITECTURE ─── -->
 <section id="architecture">

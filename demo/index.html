@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Multi-Agent Chain Simulator | PipeFish Labs</title>
+<meta name="description" content="Test PipeFish Labs' live 8-node autonomous AI agent orchestration graph. Watch real-time payload handoffs, cryptographic state signing, and multi-channel execution.">
+<link rel="canonical" href="https://pipefishlabs.io/demo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<meta property="og:title" content="Live Multi-Agent Chain Simulator | PipeFish Labs">
+<meta property="og:description" content="Experience autonomous multi-agent orchestration in action. Trigger an 8-node execution graph with real-time telemetry.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pipefishlabs.io/demo/">
+<meta property="og:image" content="https://pipefishlabs.io/logo.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@pipefishlabs">
+<meta name="twitter:title" content="Live Multi-Agent Chain Simulator | PipeFish Labs">
+<meta name="twitter:description" content="Experience autonomous multi-agent orchestration in action. Trigger an 8-node execution graph with real-time telemetry.">
+<meta name="twitter:image" content="https://pipefishlabs.io/logo.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pipefishlabs.io/#organization",
+      "name": "PipeFish Labs",
+      "url": "https://pipefishlabs.io",
+      "logo": "https://pipefishlabs.io/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "pipefish.labs@gmail.com",
+        "areaServed": ["US", "EU", "APAC"]
+      },
+      "sameAs": [
+        "https://twitter.com/pipefishlabs",
+        "https://www.linkedin.com/company/pipefishlabs"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://pipefishlabs.io"},
+        {"@type": "ListItem", "position": 2, "name": "Interactive Demo", "item": "https://pipefishlabs.io/demo/"}
+      ]
+    },
+    {
+      "@type": "WebApplication",
+      "name": "PipeFish Multi-Agent Chain Simulator",
+      "url": "https://pipefishlabs.io/demo/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Live 8-node interactive agent chain execution graph demonstrating real-time AI orchestration, JSON state handoffs, and cryptographic payload signing."
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #06070C;
+    --surface: #0B0E17;
+    --elevated: #111625;
+    --border: #1C253B;
+    --border-strong: #2A3859;
+    --cyan: #00D4FF;
+    --cyan-glow: rgba(0,212,255,0.25);
+    --cyan-dim: rgba(0,212,255,0.08);
+    --magenta: #E040FF;
+    --magenta-glow: rgba(224,64,255,0.25);
+    --text-strong: #F0F4FF;
+    --text-body: #94A3B8;
+    --text-dim: #475569;
+    --font-fd: 'Orbitron', monospace;
+    --font-fb: 'Inter', sans-serif;
+    --font-fm: 'JetBrains Mono', monospace;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --nav-h: 72px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text-body); font-family: var(--font-fb); line-height: 1.6; overflow-x: hidden; }
+  .container { max-width: 1280px; margin-inline: auto; padding-inline: clamp(1.5rem, 5vw, 4rem); }
+  
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(6,7,12,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-fd); font-weight: 800; font-size: 16px; color: var(--text-strong); text-decoration: none; }
+  .logo span:first-child { color: var(--cyan); }
+  .logo span:last-child { color: var(--magenta); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-body); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-fm); font-size: 12.5px; font-weight: 700; padding: 10px 20px; border-radius: 100px; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; }
+  .btn-p { background: var(--cyan); color: #000; box-shadow: 0 0 20px var(--cyan-glow); }
+  .btn-p:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(0,212,255,0.4); }
+  .btn-o { background: var(--surface); color: var(--text-strong); border: 1px solid var(--border-strong); }
+  .btn-o:hover { border-color: var(--cyan); color: var(--cyan); }
+  .btn-m { background: var(--magenta); color: #000; box-shadow: 0 0 20px var(--magenta-glow); }
+
+  .page-hero { padding-top: calc(var(--nav-h) + 52px); padding-bottom: 40px; text-align: center; }
+  .lbl { font-family: var(--font-fm); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+  .h1 { font-family: var(--font-fd); font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 900; color: var(--text-strong); line-height: 1.1; }
+  .glow-c { color: var(--cyan); text-shadow: 0 0 32px var(--cyan-glow); }
+  .glow-m { color: var(--magenta); text-shadow: 0 0 32px var(--magenta-glow); }
+  .lead { font-size: 15px; color: var(--text-body); max-width: 64ch; margin: 16px auto 0; }
+
+  /* DEMO STYLING */
+  .demo-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+  .demo-tab { font-family: var(--font-fm); font-size: 12px; font-weight: 600; padding: 10px 18px; border-radius: 100px; background: var(--surface); border: 1px solid var(--border); color: var(--text-body); cursor: pointer; transition: all 0.2s; }
+  .demo-tab.active, .demo-tab:hover { background: var(--cyan-dim); border-color: var(--cyan); color: var(--cyan); }
+  .demo-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; box-shadow: 0 16px 48px rgba(0,0,0,0.4); margin-bottom: 60px; }
+  .demo-payload-box { background: var(--elevated); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px 24px; margin-bottom: 24px; font-family: var(--font-fm); font-size: 12.5px; }
+  .demo-payload-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: var(--text-dim); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .demo-payload-text { color: var(--text-strong); line-height: 1.5; }
+  .demo-controls { display: flex; gap: 12px; margin-bottom: 28px; }
+  .demo-rows { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .demo-row { background: var(--elevated); border: 1px solid var(--border); border-radius: var(--r-md); padding: 16px 20px; display: grid; grid-template-columns: 80px 180px 1fr 120px; gap: 16px; align-items: center; font-size: 13px; transition: all 0.3s; }
+  .demo-row.running { border-color: var(--cyan); background: var(--cyan-dim); box-shadow: 0 0 24px var(--cyan-glow); }
+  .demo-row.done { border-color: var(--border-strong); opacity: 0.9; }
+  .demo-node-num { font-family: var(--font-fm); font-size: 11px; font-weight: 700; color: var(--cyan); }
+  .demo-node-title { font-weight: 700; color: var(--text-strong); }
+  .demo-node-desc { color: var(--text-body); font-size: 12.5px; }
+  .demo-node-status { font-family: var(--font-fm); font-size: 11px; text-align: right; color: var(--text-dim); font-weight: 600; }
+  .demo-row.running .demo-node-status { color: var(--cyan); }
+  .demo-row.done .demo-node-status { color: #00FF66; }
+  .demo-status-bar { background: var(--elevated); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-fm); font-size: 12px; color: var(--text-body); }
+  .demo-channels { color: var(--text-dim); font-size: 11.5px; }
+
+  @media (max-width: 850px) {
+    .demo-row { grid-template-columns: 1fr; gap: 8px; }
+    .demo-node-status { text-align: left; }
+    .demo-status-bar { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="logo">
+      <span>PipeFish</span><span> Labs</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/services-solutions/">Services</a></li>
+      <li><a href="/case-studies-results/">Case Studies</a></li>
+      <li><a href="/benefits-testimonials/">Benefits</a></li>
+      <li><a href="/affiliates-corporate-partnerships/">Partners</a></li>
+      <li><a href="/demo/" class="active">Demo</a></li>
+      <li><a href="/book-a-demo-contact/">Contact</a></li>
+    </ul>
+    <a href="/book-a-demo-contact/?intent=audit" class="btn btn-m">Book an Audit →</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="lbl">Autonomous Agent Chain Architecture</div>
+    <h1 class="h1">Live Multi-Agent<br><span class="glow-c">Execution Simulator</span></h1>
+    <p class="lead">Select an enterprise scenario and trigger the 8-node orchestration graph. Each node runs specialized subagents, validating cryptographic state signatures and executing cross-stack API handoffs in real time.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="demo-tabs">
+      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
+      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations AI Agent</button>
+      <button class="demo-tab" onclick="switchDemo('logistics', this)">Enterprise Logistics AI Agent</button>
+    </div>
+
+    <div class="demo-container">
+      <div class="demo-payload-box">
+        <div class="demo-payload-header">
+          <span>Inbound Telemetry Payload</span>
+          <span id="demo-payload-type" style="color:var(--magenta)">LIVE INBOUND SIGNAL</span>
+        </div>
+        <div class="demo-payload-text" id="demo-payload-text">
+          INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."
+        </div>
+      </div>
+
+      <div class="demo-controls">
+        <button id="run-demo-btn" onclick="runDemoGraph()" class="btn btn-p">Run Agents →</button>
+        <button id="reset-demo-btn" onclick="resetDemoGraph()" class="btn btn-o">Reset</button>
+      </div>
+
+      <div class="demo-rows" id="demo-rows-container"></div>
+
+      <div class="demo-status-bar">
+        <div id="demo-status-bar-text">Idle — press Run agents to trigger the orchestration graph.</div>
+        <div class="demo-channels" id="demo-channels-text">
+          Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const scenarios = {
+  receptionist: {
+    type: "LIVE INBOUND SIGNAL — VOICE & TEXT FRONT DESK",
+    payload: 'INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."',
+    nodes: [
+      { num: "Node 01", title: "Voice & Text Ingestion", desc: "Captures inbound voice stream, converts audio to text via zero-retention model, extracts metadata." },
+      { num: "Node 02", title: "Intent & Priority Classifier", desc: "Classifies lead intent (Critical Incident), checks SLA policy, flags VIP tenant status." },
+      { num: "Node 03", title: "Identity & Account Verifier", desc: "Queries PostgreSQL/Supabase DB via custom MCP server, verifies subscription tier and auth token." },
+      { num: "Node 04", title: "Team Availability & Routing", desc: "Checks Tier 2 engineer availability on PagerDuty/Slack, finds active on-call engineer." },
+      { num: "Node 05", title: "Ticket & Case Generator", desc: "Creates P1 Incident ticket in Jira/Zendesk, generates HMAC-SHA256 signature payload." },
+      { num: "Node 06", title: "Escalation & Calendar Sync", desc: "Schedules emergency triage call on Google Calendar/Zoom, dispatches instant notification." },
+      { num: "Node 07", title: "Client Status Response", desc: "Synthesizes real-time status response voice/text payload back to user with incident ID." },
+      { num: "Node 08", title: "Telemetry & Audit Logging", desc: "Commits complete execution log to immutable audit store and triggers Make.com webhook." }
+    ]
+  },
+  sales: {
+    type: "LIVE INBOUND SIGNAL — SALES OPERATIONS ENGINE",
+    payload: 'INBOUND WEB LEAD — Enterprise Growth Tier: "Looking for multi-agent sales automation across 40 sales reps. Budget $25k/mo. Need custom CRM integration and proposal auto-generation."',
+    nodes: [
+      { num: "Node 01", title: "Form & Lead Ingestion", desc: "Parses webform payload, extracts company domain, contact details, and intent keywords." },
+      { num: "Node 02", title: "Firmographic Enrichment", desc: "Queries Clearbit/Apollo API to fetch revenue, headcount, technology stack, and funding data." },
+      { num: "Node 03", title: "ICP Scoring & Qualification", desc: "Calculates ICP fit score (96/100 Tier A+), assigns lead priority, checks team capacity." },
+      { num: "Node 04", title: "AE Matching & Cal Check", desc: "Matches lead with senior Solutions Architect based on industry vertical and calendar slot." },
+      { num: "Node 05", title: "Proposal Draft Generator", desc: "Assembles customized proposal PDF draft with recommended scope and ROI projections." },
+      { num: "Node 06", title: "HubSpot / Salesforce Sync", desc: "Creates deal record, sets stage to Demo Scheduled, logs enriched payload data." },
+      { num: "Node 07", title: "Instant Notification", desc: "Dispatches high-priority alert to #inbound-leads Slack channel with one-click approval." },
+      { num: "Node 08", title: "Follow-Up Automation", desc: "Enrolls prospect in personalized 3-touch confirmation cadence with calendar invite." }
+    ]
+  },
+  logistics: {
+    type: "LIVE INBOUND SIGNAL — ENTERPRISE LOGISTICS ENGINE",
+    payload: 'INBOUND EDI / TELEMETRY — Warehouse Cross-Dock 14: "Shipment #8849 delayed by 45 mins due to severe weather. Need automated re-routing for 120 downstream orders."',
+    nodes: [
+      { num: "Node 01", title: "EDI Telemetry Ingestion", desc: "Captures real-time warehouse event stream via Kafka / NATS JetStream event mesh." },
+      { num: "Node 02", title: "Exception Classifier", desc: "Evaluates SLA breach risk, calculates delay cascade across 120 affected downstream orders." },
+      { num: "Node 03", title: "Inventory & Carrier Query", desc: "Queries regional cross-dock inventory and available freight carriers via custom MCP server." },
+      { num: "Node 04", title: "Dynamic Re-Routing Engine", desc: "Computes optimal alternate shipping paths to prevent SLA penalties." },
+      { num: "Node 05", title: "Dispatch & Order Update", desc: "Dispatches updated manifest to secondary carriers via automated API payloads." },
+      { num: "Node 06", title: "ERP & Billing Sync", desc: "Updates SAP/Oracle ERP system records and adjusts delivery ETA timestamps." },
+      { num: "Node 07", title: "Customer Notification", desc: "Sends automated proactive status alerts to affected customer tracking portals." },
+      { num: "Node 08", title: "Closed-Loop Telemetry", desc: "Logs execution metrics, updates predictive carrier reliability scores in database." }
+    ]
+  }
+};
+
+let currentScenarioKey = 'receptionist';
+let isRunning = false;
+let demoTimeoutId = null;
+
+function renderDemoRows() {
+  const container = document.getElementById('demo-rows-container');
+  const sc = scenarios[currentScenarioKey];
+  container.innerHTML = '';
+  sc.nodes.forEach((node, index) => {
+    const row = document.createElement('div');
+    row.className = 'demo-row';
+    row.id = `demo-node-${index}`;
+    row.innerHTML = `
+      <div class="demo-node-num">${node.num}</div>
+      <div class="demo-node-title">${node.title}</div>
+      <div class="demo-node-desc">${node.desc}</div>
+      <div class="demo-node-status" id="demo-status-${index}">Standby</div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function switchDemo(key, btn) {
+  if (isRunning) resetDemoGraph();
+  currentScenarioKey = key;
+  document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const sc = scenarios[key];
+  document.getElementById('demo-payload-type').textContent = sc.type;
+  document.getElementById('demo-payload-text').textContent = sc.payload;
+  renderDemoRows();
+}
+
+function runDemoGraph() {
+  if (isRunning) return;
+  isRunning = true;
+  document.getElementById('run-demo-btn').disabled = true;
+  document.getElementById('run-demo-btn').style.opacity = '0.5';
+  const sc = scenarios[currentScenarioKey];
+  let step = 0;
+
+  function executeStep() {
+    if (!isRunning) return;
+    if (step > 0) {
+      const prevRow = document.getElementById(`demo-node-${step - 1}`);
+      const prevStatus = document.getElementById(`demo-status-${step - 1}`);
+      if (prevRow) {
+        prevRow.classList.remove('running');
+        prevRow.classList.add('done');
+      }
+      if (prevStatus) prevStatus.textContent = '✓ Executed';
+    }
+
+    if (step < sc.nodes.length) {
+      const currRow = document.getElementById(`demo-node-${step}`);
+      const currStatus = document.getElementById(`demo-status-${step}`);
+      if (currRow) {
+        currRow.classList.add('running');
+        currRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      if (currStatus) currStatus.textContent = 'Running...';
+      document.getElementById('demo-status-bar-text').textContent = `Node 0${step + 1} Executing: ${sc.nodes[step].title} (HMAC Signed Handoff)`;
+      step++;
+      demoTimeoutId = setTimeout(executeStep, 750);
+    } else {
+      document.getElementById('demo-status-bar-text').textContent = 'Pipeline Complete — All 8 Nodes Executed & Synchronized cleanly (0 Errors).';
+      isRunning = false;
+      document.getElementById('run-demo-btn').disabled = false;
+      document.getElementById('run-demo-btn').style.opacity = '1';
+    }
+  }
+
+  executeStep();
+}
+
+function resetDemoGraph() {
+  if (demoTimeoutId) clearTimeout(demoTimeoutId);
+  isRunning = false;
+  document.getElementById('run-demo-btn').disabled = false;
+  document.getElementById('run-demo-btn').style.opacity = '1';
+  document.getElementById('demo-status-bar-text').textContent = 'Idle — press Run agents to trigger the orchestration graph.';
+  renderDemoRows();
+}
+
+document.addEventListener('DOMContentLoaded', renderDemoRows);
+</script>
+</body>
+</html>
