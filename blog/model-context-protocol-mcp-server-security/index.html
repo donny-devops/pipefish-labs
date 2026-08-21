@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Securing Model Context Protocol (MCP) Servers in Production — PipeFish Labs Blog</title>
+  <meta name="description" content="Best practices for authenticating custom MCP tool servers, enforcing schema validation, and preventing prompt injection exploits in multi-agent networks.">
+  <meta name="author" content="PipeFish Labs">
+  <link rel="canonical" href="https://pipefishlabs.io/blog/model-context-protocol-mcp-server-security/">
+  <link rel="stylesheet" href="../../assets/pfl.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .art-header { padding-top: 40px; margin-bottom: 40px; }
+    .art-meta { display: flex; gap: 16px; font-family: var(--font-fm); font-size: 13px; color: var(--cyan); margin-top: 16px; }
+    .art-body { max-width: 72ch; margin: 0 auto 60px; font-size: 16px; line-height: 1.8; color: var(--text-body); }
+    .art-body h2 { font-family: var(--font-fd); font-size: 22px; color: var(--text-strong); margin: 40px 0 16px; }
+    .art-body p { margin-bottom: 20px; }
+    .art-body ul { margin-bottom: 24px; padding-left: 24px; }
+    .art-body li { margin-bottom: 8px; }
+    .art-body code { font-family: var(--font-fm); font-size: 14px; background: rgba(0,212,255,0.08); color: var(--cyan); padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<nav id="nav"><div class="container nav-inner"><a href="/" class="logo"><img src="../../logo.png" alt="PipeFish Labs" onerror="this.style.display='none'"><span>PipeFish</span> <span>Labs</span></a><div class="nav-links"><a href="/services-solutions/">Services</a><a href="/case-studies-results/">Case Studies</a><a href="/benefits-testimonials/">Benefits</a><a href="/blog/" class="active">Blog</a><a href="/book-a-demo-contact/">Contact</a></div></div></nav>
+
+<article class="container">
+  <header class="art-header">
+    <div class="lbl">Agent Security &amp; Tools</div>
+    <h1 class="h1">Securing Model Context Protocol (MCP) Servers in Production</h1>
+    <div class="art-meta"><span>By Jason F., Founder &amp; CISO</span><span>•</span><span>Published August 20, 2026</span><span>•</span><span>7 min read</span></div>
+  </header>
+  <div class="art-body">
+    <p>Model Context Protocol (MCP) is rapidly becoming the open standard for connecting AI agent models to internal enterprise databases, file systems, and SaaS tools. However, unhardened MCP tool endpoints present severe prompt injection and unauthorized command execution risks if left unprotected.</p>
+
+    <h2>MCP Threat Vectors in Enterprise Networks</h2>
+    <p>When an LLM agent invokes an MCP tool (e.g. querying a SQL database or dispatching a customer email), malicious data returned by the tool can re-inject prompt instructions into the model context window. Without strict payload validation, an attacker can trick the agent into executing secondary administrative commands.</p>
+
+    <h2>Production Hardening Guidelines</h2>
+    <ul>
+      <li><strong>mTLS &amp; Token Authentication:</strong> Require cryptographic mTLS certificates and scoped JWT identity for every MCP RPC call.</li>
+      <li><strong>Strict JSON Schema Validation:</strong> Reject any tool input or output payload that fails rigid Pydantic/Zod schema enforcement.</li>
+      <li><strong>HMAC Signature Verification:</strong> Sign state handoffs between agents and MCP tool servers to guarantee integrity.</li>
+      <li><strong>Human-in-the-Loop Override:</strong> Mandate human approval for destructive MCP actions (e.g., database drops, wire payments, account deletions).</li>
+    </ul>
+  </div>
+</article>
+
+<footer><div class="container"><div class="ft-grid"><div class="ft-brand"><div class="ft-name"><span>PipeFish</span> <span>Labs</span></div><p>The only firm delivering AI automation, zero-trust security, autonomous multi-agent systems, and strategic consulting as a single integrated platform.</p></div><div class="ft-col"><h4>Services</h4><a href="/services-solutions/">All Services</a><a href="/demo/">Live Simulator</a></div><div class="ft-col"><h4>Company</h4><a href="/benefits-testimonials/">Benefits</a><a href="/case-studies-results/">Case Studies</a><a href="/blog/" class="active">Blog</a></div><div class="ft-col"><h4>Legal</h4><a href="/legal-privacy-policy/">Privacy Policy</a><a href="/.well-known/security.txt">security.txt</a></div><div class="ft-col"><h4>Downloads</h4><a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download>EU AI Act Checklist</a><a href="/downloads/zero-trust-architecture-assessment-template.txt" download>Zero-Trust Template</a></div></div><div class="ft-bot"><p>© 2026 PipeFish Labs. All rights reserved.</p></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecting Zero-Data-Retention (ZDR) Enclaves for Sensitive Enterprise LLM Pipelines — PipeFish Labs Blog</title>
+  <meta name="description" content="Design patterns for processing confidential enterprise data in ephemeral, cryptographically isolated enclaves with zero persistent storage.">
+  <meta name="author" content="PipeFish Labs">
+  <link rel="canonical" href="https://pipefishlabs.io/blog/zero-data-retention-ai-enclaves-enterprise-privacy/">
+  <link rel="stylesheet" href="../../assets/pfl.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .art-header { padding-top: 40px; margin-bottom: 40px; }
+    .art-meta { display: flex; gap: 16px; font-family: var(--font-fm); font-size: 13px; color: var(--cyan); margin-top: 16px; }
+    .art-body { max-width: 72ch; margin: 0 auto 60px; font-size: 16px; line-height: 1.8; color: var(--text-body); }
+    .art-body h2 { font-family: var(--font-fd); font-size: 22px; color: var(--text-strong); margin: 40px 0 16px; }
+    .art-body p { margin-bottom: 20px; }
+    .art-body ul { margin-bottom: 24px; padding-left: 24px; }
+    .art-body li { margin-bottom: 8px; }
+    .art-body code { font-family: var(--font-fm); font-size: 14px; background: rgba(0,212,255,0.08); color: var(--cyan); padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<nav id="nav"><div class="container nav-inner"><a href="/" class="logo"><img src="../../logo.png" alt="PipeFish Labs" onerror="this.style.display='none'"><span>PipeFish</span> <span>Labs</span></a><div class="nav-links"><a href="/services-solutions/">Services</a><a href="/case-studies-results/">Case Studies</a><a href="/benefits-testimonials/">Benefits</a><a href="/blog/" class="active">Blog</a><a href="/book-a-demo-contact/">Contact</a></div></div></nav>
+
+<article class="container">
+  <header class="art-header">
+    <div class="lbl">Data Privacy Architecture</div>
+    <h1 class="h1">Architecting Zero-Data-Retention (ZDR) Enclaves for Sensitive Enterprise LLM Pipelines</h1>
+    <div class="art-meta"><span>By Donny J., Chief Operations Officer</span><span>•</span><span>Published August 19, 2026</span><span>•</span><span>8 min read</span></div>
+  </header>
+  <div class="art-body">
+    <p>Enterprise legal, financial, and healthcare teams cannot allow proprietary business intelligence or customer PII to persist in external model vendor logs. Building Zero-Data-Retention (ZDR) enclaves ensures that model context windows and ephemeral scratch spaces vanish immediately upon execution finish.</p>
+
+    <h2>The Ephemeral Runtime Paradigm</h2>
+    <p>In a standard LLM agent loop, intermediate memory states are often stored in unencrypted vector databases or Redis caches. A ZDR enclave eliminates persistent storage by running agent execution inside volatile RAM-only container nodes with encrypted swap space.</p>
+
+    <ul>
+      <li><strong>RAM-Only Volatile State:</strong> Agent execution memory resides strictly in volatile memory (tmpfs) that is wiped upon task completion.</li>
+      <li><strong>Cryptographic Shredding:</strong> AES-256 session keys are generated per task and destroyed immediately upon output emission.</li>
+      <li><strong>Zero Model Training Guarantee:</strong> Outbound API calls pass through zero-retention enterprise proxies enforcing non-retention headers.</li>
+    </ul>
+
+    <h2>Implementation &amp; Compliance Outcomes</h2>
+    <p>By enforcing ZDR enclaves across multi-agent DAG pipelines, PipeFish Labs enables enterprise clients to meet strict GDPR Article 17 ("Right to be Forgotten"), HIPAA Security Rule, and EU AI Act Article 10 data minimization standards without sacrificing agent intelligence.</p>
+  </div>
+</article>
+
+<footer><div class="container"><div class="ft-grid"><div class="ft-brand"><div class="ft-name"><span>PipeFish</span> <span>Labs</span></div><p>The only firm delivering AI automation, zero-trust security, autonomous multi-agent systems, and strategic consulting as a single integrated platform.</p></div><div class="ft-col"><h4>Services</h4><a href="/services-solutions/">All Services</a><a href="/demo/">Live Simulator</a></div><div class="ft-col"><h4>Company</h4><a href="/benefits-testimonials/">Benefits</a><a href="/case-studies-results/">Case Studies</a><a href="/blog/" class="active">Blog</a></div><div class="ft-col"><h4>Legal</h4><a href="/legal-privacy-policy/">Privacy Policy</a><a href="/.well-known/security.txt">security.txt</a></div><div class="ft-col"><h4>Downloads</h4><a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download>EU AI Act Checklist</a><a href="/downloads/zero-trust-architecture-assessment-template.txt" download>Zero-Trust Template</a></div></div><div class="ft-bot"><p>© 2026 PipeFish Labs. All rights reserved.</p></div></div></footer>
+</body>
+</html>

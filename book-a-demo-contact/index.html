@@ -240,6 +240,30 @@
                 </div>
               </div>
 
+              <!-- EMBEDDED CALENDAR SCHEDULING FLOW -->
+              <div style="background:var(--bg-alt);border:1px solid var(--border-strong);border-radius:var(--r-md);padding:16px;margin-bottom:20px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+                  <span style="font-size:16px">📅</span>
+                  <span style="font-family:var(--fd);font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:0.06em">SELECT STRATEGY SESSION TIME SLOT</span>
+                </div>
+                <div class="form-row" style="margin-bottom:10px">
+                  <div class="form-group" style="margin-bottom:0">
+                    <label for="session-date" style="font-size:11px">Preferred Date *</label>
+                    <input type="date" id="session-date" name="sessionDate" style="font-size:13px;padding:8px 12px" required>
+                  </div>
+                  <div class="form-group" style="margin-bottom:0">
+                    <label for="session-time" style="font-size:11px">Time Slot (US &amp; EU) *</label>
+                    <select id="session-time" name="sessionTime" style="font-size:13px;padding:8px 12px" required>
+                      <option value="">Select time slot</option>
+                      <option>09:00 AM EST (14:00 UTC)</option>
+                      <option>11:30 AM EST (16:30 UTC)</option>
+                      <option>02:00 PM EST (19:00 UTC)</option>
+                      <option>04:30 PM EST (21:30 UTC)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
               <div class="form-group">
                 <label for="primary-interest">Primary Interest *</label>
                 <select id="primary-interest" name="interest" required>
