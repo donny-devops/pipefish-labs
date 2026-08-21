@@ -564,6 +564,96 @@
     }
     .cap-banner-p { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; color: var(--text-strong); line-height: 1.6; max-width: 78ch; margin: 0 auto; }
 
+    /* ───────── BRIEFING VIDEO ───────── */
+    #briefing-video { background: var(--bg-alt); padding-block: 72px; }
+    .video-wrap {
+      background: var(--elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6), 0 0 32px rgba(0, 212, 255, 0.08);
+      margin-top: 36px; position: relative;
+    }
+    .video-header-bar {
+      background: rgba(10, 14, 23, 0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--font-mono); font-size: 11px; color: var(--cyan);
+      letter-spacing: 0.06em;
+    }
+    .video-container {
+      position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 520px;
+      background: #030712; display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .video-canvas {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .video-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(3, 7, 18, 0.2) 0%, rgba(3, 7, 18, 0.88) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity 0.3s; z-index: 5; text-align: center; padding: 24px;
+    }
+    .video-overlay.playing { opacity: 0; pointer-events: none; }
+    .play-btn-lg {
+      width: 84px; height: 84px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 100%);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 40px var(--cyan-glow), 0 0 20px var(--magenta-glow);
+      transition: all 0.3s; transform: scale(1); margin-bottom: 16px;
+    }
+    .play-btn-lg:hover { transform: scale(1.08); box-shadow: 0 0 60px var(--cyan-glow); }
+    .play-btn-lg svg { width: 34px; height: 34px; fill: #000; margin-left: 4px; }
+    .video-title-overlay {
+      font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 700;
+      color: var(--text-strong); margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+    .video-sub-overlay {
+      font-size: 13px; color: var(--text-body); max-width: 48ch; font-family: var(--font-body);
+    }
+    .video-controls-bar {
+      background: rgba(10, 14, 23, 0.95);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .v-ctrl-btn {
+      background: transparent; border: none; color: var(--text-strong);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      padding: 6px; border-radius: var(--r-sm); transition: color 0.2s;
+    }
+    .v-ctrl-btn:hover { color: var(--cyan); }
+    .v-progress-track {
+      flex: 1; height: 6px; background: rgba(255, 255, 255, 0.1);
+      border-radius: 100px; position: relative; cursor: pointer; overflow: hidden;
+    }
+    .v-progress-fill {
+      height: 100%; width: 0%; background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      border-radius: 100px; transition: width 0.1s linear;
+    }
+    .v-time-display {
+      font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); min-width: 90px;
+    }
+    .briefing-cards {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px;
+    }
+    .b-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 24px 20px; transition: all 0.3s;
+    }
+    .b-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+    .b-card-num {
+      font-family: var(--font-mono); font-size: 11px; color: var(--cyan);
+      letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 700;
+    }
+    .b-card-h3 {
+      font-family: var(--font-display); font-size: 13.5px; font-weight: 700;
+      color: var(--text-strong); margin-bottom: 8px; line-height: 1.35;
+    }
+    .b-card-p { font-size: 12.5px; line-height: 1.6; color: var(--text-body); }
+
     /* ───────── TECH ───────── */
     #tech { background: var(--surface); }
     .tech-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -729,6 +819,7 @@
         <span>PipeFish</span><span> Labs</span>
       </a>
       <ul class="nav-links" role="list">
+        <li><a href="#briefing-video">Briefing</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#demo">Demo</a></li>
         <li><a href="#architecture">Architecture</a></li>
@@ -745,6 +836,7 @@
 </nav>
 
 <div class="mob-nav" id="mobnav">
+  <a href="#briefing-video" onclick="closeNav()">Briefing</a>
   <a href="#services"     onclick="closeNav()">Services</a>
   <a href="#demo"         onclick="closeNav()">Demo</a>
   <a href="#architecture" onclick="closeNav()">Architecture</a>
@@ -834,6 +926,74 @@
     <span class="mi"><span class="dot"></span>Custom Middleware</span>
   </div>
 </div>
+
+<!-- ─── BRIEFING VIDEO ─── -->
+<section id="briefing-video">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">Executive Briefing Video</div>
+      <h2 class="h2" style="margin-top:14px">See Multi-Agent Orchestration Direct Operations in Real-Time</h2>
+      <p class="lead" style="margin:14px auto 0;max-width:64ch">
+        Watch our 3-minute technical overview showing how autonomous agent chains execute structured state handoffs, connect custom MCP servers, protect sensitive enterprise data, and deliver measurable operational ROI.
+      </p>
+    </div>
+
+    <div class="video-wrap ai">
+      <div class="video-header-bar">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00FF66;box-shadow:0 0 10px #00FF66"></span>
+          <span>EXECUTIVE BRIEFING · 1080p HD · HMAC-SHA256 SECURED FEED</span>
+        </div>
+        <div>PIPEFISH PLATFORM OVERVIEW v4.2</div>
+      </div>
+      <div class="video-container">
+        <canvas id="briefing-canvas" class="video-canvas"></canvas>
+        <div class="video-overlay" id="v-overlay">
+          <button class="play-btn-lg" onclick="playBriefingVideo()" aria-label="Play Executive Briefing Video">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="video-title-overlay">Play 3-Minute Executive Briefing</div>
+          <div class="video-sub-overlay">Demonstrating Agent Capabilities, MCP Integrations, Customer Impact, and Interactive Chain Execution</div>
+        </div>
+      </div>
+      <div class="video-controls-bar">
+        <button class="v-ctrl-btn" id="v-play-btn" onclick="playBriefingVideo()" aria-label="Toggle Play/Pause">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg>
+        </button>
+        <div class="v-progress-track" onclick="seekBriefingVideo(event)">
+          <div class="v-progress-fill" id="v-progress"></div>
+        </div>
+        <div class="v-time-display" id="v-time">00:00 / 03:15</div>
+      </div>
+    </div>
+
+    <!-- NARRATIVE SUMMARY CARDS -->
+    <div class="briefing-cards">
+      <div class="b-card ai">
+        <div class="b-card-num">01 · CAPABILITIES</div>
+        <h3 class="b-card-h3">What Our Agents Can Do</h3>
+        <p class="b-card-p">From 24/7 AI Receptionist voice & text call handling to automated OCR document parsing, intent classification, and instant retainer payments.</p>
+      </div>
+      <div class="b-card ai" style="transition-delay:.05s">
+        <div class="b-card-num">02 · INTEGRATION &amp; MESH</div>
+        <h3 class="b-card-h3">Multi-Agent Orchestration</h3>
+        <p class="b-card-p">Seamlessly connects CRM, ERP, EMR, Phone, Email, SMS, UCC/VTC, and custom MCP tool servers using cryptographically signed state handoffs.</p>
+      </div>
+      <div class="b-card ai" style="transition-delay:.10s">
+        <div class="b-card-num">03 · CUSTOMER IMPACT</div>
+        <h3 class="b-card-h3">Measurable Business ROI</h3>
+        <p class="b-card-p">Achieve 87%+ reduction in manual tasks, $240K+ average annual cost savings, zero downtime security modernization, and 10× processing speed.</p>
+      </div>
+      <div class="b-card ai" style="transition-delay:.15s">
+        <div class="b-card-num">04 · SIMULATOR BREAKDOWN</div>
+        <h3 class="b-card-h3">Live 8-Node Chain Run</h3>
+        <p class="b-card-p">Summarizes the live interactive graph rendered below — from initial inbound signal to calendar verification, CRM sync, and notification.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <!-- ─── PROBLEM ─── -->
 <section id="problem">
@@ -1816,6 +1976,121 @@ document.addEventListener('DOMContentLoaded', renderDemoRows);
 if (document.readyState === 'interactive' || document.readyState === 'complete') {
   renderDemoRows();
 }
+
+/* ── EXECUTIVE BRIEFING VIDEO CANVAS SCRIPT ── */
+(function() {
+  const canvas = document.getElementById('briefing-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let playing = false;
+  let currentTime = 0;
+  const totalDuration = 195; // 3:15 in seconds
+  let animationId = null;
+
+  function resizeCanvas() {
+    canvas.width = canvas.clientWidth || 960;
+    canvas.height = canvas.clientHeight || 540;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function drawThumbnail() {
+    ctx.fillStyle = '#030712';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw Cyber Grid Lines
+    ctx.strokeStyle = 'rgba(0, 212, 255, 0.08)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < canvas.width; x += 40) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+    }
+    for (let y = 0; y < canvas.height; y += 40) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+    }
+
+    // Draw Central Node Network Graphic
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 70, 0, Math.PI * 2);
+    ctx.strokeStyle = '#00D4FF';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = '#00D4FF';
+    ctx.font = 'bold 14px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('PIPEFISH AGENT MESH', cx, cy + 5);
+  }
+
+  function renderVideoFrame() {
+    if (!playing) return;
+    currentTime += 0.2;
+    if (currentTime >= totalDuration) {
+      currentTime = 0;
+      playing = false;
+      document.getElementById('v-overlay').classList.remove('playing');
+      return;
+    }
+
+    // Update Progress Fill and Timer Text
+    const pct = (currentTime / totalDuration) * 100;
+    const fillEl = document.getElementById('v-progress');
+    if (fillEl) fillEl.style.width = pct + '%';
+
+    const curM = Math.floor(currentTime / 60);
+    const curS = Math.floor(currentTime % 60).toString().padStart(2, '0');
+    const timeEl = document.getElementById('v-time');
+    if (timeEl) timeEl.innerText = `0${curM}:${curS} / 03:15`;
+
+    // Draw Dynamic Video Frame
+    ctx.fillStyle = '#030712';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Waveforms
+    ctx.fillStyle = 'rgba(0, 212, 255, 0.2)';
+    const bars = 40;
+    const w = canvas.width / bars;
+    for (let i = 0; i < bars; i++) {
+      const h = Math.sin(currentTime + i) * 60 + 80;
+      ctx.fillRect(i * w, canvas.height / 2 - h / 2, w - 4, h);
+    }
+
+    // Dynamic Telemetry Overlay
+    ctx.fillStyle = '#E040FF';
+    ctx.font = '12px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(`HMAC-SHA256 SIGNATURE: 0x${Math.floor(currentTime * 849204).toString(16)}`, 24, 40);
+    ctx.fillText(`ACTIVE AGENTS: 8/8 · RETELL / ELEVENLABS REMOVED · PHONE / EMAIL / UCC ENGAGED`, 24, 60);
+    ctx.fillText(`CUSTOMER ROI IMPACT: 87.4% WORKLOAD REDUCTION · $240K/YR SAVINGS`, 24, 80);
+
+    animationId = requestAnimationFrame(renderVideoFrame);
+  }
+
+  window.playBriefingVideo = function() {
+    playing = !playing;
+    const overlay = document.getElementById('v-overlay');
+    if (playing) {
+      if (overlay) overlay.classList.add('playing');
+      renderVideoFrame();
+    } else {
+      if (overlay) overlay.classList.remove('playing');
+      cancelAnimationFrame(animationId);
+    }
+  };
+
+  window.seekBriefingVideo = function(e) {
+    const track = e.currentTarget;
+    const rect = track.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const pct = clickX / rect.width;
+    currentTime = pct * totalDuration;
+    renderVideoFrame();
+  };
+
+  drawThumbnail();
+})();
 </script>
 </body>
 </html>
