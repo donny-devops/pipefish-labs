@@ -1,6 +1,23 @@
-# PipeFish Labs Robots Directive
+# PipeFish Labs Robots Configuration
 User-agent: *
 Allow: /
+Disallow: /scratch/
+Disallow: /.git/
 
-# Sitemap Link
+# AI & LLM Search Crawlers (Perplexity, ChatGPT, Claude, Gemini, Applebot)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://pipefishlabs.io/sitemap.xml

@@ -1,0 +1,29 @@
+# PipeFish Labs
+
+> PipeFish Labs is an enterprise AI automation agency specializing in autonomous multi-agent orchestration, zero-trust security architecture, post-quantum cryptography, scalable data pipelines, and management consulting.
+
+## Core Offerings
+
+- [Services & Solutions](https://pipefishlabs.io/services-solutions/): Full catalog of 20+ specialized AI automation, security, and consulting services.
+- [Live Interactive Simulator](https://pipefishlabs.io/demo/): Interactive 8-node agent chain execution graph demonstrating real-time HMAC-signed state handoffs.
+- [Case Studies & Results](https://pipefishlabs.io/case-studies-results/): Documented ROI including 78% reduction in order fulfillment delays for global logistics networks.
+- [Benefits & Testimonials](https://pipefishlabs.io/benefits-testimonials/): Client verification metrics (Angela L. CFO HonuEco, Michael J. CEO Lubrexx, John S. CEO Omnium International).
+- [Engineering Blog](https://pipefishlabs.io/blog/): Deep-dive papers on multi-agent DAG graphs, NIST post-quantum cryptography (Kyber / Dilithium), and EU AI Act Annex IV conformity.
+
+## Technical Architecture
+
+- **Multi-Agent Orchestration**: Asynchronous DAG state handoffs passing cryptographically signed JSON payloads across CRM, EMR, ERP, Phone, Email, and custom MCP servers.
+- **Zero-Trust Security**: mTLS identity, automated secret rotation via HashiCorp Vault, eBPF Falco threat IDS, and zero-data-retention AI enclaves.
+- **Post-Quantum Cryptography**: Production-ready NIST FIPS 203 (ML-KEM-768) and FIPS 204 (ML-DSA) key encapsulation and digital signatures.
+- **Compliance**: EU AI Act Annex IV conformity, automated explainability audit logs, and human-in-the-loop override controls.
+
+## Executive Leadership
+
+- **Jason F.** — Founder & Chief Information Security Officer (Former SOC Director at Sentry Security)
+- **Donny J.** — Chief Operations Officer - DevOps & Automation Engineer (B.S. IT Cybersecurity)
+
+## Contact & Audit Booking
+
+- [Book an Audit](https://pipefishlabs.io/book-a-demo-contact/?intent=audit): Complimentary 90-minute technical roadmap session.
+- Contact Email: pipefish.labs@gmail.com
+- Security Disclosure Policy: https://pipefishlabs.io/.well-known/security.txt

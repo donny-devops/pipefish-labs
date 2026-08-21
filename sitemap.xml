@@ -16,7 +16,7 @@
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://pipefishlabs.io/book-a-demo-contact/</loc>
+    <loc>https://pipefishlabs.io/demo/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -32,6 +32,36 @@
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://pipefishlabs.io/blog/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://pipefishlabs.io/blog/architecting-autonomous-multi-agent-systems/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://pipefishlabs.io/blog/post-quantum-cryptography-production-guide/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://pipefishlabs.io/blog/eu-ai-act-annex-iv-conformity-guide/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://pipefishlabs.io/book-a-demo-contact/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://pipefishlabs.io/affiliates-corporate-partnerships/</loc>
