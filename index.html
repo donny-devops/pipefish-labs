@@ -1737,17 +1737,23 @@ function renderDemoRows() {
   });
 }
 
+let demoTimeoutId = null;
+
 function switchDemo(type, btn) {
-  if (demoRunning) return;
+  if (demoTimeoutId) clearTimeout(demoTimeoutId);
+  demoRunning = false;
   currentDemoScenario = type;
   document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
   if (btn) btn.classList.add('active');
   renderDemoRows();
+  const runBtn = document.getElementById('run-demo-btn');
+  if (runBtn) runBtn.removeAttribute('disabled');
   const statusBar = document.getElementById('demo-status-bar-text');
   if (statusBar) statusBar.innerText = 'Idle — press Run agents to trigger the orchestration graph.';
 }
 
 function resetDemoGraph() {
+  if (demoTimeoutId) clearTimeout(demoTimeoutId);
   demoRunning = false;
   renderDemoRows();
   const runBtn = document.getElementById('run-demo-btn');
@@ -1758,6 +1764,7 @@ function resetDemoGraph() {
 
 function runDemoGraph() {
   if (demoRunning) return;
+  if (demoTimeoutId) clearTimeout(demoTimeoutId);
   demoRunning = true;
   const runBtn = document.getElementById('run-demo-btn');
   if (runBtn) runBtn.setAttribute('disabled', 'true');
@@ -1774,7 +1781,8 @@ function runDemoGraph() {
       if (prevRow) {
         prevRow.classList.remove('active');
         prevRow.classList.add('done');
-        prevStat.innerText = `State handoff complete ✓ [HMAC-SHA256 Signed · MCP Tool Verified → Node 0${step + 1}]`;
+        const nextNodeText = step < sc.nodes.length ? `→ Node 0${step + 1}` : `→ Pipeline Complete`;
+        prevStat.innerText = `State handoff complete ✓ [HMAC-SHA256 Signed · MCP Tool Verified ${nextNodeText}]`;
         prevBadge.innerText = 'PASSED';
       }
     }
@@ -1785,13 +1793,14 @@ function runDemoGraph() {
       const curBadge = document.getElementById(`demo-badge-${step}`);
       if (curRow) {
         curRow.classList.add('active');
+        curRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         curStat.innerText = `Processing agent execution & state verification…`;
         curBadge.innerText = 'EXECUTING';
       }
       const statusBar = document.getElementById('demo-status-bar-text');
       if (statusBar) statusBar.innerText = `Executing graph: Node 0${step + 1} (${sc.nodes[step].name}) active...`;
       step++;
-      setTimeout(processNextStep, 450);
+      demoTimeoutId = setTimeout(processNextStep, 500);
     } else {
       demoRunning = false;
       if (runBtn) runBtn.removeAttribute('disabled');
