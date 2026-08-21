@@ -288,6 +288,60 @@
       border-bottom: 1px solid var(--border);
     }
 
+    /* ───────── STICKY HOMEPAGE SUB-NAV ───────── */
+    .sec-subnav {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 98;
+      background: rgba(10, 15, 29, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding-block: 8px;
+    }
+    .subnav-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .subnav-inner::-webkit-scrollbar { display: none; }
+    .subnav-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .subnav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .subnav-item {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-body);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 12px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .subnav-item:hover {
+      color: var(--text-strong);
+      border-color: var(--cyan);
+      background: var(--cyan-dim);
+    }
+
     /* ───────── HERO ───────── */
     #hero {
       position: relative; min-height: 100vh;
@@ -820,20 +874,18 @@
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="logo" aria-label="PipeFish Labs">
+      <a href="/" class="logo" aria-label="PipeFish Labs">
         <img src="./logo.png" alt="PipeFish Labs" onerror="this.style.display='none'">
         <span>PipeFish</span><span> Labs</span>
       </a>
       <ul class="nav-links" role="list">
-        <li><a href="#briefing-video">Briefing</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#demo">Demo</a></li>
-        <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#capabilities">Capabilities</a></li>
-        <li><a href="#agents">Multi-Agent</a></li>
-        <li><a href="#process">Process</a></li>
+        <li><a href="/services-solutions/">Services</a></li>
+        <li><a href="/case-studies-results/">Case Studies</a></li>
+        <li><a href="/benefits-testimonials/">Benefits</a></li>
+        <li><a href="/affiliates-corporate-partnerships/">Partners</a></li>
+        <li><a href="/book-a-demo-contact/">Contact</a></li>
       </ul>
-      <a href="#cta" class="btn btn-m" style="flex-shrink:0">Book an Audit →</a>
+      <a href="/book-a-demo-contact/" class="btn btn-m" style="flex-shrink:0">Book an Audit →</a>
       <button class="ham" aria-label="Open menu" aria-expanded="false" id="ham">
         <span></span><span></span><span></span>
       </button>
@@ -842,14 +894,30 @@
 </nav>
 
 <div class="mob-nav" id="mobnav">
-  <a href="#briefing-video" onclick="closeNav()">Briefing</a>
-  <a href="#services"     onclick="closeNav()">Services</a>
-  <a href="#demo"         onclick="closeNav()">Demo</a>
-  <a href="#architecture" onclick="closeNav()">Architecture</a>
-  <a href="#capabilities" onclick="closeNav()">Capabilities</a>
-  <a href="#agents"       onclick="closeNav()">Multi-Agent</a>
-  <a href="#process"      onclick="closeNav()">Process</a>
-  <a href="#cta"          onclick="closeNav()" class="btn btn-m" style="margin-top:8px;justify-content:center">Book an Audit →</a>
+  <a href="/services-solutions/" onclick="closeNav()">Services</a>
+  <a href="/case-studies-results/" onclick="closeNav()">Case Studies</a>
+  <a href="/benefits-testimonials/" onclick="closeNav()">Benefits</a>
+  <a href="/affiliates-corporate-partnerships/" onclick="closeNav()">Partners</a>
+  <a href="/book-a-demo-contact/" onclick="closeNav()">Contact</a>
+  <a href="/book-a-demo-contact/" onclick="closeNav()" class="btn btn-m" style="margin-top:8px;justify-content:center">Book an Audit →</a>
+</div>
+
+<!-- ─── HOMEPAGE STICKY SECTION SUB-NAV ─── -->
+<div class="sec-subnav" id="sec-subnav" aria-label="Page section links">
+  <div class="container">
+    <div class="subnav-inner">
+      <span class="subnav-title">Page Index:</span>
+      <div class="subnav-links">
+        <a href="#briefing-video" class="subnav-item">Briefing Video</a>
+        <a href="#services" class="subnav-item">Services Arsenal</a>
+        <a href="#demo" class="subnav-item">Agent Simulator</a>
+        <a href="#architecture" class="subnav-item">Architecture</a>
+        <a href="#capabilities" class="subnav-item">Capabilities</a>
+        <a href="#agents" class="subnav-item">Multi-Agent Engine</a>
+        <a href="#process" class="subnav-item">Process</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ─── HERO ─── -->
