@@ -327,18 +327,66 @@ window.addEventListener('scroll',()=>{document.getElementById('nav').classList.t
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1})
 document.querySelectorAll('.ai').forEach(el=>io.observe(el))
 
-function handleSubmit(e){
-  e.preventDefault()
-  const form=e.target
-  const required=form.querySelectorAll('[required]')
-  let valid=true
-  required.forEach(f=>{
-    f.style.borderColor=f.value.trim()?'var(--border)':'var(--magenta)'
-    if(!f.value.trim())valid=false
-  })
-  if(!valid){required[0].focus();return}
-  document.getElementById('form-container').style.display='none'
-  document.getElementById('success-msg').style.display='block'
+// Configurable Webhook Endpoint (Paste your Make.com or Custom Webhook URL here)
+const MAKE_WEBHOOK_URL = window.MAKE_WEBHOOK_URL || "";
+
+async function handleSubmit(e){
+  e.preventDefault();
+  const form = e.target;
+  const required = form.querySelectorAll('[required]');
+  let valid = true;
+
+  required.forEach(f => {
+    f.style.borderColor = f.value.trim() ? 'var(--border)' : 'var(--magenta)';
+    if (!f.value.trim()) valid = false;
+  });
+
+  if (!valid) {
+    required[0].focus();
+    return;
+  }
+
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  // Capture URL parameters (UTM tags)
+  const urlParams = new URLSearchParams(window.location.search);
+  const utmObj = {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
+    if (urlParams.has(k)) utmObj[k] = urlParams.get(k);
+  });
+
+  const payload = {
+    ...data,
+    utm: utmObj,
+    page_url: window.location.href,
+    referrer: document.referrer,
+    timestamp: new Date().toISOString()
+  };
+
+  // Push event to GTM Data Layer if present
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'generate_lead',
+    lead_type: data.discipline || 'General Inquiry',
+    company_size: data.size || 'Unknown'
+  });
+
+  // Post to Make.com Webhook if configured
+  if (MAKE_WEBHOOK_URL) {
+    try {
+      await fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.warn("Webhook delivery deferred:", err);
+    }
+  }
+
+  document.getElementById('form-container').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
 }
 </script>
 </body>
