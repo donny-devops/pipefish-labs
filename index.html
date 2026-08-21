@@ -1370,35 +1370,35 @@
     </div>
     <div class="tech-cols">
       <div class="card ai">
-        <div class="label" style="margin-bottom:14px">AI &amp; ML Frameworks</div>
+        <div class="label" style="margin-bottom:14px">AI, MCP &amp; Multi-Modal</div>
         <div class="badges" style="flex-direction:column;align-items:flex-start;gap:7px">
-          <span class="badge">OpenAI / GPT-4o</span>
-          <span class="badge">Anthropic Claude</span>
+          <span class="badge">OpenAI / GPT-4o &amp; Claude 3.5</span>
+          <span class="badge">Custom MCP Server Catalog</span>
+          <span class="badge">Vision-Language Document OCR</span>
+          <span class="badge">Multi-Modal Audio &amp; Speech</span>
           <span class="badge">LangChain / LangGraph</span>
-          <span class="badge">CrewAI / AutoGen</span>
-          <span class="badge">Hugging Face</span>
-          <span class="badge">Ollama (Local LLMs)</span>
+          <span class="badge">Ollama &amp; Local Edge LLMs</span>
         </div>
       </div>
       <div class="card ai" style="transition-delay:.05s">
-        <div class="label" style="margin-bottom:14px">Automation &amp; Integration</div>
+        <div class="label" style="margin-bottom:14px">A2A &amp; Integration Mesh</div>
         <div class="badges" style="flex-direction:column;align-items:flex-start;gap:7px">
-          <span class="badge">n8n</span>
-          <span class="badge">Make (Integromat)</span>
-          <span class="badge">Zapier Enterprise</span>
-          <span class="badge">REST / GraphQL APIs</span>
-          <span class="badge">Webhooks &amp; SSE</span>
-          <span class="badge">Custom MCP Servers</span>
+          <span class="badge">A2A Cryptographic State Graphs</span>
+          <span class="badge">HMAC-SHA256 Payload Signing</span>
+          <span class="badge">NATS JetStream &amp; Kafka</span>
+          <span class="badge">n8n &amp; Zapier Enterprise</span>
+          <span class="badge">REST / GraphQL &amp; gRPC</span>
+          <span class="badge">Webhooks &amp; Event Streaming</span>
         </div>
       </div>
       <div class="card ai" style="transition-delay:.10s">
-        <div class="label" style="margin-bottom:14px">Security &amp; InfoSec</div>
+        <div class="label" style="margin-bottom:14px">Cybersecurity, WAF &amp; IDS</div>
         <div class="badges" style="flex-direction:column;align-items:flex-start;gap:7px">
-          <span class="badge">Zero-Trust Architecture</span>
-          <span class="badge">mTLS &amp; TLS 1.3 Hardening</span>
-          <span class="badge">OAuth2 / OIDC &amp; IAM</span>
-          <span class="badge">HashiCorp Vault &amp; KMS</span>
-          <span class="badge">SIEM &amp; Threat Telemetry</span>
+          <span class="badge">Cloudflare Enterprise OWASP WAF</span>
+          <span class="badge">eBPF Runtime IDS (Falco)</span>
+          <span class="badge">HashiCorp Vault Auto-Rotation</span>
+          <span class="badge">Gitleaks &amp; TruffleHog CI Scans</span>
+          <span class="badge">Zero-Trust mTLS &amp; IAM</span>
           <span class="badge">SOC 2 / ISO 27001 Controls</span>
         </div>
       </div>
@@ -1408,9 +1408,9 @@
           <span class="badge">AWS / Azure / GCP</span>
           <span class="badge">Kubernetes / Docker</span>
           <span class="badge">Supabase / PostgreSQL</span>
-          <span class="badge">Redis / Kafka</span>
-          <span class="badge">Terraform / Pulumi</span>
-          <span class="badge">Edge Computing</span>
+          <span class="badge">Redis Cluster &amp; KeyDB</span>
+          <span class="badge">Terraform &amp; Pulumi IaC</span>
+          <span class="badge">Cloudflare Workers Edge</span>
         </div>
       </div>
     </div>
@@ -1774,7 +1774,7 @@ function runDemoGraph() {
       if (prevRow) {
         prevRow.classList.remove('active');
         prevRow.classList.add('done');
-        prevStat.innerText = `State handoff complete ✓ (Structured payload passed to Node 0${step + 1})`;
+        prevStat.innerText = `State handoff complete ✓ [HMAC-SHA256 Signed · MCP Tool Verified → Node 0${step + 1}]`;
         prevBadge.innerText = 'PASSED';
       }
     }
