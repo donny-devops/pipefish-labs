@@ -1,0 +1,6 @@
+# PipeFish Labs Robots Directive
+User-agent: *
+Allow: /
+
+# Sitemap Link
+Sitemap: https://pipefishlabs.io/sitemap.xml
