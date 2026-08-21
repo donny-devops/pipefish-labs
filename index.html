@@ -367,6 +367,57 @@
       position: relative; z-index: 2;
       padding-block: 80px 100px; width: 100%;
     }
+    .hero-grid-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-logo-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-logo-frame {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      padding: 16px;
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.18), 0 0 80px rgba(224, 64, 255, 0.12);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      animation: floatHeroLogo 6s ease-in-out infinite alternate;
+    }
+    .hero-logo-frame:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 60px rgba(0, 212, 255, 0.3), 0 0 100px rgba(224, 64, 255, 0.25);
+      border-color: var(--cyan);
+    }
+    .hero-logo-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--r-md);
+      object-fit: contain;
+    }
+    @keyframes floatHeroLogo {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-12px); }
+    }
+    @media (max-width: 1024px) {
+      .hero-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-logo-col {
+        order: -1;
+      }
+      .hero-logo-frame {
+        max-width: 340px;
+      }
+    }
     .hero-eye {
       display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
     }
@@ -985,43 +1036,53 @@
   <div class="hero-grad" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-body">
-      <div class="hero-eye ai">
-        <div class="hero-eye-line"></div>
-        <span class="label">AI Infrastructure · Multi-Agent Orchestration · Zero Compromise</span>
-      </div>
-      <h1 class="h1 hero-h1 ai" style="transition-delay:.08s">
-        Your Competitors Bought a Chatbot.
-      </h1>
-      <div class="h1 hero-h1-b ai" style="transition-delay:.14s">
-        <span class="glow-c">You're About to Buy</span>
-        <span class="glow-m"> the Future.</span>
-      </div>
-      <p class="lead hero-lead ai" style="transition-delay:.20s">
-        PipeFish Labs is the only firm combining autonomous AI agents, InfoSec,
-        zero-trust architecture, scalable data pipelines, and management consulting into one devastating platform.
-        We don't automate your business — we <em style="color:var(--text-strong);font-style:normal">reinvent it.</em>
-      </p>
-      <div class="hero-btns ai" style="transition-delay:.26s">
-        <a href="#demo" class="btn btn-m">See Live Agent Chain ⚡</a>
-        <a href="/book-a-demo-contact/?intent=audit" class="btn btn-p">Get an Operational Audit ↗</a>
-        <a href="#services" class="btn btn-o">Explore the Arsenal</a>
-      </div>
-      <div class="hero-stats ai" style="transition-delay:.32s">
-        <div class="hstat">
-          <div class="hstat-n glow-c">15+</div>
-          <div class="hstat-l">Core Disciplines</div>
+      <div class="hero-grid-layout">
+        <div class="hero-main-col">
+          <div class="hero-eye ai">
+            <div class="hero-eye-line"></div>
+            <span class="label">AI Infrastructure · Multi-Agent Orchestration · Zero Compromise</span>
+          </div>
+          <h1 class="h1 hero-h1 ai" style="transition-delay:.08s">
+            Your Competitors Bought a Chatbot.
+          </h1>
+          <div class="h1 hero-h1-b ai" style="transition-delay:.14s">
+            <span class="glow-c">You're About to Buy</span>
+            <span class="glow-m"> the Future.</span>
+          </div>
+          <p class="lead hero-lead ai" style="transition-delay:.20s">
+            PipeFish Labs is the only firm combining autonomous AI agents, InfoSec,
+            zero-trust architecture, scalable data pipelines, and management consulting into one devastating platform.
+            We don't automate your business — we <em style="color:var(--text-strong);font-style:normal">reinvent it.</em>
+          </p>
+          <div class="hero-btns ai" style="transition-delay:.26s">
+            <a href="#demo" class="btn btn-m">See Live Agent Chain ⚡</a>
+            <a href="/book-a-demo-contact/?intent=audit" class="btn btn-p">Get an Operational Audit ↗</a>
+            <a href="#services" class="btn btn-o">Explore the Arsenal</a>
+          </div>
+          <div class="hero-stats ai" style="transition-delay:.32s">
+            <div class="hstat">
+              <div class="hstat-n glow-c">15+</div>
+              <div class="hstat-l">Core Disciplines</div>
+            </div>
+            <div class="hstat">
+              <div class="hstat-n glow-c">20+</div>
+              <div class="hstat-l">Industries Served</div>
+            </div>
+            <div class="hstat">
+              <div class="hstat-n glow-c">99.9%</div>
+              <div class="hstat-l">Execution Reliability</div>
+            </div>
+            <div class="hstat">
+              <div class="hstat-n glow-m">∞</div>
+              <div class="hstat-l">Customization Depth</div>
+            </div>
+          </div>
         </div>
-        <div class="hstat">
-          <div class="hstat-n glow-c">20+</div>
-          <div class="hstat-l">Industries Served</div>
-        </div>
-        <div class="hstat">
-          <div class="hstat-n glow-c">99.9%</div>
-          <div class="hstat-l">Execution Reliability</div>
-        </div>
-        <div class="hstat">
-          <div class="hstat-n glow-m">∞</div>
-          <div class="hstat-l">Customization Depth</div>
+
+        <div class="hero-logo-col ai" style="transition-delay:.16s">
+          <div class="hero-logo-frame">
+            <img src="/hero-logo.png" alt="PipeFish Labs Logo Badge" class="hero-logo-img">
+          </div>
         </div>
       </div>
     </div>
