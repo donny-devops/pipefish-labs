@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act Annex IV Conformity & Audit Trails | PipeFish Labs Blog</title>
+<meta name="description" content="Technical guide for achieving EU AI Act Annex IV compliance for high-risk autonomous AI systems, explainability logging, and human-in-the-loop controls.">
+<link rel="canonical" href="https://pipefishlabs.io/blog/eu-ai-act-annex-iv-conformity-guide/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<meta property="og:title" content="EU AI Act Annex IV Conformity & Audit Trails | PipeFish Labs Blog">
+<meta property="og:description" content="Technical guide for achieving EU AI Act Annex IV compliance for high-risk autonomous AI systems, explainability logging, and human-in-the-loop controls.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://pipefishlabs.io/blog/eu-ai-act-annex-iv-conformity-guide/">
+<meta property="og:image" content="https://pipefishlabs.io/logo.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pipefishlabs.io/#organization",
+      "name": "PipeFish Labs",
+      "url": "https://pipefishlabs.io",
+      "logo": "https://pipefishlabs.io/logo.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Navigating EU AI Act Annex IV Conformity & Immutable Audit Trails",
+      "description": "Technical requirements for high-risk AI system compliance: automated explainability logs, human-in-the-loop overrides, and continuous risk assessments.",
+      "url": "https://pipefishlabs.io/blog/eu-ai-act-annex-iv-conformity-guide/",
+      "datePublished": "2026-08-05",
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Elena Rostova",
+        "jobTitle": "Principal AI & Graph Engineering Lead"
+      },
+      "publisher": {
+        "@id": "https://pipefishlabs.io/#organization"
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #06070C;
+    --surface: #0B0E17;
+    --elevated: #111625;
+    --border: #1C253B;
+    --border-strong: #2A3859;
+    --cyan: #00D4FF;
+    --cyan-glow: rgba(0,212,255,0.25);
+    --magenta: #E040FF;
+    --magenta-glow: rgba(224,64,255,0.25);
+    --text-strong: #F0F4FF;
+    --text-body: #8A99AD;
+    --text-dim: #7F8EA3;
+    --font-fd: 'Orbitron', monospace;
+    --font-fb: 'Inter', sans-serif;
+    --font-fm: 'JetBrains Mono', monospace;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --nav-h: 72px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text-body); font-family: var(--font-fb); line-height: 1.7; overflow-x: hidden; }
+  .container { max-width: 900px; margin-inline: auto; padding-inline: clamp(1.5rem, 5vw, 4rem); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(6,7,12,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: clamp(1.5rem, 5vw, 4rem); }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-fd); font-weight: 800; font-size: 16px; color: var(--text-strong); text-decoration: none; }
+  .logo span:first-child { color: var(--cyan); }
+  .logo span:last-child { color: var(--magenta); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-body); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-fm); font-size: 12.5px; font-weight: 700; padding: 10px 20px; border-radius: 100px; text-decoration: none; cursor: pointer; border: none; }
+  .btn-m { background: var(--magenta); color: #000; box-shadow: 0 0 20px var(--magenta-glow); }
+
+  .art-header { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+  .lbl { font-family: var(--font-fm); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+  .h1 { font-family: var(--font-fd); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--text-strong); line-height: 1.2; margin-bottom: 16px; }
+  .art-meta { font-family: var(--font-fm); font-size: 12px; color: var(--text-dim); display: flex; gap: 16px; align-items: center; }
+
+  .art-body { font-size: 15px; color: var(--text-body); margin-bottom: 60px; }
+  .art-body h2 { font-family: var(--font-fd); font-size: 20px; font-weight: 700; color: var(--text-strong); margin-top: 36px; margin-bottom: 16px; }
+  .art-body p { margin-bottom: 20px; }
+  .art-cta { background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--r-lg); padding: 36px; text-align: center; margin-bottom: 80px; }
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding-block: 40px 24px; text-align: center; font-size: 13px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <span>PipeFish</span><span> Labs</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/services-solutions/">Services</a></li>
+      <li><a href="/case-studies-results/">Case Studies</a></li>
+      <li><a href="/benefits-testimonials/">Benefits</a></li>
+      <li><a href="/demo/">Demo</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/book-a-demo-contact/">Contact</a></li>
+    </ul>
+    <a href="/book-a-demo-contact/?intent=audit" class="btn btn-m">Book an Audit →</a>
+  </div>
+</nav>
+
+<article class="container">
+  <header class="art-header">
+    <div class="lbl">Regulatory Compliance Paper</div>
+    <h1 class="h1">Navigating EU AI Act Annex IV Conformity &amp; Immutable Audit Trails</h1>
+    <div class="art-meta">
+      <span>By Dr. Elena Rostova, Principal AI &amp; Graph Engineering Lead</span>
+      <span>•</span>
+      <span>Published August 5, 2026</span>
+      <span>•</span>
+      <span>7 min read</span>
+    </div>
+  </header>
+
+  <div class="art-body">
+    <p>The enforcement of the EU AI Act mandates strict technical compliance for high-risk AI deployments, including financial credit assessment, insurance underwriting, and healthcare intake systems. Annex IV outlines mandatory technical documentation that must be generated automatically during system operation.</p>
+
+    <h2>1. Immutable Log Generation</h2>
+    <p>Every decision executed by a PipeFish agent chain emits an append-only JSON event to an immutable audit store. Each event records the input prompt, model version, system prompt hash, temperature parameter, and output confidence score.</p>
+
+    <h2>2. Human-in-the-Loop Override Mechanisms</h2>
+    <p>Annex IV mandates that operators retain real-time override authority. Our orchestration framework embeds fallback latches allowing human supervisors to halt, adjust, or manually approve agent decisions in real time.</p>
+
+    <h2>3. Automated Conformity Assessments</h2>
+    <p>We provide enterprise clients with continuous AI Act readiness dashboards, automated Annex IV technical dossiers, and quarterly bias audit reports ready for European Notified Body inspection.</p>
+  </div>
+
+  <div class="art-cta">
+    <h3>Audit Your AI Act Compliance Posture</h3>
+    <p style="margin-bottom:20px">Ensure your AI infrastructure meets EU AI Act Annex IV requirements before enforcement deadlines.</p>
+    <a href="/book-a-demo-contact/?intent=audit" class="btn btn-m" style="font-size:14px;padding:14px 32px">Request Compliance Audit →</a>
+  </div>
+</article>
+
+<footer>
+  <p>© 2026 PipeFish Labs. The only firm delivering AI automation, zero-trust security, autonomous multi-agent systems, and strategic consulting as a single integrated platform.</p>
+</footer>
+
+</body>
+</html>

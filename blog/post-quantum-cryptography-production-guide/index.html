@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Quantum Cryptography in Production | PipeFish Labs Blog</title>
+<meta name="description" content="A practical engineering guide to deploying NIST ML-KEM (Kyber) and ML-DSA (Dilithium) post-quantum algorithms across enterprise infrastructure.">
+<link rel="canonical" href="https://pipefishlabs.io/blog/post-quantum-cryptography-production-guide/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<meta property="og:title" content="Post-Quantum Cryptography in Production | PipeFish Labs Blog">
+<meta property="og:description" content="A practical engineering guide to deploying NIST ML-KEM (Kyber) and ML-DSA (Dilithium) post-quantum algorithms across enterprise infrastructure.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://pipefishlabs.io/blog/post-quantum-cryptography-production-guide/">
+<meta property="og:image" content="https://pipefishlabs.io/logo.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pipefishlabs.io/#organization",
+      "name": "PipeFish Labs",
+      "url": "https://pipefishlabs.io",
+      "logo": "https://pipefishlabs.io/logo.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Post-Quantum Cryptography in Production: NIST Module-Lattice Standards",
+      "description": "A practical guide to deploying Kyber (ML-KEM) and Dilithium (ML-DSA) algorithms across mTLS proxies and HashiCorp Vault secrets.",
+      "url": "https://pipefishlabs.io/blog/post-quantum-cryptography-production-guide/",
+      "datePublished": "2026-08-10",
+      "author": {
+        "@type": "Person",
+        "name": "Marcus Vance, CISSP",
+        "jobTitle": "Head of Zero-Trust Security & InfoSec"
+      },
+      "publisher": {
+        "@id": "https://pipefishlabs.io/#organization"
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #06070C;
+    --surface: #0B0E17;
+    --elevated: #111625;
+    --border: #1C253B;
+    --border-strong: #2A3859;
+    --cyan: #00D4FF;
+    --cyan-glow: rgba(0,212,255,0.25);
+    --magenta: #E040FF;
+    --magenta-glow: rgba(224,64,255,0.25);
+    --text-strong: #F0F4FF;
+    --text-body: #8A99AD;
+    --text-dim: #7F8EA3;
+    --font-fd: 'Orbitron', monospace;
+    --font-fb: 'Inter', sans-serif;
+    --font-fm: 'JetBrains Mono', monospace;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --nav-h: 72px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text-body); font-family: var(--font-fb); line-height: 1.7; overflow-x: hidden; }
+  .container { max-width: 900px; margin-inline: auto; padding-inline: clamp(1.5rem, 5vw, 4rem); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(6,7,12,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: clamp(1.5rem, 5vw, 4rem); }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-fd); font-weight: 800; font-size: 16px; color: var(--text-strong); text-decoration: none; }
+  .logo span:first-child { color: var(--cyan); }
+  .logo span:last-child { color: var(--magenta); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-body); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-fm); font-size: 12.5px; font-weight: 700; padding: 10px 20px; border-radius: 100px; text-decoration: none; cursor: pointer; border: none; }
+  .btn-m { background: var(--magenta); color: #000; box-shadow: 0 0 20px var(--magenta-glow); }
+
+  .art-header { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+  .lbl { font-family: var(--font-fm); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+  .h1 { font-family: var(--font-fd); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--text-strong); line-height: 1.2; margin-bottom: 16px; }
+  .art-meta { font-family: var(--font-fm); font-size: 12px; color: var(--text-dim); display: flex; gap: 16px; align-items: center; }
+
+  .art-body { font-size: 15px; color: var(--text-body); margin-bottom: 60px; }
+  .art-body h2 { font-family: var(--font-fd); font-size: 20px; font-weight: 700; color: var(--text-strong); margin-top: 36px; margin-bottom: 16px; }
+  .art-body p { margin-bottom: 20px; }
+  .art-cta { background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--r-lg); padding: 36px; text-align: center; margin-bottom: 80px; }
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding-block: 40px 24px; text-align: center; font-size: 13px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <span>PipeFish</span><span> Labs</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/services-solutions/">Services</a></li>
+      <li><a href="/case-studies-results/">Case Studies</a></li>
+      <li><a href="/benefits-testimonials/">Benefits</a></li>
+      <li><a href="/demo/">Demo</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/book-a-demo-contact/">Contact</a></li>
+    </ul>
+    <a href="/book-a-demo-contact/?intent=audit" class="btn btn-m">Book an Audit →</a>
+  </div>
+</nav>
+
+<article class="container">
+  <header class="art-header">
+    <div class="lbl">InfoSec Research Paper</div>
+    <h1 class="h1">Post-Quantum Cryptography in Production: NIST Module-Lattice Standards</h1>
+    <div class="art-meta">
+      <span>By Marcus Vance, CISSP, Head of Zero-Trust Security</span>
+      <span>•</span>
+      <span>Published August 10, 2026</span>
+      <span>•</span>
+      <span>10 min read</span>
+    </div>
+  </header>
+
+  <div class="art-body">
+    <p>With NIST ratifying the final FIPS 203 (ML-KEM / Kyber) and FIPS 204 (ML-DSA / Dilithium) post-quantum cryptography standards, forward-thinking enterprise InfoSec teams must migrate away from RSA-2048 and ECC before "harvest now, decrypt later" adversary campaigns compromise long-lived telemetry and financial records.</p>
+
+    <h2>1. Hybrid Key Exchange (X25519 + Kyber768)</h2>
+    <p>PipeFish Labs deploys hybrid TLS 1.3 key negotiation proxies combining traditional elliptic-curve Diffie-Hellman with Module-Lattice Key Encapsulation (ML-KEM-768). This dual-layer posture ensures zero regression in performance while safeguarding data against quantum decryption threats.</p>
+
+    <h2>2. Secrets Management &amp; Automated Vault Rotation</h2>
+    <p>Integrating HashiCorp Vault with post-quantum signed certificates guarantees that API tokens, database connection URIs, and HMAC secret keys rotate automatically every 24 hours.</p>
+
+    <h2>3. Compliance Timeline</h2>
+    <p>We work directly with CISOs to conduct cryptographic inventory audits, map algorithm migration dependencies, and achieve complete PQC readiness well ahead of federal and financial compliance deadlines.</p>
+  </div>
+
+  <div class="art-cta">
+    <h3>Protect Your Systems Against Quantum Threats</h3>
+    <p style="margin-bottom:20px">Audit your cryptographic inventory and zero-trust posture with our InfoSec team.</p>
+    <a href="/book-a-demo-contact/?intent=audit" class="btn btn-m" style="font-size:14px;padding:14px 32px">Request Security Audit →</a>
+  </div>
+</article>
+
+<footer>
+  <p>© 2026 PipeFish Labs. The only firm delivering AI automation, zero-trust security, autonomous multi-agent systems, and strategic consulting as a single integrated platform.</p>
+</footer>
+
+</body>
+</html>

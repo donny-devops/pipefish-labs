@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Blog &amp; Insights | PipeFish Labs</title>
+<meta name="description" content="Engineering insights on autonomous multi-agent orchestration, post-quantum cryptography, zero-trust security architecture, and EU AI Act compliance.">
+<link rel="canonical" href="https://pipefishlabs.io/blog/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<meta property="og:title" content="Technical Blog &amp; Insights | PipeFish Labs">
+<meta property="og:description" content="Engineering insights on autonomous multi-agent orchestration, post-quantum cryptography, zero-trust security architecture, and EU AI Act compliance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pipefishlabs.io/blog/">
+<meta property="og:image" content="https://pipefishlabs.io/logo.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@pipefishlabs">
+<meta name="twitter:title" content="Technical Blog &amp; Insights | PipeFish Labs">
+<meta name="twitter:description" content="Engineering insights on autonomous multi-agent orchestration, post-quantum cryptography, zero-trust security architecture, and EU AI Act compliance.">
+<meta name="twitter:image" content="https://pipefishlabs.io/logo.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pipefishlabs.io/#organization",
+      "name": "PipeFish Labs",
+      "url": "https://pipefishlabs.io",
+      "logo": "https://pipefishlabs.io/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "pipefish.labs@gmail.com",
+        "areaServed": ["US", "EU", "APAC"]
+      },
+      "sameAs": [
+        "https://twitter.com/pipefishlabs",
+        "https://www.linkedin.com/company/pipefishlabs"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://pipefishlabs.io"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://pipefishlabs.io/blog/"}
+      ]
+    },
+    {
+      "@type": "Blog",
+      "name": "PipeFish Labs Engineering Blog",
+      "url": "https://pipefishlabs.io/blog/",
+      "description": "Deep-dive technical articles on AI automation, multi-agent systems, zero-trust security, and regulatory compliance."
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #06070C;
+    --surface: #0B0E17;
+    --elevated: #111625;
+    --border: #1C253B;
+    --border-strong: #2A3859;
+    --cyan: #00D4FF;
+    --cyan-glow: rgba(0,212,255,0.25);
+    --cyan-dim: rgba(0,212,255,0.08);
+    --magenta: #E040FF;
+    --magenta-glow: rgba(224,64,255,0.25);
+    --text-strong: #F0F4FF;
+    --text-body: #8A99AD;
+    --text-dim: #7F8EA3;
+    --font-fd: 'Orbitron', monospace;
+    --font-fb: 'Inter', sans-serif;
+    --font-fm: 'JetBrains Mono', monospace;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --nav-h: 72px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text-body); font-family: var(--font-fb); line-height: 1.6; overflow-x: hidden; }
+  .container { max-width: 1280px; margin-inline: auto; padding-inline: clamp(1.5rem, 5vw, 4rem); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(6,7,12,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-fd); font-weight: 800; font-size: 16px; color: var(--text-strong); text-decoration: none; }
+  .logo span:first-child { color: var(--cyan); }
+  .logo span:last-child { color: var(--magenta); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-body); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-fm); font-size: 12.5px; font-weight: 700; padding: 10px 20px; border-radius: 100px; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; }
+  .btn-p { background: var(--cyan); color: #000; box-shadow: 0 0 20px var(--cyan-glow); }
+  .btn-p:hover { transform: translateY(-2px); }
+  .btn-m { background: var(--magenta); color: #000; box-shadow: 0 0 20px var(--magenta-glow); }
+
+  .page-hero { padding-top: calc(var(--nav-h) + 52px); padding-bottom: 40px; text-align: center; }
+  .lbl { font-family: var(--font-fm); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+  .h1 { font-family: var(--font-fd); font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 900; color: var(--text-strong); line-height: 1.1; }
+  .glow-c { color: var(--cyan); text-shadow: 0 0 32px var(--cyan-glow); }
+  .glow-m { color: var(--magenta); text-shadow: 0 0 32px var(--magenta-glow); }
+  .lead { font-size: 15px; color: var(--text-body); max-width: 64ch; margin: 16px auto 0; }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 80px; margin-top: 40px; }
+  .blog-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s; text-decoration: none; color: inherit; }
+  .blog-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+  .blog-meta { font-family: var(--font-fm); font-size: 11.5px; color: var(--cyan); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .blog-title { font-family: var(--font-fd); font-size: 16px; font-weight: 700; color: var(--text-strong); margin-bottom: 14px; line-height: 1.4; }
+  .blog-excerpt { font-size: 13.5px; line-height: 1.7; color: var(--text-body); margin-bottom: 20px; }
+  .blog-link { font-family: var(--font-fm); font-size: 12px; font-weight: 700; color: var(--magenta); display: inline-flex; align-items: center; gap: 6px; }
+
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding-block: 60px 28px; margin-top: 60px; }
+  .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+  .ft-brand-name { font-family: var(--font-fd); font-size: 20px; font-weight: 900; }
+  .ft-brand-name span:first-child { color: var(--cyan); }
+  .ft-brand-name span:last-child { color: var(--magenta); }
+  .ft-brand p { font-size: 13.5px; line-height: 1.75; margin-top: 14px; max-width: 32ch; }
+  .ft-col h4 { font-family: var(--font-fd); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-strong); margin-bottom: 18px; }
+  .ft-col a { display: block; font-size: 13.5px; color: var(--text-body); padding-block: 5px; text-decoration: none; transition: color 0.2s; }
+  .ft-col a:hover { color: var(--cyan); }
+
+  @media (max-width: 950px) {
+    .blog-grid { grid-template-columns: 1fr; }
+    .ft-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="logo">
+      <span>PipeFish</span><span> Labs</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/services-solutions/">Services</a></li>
+      <li><a href="/case-studies-results/">Case Studies</a></li>
+      <li><a href="/benefits-testimonials/">Benefits</a></li>
+      <li><a href="/affiliates-corporate-partnerships/">Partners</a></li>
+      <li><a href="/demo/">Demo</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/book-a-demo-contact/">Contact</a></li>
+    </ul>
+    <a href="/book-a-demo-contact/?intent=audit" class="btn btn-m">Book an Audit →</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="lbl">Engineering Insights &amp; Architecture Papers</div>
+    <h1 class="h1">Technical Blog<br><span class="glow-c">&amp; Research Articles</span></h1>
+    <p class="lead">Deep dives into autonomous multi-agent orchestration, post-quantum cryptography, zero-trust security architecture, and regulatory compliance.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="blog-grid">
+      <!-- ARTICLE 1 -->
+      <a href="/blog/architecting-autonomous-multi-agent-systems/" class="blog-card">
+        <div>
+          <div class="blog-meta">Architecture · Multi-Agent Systems · 8 min read</div>
+          <h2 class="blog-title">Architecting Autonomous Multi-Agent Systems with Zero-Trust Security</h2>
+          <p class="blog-excerpt">How to design asynchronous DAG execution graphs that pass cryptographically signed state handoffs across distributed enterprise systems without human intervention.</p>
+        </div>
+        <div class="blog-link">Read Full Blueprint →</div>
+      </a>
+
+      <!-- ARTICLE 2 -->
+      <a href="/blog/post-quantum-cryptography-production-guide/" class="blog-card">
+        <div>
+          <div class="blog-meta">Security · Post-Quantum Crypto · 10 min read</div>
+          <h2 class="blog-title">Post-Quantum Cryptography in Production: NIST Module-Lattice Standards</h2>
+          <p class="blog-excerpt">A practical guide to deploying Kyber (ML-KEM) and Dilithium (ML-DSA) algorithms across mTLS proxies, HashiCorp Vault secrets, and Kafka event streams.</p>
+        </div>
+        <div class="blog-link">Read Security Paper →</div>
+      </a>
+
+      <!-- ARTICLE 3 -->
+      <a href="/blog/eu-ai-act-annex-iv-conformity-guide/" class="blog-card">
+        <div>
+          <div class="blog-meta">Compliance · EU AI Act · 7 min read</div>
+          <h2 class="blog-title">Navigating EU AI Act Annex IV Conformity &amp; Immutable Audit Trails</h2>
+          <p class="blog-excerpt">Technical requirements for high-risk AI system compliance: automated explainability logs, human-in-the-loop overrides, and continuous risk assessments.</p>
+        </div>
+        <div class="blog-link">Read Compliance Guide →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ft-brand-name"><span>PipeFish</span> <span>Labs</span></div>
+        <p>The only firm delivering AI automation, zero-trust security, autonomous multi-agent systems, and strategic consulting as a single integrated platform.</p>
+      </div>
+      <div class="ft-col">
+        <h4>Services</h4>
+        <a href="/services-solutions/">All Services</a>
+        <a href="/services-solutions/#pricing">Pricing</a>
+        <a href="/demo/">Live Simulator</a>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <a href="/benefits-testimonials/">Benefits</a>
+        <a href="/case-studies-results/">Case Studies</a>
+        <a href="/affiliates-corporate-partnerships/">Partners</a>
+        <a href="/blog/" class="active">Blog</a>
+      </div>
+      <div class="ft-col">
+        <h4>Legal &amp; Security</h4>
+        <a href="/legal-privacy-policy/">Privacy Policy</a>
+        <a href="/legal-privacy-policy/#tos">Terms of Service</a>
+        <a href="/.well-known/security.txt">security.txt</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
