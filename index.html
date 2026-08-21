@@ -1318,7 +1318,7 @@
           <span id="demo-payload-type" style="color:var(--magenta)">LIVE INBOUND SIGNAL</span>
         </div>
         <div class="demo-payload-text" id="demo-payload-text">
-          INBOUND VOICE / TEXT — "Hi, I need to schedule a consult for an urgent legal matter, check attorney availability for tomorrow afternoon, and confirm consultation fees."
+          INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."
         </div>
       </div>
 
@@ -1840,7 +1840,7 @@ document.querySelectorAll('.ai').forEach(el => io.observe(el));
 /* ── INTERACTIVE DEMO LOGIC ── */
 const demoScenarios = {
   receptionist: {
-    payload: 'INBOUND VOICE / TEXT — "Hi, I need to schedule a consult for an urgent legal matter, check attorney availability for tomorrow afternoon, and confirm consultation fees."',
+    payload: 'INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."',
     channel: 'Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs',
     nodes: [
       { n: '01', name: 'Voice Receptionist Agent', sub: '(Phone & UCC/VTC)', status: 'awaiting upstream signal…' },
