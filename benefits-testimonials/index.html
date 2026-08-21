@@ -59,17 +59,18 @@
 .benefit-item h3{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--text-strong);margin-bottom:8px}
 .benefit-item p{font-size:14px;line-height:1.75}
 
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;transition:all .3s;position:relative}
-.testi-card:hover{border-color:var(--border-strong);transform:translateY(-3px)}
-.testi-quote{font-size:15px;line-height:1.8;color:var(--text-strong);margin-bottom:20px;font-style:italic}
-.testi-quote::before{content:'"';font-size:3rem;line-height:0;vertical-align:-.6em;color:var(--cyan);font-family:var(--fd);margin-right:4px}
-.testi-author{display:flex;align-items:center;gap:14px;border-top:1px solid var(--border);padding-top:16px}
-.testi-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--cyan-dim),var(--magenta-dim));border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:13px;font-weight:700;color:var(--cyan);flex-shrink:0}
-.testi-name{font-size:13.5px;font-weight:600;color:var(--text-strong)}
-.testi-role{font-size:12px;color:var(--text-dim);font-family:var(--fm)}
-.testi-badge{position:absolute;top:20px;right:20px}
-.testi-result{display:inline-block;background:var(--cyan-dim);border:1px solid var(--border-strong);border-radius:100px;padding:4px 10px;font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--cyan)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:stretch}
+.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 28px 28px;transition:all .3s;display:flex;flex-direction:column;justify-content:space-between;min-height:310px}
+.testi-card:hover{border-color:var(--border-strong);transform:translateY(-4px);box-shadow:0 8px 36px rgba(0,212,255,.08)}
+.testi-card-top{display:flex;flex-direction:column;flex-grow:1}
+.testi-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;width:100%}
+.testi-quote{font-size:14.5px;line-height:1.75;color:var(--text-strong);margin-bottom:24px;font-style:italic;flex-grow:1}
+.testi-quote::before{content:'"';font-size:2.4rem;line-height:0;vertical-align:-.4em;color:var(--cyan);font-family:var(--fd);margin-right:6px}
+.testi-author{display:flex;align-items:flex-start;gap:14px;border-top:1px solid var(--border);padding-top:20px;margin-top:auto}
+.testi-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cyan-dim),var(--magenta-dim));border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:13px;font-weight:700;color:var(--cyan);flex-shrink:0;margin-top:2px}
+.testi-name{font-size:14px;font-weight:700;color:var(--text-strong);margin-bottom:3px;line-height:1.3}
+.testi-role{font-size:12px;color:var(--text-dim);font-family:var(--fm);line-height:1.45;word-break:break-word}
+.testi-result{display:inline-block;background:var(--cyan-dim);border:1px solid var(--border-strong);border-radius:100px;padding:5px 12px;font-family:var(--fm);font-size:10.5px;letter-spacing:.06em;font-weight:600;color:var(--cyan);white-space:nowrap}
 
 .compare-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
 .compare-table th{background:var(--elevated);padding:16px 20px;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-body);font-weight:600;text-align:left}
@@ -213,8 +214,12 @@
     </div>
     <div class="testi-grid">
       <div class="testi-card ai">
-        <div class="testi-badge"><span class="testi-result">↓ 91% manual work</span></div>
-        <p class="testi-quote">We were drowning in invoice processing — 3 FTEs spending 60% of their week on data entry. PipeFish built an end-to-end pipeline that now handles 2,000+ invoices daily with 99.6% accuracy. Those 3 people are now doing strategic work.</p>
+        <div class="testi-card-top">
+          <div class="testi-header">
+            <span class="testi-result">↓ 91% manual work</span>
+          </div>
+          <p class="testi-quote">We were drowning in invoice processing — 3 FTEs spending 60% of their week on data entry. PipeFish built an end-to-end pipeline that now handles 2,000+ invoices daily with 99.6% accuracy. Those 3 people are now doing strategic work.</p>
+        </div>
         <div class="testi-author">
           <div class="testi-avatar">AL</div>
           <div>
@@ -224,8 +229,12 @@
         </div>
       </div>
       <div class="testi-card ai">
-        <div class="testi-badge"><span class="testi-result" style="background:var(--magenta-dim);color:var(--magenta);border-color:rgba(224,64,255,.22)">3.8× throughput</span></div>
-        <p class="testi-quote">The multi-agent system they architected for our underwriting pipeline is unlike anything our competitors have. We went from 4-day turnaround to same-day decisions. Our close rate jumped 34% in Q1 alone.</p>
+        <div class="testi-card-top">
+          <div class="testi-header">
+            <span class="testi-result" style="background:var(--magenta-dim);color:var(--magenta);border-color:rgba(224,64,255,.22)">3.8× throughput</span>
+          </div>
+          <p class="testi-quote">The multi-agent system they architected for our underwriting pipeline is unlike anything our competitors have. We went from 4-day turnaround to same-day decisions. Our close rate jumped 34% in Q1 alone.</p>
+        </div>
         <div class="testi-author">
           <div class="testi-avatar" style="color:var(--magenta)">MJ</div>
           <div>
@@ -235,8 +244,12 @@
         </div>
       </div>
       <div class="testi-card ai">
-        <div class="testi-badge"><span class="testi-result" style="background:var(--cyan-dim);color:var(--cyan);border-color:rgba(0,212,255,.22)">Zero-Trust Certified</span></div>
-        <p class="testi-quote">We brought PipeFish in to deploy our zero-trust security and data governance architecture. They didn't just configure tools — they redesigned our entire infrastructure for continuous posture verification. Zero downtime, SOC 2 compliant, and completed in 11 weeks.</p>
+        <div class="testi-card-top">
+          <div class="testi-header">
+            <span class="testi-result" style="background:var(--cyan-dim);color:var(--cyan);border-color:rgba(0,212,255,.22)">Zero-Trust Certified</span>
+          </div>
+          <p class="testi-quote">We brought PipeFish in to deploy our zero-trust security and data governance architecture. They didn't just configure tools — they redesigned our entire infrastructure for continuous posture verification. Zero downtime, SOC 2 compliant, and completed in 11 weeks.</p>
+        </div>
         <div class="testi-author">
           <div class="testi-avatar" style="color:var(--cyan)">JS</div>
           <div>
