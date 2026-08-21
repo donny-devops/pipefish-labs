@@ -1,0 +1,7 @@
+# PipeFish Labs Security Disclosure Policy (RFC 9116)
+Contact: mailto:pipefish.labs@gmail.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://pipefishlabs.io/.well-known/security.txt
+Policy: https://pipefishlabs.io/legal-privacy-policy/#security
+Hiring: https://pipefishlabs.io/affiliates-corporate-partnerships/
