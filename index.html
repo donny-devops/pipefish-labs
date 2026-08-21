@@ -462,6 +462,108 @@
     .a-arrow { font-size: 18px; color: var(--text-dim); }
     .agents-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 
+    /* ───────── INTERACTIVE DEMO ───────── */
+    #demo { background: var(--bg-alt); position: relative; }
+    .demo-tabs { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+    .demo-tab {
+      background: var(--surface); border: 1px solid var(--border-strong);
+      color: var(--text-body); padding: 10px 22px; border-radius: var(--r-full);
+      font-family: var(--font-display); font-size: 12.5px; font-weight: 600;
+      cursor: pointer; transition: all 0.25s;
+    }
+    .demo-tab:hover, .demo-tab.active {
+      background: var(--cyan-dim); border-color: var(--cyan); color: var(--cyan);
+      box-shadow: 0 0 16px rgba(0,212,255,0.15);
+    }
+    .demo-container {
+      background: var(--surface); border: 1px solid var(--border-strong);
+      border-radius: var(--r-lg); padding: 28px; box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+    }
+    .demo-payload-box {
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 18px 20px; margin-bottom: 20px;
+    }
+    .demo-payload-header {
+      font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--cyan); margin-bottom: 8px; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .demo-payload-text { font-family: var(--font-mono); font-size: 13px; color: var(--text-strong); line-height: 1.6; }
+    .demo-controls { display: flex; gap: 12px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
+    .demo-rows { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .demo-row {
+      display: grid; grid-template-columns: 40px 260px 1fr auto; gap: 14px;
+      align-items: center; background: rgba(255,255,255,0.015); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 12px 18px; transition: all 0.3s;
+    }
+    .demo-row-n { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--text-dim); }
+    .demo-row-name { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--text-strong); }
+    .demo-row-sub { font-size: 11px; color: var(--magenta); margin-left: 6px; font-weight: 400; }
+    .demo-row-status { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
+    .demo-row-badge {
+      font-family: var(--font-mono); font-size: 11px; padding: 4px 10px; border-radius: 4px;
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-dim);
+    }
+    .demo-row.active {
+      border-color: var(--cyan); background: rgba(0,212,255,0.06);
+      box-shadow: 0 0 15px rgba(0,212,255,0.1);
+    }
+    .demo-row.active .demo-row-status { color: var(--cyan); }
+    .demo-row.active .demo-row-badge { background: var(--cyan-dim); border-color: var(--cyan); color: var(--cyan); }
+    .demo-row.done {
+      border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.02);
+    }
+    .demo-row.done .demo-row-status { color: #00FFB2; }
+    .demo-row.done .demo-row-badge { background: rgba(0,255,178,0.1); border-color: rgba(0,255,178,0.3); color: #00FFB2; }
+    .demo-status-bar {
+      background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 14px 18px; font-family: var(--font-mono);
+      font-size: 12.5px; color: var(--text-body); display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .demo-channels { font-size: 11.5px; color: var(--text-dim); }
+
+    /* ───────── WORKFLOW ARCHITECTURE ───────── */
+    #architecture { position: relative; }
+    .arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; }
+    .arch-card {
+      background: var(--surface); border: 1px solid var(--border-strong);
+      border-radius: var(--r-lg); padding: 28px; display: flex; flex-direction: column;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .arch-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,212,255,0.1); }
+    .arch-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text-strong); margin-bottom: 4px; }
+    .arch-tag { font-family: var(--font-mono); font-size: 11px; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .arch-desc { font-size: 13.5px; line-height: 1.65; color: var(--text-body); margin-bottom: 20px; flex-grow: 1; }
+    .arch-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 8px; margin-bottom: 20px; text-align: center; }
+    .arch-metric-val { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--cyan); }
+    .arch-metric-lbl { font-size: 10.5px; color: var(--text-dim); line-height: 1.3; margin-top: 3px; }
+    .arch-nodes-head { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 10px; }
+    .arch-nodes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .arch-node {
+      font-family: var(--font-mono); font-size: 11px; background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border); border-radius: var(--r-sm); padding: 6px 10px;
+      color: var(--text-body); display: flex; align-items: center; gap: 6px;
+    }
+    .arch-node-n { color: var(--cyan); font-weight: 700; }
+
+    /* ───────── CAPABILITIES ───────── */
+    #capabilities { background: var(--surface); }
+    .cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 36px; }
+    .cap-card {
+      background: var(--bg-alt); border: 1px solid var(--border-strong);
+      border-radius: var(--r-lg); padding: 28px; transition: all 0.3s;
+    }
+    .cap-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+    .cap-icon { font-size: 28px; margin-bottom: 16px; }
+    .cap-h3 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-strong); margin-bottom: 10px; }
+    .cap-p { font-size: 13.5px; line-height: 1.7; color: var(--text-body); }
+    .cap-banner {
+      margin-top: 40px; background: linear-gradient(135deg, rgba(0,212,255,0.08) 0%, rgba(224,64,255,0.08) 100%);
+      border: 1px solid var(--border-strong); border-radius: var(--r-lg); padding: 32px; text-align: center;
+    }
+    .cap-banner-p { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 600; color: var(--text-strong); line-height: 1.6; max-width: 78ch; margin: 0 auto; }
+
     /* ───────── TECH ───────── */
     #tech { background: var(--surface); }
     .tech-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -628,7 +730,9 @@
       </a>
       <ul class="nav-links" role="list">
         <li><a href="#services">Services</a></li>
-        <li><a href="#industries">Industries</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#capabilities">Capabilities</a></li>
         <li><a href="#agents">Multi-Agent</a></li>
         <li><a href="#process">Process</a></li>
       </ul>
@@ -641,11 +745,13 @@
 </nav>
 
 <div class="mob-nav" id="mobnav">
-  <a href="#services"   onclick="closeNav()">Services</a>
-  <a href="#industries" onclick="closeNav()">Industries</a>
-  <a href="#agents"     onclick="closeNav()">Multi-Agent</a>
-  <a href="#process"    onclick="closeNav()">Process</a>
-  <a href="#cta"        onclick="closeNav()" class="btn btn-m" style="margin-top:8px;justify-content:center">Book an Audit →</a>
+  <a href="#services"     onclick="closeNav()">Services</a>
+  <a href="#demo"         onclick="closeNav()">Demo</a>
+  <a href="#architecture" onclick="closeNav()">Architecture</a>
+  <a href="#capabilities" onclick="closeNav()">Capabilities</a>
+  <a href="#agents"       onclick="closeNav()">Multi-Agent</a>
+  <a href="#process"      onclick="closeNav()">Process</a>
+  <a href="#cta"          onclick="closeNav()" class="btn btn-m" style="margin-top:8px;justify-content:center">Book an Audit →</a>
 </div>
 
 <!-- ─── HERO ─── -->
@@ -1028,6 +1134,231 @@
 
 <div class="divider"></div>
 
+<!-- ─── INTERACTIVE DEMO ─── -->
+<section id="demo">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">Live Graph Execution</div>
+      <h2 class="h2" style="margin-top:14px">Interactive Demo<br><span class="glow-c">Trigger a Real Agent Chain</span></h2>
+      <p class="lead" style="margin:14px auto 0;max-width:62ch">
+        Pick a scenario and run it. Each row is an independent agent handing structured state to the next — the same graph pattern we deploy into receptionist desks, sales operations, and intake teams.
+      </p>
+    </div>
+
+    <!-- Scenario Selector Tabs -->
+    <div class="demo-tabs ai">
+      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
+      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations AI Agent</button>
+    </div>
+
+    <!-- Demo Container -->
+    <div class="demo-container ai">
+      <!-- Inbound Payload Display -->
+      <div class="demo-payload-box">
+        <div class="demo-payload-header">
+          <span>Inbound Telemetry Payload</span>
+          <span id="demo-payload-type" style="color:var(--magenta)">LIVE INBOUND SIGNAL</span>
+        </div>
+        <div class="demo-payload-text" id="demo-payload-text">
+          INBOUND VOICE / TEXT — "Hi, I need to schedule a consult for an urgent legal matter, check attorney availability for tomorrow afternoon, and confirm consultation fees."
+        </div>
+      </div>
+
+      <!-- Action Controls -->
+      <div class="demo-controls">
+        <button id="run-demo-btn" onclick="runDemoGraph()" class="btn btn-p">Run Agents →</button>
+        <button id="reset-demo-btn" onclick="resetDemoGraph()" class="btn btn-o">Reset</button>
+      </div>
+
+      <!-- Agent Chain Rows (Nodes 01 - 08) -->
+      <div class="demo-rows" id="demo-rows-container">
+        <!-- Rendered dynamically via JS -->
+      </div>
+
+      <!-- Live Execution Status Bar -->
+      <div class="demo-status-bar">
+        <div id="demo-status-bar-text">Idle — press Run agents to trigger the orchestration graph.</div>
+        <div class="demo-channels" id="demo-channels-text">
+          Channels Enabled: Voice (Retell / ElevenLabs) · Text / SMS · Webchat · Email · Calendar APIs
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── WORKFLOW ARCHITECTURE ─── -->
+<section id="architecture">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">Proven Blueprints</div>
+      <h2 class="h2" style="margin-top:14px">Workflow Architecture<br><span class="glow-m">Diagrams with Numbers Attached</span></h2>
+      <p class="lead" style="margin:14px auto 0;max-width:58ch">
+        Autonomous agent chains configured for specific operating environments. Every node executes specialized subagents and hands off validated JSON payloads across your stack.
+      </p>
+    </div>
+
+    <div class="arch-grid">
+      <!-- CARD 1: AI RECEPTIONIST -->
+      <div class="arch-card ai">
+        <div class="arch-tag">Voice &amp; Text Front Desk</div>
+        <h3 class="arch-title">AI Receptionist Agent</h3>
+        <p class="arch-desc">
+          Features <strong>Voice Receptionist Agent</strong> (powered by Retell AI &amp; ElevenLabs voice engine) and <strong>Text Receptionist Agent</strong> (SMS/Webchat/Email). Every call, voicemail, form and text becomes one qualified record: practice area classified, conflicts cleared, attorney availability checked, consults booked, retainers requested, intake forms and e-signatures chased to completion.
+        </p>
+        <div class="arch-metrics">
+          <div>
+            <div class="arch-metric-val">100%</div>
+            <div class="arch-metric-lbl">After-hours answered</div>
+          </div>
+          <div>
+            <div class="arch-metric-val">3.2 sec</div>
+            <div class="arch-metric-lbl">Voice latency</div>
+          </div>
+          <div>
+            <div class="arch-metric-val">89%</div>
+            <div class="arch-metric-lbl">Consult booking rate</div>
+          </div>
+        </div>
+        <div class="arch-nodes-head">Configured Nodes</div>
+        <div class="arch-nodes">
+          <div class="arch-node"><span class="arch-node-n">01</span> Voice Receptionist</div>
+          <div class="arch-node"><span class="arch-node-n">02</span> Text Receptionist</div>
+          <div class="arch-node"><span class="arch-node-n">03</span> Intent Classifier</div>
+          <div class="arch-node"><span class="arch-node-n">04</span> Availability &amp; Cal</div>
+          <div class="arch-node"><span class="arch-node-n">05</span> Intake &amp; Verify</div>
+          <div class="arch-node"><span class="arch-node-n">06</span> CRM / EMR Sync</div>
+          <div class="arch-node"><span class="arch-node-n">07</span> Payment &amp; Retainer</div>
+          <div class="arch-node"><span class="arch-node-n">08</span> Escalation &amp; Comms</div>
+        </div>
+      </div>
+
+      <!-- CARD 2: SALES OPERATIONS -->
+      <div class="arch-card ai" style="transition-delay:.05s">
+        <div class="arch-tag">Revenue &amp; Pipeline Engine</div>
+        <h3 class="arch-title">Sales Operations AI Agent</h3>
+        <p class="arch-desc">
+          Contains specialized subagents: <strong>Sales Enablement Agent</strong>, <strong>Sales Follow-Up Agent</strong>, <strong>Sales Outreach Agent</strong>, <strong>Email Agent</strong>, <strong>Lead Qualification Agent</strong>, <strong>CRM Hygiene Agent</strong>, <strong>Proposal Generator Agent</strong>, and <strong>Deal Recovery Agent</strong>. Enriches pipeline continuously, crafts personalized outreach, generates proposals, enforces CRM hygiene, and reopens stalled deals until closed.
+        </p>
+        <div class="arch-metrics">
+          <div>
+            <div class="arch-metric-val">340%</div>
+            <div class="arch-metric-lbl">Worked touchpoints</div>
+          </div>
+          <div>
+            <div class="arch-metric-val">27%</div>
+            <div class="arch-metric-lbl">Recovered pipeline</div>
+          </div>
+          <div>
+            <div class="arch-metric-val">19 hrs</div>
+            <div class="arch-metric-lbl">Saved / rep / week</div>
+          </div>
+        </div>
+        <div class="arch-nodes-head">Configured Nodes</div>
+        <div class="arch-nodes">
+          <div class="arch-node"><span class="arch-node-n">01</span> Qualification Agent</div>
+          <div class="arch-node"><span class="arch-node-n">02</span> Enrichment Agent</div>
+          <div class="arch-node"><span class="arch-node-n">03</span> Sales Outreach</div>
+          <div class="arch-node"><span class="arch-node-n">04</span> Email Agent</div>
+          <div class="arch-node"><span class="arch-node-n">05</span> Sales Enablement</div>
+          <div class="arch-node"><span class="arch-node-n">06</span> Proposal Generator</div>
+          <div class="arch-node"><span class="arch-node-n">07</span> Sales Follow-Up</div>
+          <div class="arch-node"><span class="arch-node-n">08</span> Deal Recovery</div>
+        </div>
+      </div>
+
+      <!-- CARD 3: ENTERPRISE OPERATIONS -->
+      <div class="arch-card ai" style="transition-delay:.10s">
+        <div class="arch-tag">Operations &amp; Logistics</div>
+        <h3 class="arch-title">Enterprise Operations &amp; Logistics</h3>
+        <p class="arch-desc">
+          For underperforming or scaling operational teams across every industry — load &amp; task details extracted from inbound threads, accounts verified, workflows launched in core software, pickups &amp; milestones coordinated, movement tracked, and operational exceptions resolved before the customer feels them.
+        </p>
+        <div class="arch-metrics">
+          <div>
+            <div class="arch-metric-val">92%</div>
+            <div class="arch-metric-lbl">Built without human</div>
+          </div>
+          <div>
+            <div class="arch-metric-val">6.4 min</div>
+            <div class="arch-metric-lbl">Quote-to-tender</div>
+          </div>
+          <div>
+            <div class="arch-metric-val">71%</div>
+            <div class="arch-metric-lbl">Fewer escalations</div>
+          </div>
+        </div>
+        <div class="arch-nodes-head">Configured Nodes</div>
+        <div class="arch-nodes">
+          <div class="arch-node"><span class="arch-node-n">01</span> Extraction Agent</div>
+          <div class="arch-node"><span class="arch-node-n">02</span> Verification Agent</div>
+          <div class="arch-node"><span class="arch-node-n">03</span> System / ERP Agent</div>
+          <div class="arch-node"><span class="arch-node-n">04</span> Dispatch Agent</div>
+          <div class="arch-node"><span class="arch-node-n">05</span> Scheduling Agent</div>
+          <div class="arch-node"><span class="arch-node-n">06</span> Tracking Agent</div>
+          <div class="arch-node"><span class="arch-node-n">07</span> Exception Agent</div>
+          <div class="arch-node"><span class="arch-node-n">08</span> Comms Agent</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── CAPABILITIES ─── -->
+<section id="capabilities">
+  <div class="container">
+    <div class="sec-head center ai">
+      <div class="label">Enterprise Control Plane</div>
+      <h2 class="h2" style="margin-top:14px">Capabilities<br><span class="glow-c">One Layer Over Everything You Already Run</span></h2>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card ai">
+        <div class="cap-icon">🎛️</div>
+        <h3 class="cap-h3">Service &amp; Orchestration Layering</h3>
+        <p class="cap-p">
+          A control plane laid over carrier systems, Retell AI / ElevenLabs voice engines, and legacy software so phone, email, SMS and UCC/VTC channels execute as one coordinated pipeline instead of four disconnected inboxes.
+        </p>
+      </div>
+
+      <div class="cap-card ai" style="transition-delay:.05s">
+        <div class="cap-icon">📄</div>
+        <h3 class="cap-h3">Documentation, Payments, Secure Comms</h3>
+        <p class="cap-p">
+          Flawless document generation and filing, payment requests and reconciliation, and customer communication that stays auditable, permissioned and on-record end to end.
+        </p>
+      </div>
+
+      <div class="cap-card ai" style="transition-delay:.10s">
+        <div class="cap-icon">🤖</div>
+        <h3 class="cap-h3">Hundreds of Autonomous Agents</h3>
+        <p class="cap-p">
+          We develop, implement, manage and enhance asynchronously independent, customizable agents inside a multi-agent integration, automation and orchestration platform.
+        </p>
+      </div>
+
+      <div class="cap-card ai" style="transition-delay:.15s">
+        <div class="cap-icon">🔌</div>
+        <h3 class="cap-h3">ERP, CMS, CRM, Apps, APIs</h3>
+        <p class="cap-p">
+          Deep implementation work across ERP and CMS software, internal applications, workflow engines, CRMs and API surfaces — built to your operating reality, not a template.
+        </p>
+      </div>
+    </div>
+
+    <div class="cap-banner ai">
+      <p class="cap-banner-p">
+        "We work with sales, marketing and operations teams in struggling or underperforming businesses across every industry — where the process exists on paper but nothing follows through in practice."
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ─── TECH ─── -->
 <section id="tech">
   <div class="container">
@@ -1347,6 +1678,137 @@ document.querySelectorAll('.ai').forEach(el => io.observe(el));
 
   resize(); frame();
 })();
+
+/* ── INTERACTIVE DEMO LOGIC ── */
+const demoScenarios = {
+  receptionist: {
+    payload: 'INBOUND VOICE / TEXT — "Hi, I need to schedule a consult for an urgent legal matter, check attorney availability for tomorrow afternoon, and confirm consultation fees."',
+    channel: 'Channels Enabled: Voice (Retell / ElevenLabs) · Text / SMS · Webchat · Email · Calendar APIs',
+    nodes: [
+      { n: '01', name: 'Voice Receptionist Agent', sub: '(Retell / ElevenLabs)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Text Receptionist Agent', sub: '(SMS & Webchat)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Intent Classifier Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Availability & Calendar Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Intake & Verification Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'CRM & EMR Sync Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Payment & Retainer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Escalation & Notification Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  sales: {
+    payload: 'INBOUND LEAD FORM & EMAIL — "Interested in enterprise multi-agent deployment for our 120-person sales team. Need pricing, custom integration docs, and a security audit review."',
+    channel: 'Channels Enabled: Email · Phone · SMS · CRM APIs · Document Generators · Billing APIs',
+    nodes: [
+      { n: '01', name: 'Lead Qualification Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Sales Enrichment Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Sales Outreach Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Email Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Sales Enablement Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Proposal Generator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Sales Follow-Up Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Deal Recovery Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  }
+};
+
+let currentDemoScenario = 'receptionist';
+let demoRunning = false;
+
+function renderDemoRows() {
+  const sc = demoScenarios[currentDemoScenario];
+  const payloadEl = document.getElementById('demo-payload-text');
+  const channelEl = document.getElementById('demo-channels-text');
+  const container = document.getElementById('demo-rows-container');
+  if (!container) return;
+
+  if (payloadEl) payloadEl.innerText = sc.payload;
+  if (channelEl) channelEl.innerText = sc.channel;
+
+  container.innerHTML = '';
+  sc.nodes.forEach((nd, idx) => {
+    const row = document.createElement('div');
+    row.className = 'demo-row';
+    row.id = `demo-row-${idx}`;
+    row.innerHTML = `
+      <div class="demo-row-n">${nd.n}</div>
+      <div class="demo-row-name">${nd.name} ${nd.sub ? `<span class="demo-row-sub">${nd.sub}</span>` : ''}</div>
+      <div class="demo-row-status" id="demo-status-${idx}">${nd.status}</div>
+      <div><span class="demo-row-badge" id="demo-badge-${idx}">IDLE</span></div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function switchDemo(type, btn) {
+  if (demoRunning) return;
+  currentDemoScenario = type;
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderDemoRows();
+  const statusBar = document.getElementById('demo-status-bar-text');
+  if (statusBar) statusBar.innerText = 'Idle — press Run agents to trigger the orchestration graph.';
+}
+
+function resetDemoGraph() {
+  demoRunning = false;
+  renderDemoRows();
+  const runBtn = document.getElementById('run-demo-btn');
+  if (runBtn) runBtn.removeAttribute('disabled');
+  const statusBar = document.getElementById('demo-status-bar-text');
+  if (statusBar) statusBar.innerText = 'Idle — press Run agents to trigger the orchestration graph.';
+}
+
+function runDemoGraph() {
+  if (demoRunning) return;
+  demoRunning = true;
+  const runBtn = document.getElementById('run-demo-btn');
+  if (runBtn) runBtn.setAttribute('disabled', 'true');
+
+  const sc = demoScenarios[currentDemoScenario];
+  let step = 0;
+
+  function processNextStep() {
+    if (step > 0) {
+      const prevIdx = step - 1;
+      const prevRow = document.getElementById(`demo-row-${prevIdx}`);
+      const prevStat = document.getElementById(`demo-status-${prevIdx}`);
+      const prevBadge = document.getElementById(`demo-badge-${prevIdx}`);
+      if (prevRow) {
+        prevRow.classList.remove('active');
+        prevRow.classList.add('done');
+        prevStat.innerText = `State handoff complete ✓ (Structured payload passed to Node 0${step + 1})`;
+        prevBadge.innerText = 'PASSED';
+      }
+    }
+
+    if (step < sc.nodes.length) {
+      const curRow = document.getElementById(`demo-row-${step}`);
+      const curStat = document.getElementById(`demo-status-${step}`);
+      const curBadge = document.getElementById(`demo-badge-${step}`);
+      if (curRow) {
+        curRow.classList.add('active');
+        curStat.innerText = `Processing agent execution & state verification…`;
+        curBadge.innerText = 'EXECUTING';
+      }
+      const statusBar = document.getElementById('demo-status-bar-text');
+      if (statusBar) statusBar.innerText = `Executing graph: Node 0${step + 1} (${sc.nodes[step].name}) active...`;
+      step++;
+      setTimeout(processNextStep, 450);
+    } else {
+      demoRunning = false;
+      if (runBtn) runBtn.removeAttribute('disabled');
+      const statusBar = document.getElementById('demo-status-bar-text');
+      if (statusBar) statusBar.innerText = 'Graph Execution Complete — 8/8 agents completed state handoffs across pipeline.';
+    }
+  }
+
+  processNextStep();
+}
+
+document.addEventListener('DOMContentLoaded', renderDemoRows);
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+  renderDemoRows();
+}
 </script>
 </body>
 </html>
