@@ -94,7 +94,7 @@ section{padding-block:var(--sy)}
 
 /* ── FOOTER ── */
 footer{background:var(--surface);border-top:1px solid var(--border);padding-block:52px 24px}
-.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:48px}
 .ft-name{font-family:var(--fd);font-size:18px;font-weight:900}
 .ft-name span:first-child{color:var(--cyan)}
 .ft-name span:last-child{color:var(--magenta)}

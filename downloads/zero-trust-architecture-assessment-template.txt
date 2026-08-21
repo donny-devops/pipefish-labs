@@ -1,0 +1,51 @@
+# PIPE FISH LABS — ENTERPRISE RESOURCES & AUDIT TEMPLATES
+# Document: Zero-Trust Architecture Assessment Template
+# Version: 3.1 (Current with NIST SP 800-207 & Post-Quantum Standards)
+# Organization: PipeFish Labs (https://pipefishlabs.io)
+# License: Free Enterprise Resource (Distribution Allowed)
+
+================================================================================
+ZERO-TRUST INFRASTRUCTURE ASSESSMENT & AUDIT TEMPLATE (NIST SP 800-207)
+================================================================================
+
+SECTION 1: IDENTITY & AUTHENTICATION MATURITY
+--------------------------------------------------------------------------------
+[ ] 1.1 Are all microservices, agents, and API workloads authenticated via short-lived mTLS certificates?
+[ ] 1.2 Is passwordless hardware-bound MFA (FIDO2 / WebAuthn) enforced across all administrative accounts?
+[ ] 1.3 Is static API key usage prohibited across production inter-service communication?
+[ ] 1.4 Are workload identity tokens (SPIFFE/SPIRE or OIDC) validated dynamically per request?
+
+SECTION 2: SECRETS MANAGEMENT & CRYPTOGRAPHIC ROTATION
+--------------------------------------------------------------------------------
+[ ] 2.1 Are secrets managed centrally using HashiCorp Vault, AWS Secrets Manager, or equivalent?
+[ ] 2.2 Is dynamic secret generation enforced with automatic TTL rotation (< 24 hours)?
+[ ] 2.3 Are hardcoded secrets in source repositories dynamically blocked by CI/CD pre-commit hooks?
+[ ] 2.4 Is Post-Quantum Cryptography (PQC NIST FIPS 203 ML-KEM) enabled on internal TLS proxies?
+
+SECTION 3: NETWORK SEGMENTATION & THREAT DETECTION
+--------------------------------------------------------------------------------
+[ ] 3.1 Is microsegmentation enforced so compromised nodes cannot move laterally?
+[ ] 3.2 Is real-time eBPF kernel event monitoring (Falco / Cilium) active on all container clusters?
+[ ] 3.3 Are default-deny egress security policies configured on all agent runtime pods?
+[ ] 3.4 Is all internal East-West cluster traffic encrypted in transit via WireGuard / IPsec?
+
+SECTION 4: DATA PROTECTION & ZERO-RETENTION ENCLAVES
+--------------------------------------------------------------------------------
+[ ] 4.1 Is data-at-rest encrypted using AES-256-GCM with customer-managed encryption keys (CMEK)?
+[ ] 4.2 Are AI model context windows and agent scratch spaces running in ephemeral zero-retention enclaves?
+[ ] 4.3 Is Data Loss Prevention (DLP) filtering active on outgoing LLM prompt payloads?
+[ ] 4.4 Are database queries parameterized and guarded against vector-injection exploits?
+
+SECTION 5: CONTINUOUS POSTURE AUDITING & AUDIT COMPLIANCE
+--------------------------------------------------------------------------------
+[ ] 5.1 Are infrastructure state drifts automatically detected and remediated via Infrastructure-as-Code?
+[ ] 5.2 Are audit logs stored in append-only immutable storage with WORM (Write Once Read Many) policies?
+[ ] 5.3 Is real-time SOC 2 Type II / ISO 27001 posture telemetry displayed on compliance dashboards?
+[ ] 5.4 Is RFC 9116 security disclosure published at /.well-known/security.txt?
+
+================================================================================
+Need PipeFish Labs to Perform Your Zero-Trust Assessment?
+We conduct 90-minute technical reviews and full zero-trust architecture deployments.
+Book a Complimentary Assessment: https://pipefishlabs.io/book-a-demo-contact/?intent=audit
+Contact Security Operations: pipefish.labs@gmail.com
+================================================================================
