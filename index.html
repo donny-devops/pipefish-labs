@@ -833,7 +833,22 @@
       "@id": "https://pipefishlabs.io/#organization",
       "name": "PipeFish Labs",
       "url": "https://pipefishlabs.io",
-      "logo": {"@type": "ImageObject", "url": "https://pipefishlabs.io/logo.png", "width": 512, "height": 512},
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://pipefishlabs.io/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "pipefish.labs@gmail.com",
+        "areaServed": ["US", "EU", "APAC"]
+      },
+      "sameAs": [
+        "https://twitter.com/pipefishlabs",
+        "https://www.linkedin.com/company/pipefishlabs"
+      ],
       "description": "AI automation agency specializing in autonomous multi-agent orchestration, enterprise InfoSec, zero-trust architecture, scalable data pipelines, and management consulting for businesses across every industry.",
       "areaServed": "Worldwide",
       "knowsAbout": ["AI Automation", "Multi-Agent Orchestration", "Zero-Trust Architecture", "EU AI Act Compliance", "Cybersecurity", "Management Consulting", "Data Pipelines", "Workflow Automation"],
@@ -860,9 +875,47 @@
     },
     {
       "@type": "WebPage",
+      "@id": "https://pipefishlabs.io/#webpage",
       "url": "https://pipefishlabs.io",
       "name": "PipeFish Labs — AI Infrastructure & Multi-Agent Systems",
       "isPartOf": {"@id": "https://pipefishlabs.io/#website"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What makes PipeFish Labs different from a typical AI agency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Unlike agencies that deploy basic wrapper scripts or isolated chatbots, PipeFish Labs integrates autonomous multi-agent orchestration, zero-trust security architecture, production data pipelines, and management consulting into one unified operational platform."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is autonomous multi-agent orchestration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Autonomous multi-agent orchestration coordinates teams of specialized AI agents that pass validated, cryptographically signed JSON payloads across your tech stack to automate multi-step enterprise workflows in real time without manual human intervention."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does PipeFish Labs ensure zero-trust security and data privacy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement mTLS encryption, automated secret rotation via HashiCorp Vault, Falco eBPF threat monitoring, and zero-data-retention AI model integration to guarantee complete enterprise SOC 2 and GDPR compliance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does an AI automation or infrastructure deployment take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most client workflows and agent orchestrations are deployed within 4 to 12 weeks, supported by continuous telemetry, SLA monitoring, and automated optimization."
+          }
+        }
+      ]
     }
   ]
 }

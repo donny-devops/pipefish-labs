@@ -39,19 +39,36 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pipefishlabs.io/#organization",
+      "name": "PipeFish Labs",
+      "url": "https://pipefishlabs.io",
+      "logo": "https://pipefishlabs.io/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "pipefish.labs@gmail.com",
+        "areaServed": ["US", "EU", "APAC"]
+      },
+      "sameAs": [
+        "https://twitter.com/pipefishlabs",
+        "https://www.linkedin.com/company/pipefishlabs"
+      ]
+    },
     {"@type": "BreadcrumbList", "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://pipefishlabs.io"},
       {"@type": "ListItem", "position": 2, "name": "Services & Solutions", "item": "https://pipefishlabs.io/services-solutions/"}
     ]},
     {"@type": "WebPage", "url": "https://pipefishlabs.io/services-solutions/", "name": "Services & Solutions | PipeFish Labs", "description": "20+ specialized AI, security, and consulting services for businesses in every industry.", "isPartOf": {"@id": "https://pipefishlabs.io/#website"}},
-    {"@type": "ItemList", "name": "PipeFish Labs Services", "description": "Complete AI automation, security, and consulting services catalog", "numberOfItems": 20,
+    {"@type": "ItemList", "name": "PipeFish Labs Services", "description": "Complete AI automation, security, and consulting services catalog", "numberOfItems": 6,
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "item": {"@type": "Service", "name": "AI Automation & Workflow Engineering", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
-        {"@type": "ListItem", "position": 2, "item": {"@type": "Service", "name": "Multi-Agent Orchestration Systems", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
-        {"@type": "ListItem", "position": 3, "item": {"@type": "Service", "name": "Zero-Trust Security & Identity", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
-        {"@type": "ListItem", "position": 4, "item": {"@type": "Service", "name": "Data Pipelines & Event Telemetry", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
-        {"@type": "ListItem", "position": 5, "item": {"@type": "Service", "name": "EU AI Act Compliance", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
-        {"@type": "ListItem", "position": 6, "item": {"@type": "Service", "name": "Management Consulting & Operational Auditing", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}}
+        {"@type": "ListItem", "position": 1, "item": {"@type": "Service", "name": "AI Automation & Workflow Engineering", "description": "End-to-end autonomous business process automation.", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
+        {"@type": "ListItem", "position": 2, "item": {"@type": "Service", "name": "Multi-Agent Orchestration Systems", "description": "Specialized agent chains with state handoff and real-time telemetry.", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
+        {"@type": "ListItem", "position": 3, "item": {"@type": "Service", "name": "Zero-Trust Security & Identity", "description": "mTLS, automated secrets rotation, and eBPF threat monitoring.", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
+        {"@type": "ListItem", "position": 4, "item": {"@type": "Service", "name": "Data Pipelines & Event Telemetry", "description": "Sub-second event streaming, vector indexing, and pipeline architecture.", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
+        {"@type": "ListItem", "position": 5, "item": {"@type": "Service", "name": "EU AI Act Compliance", "description": "Conformity assessments, Annex IV technical docs, and audit trails.", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}},
+        {"@type": "ListItem", "position": 6, "item": {"@type": "Service", "name": "Management Consulting & Operational Auditing", "description": "Comprehensive bottleneck diagnosis, vendor evaluation, and technical roadmaps.", "provider": {"@type": "Organization", "name": "PipeFish Labs", "url": "https://pipefishlabs.io"}}}
       ]
     }
   ]
