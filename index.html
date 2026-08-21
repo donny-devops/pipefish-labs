@@ -1018,8 +1018,6 @@
     <div class="subnav-inner">
       <span class="subnav-title">Page Index:</span>
       <div class="subnav-links">
-        <a href="#briefing-video" class="subnav-item">Briefing Video</a>
-        <a href="#services" class="subnav-item">Services Arsenal</a>
         <a href="#demo" class="subnav-item">Agent Simulator</a>
         <a href="#architecture" class="subnav-item">Architecture</a>
         <a href="#capabilities" class="subnav-item">Capabilities</a>
@@ -1122,73 +1120,7 @@
   </div>
 </div>
 
-<!-- ─── BRIEFING VIDEO ─── -->
-<section id="briefing-video">
-  <div class="container">
-    <div class="sec-head center ai">
-      <div class="label">Executive Briefing Video</div>
-      <h2 class="h2" style="margin-top:14px">See Multi-Agent Orchestration Direct Operations in Real-Time</h2>
-      <p class="lead" style="margin:14px auto 0;max-width:64ch">
-        Watch our 3-minute technical overview showing how autonomous agent chains execute structured state handoffs, connect custom MCP servers, protect sensitive enterprise data, and deliver measurable operational ROI.
-      </p>
-    </div>
 
-    <div class="video-wrap ai">
-      <div class="video-header-bar">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00FF66;box-shadow:0 0 10px #00FF66"></span>
-          <span>EXECUTIVE BRIEFING · 1080p HD · HMAC-SHA256 SECURED FEED</span>
-        </div>
-        <div>PIPEFISH PLATFORM OVERVIEW v4.2</div>
-      </div>
-      <div class="video-container">
-        <canvas id="briefing-canvas" class="video-canvas"></canvas>
-        <div class="video-overlay" id="v-overlay">
-          <button class="play-btn-lg" onclick="playBriefingVideo()" aria-label="Play Executive Briefing Video">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <div class="video-title-overlay">Play 3-Minute Executive Briefing</div>
-          <div class="video-sub-overlay">Demonstrating Agent Capabilities, MCP Integrations, Customer Impact, and Interactive Chain Execution</div>
-        </div>
-      </div>
-      <div class="video-controls-bar">
-        <button class="v-ctrl-btn" id="v-play-btn" onclick="playBriefingVideo()" aria-label="Toggle Play/Pause">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg>
-        </button>
-        <div class="v-progress-track" onclick="seekBriefingVideo(event)">
-          <div class="v-progress-fill" id="v-progress"></div>
-        </div>
-        <div class="v-time-display" id="v-time">00:00 / 03:15</div>
-      </div>
-    </div>
-
-    <!-- NARRATIVE SUMMARY CARDS -->
-    <div class="briefing-cards">
-      <div class="b-card ai">
-        <div class="b-card-num">01 · CAPABILITIES</div>
-        <h3 class="b-card-h3">What Our Agents Can Do</h3>
-        <p class="b-card-p">From 24/7 AI Receptionist voice & text call handling to automated OCR document parsing, intent classification, and instant retainer payments.</p>
-      </div>
-      <div class="b-card ai" style="transition-delay:.05s">
-        <div class="b-card-num">02 · INTEGRATION &amp; MESH</div>
-        <h3 class="b-card-h3">Multi-Agent Orchestration</h3>
-        <p class="b-card-p">Seamlessly connects CRM, ERP, EMR, Phone, Email, SMS, UCC/VTC, and custom MCP tool servers using cryptographically signed state handoffs.</p>
-      </div>
-      <div class="b-card ai" style="transition-delay:.10s">
-        <div class="b-card-num">03 · CUSTOMER IMPACT</div>
-        <h3 class="b-card-h3">Measurable Business ROI</h3>
-        <p class="b-card-p">Achieve 87%+ reduction in manual tasks, $240K+ average annual cost savings, zero downtime security modernization, and 10× processing speed.</p>
-      </div>
-      <div class="b-card ai" style="transition-delay:.15s">
-        <div class="b-card-num">04 · SIMULATOR BREAKDOWN</div>
-        <h3 class="b-card-h3">Live 8-Node Chain Run</h3>
-        <p class="b-card-p">Summarizes the live interactive graph rendered below — from initial inbound signal to calendar verification, CRM sync, and notification.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- ─── INTERACTIVE DEMO (POSITION 2) ─── -->
 <section id="demo">
