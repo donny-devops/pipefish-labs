@@ -224,8 +224,8 @@
               </div>
 
               <div class="form-group">
-                <label for="interest">Primary Interest *</label>
-                <select id="interest" name="interest" required>
+                <label for="primary-interest">Primary Interest *</label>
+                <select id="primary-interest" name="interest" required>
                   <option value="">What are you looking for?</option>
                   <option>AI Automation &amp; Workflow Engineering</option>
                   <option>Multi-Agent Orchestration</option>
@@ -325,6 +325,33 @@
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>10)})
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1})
 document.querySelectorAll('.ai').forEach(el=>io.observe(el))
+
+// URL Intent Pre-selection & Dynamic Messaging
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const intent = params.get('intent');
+  const intentMap = {
+    audit: 'Management Consulting & Operational Audit',
+    strategy: 'Not sure — need full discovery',
+    discovery: 'Not sure — need full discovery'
+  };
+
+  const selectElem = document.querySelector('#primary-interest') || document.querySelector('#interest');
+  if (intent && intentMap[intent] && selectElem) {
+    selectElem.value = intentMap[intent];
+  }
+
+  if (intent === 'discovery') {
+    const heroH2 = document.querySelector('.ai h2');
+    const heroP = document.querySelector('.ai > p:not(.lbl)');
+    if (heroH2) {
+      heroH2.innerHTML = 'Book Your Full Discovery<br><span class="glow-c">Transformation Session</span>';
+    }
+    if (heroP) {
+      heroP.textContent = "This isn't a surface sales pitch. It's a deep-dive operational discovery session where we map out your bottlenecks, evaluate automation readiness, and deliver an actionable technical roadmap.";
+    }
+  }
+});
 
 // Configurable Webhook Endpoint (Paste your Make.com or Custom Webhook URL here)
 const MAKE_WEBHOOK_URL = window.MAKE_WEBHOOK_URL || "";
