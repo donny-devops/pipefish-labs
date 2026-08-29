@@ -107,10 +107,7 @@
 
 <nav id="nav" class="scrolled">
   <div class="container nav-inner">
-    <a href="/" class="logo">
-      <img src="../logo.png" alt="PipeFish Labs" onerror="this.style.display='none'">
-      <span>PipeFish</span> <span>Labs</span>
-    </a>
+    <a href="/" class="logo" aria-label="PipeFish Labs"><img src="/logo.png" alt="PipeFish Labs" onerror="this.style.display='none'"><span>PipeFish</span><span> Labs</span></a>
     <div class="nav-links">
       <a href="/services-solutions/">Services</a>
       <a href="/case-studies-results/">Case Studies</a>
@@ -349,7 +346,8 @@
       <div class="ft-col"><h4>Services</h4><a href="/services-solutions/">All Services</a><a href="/services-solutions/#pricing">Pricing</a></div>
       <div class="ft-col"><h4>Company</h4><a href="/benefits-testimonials/">Benefits</a><a href="/case-studies-results/">Case Studies</a><a href="/affiliates-corporate-partnerships/">Partners</a></div>
       <div class="ft-col"><h4>Legal</h4><a href="/legal-privacy-policy/">Privacy Policy</a><a href="/legal-privacy-policy/#tos">Terms of Service</a><a href="/legal-privacy-policy/#ai-ethics">AI Ethics</a></div>
-      <div class="ft-col"><h4>Downloads</h4><a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download>EU AI Act Checklist</a><a href="/downloads/zero-trust-architecture-assessment-template.txt" download>Zero-Trust Template</a><a href="/.well-known/security.txt">security.txt (RFC 9116)</a><a href="/llms.txt">llms.txt (AI Index)</a></div>
+      <div class="ft-col"><h4>Downloads</h4><a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download>EU AI Act Checklist</a><a href="/downloads/zero-trust-architecture-assessment-template.txt" download>Zero-Trust Assessment</a>
+        <a href="/downloads/post-quantum-cryptography-migration-blueprint.txt" download>PQC Migration Blueprint</a><a href="/.well-known/security.txt">security.txt (RFC 9116)</a><a href="/llms.txt">llms.txt (AI Index)</a></div>
     </div>
     <div class="dvd"></div>
     <div class="ft-trust" aria-label="Trust and security certifications">
@@ -453,6 +451,28 @@ async function handleSubmit(e){
 
   document.getElementById('form-container').style.display = 'none';
   document.getElementById('success-msg').style.display = 'block';
+}
+</script>
+<script>
+function selectDate(btn, dateStr) {
+  document.querySelectorAll('.cal-day-btn').forEach(b => {
+    b.style.background = 'var(--elevated)';
+    b.style.borderColor = 'var(--border-strong)';
+    b.style.color = 'var(--text-strong)';
+  });
+  btn.style.background = 'var(--cyan-dim)';
+  btn.style.borderColor = 'var(--cyan)';
+  btn.style.color = 'var(--cyan)';
+}
+function selectTime(btn, timeStr) {
+  document.querySelectorAll('.cal-time-btn').forEach(b => {
+    b.style.background = 'var(--elevated)';
+    b.style.borderColor = 'var(--border)';
+    b.style.color = 'var(--text-body)';
+  });
+  btn.style.background = 'var(--cyan-dim)';
+  btn.style.borderColor = 'var(--cyan)';
+  btn.style.color = 'var(--cyan)';
 }
 </script>
 </body>

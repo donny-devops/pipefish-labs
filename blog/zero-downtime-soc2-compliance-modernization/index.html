@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero-Downtime SOC 2 Compliance Modernization for Legacy Infrastructure | PipeFish Labs Blog</title>
+<meta name="description" content="Engineering strategy for migrating legacy monolithic workloads to SOC 2 Type II aligned zero-trust architectures with zero operational downtime and automated mTLS key rotation.">
+<meta name="keywords" content="zero downtime SOC 2 compliance, infrastructure modernization, mTLS key rotation, HashiCorp Vault, eBPF threat monitoring, PipeFish Labs">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/pfl.css">
+<link rel="canonical" href="https://pipefishlabs.io/blog/zero-downtime-soc2-compliance-modernization/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Zero-Downtime SOC 2 Compliance Modernization for Legacy Infrastructure",
+  "description": "How PipeFish Labs modernizes enterprise security postures without operational interruption.",
+  "author": {"@type": "Person", "name": "Jason F.", "jobTitle": "Chief Information Security Officer"},
+  "publisher": {"@type": "Organization", "name": "PipeFish Labs", "logo": "https://pipefishlabs.io/logo.png"},
+  "datePublished": "2026-08-28",
+  "mainEntityOfPage": "https://pipefishlabs.io/blog/zero-downtime-soc2-compliance-modernization/"
+}
+</script>
+<style>
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(6,7,12,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--fd); font-weight: 800; font-size: 16px; color: var(--text-strong); text-decoration: none; }
+  .logo span:first-child { color: var(--cyan); }
+  .logo span:last-child { color: var(--magenta); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-body); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+  
+  .article-body { max-width: 800px; margin: calc(var(--nav-h) + 60px) auto 80px; padding-inline: 24px; }
+  .art-header { margin-bottom: 40px; text-align: center; }
+  .art-meta { font-family: var(--fm); font-size: 12px; color: var(--cyan); margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .art-content h2 { font-family: var(--fd); font-size: 1.6rem; color: var(--text-strong); margin-top: 36px; margin-bottom: 16px; }
+  .art-content p { font-size: 15px; line-height: 1.8; color: var(--text-body); margin-bottom: 20px; }
+  .art-content ul { margin-bottom: 24px; padding-left: 20px; }
+  .art-content li { font-size: 14.5px; line-height: 1.7; color: var(--text-body); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="logo" aria-label="PipeFish Labs"><img src="/logo.png" alt="PipeFish Labs" onerror="this.style.display='none'"><span>PipeFish</span><span> Labs</span></a>
+    <ul class="nav-links">
+      <li><a href="/services-solutions/">Services</a></li>
+      <li><a href="/case-studies-results/">Case Studies</a></li>
+      <li><a href="/benefits-testimonials/">Benefits</a></li>
+      <li><a href="/affiliates-corporate-partnerships/">Partners</a></li>
+      <li><a href="/demo/">Demo</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/book-a-demo-contact/">Contact</a></li>
+    </ul>
+    <a href="/book-a-demo-contact/?intent=audit" class="btn btn-m">Book an Audit →</a>
+  </div>
+</nav>
+
+<article class="article-body">
+  <header class="art-header">
+    <div class="lbl">Enterprise Case Breakdown</div>
+    <h1 class="h1">Zero-Downtime SOC 2 Compliance Modernization for Legacy Infrastructure</h1>
+    <div class="art-meta">
+      <span>By Jason F., Chief Information Security Officer</span>
+      <span>•</span>
+      <span>August 28, 2026</span>
+      <span>•</span>
+      <span>7 min read</span>
+    </div>
+  </header>
+
+  <div class="art-content">
+    <p>Legacy software architectures often accumulate high security debt: hardcoded credentials, unencrypted internal API traffic, static service tokens, and missing audit telemetry. PipeFish Labs specializes in surgical zero-downtime infrastructure refactoring to bring complex multi-region operations into full SOC 2 Type II compliance.</p>
+
+    <h2>1. Parallel Proxy Ingress Migration</h2>
+    <p>Rather than attempting risky "big bang" cutovers, we deploy Envoy sidecars and mTLS proxy layers in parallel. Traffic is transparently proxied and verified using eBPF probes prior to retiring legacy endpoints.</p>
+
+    <h2>2. Dynamic Vault Secret Rotation</h2>
+    <p>Static API credentials are replaced with dynamic short-lived tokens generated on-demand by HashiCorp Vault with maximum lifetimes measured in minutes rather than months.</p>
+
+    <h2>3. Real-World Case Outcome: Omnium International</h2>
+    <p>During our 11-week modernization with Omnium International Products Corporation across 14 countries, zero downtime was experienced while establishing full continuous posture verification and SOC 2 Type II audit readiness.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-brand"><div class="ft-name"><span>PipeFish</span> <span>Labs</span></div><p>Enterprise AI automation, zero-trust security, and multi-agent orchestration.</p></div>
+      <div class="ft-col"><h4>Services</h4><a href="/services-solutions/#ai-automation">AI Automation</a><a href="/services-solutions/#multi-agent">Multi-Agent Systems</a><a href="/services-solutions/#zero-trust">Zero-Trust Security</a><a href="/services-solutions/#data-pipelines">Data Pipelines</a></div>
+      <div class="ft-col"><h4>Company</h4><a href="/benefits-testimonials/">Benefits</a><a href="/case-studies-results/">Case Studies</a><a href="/affiliates-corporate-partnerships/">Partners</a><a href="https://www.linkedin.com/company/pipefishlabs" target="_blank" rel="noopener">LinkedIn</a><a href="/book-a-demo-contact/">Contact</a></div>
+      <div class="ft-col"><h4>Legal</h4><a href="/legal-privacy-policy/">Privacy Policy</a><a href="/legal-privacy-policy/#tos">Terms of Service</a><a href="/legal-privacy-policy/#ai-ethics">AI Ethics</a></div>
+      <div class="ft-col"><h4>Downloads</h4><a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download>EU AI Act Checklist</a><a href="/downloads/zero-trust-architecture-assessment-template.txt" download>Zero-Trust Template</a><a href="/downloads/post-quantum-cryptography-migration-blueprint.txt" download>PQC Migration Blueprint</a></div>
+    </div>
+    <div class="dvd"></div>
+    <div class="ft-bot"><p>© 2026 PipeFish Labs. All rights reserved.</p></div>
+  </div>
+</footer>
+
+</body>
+</html>

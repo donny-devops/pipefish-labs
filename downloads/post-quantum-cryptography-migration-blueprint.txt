@@ -1,0 +1,32 @@
+PIPEFISH LABS — ENTERPRISE POST-QUANTUM CRYPTOGRAPHY (PQC) MIGRATION BLUEPRINT
+=================================================================================
+Document Version: 2.4 | Classification: Technical Reference & Audit Guide
+Published: 2026 | Author: PipeFish Labs Cryptographic Infrastructure Practice
+
+EXECUTIVE OVERVIEW:
+-------------------
+With NIST releasing official Post-Quantum Cryptography (PQC) standards—specifically FIPS 203 (ML-KEM for Key Encapsulation) and FIPS 204/205 (ML-DSA / SLH-DSA for Digital Signatures)—enterprises face an urgent mandate to transition legacy RSA/ECC primitives before quantum decryption capabilities mature.
+
+PHASE 1: CRYPTOGRAPHIC ASSET DISCOVERY & AUDIT
+- Inventory all TLS 1.3 endpoints, mTLS mesh certificates, and API gateway keys.
+- Map asymmetric dependencies: RSA-2048/4096, ECDSA (P-256/P-384), Ed25519.
+- Classify data longevity: Mark data requiring >5-year retention for immediate PQC migration.
+
+PHASE 2: HYBRID KEM DEPLOYMENT (ML-KEM-768 + X25519)
+- Deploy hybrid key encapsulation combining classical ECDH (X25519) with NIST FIPS 203 ML-KEM-768.
+- Configure HashiCorp Vault secrets engines for dynamic ML-KEM key pair generation.
+- Enforce fallback negotiation parameters to maintain backward compatibility during rollout.
+
+PHASE 3: ZERO-DATA RETENTION (ZDR) ENCLAVE HARDENING
+- Enclose AI model execution nodes within AWS Nitro / Intel SGX confidential enclaves.
+- Implement ephemeral session key derivation using post-quantum mTLS handshakes.
+- Eliminate disk persistence for decrypted prompt/payload memory buffers.
+
+PHASE 4: CONTINUOUS TELEMETRY & AUDIT VERIFICATION
+- Monitor eBPF socket events via Falco to detect non-PQC cipher suite fallbacks.
+- Generate cryptographically verifiable SOC 2 Type II posture logs.
+- Conduct bi-annual PQC algorithm agility drills.
+
+For custom PQC deployment assistance or zero-trust architecture audits, contact PipeFish Labs:
+Website: https://pipefishlabs.io/book-a-demo-contact/
+Email: pipefish.labs@gmail.com
