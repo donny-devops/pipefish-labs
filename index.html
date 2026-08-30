@@ -634,12 +634,12 @@
     .demo-row.done .demo-row-status { color: #00FFB2; }
     .demo-row.done .demo-row-badge { background: rgba(0,255,178,0.1); border-color: rgba(0,255,178,0.3); color: #00FFB2; }
     .demo-status-bar {
-      background: rgba(0,0,0,0.5); border: 1px solid var(--border);
-      border-radius: var(--r-md); padding: 14px 18px; font-family: var(--font-mono);
-      font-size: 12.5px; color: var(--text-body); display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,0.5); border: 1px solid var(--border-strong);
+      border-radius: var(--r-md); padding: 16px 20px; font-family: var(--font-mono);
+      font-size: 15px; font-weight: 700; color: var(--text-strong); display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 12px;
     }
-    .demo-channels { font-size: 11.5px; color: var(--text-dim); }
+    .demo-channels { font-size: 14px; font-weight: 700; color: var(--cyan); text-shadow: 0 0 10px rgba(0,212,255,0.2); }
 
     /* ───────── WORKFLOW ARCHITECTURE ───────── */
     #architecture { position: relative; }
@@ -1082,8 +1082,8 @@
 
       <!-- Live Execution Status Bar -->
       <div class="demo-status-bar">
-        <div id="demo-status-bar-text">Idle — press Run agents to trigger the orchestration graph.</div>
-        <div class="demo-channels" id="demo-channels-text">
+        <div id="demo-status-bar-text" style="font-size:15px;font-weight:700;color:var(--text-strong)">Idle — press Run agents to trigger the orchestration graph.</div>
+        <div class="demo-channels" id="demo-channels-text" style="font-size:14px;font-weight:700;color:var(--cyan);text-shadow:0 0 10px rgba(0,212,255,0.2)">
           Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs
         </div>
       </div>
