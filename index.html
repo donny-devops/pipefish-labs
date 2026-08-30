@@ -1036,10 +1036,8 @@
 
     <!-- Scenario Selector Tabs -->
     <div class="demo-tabs ai">
-      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
+      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">Receptionist Agent (Voice &amp; Text)</button>
       <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations Agent</button>
-      <button class="demo-tab" onclick="switchDemo('admin', this)">Administrative / Back-Office Agent</button>
-      <button class="demo-tab" onclick="switchDemo('support', this)">Customer Support Agent</button>
       <button class="demo-tab" onclick="switchDemo('logistics', this)">Logistics / Supply Chain Agent</button>
       <button class="demo-tab" onclick="switchDemo('infra', this)">Infrastructure / Ops Agent</button>
       <button class="demo-tab" onclick="switchDemo('quantum', this)">Quantum Computing Agent</button>
@@ -1403,10 +1401,10 @@
     </div>
 
     <div class="arch-grid">
-      <!-- CARD 1: AI RECEPTIONIST -->
+      <!-- CARD 1: RECEPTIONIST -->
       <div class="arch-card ai">
         <div class="arch-tag">Voice &amp; Text Front Desk</div>
-        <h3 class="arch-title">AI Receptionist Agent</h3>
+        <h3 class="arch-title">Receptionist Agent</h3>
         <p class="arch-desc">
           Features <strong>Voice Receptionist Agent</strong> (Phone, Email, UCC/VTC integration) and <strong>Text Receptionist Agent</strong> (SMS/Webchat/Email). Every inbound lead, inquiry, sign-up, and message becomes one fully resolved operational record: buyer intent classified, account eligibility verified, team capacity checked, strategy calls booked, proposals generated, and contract signatures chased to completion.
         </p>
@@ -1440,7 +1438,7 @@
       <!-- CARD 2: SALES OPERATIONS -->
       <div class="arch-card ai" style="transition-delay:.05s">
         <div class="arch-tag">Revenue &amp; Pipeline Engine</div>
-        <h3 class="arch-title">Sales Operations AI Agent</h3>
+        <h3 class="arch-title">Sales Operations Agent</h3>
         <p class="arch-desc">
           Contains specialized subagents: <strong>Sales Enablement Agent</strong>, <strong>Sales Follow-Up Agent</strong>, <strong>Sales Outreach Agent</strong>, <strong>Email Agent</strong>, <strong>Lead Qualification Agent</strong>, <strong>CRM Hygiene Agent</strong>, <strong>Proposal Generator Agent</strong>, and <strong>Deal Recovery Agent</strong>. Enriches pipeline continuously, crafts personalized outreach, generates proposals, enforces CRM hygiene, and reopens stalled deals until closed.
         </p>
@@ -1474,7 +1472,7 @@
       <!-- CARD 3: ENTERPRISE OPERATIONS -->
       <div class="arch-card ai" style="transition-delay:.10s">
         <div class="arch-tag">Operations &amp; Logistics</div>
-        <h3 class="arch-title">Enterprise Operations &amp; Logistics AI Agent</h3>
+        <h3 class="arch-title">Supply Chain &amp; Logistics Agent</h3>
         <p class="arch-desc">
           For underperforming or scaling operational teams across every industry — load &amp; task details extracted from inbound threads, accounts verified, workflows launched in core software, pickups &amp; milestones coordinated, movement tracked, and operational exceptions resolved before the customer feels them.
         </p>
@@ -1964,34 +1962,6 @@ const demoScenarios = {
       { n: '06', name: 'Proposal Generator Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '07', name: 'Sales Follow-Up Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '08', name: 'Deal Recovery Agent', sub: '', status: 'awaiting upstream signal…' }
-    ]
-  },
-  admin: {
-    payload: 'INBOUND DISPATCH & DOCUMENT INTAKE — "Reconcile vendor invoices, extract line-item SAP POs, verify TAX IDs, execute ledger matching, and route approvals for Q3 operational expenditures ($420k aggregate)."',
-    channel: 'Channels Enabled: SAP ERP · QuickBooks · OCR Vision · Email · Bank APIs · Approval Workflows',
-    nodes: [
-      { n: '01', name: 'Document Extraction & OCR Agent', sub: '(Vision AI)', status: 'awaiting upstream signal…' },
-      { n: '02', name: 'TAX ID & Merchant Verification Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '03', name: 'PO Match & ERP Ledger Agent', sub: '(SAP Integration)', status: 'awaiting upstream signal…' },
-      { n: '04', name: 'Anomaly & Fraud Scoring Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '05', name: 'Approval Routing & Hierarchy Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '06', name: 'Automated Remittance Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '07', name: 'Audit Logging & Archival Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '08', name: 'Executive Summary Agent', sub: '', status: 'awaiting upstream signal…' }
-    ]
-  },
-  support: {
-    payload: 'INBOUND TICKET & CHAT TELEMETRY — "Tenant #8892 reporting latency spikes during peak checkout. Database connection pool exhausted and session tokens failing renewal."',
-    channel: 'Channels Enabled: Zendesk · Intercom · Slack · Datadog Telemetry · PagerDuty · Database Proxies',
-    nodes: [
-      { n: '01', name: 'Ticket Parsing & Sentiment Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '02', name: 'Telemetry & Log Analyzer Agent', sub: '(Datadog / APM)', status: 'awaiting upstream signal…' },
-      { n: '03', name: 'Knowledge Base & RAG Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '04', name: 'Session & DB Pool Reset Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '05', name: 'Customer Auto-Response Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '06', name: 'Tier 3 Escalation Agent', sub: '(PagerDuty)', status: 'awaiting upstream signal…' },
-      { n: '07', name: 'SLA Tracking & Resolution Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '08', name: 'CSAT & Feedback Capture Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   },
   logistics: {

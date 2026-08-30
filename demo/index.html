@@ -168,10 +168,8 @@
 <section>
   <div class="container">
     <div class="demo-tabs">
-      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
+      <button class="demo-tab active" onclick="switchDemo('receptionist', this)">Receptionist Agent (Voice &amp; Text)</button>
       <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations Agent</button>
-      <button class="demo-tab" onclick="switchDemo('admin', this)">Administrative / Back-Office Agent</button>
-      <button class="demo-tab" onclick="switchDemo('support', this)">Customer Support Agent</button>
       <button class="demo-tab" onclick="switchDemo('logistics', this)">Logistics / Supply Chain Agent</button>
       <button class="demo-tab" onclick="switchDemo('infra', this)">Infrastructure / Ops Agent</button>
       <button class="demo-tab" onclick="switchDemo('quantum', this)">Quantum Computing Agent</button>
@@ -269,34 +267,6 @@ const scenarios = {
       { num: "Node 06", title: "ERP & Billing Sync", desc: "Updates SAP/Oracle ERP system records and adjusts delivery ETA timestamps." },
       { num: "Node 07", title: "Customer Notification", desc: "Sends automated proactive status alerts to affected customer tracking portals." },
       { num: "Node 08", title: "Closed-Loop Telemetry", desc: "Logs execution metrics, updates predictive carrier reliability scores in database." }
-    ]
-  },
-  admin: {
-    type: "LIVE INBOUND SIGNAL — ADMINISTRATIVE & BACK-OFFICE ENGINE",
-    payload: 'INBOUND DISPATCH & DOCUMENT INTAKE — "Reconcile vendor invoices, extract line-item SAP POs, verify TAX IDs, execute ledger matching, and route approvals for Q3 operational expenditures ($420k aggregate)."',
-    nodes: [
-      { num: "Node 01", title: "Document Extraction & OCR", desc: "Extracts invoice line items using Vision AI and structured document parsers." },
-      { num: "Node 02", title: "TAX ID & Merchant Verification", desc: "Validates TIN/EIN numbers against government databases to prevent vendor spoofing." },
-      { num: "Node 03", title: "PO Match & ERP Ledger", desc: "Performs 3-way matching across purchase orders, receiving slips, and invoices in SAP." },
-      { num: "Node 04", title: "Anomaly & Fraud Scoring", desc: "Calculates duplicate payment and fraud risk scores before committing remittance." },
-      { num: "Node 05", title: "Approval Routing Engine", desc: "Routes high-value invoices to department VPs based on spending authority matrix." },
-      { num: "Node 06", title: "Automated Remittance", desc: "Executes batch ACH/wire payments via secure banking API integration." },
-      { num: "Node 07", title: "Audit Logging & Archival", desc: "Archives cryptographically signed transaction proofs in SOC 2 compliance vault." },
-      { num: "Node 08", title: "Executive Summary Digest", desc: "Compiles weekly spend variance analysis for the Chief Financial Officer." }
-    ]
-  },
-  support: {
-    type: "LIVE INBOUND SIGNAL — CUSTOMER SUPPORT TELEMETRY ENGINE",
-    payload: 'INBOUND TICKET & CHAT TELEMETRY — "Tenant #8892 reporting latency spikes during peak checkout. Database connection pool exhausted and session tokens failing renewal."',
-    nodes: [
-      { num: "Node 01", title: "Ticket Parsing & Sentiment", desc: "Parses ticket sentiment, categorizes issue urgency as P1 Outage, and checks SLA tier." },
-      { num: "Node 02", title: "Telemetry & Log Analyzer", desc: "Queries Datadog / APM metrics to diagnose database connection pool exhaustion." },
-      { num: "Node 03", title: "Knowledge Base & RAG", desc: "Retrieves runbooks for database connection pool recycling from internal vector store." },
-      { num: "Node 04", title: "Session & DB Pool Reset", desc: "Executes automated pool flush script via secure infrastructure tool server." },
-      { num: "Node 05", title: "Customer Auto-Response", desc: "Sends instant status update to tenant administrator with investigation timeline." },
-      { num: "Node 06", title: "Tier 3 Escalation Engine", desc: "Triggers PagerDuty alert to primary infrastructure on-call engineer." },
-      { num: "Node 07", title: "SLA Tracking & Resolution", desc: "Tracks resolution metrics to ensure adherence to 99.99% uptime SLA commitments." },
-      { num: "Node 08", title: "CSAT & Feedback Capture", desc: "Dispatches automated follow-up survey upon ticket closure to measure customer satisfaction." }
     ]
   },
   infra: {
