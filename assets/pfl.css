@@ -54,7 +54,7 @@ section{padding-block:var(--sy)}
 .badge:hover{border-color:var(--cyan);color:var(--cyan)}
 
 /* ── TAGS ── */
-.tag{display:inline-block;padding:3px 10px;border-radius:100px;font-size:10px;font-family:var(--fm);letter-spacing:.08em;text-transform:uppercase}
+.tag{display:inline-block;padding:5px 14px;border-radius:100px;font-size:13.5px;font-weight:800;font-family:var(--fm);letter-spacing:.1em;text-transform:uppercase}
 .tag-c{background:var(--cyan-dim);color:var(--cyan)}
 .tag-m{background:var(--magenta-dim);color:var(--magenta)}
 .tag-o{background:var(--orange-dim);color:var(--orange)}
