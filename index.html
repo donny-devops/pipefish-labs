@@ -1054,6 +1054,12 @@
       <button class="demo-tab" onclick="switchDemo('forensics', this)">Digital Forensics Agent</button>
       <button class="demo-tab" onclick="switchDemo('malware', this)">Malware Analysis Agent</button>
       <button class="demo-tab" onclick="switchDemo('revops', this)">Growth Hacking / RevOps Agent</button>
+      <button class="demo-tab" onclick="switchDemo('analytics', this)">Analytics Agent</button>
+      <button class="demo-tab" onclick="switchDemo('auditing', this)">Auditing Agent</button>
+      <button class="demo-tab" onclick="switchDemo('logtriage', this)">Log Triage Agent</button>
+      <button class="demo-tab" onclick="switchDemo('erp', this)">ERP Agent</button>
+      <button class="demo-tab" onclick="switchDemo('trafficrouter', this)">Traffic Router Agent</button>
+      <button class="demo-tab" onclick="switchDemo('networkdispatch', this)">Network Dispatch Agent</button>
     </div>
 
     <!-- Demo Container -->
@@ -2195,6 +2201,90 @@ const demoScenarios = {
       { n: '06', name: 'Salesforce / HubSpot Pipeline Sync Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '07', name: 'Stripe LTV & Expansion Predictor Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '08', name: 'Growth Telemetry & Attribution Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  analytics: {
+    payload: 'ANALYTICS STREAM TRIGGER — "Aggregate 250M event streams across Snowflake, ClickHouse, and Mixpanel. Compute real-time user retention cohorts and funnels."',
+    channel: 'Channels Enabled: Snowflake · ClickHouse · Mixpanel · BigQuery · Apache Pinot · Vector Embeddings',
+    nodes: [
+      { n: '01', name: 'High-Throughput Stream Ingestor Agent', sub: '(ClickHouse / Pinot)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Dimension Normalizer & Deduplicator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Funnel & Retention Cohort Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Statistical Anomaly Detector Agent', sub: '(Isolation Forest)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Predictive LTV & Churn Model Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Executive Dashboard Synthesizer Agent', sub: '(Looker / BI)', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Automated Insight Digest Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Real-Time Alert Dispatcher Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  auditing: {
+    payload: 'SOC 2 & ISO 27001 AUDIT TRIGGER — "Verify zero-trust access logs, IAM key rotations, and encrypted data backups across 45 cloud accounts for Q3 audit proof."',
+    channel: 'Channels Enabled: AWS CloudTrail · GCP Audit Logs · HashiCorp Vault · SOC 2 Vault · ISO 27001',
+    nodes: [
+      { n: '01', name: 'CloudTrail & IAM Audit Collector Agent', sub: '(AWS / GCP Logs)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Access Control Policy Verifier Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Encryption & Key Rotation Auditor Agent', sub: '(KMS / Vault)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Backup Integrity Verification Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Non-Conformity Gap Detector Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'SOC 2 / ISO 27001 Evidence Packer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Remediation Action Router Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Auditor Certificate Generator Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  logtriage: {
+    payload: 'LOG TRIAGE ALERT — "Ingesting 85,000 log events/sec. Classifying critical NullPointerExceptions, stack trace cascades, and API gateway timeouts."',
+    channel: 'Channels Enabled: Elasticsearch · Logstash · Kibana · Vector · OpenSearch · Datadog',
+    nodes: [
+      { n: '01', name: 'High-Volume Log Parser & Tokenizer Agent', sub: '(Vector Engine)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Stack Trace & Exception Extractor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Log Clustering & Deduplication Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Severity Classifier & SLA Matcher Agent', sub: '(P1 / P2 / P3)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Root Cause Code File Correlator Agent', sub: '(Git Blame Sync)', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Sentry / Rollbar Issue Linker Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Noise Suppression & Filter Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'On-Call Engineer Dispatcher Agent', sub: '(PagerDuty / Opsgenie)', status: 'awaiting upstream signal…' }
+    ]
+  },
+  erp: {
+    payload: 'SAP / ORACLE ERP EVENT — "Execute Q3 inventory rebalancing, PO reconciliation, and vendor ledger posting across 14 global distribution nodes."',
+    channel: 'Channels Enabled: SAP S/4HANA · Oracle Fusion ERP · NetSuite · QuickBooks · B2B EDI 850/856',
+    nodes: [
+      { n: '01', name: 'ERP Master Data Synchronizer Agent', sub: '(SAP / Oracle)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Purchase Order 3-Way Matcher Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Inventory Allocation & Rebalance Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'General Ledger Posting Agent', sub: '(Double-Entry Audit)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Tax & Multi-Currency Calculator Agent', sub: '(Avalara / TaxJar)', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Vendor Payment Approver Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'EDI 850 / 856 Order Dispatcher Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Financial Close Telemetry Logger Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  trafficrouter: {
+    payload: 'EDGE ROUTING SIGNAL — "Latency spike detected on US-East BGP routes. Re-routing 450,000 active HTTP/2 sessions to EU-West and Asia-South edge gateways."',
+    channel: 'Channels Enabled: Cloudflare Workers · AWS Route 53 · BGP Routing · Envoy Proxy · HAProxy · NGINX',
+    nodes: [
+      { n: '01', name: 'BGP & Edge Health Monitor Agent', sub: '(Global Probes)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Geographic Traffic Balancer Agent', sub: '(Route 53 API)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'HTTP/2 Session Failover Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'DDoS & Rate-Limit Shield Agent', sub: '(Cloudflare / WAF)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Envoy / NGINX Config Pusher Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Canary & Blue/Green Traffic Shifter Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'TLS Session Ticket Rotator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Routing Performance Telemetry Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  networkdispatch: {
+    payload: 'NETWORK MESH DISPATCH — "Dispatching SD-WAN network routes for 350 enterprise branch offices. Optimizing QoS bandwidth for real-time VoIP and video streams."',
+    channel: 'Channels Enabled: Cisco SD-WAN · Juniper PyEZ · WireGuard · MPLS · gNMI / YANG · OpenFlow',
+    nodes: [
+      { n: '01', name: 'SD-WAN Mesh Topology Analyzer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'QoS & Traffic Prioritization Agent', sub: '(DSSC Marking)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'WireGuard Tunnel Provisioner Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'gNMI / YANG Telemetry Collector Agent', sub: '(Juniper / Cisco)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Dynamic Path Selection Engine Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'BGP Peer & Community Setter Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Zero-Touch Provisioning (ZTP) Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Network Health & SLA Verifier Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   }
 };

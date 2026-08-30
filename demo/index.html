@@ -186,6 +186,12 @@
       <button class="demo-tab" onclick="switchDemo('forensics', this)">Digital Forensics Agent</button>
       <button class="demo-tab" onclick="switchDemo('malware', this)">Malware Analysis Agent</button>
       <button class="demo-tab" onclick="switchDemo('revops', this)">Growth Hacking / RevOps Agent</button>
+      <button class="demo-tab" onclick="switchDemo('analytics', this)">Analytics Agent</button>
+      <button class="demo-tab" onclick="switchDemo('auditing', this)">Auditing Agent</button>
+      <button class="demo-tab" onclick="switchDemo('logtriage', this)">Log Triage Agent</button>
+      <button class="demo-tab" onclick="switchDemo('erp', this)">ERP Agent</button>
+      <button class="demo-tab" onclick="switchDemo('trafficrouter', this)">Traffic Router Agent</button>
+      <button class="demo-tab" onclick="switchDemo('networkdispatch', this)">Network Dispatch Agent</button>
     </div>
 
     <div class="demo-container">
@@ -486,6 +492,90 @@ const scenarios = {
       { num: "Node 06", title: "Salesforce / HubSpot Pipeline Sync", desc: "Creates high-priority deal stage in CRM and assigns primary Account Executive." },
       { num: "Node 07", title: "Stripe LTV & Expansion Predictor", desc: "Projects 12-month Customer Lifetime Value (LTV) and expansion revenue potential." },
       { num: "Node 08", title: "Growth Telemetry & Attribution", desc: "Attributes conversion source, logs CAC efficiency, and dispatches Slack alert to #growth-wins." }
+    ]
+  },
+  analytics: {
+    type: "LIVE INBOUND SIGNAL — REAL-TIME ANALYTICS ENGINE",
+    payload: 'ANALYTICS STREAM TRIGGER — "Aggregate 250M event streams across Snowflake, ClickHouse, and Mixpanel. Compute real-time user retention cohorts and funnels."',
+    nodes: [
+      { num: "Node 01", title: "High-Throughput Stream Ingestor", desc: "Ingests real-time clickstream events into columnar data stores." },
+      { num: "Node 02", title: "Dimension Normalizer & Deduplicator", desc: "Standardizes user IDs, session tokens, and timezone timestamps." },
+      { num: "Node 03", title: "Funnel & Retention Cohort Engine", desc: "Calculates N-day user retention curves and conversion funnel drop-offs." },
+      { num: "Node 04", title: "Statistical Anomaly Detector", desc: "Flags metric deviations using machine learning anomaly models." },
+      { num: "Node 05", title: "Predictive LTV & Churn Model", desc: "Predicts lifetime value metrics and flags churn-risk user segments." },
+      { num: "Node 06", title: "Executive Dashboard Synthesizer", desc: "Renders dynamic real-time visualization widgets and reports." },
+      { num: "Node 07", title: "Automated Insight Digest", desc: "Generates natural language summaries of weekly operational performance." },
+      { num: "Node 08", title: "Real-Time Alert Dispatcher", desc: "Dispatches metric anomaly notifications to executive Slack channels." }
+    ]
+  },
+  auditing: {
+    type: "LIVE INBOUND SIGNAL — COMPLIANCE & AUDITING ENGINE",
+    payload: 'SOC 2 & ISO 27001 AUDIT TRIGGER — "Verify zero-trust access logs, IAM key rotations, and encrypted data backups across 45 cloud accounts for Q3 audit proof."',
+    nodes: [
+      { num: "Node 01", title: "CloudTrail & IAM Audit Collector", desc: "Aggregates API activity logs and authentication events across accounts." },
+      { num: "Node 02", title: "Access Control Policy Verifier", desc: "Evaluates Least Privilege access rules against IAM policy benchmarks." },
+      { num: "Node 03", title: "Encryption & Key Rotation Auditor", desc: "Verifies 90-day KMS master key rotation and TLS certificate validity." },
+      { num: "Node 04", title: "Backup Integrity Verification", desc: "Validates immutable snapshot backups and disaster recovery RTO/RPO." },
+      { num: "Node 05", title: "Non-Conformity Gap Detector", desc: "Flags compliance drift and unauthorized security group modifications." },
+      { num: "Node 06", title: "SOC 2 / ISO 27001 Evidence Packer", desc: "Compiles cryptographically hashed evidence artifacts for external auditors." },
+      { num: "Node 07", title: "Remediation Action Router", desc: "Dispatches automated Jira tickets for detected compliance gaps." },
+      { num: "Node 08", title: "Auditor Certificate Generator", desc: "Issues signed compliance verification token and executive audit report." }
+    ]
+  },
+  logtriage: {
+    type: "LIVE INBOUND SIGNAL — LOG TRIAGE ENGINE",
+    payload: 'LOG TRIAGE ALERT — "Ingesting 85,000 log events/sec. Classifying critical NullPointerExceptions, stack trace cascades, and API gateway timeouts."',
+    nodes: [
+      { num: "Node 01", title: "High-Volume Log Parser & Tokenizer", desc: "Parses unstructured syslog and JSON log streams at 85k events/sec." },
+      { num: "Node 02", title: "Stack Trace & Exception Extractor", desc: "Extracts multiline error stack traces and unhandled exception frames." },
+      { num: "Node 03", title: "Log Clustering & Deduplication", desc: "Groups recurring log signatures into single manageable incident tickets." },
+      { num: "Node 04", title: "Severity Classifier & SLA Matcher", desc: "Categorizes incident priority based on error rate and service criticality." },
+      { num: "Node 05", title: "Root Cause Code File Correlator", desc: "Correlates stack trace lines with specific git commits and authors." },
+      { num: "Node 06", title: "Sentry / Rollbar Issue Linker", desc: "Links error clusters to existing tracker issues or creates new tickets." },
+      { num: "Node 07", title: "Noise Suppression & Filter Engine", desc: "Filters out benign debug logs and false positive warning spikes." },
+      { num: "Node 08", title: "On-Call Engineer Dispatcher", desc: "Dispatches targeted PagerDuty alerts with full diagnostic context." }
+    ]
+  },
+  erp: {
+    type: "LIVE INBOUND SIGNAL — ENTERPRISE ERP ORCHESTRATION ENGINE",
+    payload: 'SAP / ORACLE ERP EVENT — "Execute Q3 inventory rebalancing, PO reconciliation, and vendor ledger posting across 14 global distribution nodes."',
+    nodes: [
+      { num: "Node 01", title: "ERP Master Data Synchronizer", desc: "Synchronizes material master, vendor IDs, and ledger accounts across ERPs." },
+      { num: "Node 02", title: "Purchase Order 3-Way Matcher", desc: "Matches invoices, receiving slips, and PO line items automatically." },
+      { num: "Node 03", title: "Inventory Allocation & Rebalance", desc: "Rebalances stock levels across regional distribution warehouses." },
+      { num: "Node 04", title: "General Ledger Posting Engine", desc: "Executes automated double-entry ledger debit/credit transactions." },
+      { num: "Node 05", title: "Tax & Multi-Currency Calculator", desc: "Calculates regional VAT/GST taxes and real-time exchange rates." },
+      { num: "Node 06", title: "Vendor Payment Approver", desc: "Routes high-value disbursements for CFO approval based on policy matrix." },
+      { num: "Node 07", title: "EDI 850 / 856 Order Dispatcher", desc: "Generates and transmits standard EDI shipping and order documents." },
+      { num: "Node 08", title: "Financial Close Telemetry Logger", desc: "Updates period-end financial close status and logs audit trail." }
+    ]
+  },
+  trafficrouter: {
+    type: "LIVE INBOUND SIGNAL — GLOBAL TRAFFIC ROUTING ENGINE",
+    payload: 'EDGE ROUTING SIGNAL — "Latency spike detected on US-East BGP routes. Re-routing 450,000 active HTTP/2 sessions to EU-West and Asia-South edge gateways."',
+    nodes: [
+      { num: "Node 01", title: "BGP & Edge Health Monitor", desc: "Monitors real-time latency and packet loss across global edge POPs." },
+      { num: "Node 02", title: "Geographic Traffic Balancer", desc: "Calculates lowest-latency geographic DNS routing paths." },
+      { num: "Node 03", title: "HTTP/2 Session Failover Engine", desc: "Transfers active TCP/TLS sessions without dropping user requests." },
+      { num: "Node 04", title: "DDoS & Rate-Limit Shield", desc: "Enforces IP reputation filtering and layer-7 volumetric DDoS blocks." },
+      { num: "Node 05", title: "Envoy / NGINX Config Pusher", desc: "Deploys dynamic ingress routing tables to proxy nodes in 200ms." },
+      { num: "Node 06", title: "Canary & Blue/Green Traffic Shifter", desc: "Shifts deployment traffic percentage safely across microservice clusters." },
+      { num: "Node 07", title: "TLS Session Ticket Rotator", desc: "Rotates TLS 1.3 session encryption keys across edge locations." },
+      { num: "Node 08", title: "Routing Performance Telemetry", desc: "Logs sub-millisecond routing efficiency metrics to central dashboard." }
+    ]
+  },
+  networkdispatch: {
+    type: "LIVE INBOUND SIGNAL — NETWORK DISPATCH & MESH ENGINE",
+    payload: 'NETWORK MESH DISPATCH — "Dispatching SD-WAN network routes for 350 enterprise branch offices. Optimizing QoS bandwidth for real-time VoIP and video streams."',
+    nodes: [
+      { num: "Node 01", title: "SD-WAN Mesh Topology Analyzer", desc: "Inspects active MPLS, cellular, and broadband tunnel paths." },
+      { num: "Node 02", title: "QoS & Traffic Prioritization", desc: "Prioritizes latency-sensitive VoIP and UCC video streams over backup data." },
+      { num: "Node 03", title: "WireGuard Tunnel Provisioner", desc: "Provisions encrypted site-to-site VPN tunnels between remote branch nodes." },
+      { num: "Node 04", title: "gNMI / YANG Telemetry Collector", desc: "Streams low-level hardware interface telemetry from router switches." },
+      { num: "Node 05", title: "Dynamic Path Selection Engine", desc: "Switches traffic away from degraded ISP circuits instantaneously." },
+      { num: "Node 06", title: "BGP Peer & Community Setter", desc: "Updates BGP AS-Path and local-preference attributes dynamically." },
+      { num: "Node 07", title: "Zero-Touch Provisioning (ZTP)", desc: "Configures new branch router hardware automatically upon boot." },
+      { num: "Node 08", title: "Network Health & SLA Verifier", desc: "Verifies 99.999% uptime SLA compliance across all branch locations." }
     ]
   }
 };
