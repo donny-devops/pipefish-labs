@@ -185,7 +185,7 @@
       <button class="demo-tab" onclick="switchDemo('threathunt', this)">Threat Hunting Agent</button>
       <button class="demo-tab" onclick="switchDemo('forensics', this)">Digital Forensics Agent</button>
       <button class="demo-tab" onclick="switchDemo('malware', this)">Malware Analysis Agent</button>
-      <button class="demo-tab" onclick="switchDemo('datagov', this)">Data Governance / Policy Agent</button>
+      <button class="demo-tab" onclick="switchDemo('revops', this)">Growth Hacking / RevOps Agent</button>
     </div>
 
     <div class="demo-container">
@@ -474,18 +474,18 @@ const scenarios = {
       { num: "Node 08", title: "Automated Malware Dossier", desc: "Publishes threat intelligence dossier for SOC defenses and CERT sharing." }
     ]
   },
-  datagov: {
-    type: "LIVE INBOUND SIGNAL — DATA GOVERNANCE & POLICY ENGINE",
-    payload: 'GDPR & HIPAA AUDIT TRIGGER — "Audit database query logs across 12 SaaS customer tenants. Detect unauthorized PII export and enforce column-level data masking."',
+  revops: {
+    type: "LIVE INBOUND SIGNAL — GROWTH HACKING & REVOPS ENGINE",
+    payload: 'REVOPS GROWTH SIGNAL — "Detecting 3.4x spike in sign-ups from fintech accounts ($50M+ ARR). Trigger automated outbound enrichment, personalized A/B landing page generation, and instant VP sales routing."',
     nodes: [
-      { num: "Node 01", title: "PII & Sensitive Data Discovery", desc: "Scans relational databases and object stores for PII, PHI, and PCI data." },
-      { num: "Node 02", title: "GDPR Erasure Verifier", desc: "Verifies execution of Article 17 Right to Be Forgotten deletion requests." },
-      { num: "Node 03", title: "Dynamic Column Data Masker", desc: "Enforces real-time column-level data masking and pseudonymization." },
-      { num: "Node 04", title: "Attribute-Based Access Control", desc: "Evaluates user role, tenant ID, and geographic location access policies." },
-      { num: "Node 05", title: "Data Loss Prevention (DLP)", desc: "Blocks unauthorized bulk data exports and unencrypted email attachments." },
-      { num: "Node 06", title: "Retention & Lineage Auditor", desc: "Tracks data lineage, transformation history, and compliance retention schedules." },
-      { num: "Node 07", title: "Non-Conformity Alert Engine", desc: "Flags policy violations and dispatches immediate compliance officer alerts." },
-      { num: "Node 08", title: "EU AI Act Article 10 Audit Proof", desc: "Generates cryptographically signed data governance compliance proof for auditors." }
+      { num: "Node 01", title: "Product Analytics & Sign-Up Monitor", desc: "Monitors real-time product sign-up events and user onboarding behavior using PostHog & Segment." },
+      { num: "Node 02", title: "Firmographic & Intent Enrichment", desc: "Enriches domain profile with headcount, funding round, tech stack, and intent signals." },
+      { num: "Node 03", title: "PLG Lead Scoring & ICP Classifier", desc: "Calculates Product-Led Growth fit score and classifies account as High-Value Enterprise." },
+      { num: "Node 04", title: "Dynamic Personalization Engine", desc: "Generates tailored landing page copy, case study callouts, and custom onboarding flows." },
+      { num: "Node 05", title: "Multi-Touch Outbound Cadence", desc: "Enrolls key stakeholders into personalized multi-channel email, LinkedIn, and SMS sequences." },
+      { num: "Node 06", title: "Salesforce / HubSpot Pipeline Sync", desc: "Creates high-priority deal stage in CRM and assigns primary Account Executive." },
+      { num: "Node 07", title: "Stripe LTV & Expansion Predictor", desc: "Projects 12-month Customer Lifetime Value (LTV) and expansion revenue potential." },
+      { num: "Node 08", title: "Growth Telemetry & Attribution", desc: "Attributes conversion source, logs CAC efficiency, and dispatches Slack alert to #growth-wins." }
     ]
   }
 };

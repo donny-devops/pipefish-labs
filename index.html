@@ -1053,7 +1053,7 @@
       <button class="demo-tab" onclick="switchDemo('threathunt', this)">Threat Hunting Agent</button>
       <button class="demo-tab" onclick="switchDemo('forensics', this)">Digital Forensics Agent</button>
       <button class="demo-tab" onclick="switchDemo('malware', this)">Malware Analysis Agent</button>
-      <button class="demo-tab" onclick="switchDemo('datagov', this)">Data Governance / Policy Agent</button>
+      <button class="demo-tab" onclick="switchDemo('revops', this)">Growth Hacking / RevOps Agent</button>
     </div>
 
     <!-- Demo Container -->
@@ -2183,18 +2183,18 @@ const demoScenarios = {
       { n: '08', name: 'Automated Malware Dossier Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   },
-  datagov: {
-    payload: 'GDPR & HIPAA AUDIT TRIGGER — "Audit database query logs across 12 SaaS customer tenants. Detect unauthorized PII export and enforce column-level data masking."',
-    channel: 'Channels Enabled: Immuta · Apache Ranger · Snowflake Data Masking · AWS Macie · DLP Engines',
+  revops: {
+    payload: 'REVOPS GROWTH SIGNAL — "Detecting 3.4x spike in sign-ups from fintech accounts ($50M+ ARR). Trigger automated outbound enrichment, personalized A/B landing page generation, and instant VP sales routing."',
+    channel: 'Channels Enabled: HubSpot · Salesforce · Clearbit · Customer.io · Stripe · Segment · PostHog',
     nodes: [
-      { n: '01', name: 'PII & Sensitive Data Discovery Agent', sub: '(AWS Macie)', status: 'awaiting upstream signal…' },
-      { n: '02', name: 'GDPR Article 17 Erasure Verifier Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '03', name: 'Dynamic Column-Level Data Masker Agent', sub: '(Immuta Integration)', status: 'awaiting upstream signal…' },
-      { n: '04', name: 'Attribute-Based Access Control Agent', sub: '(ABAC Engine)', status: 'awaiting upstream signal…' },
-      { n: '05', name: 'Data Loss Prevention (DLP) Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '06', name: 'Retention & Lineage Audit Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '07', name: 'Compliance Non-Conformity Alert Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '08', name: 'EU AI Act Article 10 Audit Proof Agent', sub: '', status: 'awaiting upstream signal…' }
+      { n: '01', name: 'Product Analytics & Sign-Up Monitor Agent', sub: '(PostHog / Segment)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Firmographic & Intent Enrichment Agent', sub: '(Clearbit / Apollo)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'PLG Lead Scoring & ICP Classifier Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Dynamic Personalization Engine Agent', sub: '(A/B Variant Generator)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Multi-Touch Outbound Cadence Agent', sub: '(Customer.io)', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Salesforce / HubSpot Pipeline Sync Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Stripe LTV & Expansion Predictor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Growth Telemetry & Attribution Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   }
 };
