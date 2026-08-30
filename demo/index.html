@@ -117,7 +117,7 @@
   .demo-tab.active, .demo-tab:hover { background: var(--cyan-dim); border-color: var(--cyan); color: var(--cyan); }
   .demo-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; box-shadow: 0 16px 48px rgba(0,0,0,0.4); margin-bottom: 60px; }
   .demo-payload-box { background: var(--elevated); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px 24px; margin-bottom: 24px; font-family: var(--font-fm); font-size: 12.5px; }
-  .demo-payload-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: var(--text-dim); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .demo-payload-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; color: var(--cyan); font-size: 15px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
   .demo-payload-text { color: var(--text-strong); line-height: 1.5; }
   .demo-controls { display: flex; gap: 12px; margin-bottom: 28px; }
   .demo-rows { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
@@ -191,8 +191,8 @@
     <div class="demo-container">
       <div class="demo-payload-box">
         <div class="demo-payload-header">
-          <span>Inbound Telemetry Payload</span>
-          <span id="demo-payload-type" style="color:var(--magenta)">LIVE INBOUND SIGNAL</span>
+          <span style="font-size:15px;font-weight:800;letter-spacing:0.14em;color:var(--cyan);text-shadow:0 0 12px rgba(0,212,255,0.25)">Inbound Telemetry Payload</span>
+          <span id="demo-payload-type" style="font-size:15px;font-weight:800;letter-spacing:0.14em;color:var(--magenta);text-shadow:0 0 12px rgba(224,64,255,0.3)">LIVE INBOUND SIGNAL</span>
         </div>
         <div class="demo-payload-text" id="demo-payload-text">
           INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."
