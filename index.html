@@ -1044,7 +1044,16 @@
       <button class="demo-tab" onclick="switchDemo('reverse', this)">Reverse Engineering Agent</button>
       <button class="demo-tab" onclick="switchDemo('crypto', this)">Encryption / Cryptography Agent</button>
       <button class="demo-tab" onclick="switchDemo('errorcorr', this)">Error-Correcting Agent</button>
-      <button class="demo-tab" onclick="switchDemo('bi', this)">Business Intelligence Agent</button>
+      <button class="demo-tab" onclick="switchDemo('trend', this)">Trend Spotting Agent</button>
+      <button class="demo-tab" onclick="switchDemo('market', this)">Market Research Agent</button>
+      <button class="demo-tab" onclick="switchDemo('codescan', this)">Code-Scanning Agent</button>
+      <button class="demo-tab" onclick="switchDemo('docs', this)">Documentation Agent</button>
+      <button class="demo-tab" onclick="switchDemo('observability', this)">Monitoring / Observability Agent</button>
+      <button class="demo-tab" onclick="switchDemo('ids', this)">Intrusion Detection Agent</button>
+      <button class="demo-tab" onclick="switchDemo('threathunt', this)">Threat Hunting Agent</button>
+      <button class="demo-tab" onclick="switchDemo('forensics', this)">Digital Forensics Agent</button>
+      <button class="demo-tab" onclick="switchDemo('malware', this)">Malware Analysis Agent</button>
+      <button class="demo-tab" onclick="switchDemo('datagov', this)">Data Governance / Policy Agent</button>
     </div>
 
     <!-- Demo Container -->
@@ -2048,18 +2057,144 @@ const demoScenarios = {
       { n: '08', name: 'Data Integrity Verification Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   },
-  bi: {
-    payload: 'ENTERPRISE DATA PIPELINE — "Aggregate Q3 cross-platform revenue metrics from Snowflake, Stripe, and Salesforce. Detect churn anomaly signals and forecast Q4 ARR targets."',
-    channel: 'Channels Enabled: Snowflake · BigQuery · Salesforce · Stripe · Looker APIs · Vector Embeddings',
+  trend: {
+    payload: 'MARKET SIGNAL — CONSUMER INTENT & MACRO TREND ENGINES: "Detecting +410% velocity surge in post-quantum cryptography procurement discussions across Fortune 500 CISO forums."',
+    channel: 'Channels Enabled: Social Telemetry · Patent Registry · RSS Feeds · LLM Classifiers · Vector Indices',
     nodes: [
-      { n: '01', name: 'Multi-Source Ingestion Agent', sub: '(Snowflake & Stripe)', status: 'awaiting upstream signal…' },
-      { n: '02', name: 'Schema Normalization & ETL Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '03', name: 'ARR & Revenue Metric Engine Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '04', name: 'Predictive Churn Anomaly Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '05', name: 'Cohort Segmentation Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '06', name: 'Statistical Forecasting Model Agent', sub: '(Monte Carlo)', status: 'awaiting upstream signal…' },
-      { n: '07', name: 'Dashboard Synthesizer Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '08', name: 'Automated Insight Alert Agent', sub: '', status: 'awaiting upstream signal…' }
+      { n: '01', name: 'Multi-Source Signal Scraper Agent', sub: '(Social & Forum APIs)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Semantic Embedding & Clustering Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Velocity & Sentiment Anomaly Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Patent & Academic Paper Correlator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Commercial Opportunity Scoring Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Competitor Horizon Mapping Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Executive Trend Dossier Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Strategy Signal Alert Dispatcher Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  market: {
+    payload: 'ENTERPRISE RESEARCH REQUEST — "Synthesize TAM/SAM metrics, competitive moat analysis, pricing strategies, and buyer personas for European AI Act compliance software."',
+    channel: 'Channels Enabled: SEC Filings (EDGAR) · Gartner APIs · Web Crawlers · Financial Datasets · RAG Vector DB',
+    nodes: [
+      { n: '01', name: 'SEC 10-K & Financial Data Extractor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Competitive & Feature Matrix Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Customer Pain & Review Synthesizer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'TAM / SAM Calculation Engine Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Pricing Architecture Benchmark Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Regulatory Headwind / Tailwind Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'SWOT Analysis Synthesizer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Interactive Research Briefing Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  codescan: {
+    payload: 'SAST / DAST AUDIT PIPELINE — "Scanning commit #f98a21 across 1.4M LOC repository. Detecting SQL injection vulnerability in OAuth callback handler and hardcoded AWS secret keys."',
+    channel: 'Channels Enabled: Semgrep AST · SonarQube · Git Hooks · AST Parsers · Secret Scanners · CI/CD',
+    nodes: [
+      { n: '01', name: 'AST Syntax Tree Parser Agent', sub: '(Semgrep Engine)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Secret & API Key Scanner Agent', sub: '(Entropy Checks)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'OWASP Top 10 Vulnerability Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Somatic Dependency CVE Matcher Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Automated Refactor & Patch Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'PR Inline Comment & Blocking Agent', sub: '(GitHub / GitLab)', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Compliance Evidence Collector Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'CISO Risk Metric Synthesizer Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  docs: {
+    payload: 'AUTODOC GENERATION TRIGGER — "Parse TypeScript / Python codebase commit #0481. Generate OpenAPI 3.1 specifications, inline JSDoc comments, and interactive developer portal docs."',
+    channel: 'Channels Enabled: TypeDoc · Sphinx · OpenAPI Generators · Markdown Parsers · Git Pipelines',
+    nodes: [
+      { n: '01', name: 'Code AST & Signature Extractor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'OpenAPI 3.1 Spec Generator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Code Example Synthesizer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Architecture Diagram Generator Agent', sub: '(Mermaid.js Engine)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'SDK Usage & Getting Started Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Broken Link & Term Verifier Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Developer Portal Publisher Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Changelog & Release Notes Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  observability: {
+    payload: 'TELEMETRY AGGREGATION SIGNAL — "Ingesting 140,000 logs/sec across Kubernetes worker clusters. Detecting HTTP 504 gateway timeout spike on /api/v2/checkout."',
+    channel: 'Channels Enabled: OpenTelemetry · Prometheus · Grafana · Datadog · Jaeger Tracing · Logstash',
+    nodes: [
+      { n: '01', name: 'OpenTelemetry Log & Metric Collector Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Distributed Trace Correlator Agent', sub: '(Jaeger / Zipkin)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Metric Anomaly Detector Agent', sub: '(Prometheus Rules)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Bottleneck Root Cause Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Dynamic Grafana Dashboard Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Threshold Alerting & Suppression Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Self-Healing Remediation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'SLO / SLA Compliance Logger Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  ids: {
+    payload: 'SIEM SECURITY TELEMETRY — "Correlating Snort/Suricata IDS network alerts: IP 192.168.1.104 performing lateral SMB relay scan and pass-the-hash authentication attempt."',
+    channel: 'Channels Enabled: Suricata · Snort IDS · Zeek Network Security · Splunk SIEM · Firewall APIs',
+    nodes: [
+      { n: '01', name: 'Packet Inspection & PCAP Agent', sub: '(Suricata / Zeek)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Pass-the-Hash Pattern Recognizer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Lateral Movement Mapping Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Zero-Trust Firewall Blocker Agent', sub: '(Automated ACL)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Session Token Revocation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Active Directory Isolation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'SIEM Log Correlation Agent', sub: '(Splunk / Sentinel)', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'SOC Incident Escalator Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  threathunt: {
+    payload: 'PROACTIVE SECURITY AUDIT — "Execute proactive threat hunt across 4,500 enterprise endpoints for dormant Cobalt Strike beacons and suspicious Kerberoasting activity."',
+    channel: 'Channels Enabled: CrowdStrike Falcon · SentinelOne · Microsoft Defender EDR · YARA · Osquery',
+    nodes: [
+      { n: '01', name: 'EDR Telemetry & Process Graph Agent', sub: '(CrowdStrike API)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Memory Injection & Beacon Hunter Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Kerberos Ticket Anomaly Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Persistence Registry Scanner Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Fileless Malware Detector Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'MITRE ATT&CK Matrix Mapping Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Automated Containment Playbook Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Threat Intelligence Report Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  forensics: {
+    payload: 'INCIDENT RESPONSE FORENSICS — "Extract volatility memory dump, NTFS Master File Table ($MFT), and event logs from compromised domain controller DC-PROD-01."',
+    channel: 'Channels Enabled: Volatility 3 · FTK Imager · Autopsy · Plaso Timeline · Cryptographic Hashes',
+    nodes: [
+      { n: '01', name: 'Memory & Disk Image Capture Agent', sub: '(Volatility Engine)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Chain of Custody Hash Verifier Agent', sub: '(SHA-256 Verified)', status: 'awaiting upstream signal…' },
+      { n: '03', name: '$MFT & File Artifact Parser Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Super-Timeline Reconstruction Agent', sub: '(Plaso Log2timeline)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Deleted File & Fragment Recovery Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Command History & Registry Analyzer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Attacker Footprint Reconstructor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Court-Ready Forensic Report Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  malware: {
+    payload: 'SANDBOX EXECUTION SIGNAL — "Execute dynamic sandbox behavioral analysis of ransomware sample payload #7721 (LockBit 3.0 variant). Document C2 traffic and file encryption keys."',
+    channel: 'Channels Enabled: Cuckoo Sandbox · CAPEv2 · Hybrid Analysis · x64dbg · Unpacker Engines',
+    nodes: [
+      { n: '01', name: 'Isolated Dynamic Sandbox Agent', sub: '(CAPEv2 Engine)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Behavioral Process Tree Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'File System Mutation & Encryption Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'PCAP Network Traffic Extractor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Dynamic API Call Tracing Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Ransomware Master Key Recoverer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'IOC & YARA Signature Extractor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Automated Malware Dossier Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  datagov: {
+    payload: 'GDPR & HIPAA AUDIT TRIGGER — "Audit database query logs across 12 SaaS customer tenants. Detect unauthorized PII export and enforce column-level data masking."',
+    channel: 'Channels Enabled: Immuta · Apache Ranger · Snowflake Data Masking · AWS Macie · DLP Engines',
+    nodes: [
+      { n: '01', name: 'PII & Sensitive Data Discovery Agent', sub: '(AWS Macie)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'GDPR Article 17 Erasure Verifier Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Dynamic Column-Level Data Masker Agent', sub: '(Immuta Integration)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Attribute-Based Access Control Agent', sub: '(ABAC Engine)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Data Loss Prevention (DLP) Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Retention & Lineage Audit Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Compliance Non-Conformity Alert Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'EU AI Act Article 10 Audit Proof Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   }
 };

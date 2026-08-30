@@ -176,7 +176,16 @@
       <button class="demo-tab" onclick="switchDemo('reverse', this)">Reverse Engineering Agent</button>
       <button class="demo-tab" onclick="switchDemo('crypto', this)">Encryption / Cryptography Agent</button>
       <button class="demo-tab" onclick="switchDemo('errorcorr', this)">Error-Correcting Agent</button>
-      <button class="demo-tab" onclick="switchDemo('bi', this)">Business Intelligence Agent</button>
+      <button class="demo-tab" onclick="switchDemo('trend', this)">Trend Spotting Agent</button>
+      <button class="demo-tab" onclick="switchDemo('market', this)">Market Research Agent</button>
+      <button class="demo-tab" onclick="switchDemo('codescan', this)">Code-Scanning Agent</button>
+      <button class="demo-tab" onclick="switchDemo('docs', this)">Documentation Agent</button>
+      <button class="demo-tab" onclick="switchDemo('observability', this)">Monitoring / Observability Agent</button>
+      <button class="demo-tab" onclick="switchDemo('ids', this)">Intrusion Detection Agent</button>
+      <button class="demo-tab" onclick="switchDemo('threathunt', this)">Threat Hunting Agent</button>
+      <button class="demo-tab" onclick="switchDemo('forensics', this)">Digital Forensics Agent</button>
+      <button class="demo-tab" onclick="switchDemo('malware', this)">Malware Analysis Agent</button>
+      <button class="demo-tab" onclick="switchDemo('datagov', this)">Data Governance / Policy Agent</button>
     </div>
 
     <div class="demo-container">
@@ -339,18 +348,144 @@ const scenarios = {
       { num: "Node 08", title: "Data Integrity Verification", desc: "Verifies repaired payload checksums and logs error correction efficiency metrics." }
     ]
   },
-  bi: {
-    type: "LIVE INBOUND SIGNAL — BUSINESS INTELLIGENCE ENGINE",
-    payload: 'ENTERPRISE DATA PIPELINE — "Aggregate Q3 cross-platform revenue metrics from Snowflake, Stripe, and Salesforce. Detect churn anomaly signals and forecast Q4 ARR targets."',
+  trend: {
+    type: "LIVE INBOUND SIGNAL — TREND SPOTTING ENGINE",
+    payload: 'MARKET SIGNAL — CONSUMER INTENT & MACRO TREND ENGINES: "Detecting +410% velocity surge in post-quantum cryptography procurement discussions across Fortune 500 CISO forums."',
     nodes: [
-      { num: "Node 01", title: "Multi-Source Data Ingestion", desc: "Pulls real-time revenue streams from Snowflake, Stripe Billing, and Salesforce CRM." },
-      { num: "Node 02", title: "Schema Normalization & ETL", desc: "Normalizes currency exchange rates, timestamps, and customer ID mappings." },
-      { num: "Node 03", title: "ARR & Revenue Metric Engine", desc: "Calculates Net Revenue Retention (NRR), Gross Margin, and Expansion MRR." },
-      { num: "Node 04", title: "Predictive Churn Anomaly", desc: "Identifies account health degradation patterns using vector embedding classifiers." },
-      { num: "Node 05", title: "Cohort Segmentation", desc: "Segments customers by industry vertical, acquisition channel, and usage volume." },
-      { num: "Node 06", title: "Statistical Forecasting Model", desc: "Runs 10,000-iteration Monte Carlo simulation to project Q4 ARR confidence intervals." },
-      { num: "Node 07", title: "Dashboard Synthesizer", desc: "Generates interactive executive charts and automated Looker / PowerBI updates." },
-      { num: "Node 08", title: "Automated Insight Alert", desc: "Dispatches executive digest summarizing key revenue drivers and action items." }
+      { num: "Node 01", title: "Multi-Source Signal Scraper", desc: "Scrapes global discussion forums, RSS feeds, social telemetry, and arXiv preprints." },
+      { num: "Node 02", title: "Semantic Embedding & Clustering", desc: "Embeds unstructured text into vector space to group emerging technical topics." },
+      { num: "Node 03", title: "Velocity & Sentiment Anomaly", desc: "Calculates metric acceleration rates and sentiment momentum shifts." },
+      { num: "Node 04", title: "Patent & Academic Correlator", desc: "Cross-references trends against USPTO patent filings and academic citations." },
+      { num: "Node 05", title: "Commercial Opportunity Scoring", desc: "Ranks total addressable market potential and commercial readiness." },
+      { num: "Node 06", title: "Competitor Horizon Mapping", desc: "Tracks competitor positioning and product announcement signals." },
+      { num: "Node 07", title: "Executive Trend Dossier", desc: "Assembles executive summary report with strategic timing recommendations." },
+      { num: "Node 08", title: "Strategy Alert Dispatcher", desc: "Pushes high-priority trend signals to product and strategy team channels." }
+    ]
+  },
+  market: {
+    type: "LIVE INBOUND SIGNAL — MARKET RESEARCH ENGINE",
+    payload: 'ENTERPRISE RESEARCH REQUEST — "Synthesize TAM/SAM metrics, competitive moat analysis, pricing strategies, and buyer personas for European AI Act compliance software."',
+    nodes: [
+      { num: "Node 01", title: "SEC 10-K & Financial Extractor", desc: "Extracts revenue, R&D spend, and risk factors from SEC EDGAR 10-K/10-Q filings." },
+      { num: "Node 02", title: "Competitive & Feature Matrix", desc: "Maps feature parity and pricing models across 25 direct market competitors." },
+      { num: "Node 03", title: "Customer Pain & Review Synthesizer", desc: "Analyzes user reviews and buyer feedback to extract key unmet product needs." },
+      { num: "Node 04", title: "TAM / SAM Calculation Engine", desc: "Computes Total Addressable Market and Serviceable Addressable Market metrics." },
+      { num: "Node 05", title: "Pricing Architecture Benchmark", desc: "Benchmarks tier structures, usage-based metering, and enterprise contract terms." },
+      { num: "Node 06", title: "Regulatory Headwind / Tailwind", desc: "Evaluates legislative timelines and compliance enforcement impact." },
+      { num: "Node 07", title: "SWOT Analysis Synthesizer", desc: "Generates dynamic Strengths, Weaknesses, Opportunities, and Threats matrix." },
+      { num: "Node 08", title: "Interactive Research Briefing", desc: "Publishes interactive research dossier for product leads and investors." }
+    ]
+  },
+  codescan: {
+    type: "LIVE INBOUND SIGNAL — CODE-SCANNING & SAST ENGINE",
+    payload: 'SAST / DAST AUDIT PIPELINE — "Scanning commit #f98a21 across 1.4M LOC repository. Detecting SQL injection vulnerability in OAuth callback handler and hardcoded AWS secret keys."',
+    nodes: [
+      { num: "Node 01", title: "AST Syntax Tree Parser", desc: "Parses Abstract Syntax Trees across multi-language repositories using Semgrep." },
+      { num: "Node 02", title: "Secret & API Key Scanner", desc: "Scans code for entropy anomalies, hardcoded RSA private keys, and API tokens." },
+      { num: "Node 03", title: "OWASP Top 10 Auditor", desc: "Detects SQL injection, XSS, SSRF, and broken access control patterns." },
+      { num: "Node 04", title: "Dependency CVE Matcher", desc: "Matches open-source third-party dependencies against National Vulnerability Database." },
+      { num: "Node 05", title: "Automated Refactor & Patch", desc: "Generates verified code fix Pull Requests to remediate detected vulnerabilities." },
+      { num: "Node 06", title: "PR Inline Comment & Blocker", desc: "Posts inline security feedback on GitHub/GitLab and blocks unsafe deployment merges." },
+      { num: "Node 07", title: "Compliance Evidence Collector", desc: "Stores signed vulnerability audit logs in SOC 2 compliance vault." },
+      { num: "Node 08", title: "CISO Risk Metric Synthesizer", desc: "Calculates repository security posture score and updates security dashboard." }
+    ]
+  },
+  docs: {
+    type: "LIVE INBOUND SIGNAL — AUTOMATED DOCUMENTATION ENGINE",
+    payload: 'AUTODOC GENERATION TRIGGER — "Parse TypeScript / Python codebase commit #0481. Generate OpenAPI 3.1 specifications, inline JSDoc comments, and interactive developer portal docs."',
+    nodes: [
+      { num: "Node 01", title: "Code AST & Signature Extractor", desc: "Extracts function signatures, TypeScript interfaces, and Python docstrings." },
+      { num: "Node 02", title: "OpenAPI 3.1 Spec Generator", desc: "Generates compliant OpenAPI 3.1 JSON/YAML REST API specifications." },
+      { num: "Node 03", title: "Code Example Synthesizer", desc: "Synthesizes executable cURL, Python, TypeScript, and Go code snippets." },
+      { num: "Node 04", title: "Architecture Diagram Generator", desc: "Renders dynamic Mermaid.js sequence and system architecture diagrams." },
+      { num: "Node 05", title: "SDK Usage & Getting Started", desc: "Writes comprehensive getting started guides and authentication tutorials." },
+      { num: "Node 06", title: "Broken Link & Term Verifier", desc: "Validates technical accuracy, link integrity, and glossary references." },
+      { num: "Node 07", title: "Developer Portal Publisher", desc: "Deploys updated developer portal documentation site via CI/CD pipeline." },
+      { num: "Node 08", title: "Changelog & Release Notes", desc: "Generates semantic versioning changelog entries from git commit logs." }
+    ]
+  },
+  observability: {
+    type: "LIVE INBOUND SIGNAL — MONITORING & OBSERVABILITY ENGINE",
+    payload: 'TELEMETRY AGGREGATION SIGNAL — "Ingesting 140,000 logs/sec across Kubernetes worker clusters. Detecting HTTP 504 gateway timeout spike on /api/v2/checkout."',
+    nodes: [
+      { num: "Node 01", title: "OpenTelemetry Collector", desc: "Ingests real-time logs, metrics, and traces from distributed microservices." },
+      { num: "Node 02", title: "Distributed Trace Correlator", desc: "Traces end-to-end HTTP request propagation using Jaeger trace IDs." },
+      { num: "Node 03", title: "Metric Anomaly Detector", desc: "Evaluates error rate spikes and latency percentile degradation." },
+      { num: "Node 04", title: "Bottleneck Root Cause Analyzer", desc: "Isolates failing microservice dependencies and database locks." },
+      { num: "Node 05", title: "Dynamic Grafana Dashboard", desc: "Renders real-time telemetry dashboards highlighting active incident state." },
+      { num: "Node 06", title: "Threshold Alert & Suppression", desc: "Suppresses alert storms and routes high-priority incident notifications." },
+      { num: "Node 07", title: "Self-Healing Remediation", desc: "Triggers automated container restarts and traffic throttling policies." },
+      { num: "Node 08", title: "SLO / SLA Compliance Logger", desc: "Records downtime impact against monthly 99.99% SLO availability targets." }
+    ]
+  },
+  ids: {
+    type: "LIVE INBOUND SIGNAL — INTRUSION DETECTION ENGINE",
+    payload: 'SIEM SECURITY TELEMETRY — "Correlating Snort/Suricata IDS network alerts: IP 192.168.1.104 performing lateral SMB relay scan and pass-the-hash authentication attempt."',
+    nodes: [
+      { num: "Node 01", title: "Packet Inspection & PCAP", desc: "Inspects raw network packets using Suricata and Zeek sensor nodes." },
+      { num: "Node 02", title: "Pass-the-Hash Recognizer", desc: "Detects unauthorized NTLM hash reuse and privilege escalation attempts." },
+      { num: "Node 03", title: "Lateral Movement Mapper", desc: "Maps compromised internal network paths and targeted server assets." },
+      { num: "Node 04", title: "Zero-Trust Firewall Blocker", desc: "Pushes instant IP drop rules to perimeter and internal firewalls." },
+      { num: "Node 05", title: "Session Token Revocation", desc: "Revokes compromised Active Directory user tokens and OAuth sessions." },
+      { num: "Node 06", title: "Active Directory Isolation", desc: "Isolates compromised host computer account from domain trust." },
+      { num: "Node 07", title: "SIEM Log Correlation", desc: "Aggregates incident logs into Splunk / Microsoft Sentinel SIEM." },
+      { num: "Node 08", title: "SOC Incident Escalator", desc: "Dispatches P1 incident payload to Security Operations Center team." }
+    ]
+  },
+  threathunt: {
+    type: "LIVE INBOUND SIGNAL — THREAT HUNTING ENGINE",
+    payload: 'PROACTIVE SECURITY AUDIT — "Execute proactive threat hunt across 4,500 enterprise endpoints for dormant Cobalt Strike beacons and suspicious Kerberoasting activity."',
+    nodes: [
+      { num: "Node 01", title: "EDR Telemetry & Process Graph", desc: "Queries CrowdStrike / Defender EDR agent telemetry across 4,500 hosts." },
+      { num: "Node 02", title: "Memory Injection & Beacon Hunter", desc: "Scans process memory space for unbacked executable code and C2 beacons." },
+      { num: "Node 03", title: "Kerberos Ticket Anomaly Scanner", desc: "Detects anomalous TGS ticket requests indicating Kerberoasting attacks." },
+      { num: "Node 04", title: "Persistence Registry Scanner", desc: "Inspects Windows registry Run keys, scheduled tasks, and WMI event consumers." },
+      { num: "Node 05", title: "Fileless Malware Detector", desc: "Analyzes PowerShell and CScript execution arguments for obfuscation." },
+      { num: "Node 06", title: "MITRE ATT&CK Matrix Mapper", desc: "Maps adversary TTPs to MITRE ATT&CK tactics T1003, T1059, T1055." },
+      { num: "Node 07", title: "Automated Containment Playbook", desc: "Executes host isolation playbooks on validated compromised endpoints." },
+      { num: "Node 08", title: "Threat Intelligence Report", desc: "Compiles comprehensive threat hunt report with IOC hashes and YARA rules." }
+    ]
+  },
+  forensics: {
+    type: "LIVE INBOUND SIGNAL — DIGITAL FORENSICS ENGINE",
+    payload: 'INCIDENT RESPONSE FORENSICS — "Extract volatility memory dump, NTFS Master File Table ($MFT), and event logs from compromised domain controller DC-PROD-01."',
+    nodes: [
+      { num: "Node 01", title: "Memory & Disk Image Capture", desc: "Captures volatile RAM dumps and forensic raw disk images using FTK Imager." },
+      { num: "Node 02", title: "Chain of Custody Hash Verifier", desc: "Generates SHA-256 cryptographic verification hashes to preserve evidence." },
+      { num: "Node 03", title: "$MFT & File Artifact Parser", desc: "Parses NTFS Master File Table ($MFT) and USN Journal file creation timestamps." },
+      { num: "Node 04", title: "Super-Timeline Reconstruction", desc: "Reconstructs unified incident timeline using Plaso log2timeline engine." },
+      { num: "Node 05", title: "Deleted File & Fragment Recovery", desc: "Carves unallocated disk clusters to recover deleted attacker tools and scripts." },
+      { num: "Node 06", title: "Command History & Registry Analyzer", desc: "Analyzes PowerShell history, shimcache, amcache, and registry hives." },
+      { num: "Node 07", title: "Attacker Footprint Reconstructor", desc: "Recreates exact step-by-step attacker entry, lateral movement, and exfiltration." },
+      { num: "Node 08", title: "Court-Ready Forensic Report", desc: "Generates legally defensible, court-ready digital forensics audit report." }
+    ]
+  },
+  malware: {
+    type: "LIVE INBOUND SIGNAL — MALWARE ANALYSIS ENGINE",
+    payload: 'SANDBOX EXECUTION SIGNAL — "Execute dynamic sandbox behavioral analysis of ransomware sample payload #7721 (LockBit 3.0 variant). Document C2 traffic and file encryption keys."',
+    nodes: [
+      { num: "Node 01", title: "Isolated Dynamic Sandbox", desc: "Executes malware binary inside air-gapped CAPEv2 virtual machine sandbox." },
+      { num: "Node 02", title: "Behavioral Process Tree", desc: "Monitors process spawning, DLL injection, and thread hijacking patterns." },
+      { num: "Node 03", title: "File System & Encryption Monitor", desc: "Tracks rapid file renaming, shadow copy deletion, and MBR modification." },
+      { num: "Node 04", title: "PCAP Traffic Extractor", desc: "Captures encrypted C2 beacon traffic, DNS queries, and TOR IP connections." },
+      { num: "Node 05", title: "Dynamic API Call Tracer", desc: "Traces low-level NTDLL system calls and cryptographic key generation." },
+      { num: "Node 06", title: "Ransomware Key Recoverer", desc: "Attempts memory scraping to extract ephemeral AES/RSA encryption keys." },
+      { num: "Node 07", title: "IOC & YARA Signature Generator", desc: "Generates automated YARA detection rules and Snort network signatures." },
+      { num: "Node 08", title: "Automated Malware Dossier", desc: "Publishes threat intelligence dossier for SOC defenses and CERT sharing." }
+    ]
+  },
+  datagov: {
+    type: "LIVE INBOUND SIGNAL — DATA GOVERNANCE & POLICY ENGINE",
+    payload: 'GDPR & HIPAA AUDIT TRIGGER — "Audit database query logs across 12 SaaS customer tenants. Detect unauthorized PII export and enforce column-level data masking."',
+    nodes: [
+      { num: "Node 01", title: "PII & Sensitive Data Discovery", desc: "Scans relational databases and object stores for PII, PHI, and PCI data." },
+      { num: "Node 02", title: "GDPR Erasure Verifier", desc: "Verifies execution of Article 17 Right to Be Forgotten deletion requests." },
+      { num: "Node 03", title: "Dynamic Column Data Masker", desc: "Enforces real-time column-level data masking and pseudonymization." },
+      { num: "Node 04", title: "Attribute-Based Access Control", desc: "Evaluates user role, tenant ID, and geographic location access policies." },
+      { num: "Node 05", title: "Data Loss Prevention (DLP)", desc: "Blocks unauthorized bulk data exports and unencrypted email attachments." },
+      { num: "Node 06", title: "Retention & Lineage Auditor", desc: "Tracks data lineage, transformation history, and compliance retention schedules." },
+      { num: "Node 07", title: "Non-Conformity Alert Engine", desc: "Flags policy violations and dispatches immediate compliance officer alerts." },
+      { num: "Node 08", title: "EU AI Act Article 10 Audit Proof", desc: "Generates cryptographically signed data governance compliance proof for auditors." }
     ]
   }
 };
