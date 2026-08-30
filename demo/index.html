@@ -169,8 +169,16 @@
   <div class="container">
     <div class="demo-tabs">
       <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
-      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations AI Agent</button>
-      <button class="demo-tab" onclick="switchDemo('logistics', this)">Enterprise Logistics AI Agent</button>
+      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations Agent</button>
+      <button class="demo-tab" onclick="switchDemo('admin', this)">Administrative / Back-Office Agent</button>
+      <button class="demo-tab" onclick="switchDemo('support', this)">Customer Support Agent</button>
+      <button class="demo-tab" onclick="switchDemo('logistics', this)">Logistics / Supply Chain Agent</button>
+      <button class="demo-tab" onclick="switchDemo('infra', this)">Infrastructure / Ops Agent</button>
+      <button class="demo-tab" onclick="switchDemo('quantum', this)">Quantum Computing Agent</button>
+      <button class="demo-tab" onclick="switchDemo('reverse', this)">Reverse Engineering Agent</button>
+      <button class="demo-tab" onclick="switchDemo('crypto', this)">Encryption / Cryptography Agent</button>
+      <button class="demo-tab" onclick="switchDemo('errorcorr', this)">Error-Correcting Agent</button>
+      <button class="demo-tab" onclick="switchDemo('bi', this)">Business Intelligence Agent</button>
     </div>
 
     <div class="demo-container">
@@ -251,16 +259,128 @@ const scenarios = {
   },
   logistics: {
     type: "LIVE INBOUND SIGNAL — ENTERPRISE LOGISTICS ENGINE",
-    payload: 'INBOUND EDI / TELEMETRY — Warehouse Cross-Dock 14: "Shipment #8849 delayed by 45 mins due to severe weather. Need automated re-routing for 120 downstream orders."',
+    payload: 'TELEMETRY SIGNAL — GLOBAL CONTAINER MANIFEST: "Port congestion delay detected at Rotterdam Terminal Node 4. 1,400 TEU freight shipment route optimization required for cold-chain cargo."',
     nodes: [
-      { num: "Node 01", title: "EDI Telemetry Ingestion", desc: "Captures real-time warehouse event stream via Kafka / NATS JetStream event mesh." },
-      { num: "Node 02", title: "Exception Classifier", desc: "Evaluates SLA breach risk, calculates delay cascade across 120 affected downstream orders." },
+      { num: "Node 01", title: "EDI Telemetry Ingestion", desc: "Captures real-time warehouse event stream via EDI 214 / Kafka event mesh." },
+      { num: "Node 02", title: "Exception Classifier", desc: "Evaluates SLA breach risk, calculates delay cascade across 1,400 affected TEU shipments." },
       { num: "Node 03", title: "Inventory & Carrier Query", desc: "Queries regional cross-dock inventory and available freight carriers via custom MCP server." },
-      { num: "Node 04", title: "Dynamic Re-Routing Engine", desc: "Computes optimal alternate shipping paths to prevent SLA penalties." },
+      { num: "Node 04", title: "Dynamic Re-Routing Engine", desc: "Computes optimal alternate rail and feeder shipping paths to prevent temperature degradation." },
       { num: "Node 05", title: "Dispatch & Order Update", desc: "Dispatches updated manifest to secondary carriers via automated API payloads." },
       { num: "Node 06", title: "ERP & Billing Sync", desc: "Updates SAP/Oracle ERP system records and adjusts delivery ETA timestamps." },
       { num: "Node 07", title: "Customer Notification", desc: "Sends automated proactive status alerts to affected customer tracking portals." },
       { num: "Node 08", title: "Closed-Loop Telemetry", desc: "Logs execution metrics, updates predictive carrier reliability scores in database." }
+    ]
+  },
+  admin: {
+    type: "LIVE INBOUND SIGNAL — ADMINISTRATIVE & BACK-OFFICE ENGINE",
+    payload: 'INBOUND DISPATCH & DOCUMENT INTAKE — "Reconcile vendor invoices, extract line-item SAP POs, verify TAX IDs, execute ledger matching, and route approvals for Q3 operational expenditures ($420k aggregate)."',
+    nodes: [
+      { num: "Node 01", title: "Document Extraction & OCR", desc: "Extracts invoice line items using Vision AI and structured document parsers." },
+      { num: "Node 02", title: "TAX ID & Merchant Verification", desc: "Validates TIN/EIN numbers against government databases to prevent vendor spoofing." },
+      { num: "Node 03", title: "PO Match & ERP Ledger", desc: "Performs 3-way matching across purchase orders, receiving slips, and invoices in SAP." },
+      { num: "Node 04", title: "Anomaly & Fraud Scoring", desc: "Calculates duplicate payment and fraud risk scores before committing remittance." },
+      { num: "Node 05", title: "Approval Routing Engine", desc: "Routes high-value invoices to department VPs based on spending authority matrix." },
+      { num: "Node 06", title: "Automated Remittance", desc: "Executes batch ACH/wire payments via secure banking API integration." },
+      { num: "Node 07", title: "Audit Logging & Archival", desc: "Archives cryptographically signed transaction proofs in SOC 2 compliance vault." },
+      { num: "Node 08", title: "Executive Summary Digest", desc: "Compiles weekly spend variance analysis for the Chief Financial Officer." }
+    ]
+  },
+  support: {
+    type: "LIVE INBOUND SIGNAL — CUSTOMER SUPPORT TELEMETRY ENGINE",
+    payload: 'INBOUND TICKET & CHAT TELEMETRY — "Tenant #8892 reporting latency spikes during peak checkout. Database connection pool exhausted and session tokens failing renewal."',
+    nodes: [
+      { num: "Node 01", title: "Ticket Parsing & Sentiment", desc: "Parses ticket sentiment, categorizes issue urgency as P1 Outage, and checks SLA tier." },
+      { num: "Node 02", title: "Telemetry & Log Analyzer", desc: "Queries Datadog / APM metrics to diagnose database connection pool exhaustion." },
+      { num: "Node 03", title: "Knowledge Base & RAG", desc: "Retrieves runbooks for database connection pool recycling from internal vector store." },
+      { num: "Node 04", title: "Session & DB Pool Reset", desc: "Executes automated pool flush script via secure infrastructure tool server." },
+      { num: "Node 05", title: "Customer Auto-Response", desc: "Sends instant status update to tenant administrator with investigation timeline." },
+      { num: "Node 06", title: "Tier 3 Escalation Engine", desc: "Triggers PagerDuty alert to primary infrastructure on-call engineer." },
+      { num: "Node 07", title: "SLA Tracking & Resolution", desc: "Tracks resolution metrics to ensure adherence to 99.99% uptime SLA commitments." },
+      { num: "Node 08", title: "CSAT & Feedback Capture", desc: "Dispatches automated follow-up survey upon ticket closure to measure customer satisfaction." }
+    ]
+  },
+  infra: {
+    type: "LIVE INBOUND SIGNAL — INFRASTRUCTURE & OPS ENGINE",
+    payload: 'KUBERNETES & EBPF FALCO ALERT — "High memory pressure and unauthorized sys_execve process spawn detected on node worker-prod-04. Initiating zero-trust pod quarantine and node failover."',
+    nodes: [
+      { num: "Node 01", title: "eBPF Kernel Event Detector", desc: "Intercepts low-level sys_execve system calls directly inside Linux kernel using Falco." },
+      { num: "Node 02", title: "Zero-Trust Pod Isolation", desc: "Quarantines suspicious Kubernetes pod from production network via CNI network policy." },
+      { num: "Node 03", title: "Memory Pressure & Scale", desc: "Triggers Cluster Autoscaler to provision backup worker node in secondary availability zone." },
+      { num: "Node 04", title: "HashiCorp Vault Token Revocation", desc: "Revokes compromised microservice tokens and rotates secrets automatically." },
+      { num: "Node 05", title: "Infra Failover Orchestrator", desc: "Reroutes live HTTP/gRPC ingress traffic away from quarantined node without dropping requests." },
+      { num: "Node 06", title: "Root Cause & Heap Dump", desc: "Captures container memory heap dump and syscall trace for post-mortem analysis." },
+      { num: "Node 07", title: "Patch & Terraform Deploy", desc: "Applies security patch and deploys updated container image via Terraform pipeline." },
+      { num: "Node 08", title: "SOC Incident Report", desc: "Generates formatted Incident Report and files ticket with security operations team." }
+    ]
+  },
+  quantum: {
+    type: "LIVE INBOUND SIGNAL — HYBRID QUANTUM COMPUTING ENGINE",
+    payload: 'HYBRID QUANTUM-CLASSICAL JOB — "Execute Variational Quantum Eigensolver (VQE) calculation for molecular lattice simulation (56 qubits) via Qiskit/Cirq API bridge with error mitigation."',
+    nodes: [
+      { num: "Node 01", title: "Hamiltonian Formulation", desc: "Transforms molecular orbital coordinates into Pauli spin operator Hamiltonian matrix." },
+      { num: "Node 02", title: "Circuit Transpiler", desc: "Compiles quantum circuit into native hardware gate set (CX, RZ, SX)." },
+      { num: "Node 03", title: "Qubit Layout Mapping", desc: "Maps virtual qubits onto physical hardware topology to minimize gate crosstalk." },
+      { num: "Node 04", title: "Quantum Error Mitigation", desc: "Applies Zero-Noise Extrapolation (ZNE) to suppress decoherence errors." },
+      { num: "Node 05", title: "Hardware Execution Bridge", desc: "Submits pulse schedule to IBM Quantum / AWS Braket superconducting QPUs." },
+      { num: "Node 06", title: "State Tomography Analyzer", desc: "Reconstructs density matrix from quantum measurement readout distributions." },
+      { num: "Node 07", title: "Classical Optimizer Loop", desc: "Executes SPSA / COBYLA parameter update step to converge ground state energy." },
+      { num: "Node 08", title: "Eigensolver Results Synthesis", desc: "Outputs final molecular binding energy and logs quantum execution telemetry." }
+    ]
+  },
+  reverse: {
+    type: "LIVE INBOUND SIGNAL — REVERSE ENGINEERING ENGINE",
+    payload: 'BINARY INTEL SIGNAL — "Analyze obfuscated x86_64 ELF payload sample #0941. Decompile control flow graph, identify C2 communication routines, and generate YARA rules."',
+    nodes: [
+      { num: "Node 01", title: "Binary Disassembly & Parsing", desc: "Parses ELF/PE headers, section tables, import address tables (IAT), and entropy metrics." },
+      { num: "Node 02", title: "Control Flow Graph (CFG)", desc: "Builds basic block control flow graph and identifies indirect jump targets." },
+      { num: "Node 03", title: "Decompilation & AST", desc: "Decompiles raw machine bytecode into C-like abstract syntax tree via Ghidra API." },
+      { num: "Node 04", title: "Anti-Analysis & Unpacker", desc: "Detects VM sandbox evasions, unpacks compressed sections, and decrypts payloads." },
+      { num: "Node 05", title: "API Hashing & Decryption", desc: "Resolves dynamic API hashing algorithms (e.g. ROR13) and decrypts embedded strings." },
+      { num: "Node 06", title: "C2 Protocol Analyzer", desc: "Extracts Command & Control IP addresses, port configurations, and encryption keys." },
+      { num: "Node 07", title: "YARA Signature Generator", desc: "Compiles byte-pattern YARA rules to detect variant malware across enterprise endpoints." },
+      { num: "Node 08", title: "Threat Intel Dossier", desc: "Exports STIX/TAXII threat intelligence report for automated SIEM ingestion." }
+    ]
+  },
+  crypto: {
+    type: "LIVE INBOUND SIGNAL — ENCRYPTION & CRYPTOGRAPHY ENGINE",
+    payload: 'POST-QUANTUM MIGRATION AUDIT — "Provision NIST FIPS 203 ML-KEM-768 key exchange & FIPS 204 ML-DSA signatures across internal mTLS microservices and rotate HSM keys."',
+    nodes: [
+      { num: "Node 01", title: "Cryptographic Inventory", desc: "Scans enterprise repositories to catalog RSA/ECC keys vulnerable to quantum factorization." },
+      { num: "Node 02", title: "Quantum Risk Auditor", desc: "Ranks microservice endpoints by harvest-now-decrypt-later vulnerability risk." },
+      { num: "Node 03", title: "NIST ML-KEM-768 Key Gen", desc: "Generates post-quantum Module-Lattice Key Encapsulation (ML-KEM-768) key pairs." },
+      { num: "Node 04", title: "ML-DSA Signature Verifier", desc: "Enforces Module-Lattice Digital Signature Algorithm (ML-DSA) payload signing." },
+      { num: "Node 05", title: "HSM Master Key Rotation", desc: "Triggers automated Master Key rotation inside FIPS 140-3 Level 3 Hardware Security Modules." },
+      { num: "Node 06", title: "mTLS Hybrid Certificate Enforcer", desc: "Deploys hybrid X.509 certificates supporting dual classic and PQC cipher suites." },
+      { num: "Node 07", title: "ZDR Enclave Provisioning", desc: "Spins up RAM-only Zero-Data-Retention enclaves for ephemeral session processing." },
+      { num: "Node 08", title: "PQC Compliance Proof", desc: "Emits cryptographically verifiable audit proof confirming post-quantum readiness." }
+    ]
+  },
+  errorcorr: {
+    type: "LIVE INBOUND SIGNAL — ERROR-CORRECTING CODE ENGINE",
+    payload: 'SYSTEM DIAGNOSTIC — "Detecting 4.2% byte corruption rate across distributed vector database shards. Reconstruct damaged payloads using Reed-Solomon LDPC error correction codes."',
+    nodes: [
+      { num: "Node 01", title: "Parity & Checksum Monitor", desc: "Scans data storage blocks for CRC32 / SHA-256 integrity mismatch signals." },
+      { num: "Node 02", title: "Syndrome Calculation", desc: "Evaluates Galois Field GF(2^8) syndrome vector to detect bit error locations." },
+      { num: "Node 03", title: "Error Locator Polynomial", desc: "Runs Berlekamp-Massey algorithm to determine error magnitude and locator roots." },
+      { num: "Node 04", title: "Chien Search & Evaluator", desc: "Finds precise corrupt byte offsets using Chien search evaluation loops." },
+      { num: "Node 05", title: "Reed-Solomon Byte Repair", desc: "Reconstructs corrupted payload bytes in-memory using generator parity polynomials." },
+      { num: "Node 06", title: "LDPC Parity Checker", desc: "Applies Low-Density Parity-Check (LDPC) belief propagation matrix decoding." },
+      { num: "Node 07", title: "Vector Shard Rebuilder", desc: "Writes restored vector database shards to high-availability storage nodes." },
+      { num: "Node 08", title: "Data Integrity Verification", desc: "Verifies repaired payload checksums and logs error correction efficiency metrics." }
+    ]
+  },
+  bi: {
+    type: "LIVE INBOUND SIGNAL — BUSINESS INTELLIGENCE ENGINE",
+    payload: 'ENTERPRISE DATA PIPELINE — "Aggregate Q3 cross-platform revenue metrics from Snowflake, Stripe, and Salesforce. Detect churn anomaly signals and forecast Q4 ARR targets."',
+    nodes: [
+      { num: "Node 01", title: "Multi-Source Data Ingestion", desc: "Pulls real-time revenue streams from Snowflake, Stripe Billing, and Salesforce CRM." },
+      { num: "Node 02", title: "Schema Normalization & ETL", desc: "Normalizes currency exchange rates, timestamps, and customer ID mappings." },
+      { num: "Node 03", title: "ARR & Revenue Metric Engine", desc: "Calculates Net Revenue Retention (NRR), Gross Margin, and Expansion MRR." },
+      { num: "Node 04", title: "Predictive Churn Anomaly", desc: "Identifies account health degradation patterns using vector embedding classifiers." },
+      { num: "Node 05", title: "Cohort Segmentation", desc: "Segments customers by industry vertical, acquisition channel, and usage volume." },
+      { num: "Node 06", title: "Statistical Forecasting Model", desc: "Runs 10,000-iteration Monte Carlo simulation to project Q4 ARR confidence intervals." },
+      { num: "Node 07", title: "Dashboard Synthesizer", desc: "Generates interactive executive charts and automated Looker / PowerBI updates." },
+      { num: "Node 08", title: "Automated Insight Alert", desc: "Dispatches executive digest summarizing key revenue drivers and action items." }
     ]
   }
 };

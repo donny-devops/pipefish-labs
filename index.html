@@ -1036,7 +1036,16 @@
     <!-- Scenario Selector Tabs -->
     <div class="demo-tabs ai">
       <button class="demo-tab active" onclick="switchDemo('receptionist', this)">AI Receptionist Agent (Voice &amp; Text)</button>
-      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations AI Agent</button>
+      <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations Agent</button>
+      <button class="demo-tab" onclick="switchDemo('admin', this)">Administrative / Back-Office Agent</button>
+      <button class="demo-tab" onclick="switchDemo('support', this)">Customer Support Agent</button>
+      <button class="demo-tab" onclick="switchDemo('logistics', this)">Logistics / Supply Chain Agent</button>
+      <button class="demo-tab" onclick="switchDemo('infra', this)">Infrastructure / Ops Agent</button>
+      <button class="demo-tab" onclick="switchDemo('quantum', this)">Quantum Computing Agent</button>
+      <button class="demo-tab" onclick="switchDemo('reverse', this)">Reverse Engineering Agent</button>
+      <button class="demo-tab" onclick="switchDemo('crypto', this)">Encryption / Cryptography Agent</button>
+      <button class="demo-tab" onclick="switchDemo('errorcorr', this)">Error-Correcting Agent</button>
+      <button class="demo-tab" onclick="switchDemo('bi', this)">Business Intelligence Agent</button>
     </div>
 
     <!-- Demo Container -->
@@ -1954,6 +1963,132 @@ const demoScenarios = {
       { n: '06', name: 'Proposal Generator Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '07', name: 'Sales Follow-Up Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '08', name: 'Deal Recovery Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  admin: {
+    payload: 'INBOUND DISPATCH & DOCUMENT INTAKE — "Reconcile vendor invoices, extract line-item SAP POs, verify TAX IDs, execute ledger matching, and route approvals for Q3 operational expenditures ($420k aggregate)."',
+    channel: 'Channels Enabled: SAP ERP · QuickBooks · OCR Vision · Email · Bank APIs · Approval Workflows',
+    nodes: [
+      { n: '01', name: 'Document Extraction & OCR Agent', sub: '(Vision AI)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'TAX ID & Merchant Verification Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'PO Match & ERP Ledger Agent', sub: '(SAP Integration)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Anomaly & Fraud Scoring Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Approval Routing & Hierarchy Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Automated Remittance Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Audit Logging & Archival Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Executive Summary Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  support: {
+    payload: 'INBOUND TICKET & CHAT TELEMETRY — "Tenant #8892 reporting latency spikes during peak checkout. Database connection pool exhausted and session tokens failing renewal."',
+    channel: 'Channels Enabled: Zendesk · Intercom · Slack · Datadog Telemetry · PagerDuty · Database Proxies',
+    nodes: [
+      { n: '01', name: 'Ticket Parsing & Sentiment Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Telemetry & Log Analyzer Agent', sub: '(Datadog / APM)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Knowledge Base & RAG Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Session & DB Pool Reset Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Customer Auto-Response Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Tier 3 Escalation Agent', sub: '(PagerDuty)', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'SLA Tracking & Resolution Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'CSAT & Feedback Capture Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  logistics: {
+    payload: 'TELEMETRY SIGNAL — GLOBAL CONTAINER MANIFEST: "Port congestion delay detected at Rotterdam Terminal Node 4. 1,400 TEU freight shipment route optimization required for cold-chain cargo."',
+    channel: 'Channels Enabled: EDI 204/214 · Telematics GPS · Port APIs · Customs Systems · Freight CRM',
+    nodes: [
+      { n: '01', name: 'EDI & Manifest Parser Agent', sub: '(EDI 214 Standard)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Cold-Chain Telematics Monitor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Dynamic Re-Routing Agent', sub: '(Port & Rail API)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Customs & Tariff Clearing Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Carrier Dispatch & Tender Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'ETA Recalculation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Warehouse Intake Booking Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Consignee Alert & Exception Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  infra: {
+    payload: 'KUBERNETES & EBPF FALCO ALERT — "High memory pressure and unauthorized sys_execve process spawn detected on node worker-prod-04. Initiating zero-trust pod quarantine and node failover."',
+    channel: 'Channels Enabled: eBPF Telemetry · Kubernetes API · Terraform · AWS / GCP IAM · Vault KMS',
+    nodes: [
+      { n: '01', name: 'eBPF Kernel Event Detector Agent', sub: '(Falco Engine)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Zero-Trust Pod Isolation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Memory Pressure & Scale Agent', sub: '(Autoscaler)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'HashiCorp Vault Token Revoker Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Infra Failover Orchestrator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Root Cause & Heap Dump Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Patch & Terraform Deploy Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'SOC Incident Report Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  quantum: {
+    payload: 'HYBRID QUANTUM-CLASSICAL JOB — "Execute Variational Quantum Eigensolver (VQE) calculation for molecular lattice simulation (56 qubits) via Qiskit/Cirq API bridge with error mitigation."',
+    channel: 'Channels Enabled: Qiskit · Cirq · IBM Quantum API · AWS Braket · High-Performance Compute (HPC)',
+    nodes: [
+      { n: '01', name: 'Hamiltonian Formulation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Circuit Optimization & Transpiler Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Qubit Layout & Topology Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Quantum Error Mitigation Agent', sub: '(Zero-Noise Extrapolation)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Hardware Execution Agent', sub: '(IBM Quantum / Braket)', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'State Tomography Analyzer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Classical Optimizer Loop Agent', sub: '(COBYLA / SPSA)', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Eigensolver Results Synthesis Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  reverse: {
+    payload: 'BINARY INTEL SIGNAL — "Analyze obfuscated x86_64 ELF payload sample #0941. Decompile control flow graph, identify C2 communication routines, and generate YARA rules."',
+    channel: 'Channels Enabled: Ghidra Headless API · Binary Ninja · IDA Pro · Dynamic Sandbox · YARA Compiler',
+    nodes: [
+      { n: '01', name: 'Binary Disassembly & PE/ELF Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Control Flow Graph (CFG) Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Decompilation & AST Agent', sub: '(Ghidra Bridge)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Anti-Analysis & Unpacker Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'API Hashing & String Decrypter Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'C2 Network Protocol Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'YARA Signature Generator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Threat Intel Dossier Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  crypto: {
+    payload: 'POST-QUANTUM MIGRATION AUDIT — "Provision NIST FIPS 203 ML-KEM-768 key exchange & FIPS 204 ML-DSA signatures across internal mTLS microservices and rotate HSM keys."',
+    channel: 'Channels Enabled: OpenSSL PQC · HashiCorp Vault · AWS KMS · PKI CA · Hardware Security Modules',
+    nodes: [
+      { n: '01', name: 'Cryptographic Inventory Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Quantum Vulnerability Auditor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'NIST ML-KEM-768 Key Generator Agent', sub: '(PQC Module)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'ML-DSA Signature Verifier Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'HSM Master Key Rotation Agent', sub: '(Vault Integration)', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'mTLS Hybrid Certificate Enforcer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Zero-Data-Retention (ZDR) Enclave Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'PQC Compliance Proof Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  errorcorr: {
+    payload: 'SYSTEM DIAGNOSTIC — "Detecting 4.2% byte corruption rate across distributed vector database shards. Reconstruct damaged payloads using Reed-Solomon LDPC error correction codes."',
+    channel: 'Channels Enabled: Reed-Solomon Engine · LDPC Decoders · Parity Checking · Shard Manager · Storage APIs',
+    nodes: [
+      { n: '01', name: 'Parity & Checksum Monitor Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Syndrome Calculation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Error Locator Polynomial Agent', sub: '(Berlekamp-Massey)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Chien Search & Evaluator Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Reed-Solomon Byte Repair Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'LDPC Parity Checker Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Vector Shard Rebuilder Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Data Integrity Verification Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  bi: {
+    payload: 'ENTERPRISE DATA PIPELINE — "Aggregate Q3 cross-platform revenue metrics from Snowflake, Stripe, and Salesforce. Detect churn anomaly signals and forecast Q4 ARR targets."',
+    channel: 'Channels Enabled: Snowflake · BigQuery · Salesforce · Stripe · Looker APIs · Vector Embeddings',
+    nodes: [
+      { n: '01', name: 'Multi-Source Ingestion Agent', sub: '(Snowflake & Stripe)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Schema Normalization & ETL Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'ARR & Revenue Metric Engine Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Predictive Churn Anomaly Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Cohort Segmentation Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Statistical Forecasting Model Agent', sub: '(Monte Carlo)', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Dashboard Synthesizer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Automated Insight Alert Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   }
 };
