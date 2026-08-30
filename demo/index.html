@@ -171,7 +171,7 @@
       <button class="demo-tab active" onclick="switchDemo('receptionist', this)">Receptionist Agent (Voice &amp; Text)</button>
       <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations Agent</button>
       <button class="demo-tab" onclick="switchDemo('logistics', this)">Logistics / Supply Chain Agent</button>
-      <button class="demo-tab" onclick="switchDemo('infra', this)">Infrastructure / Ops Agent</button>
+      <button class="demo-tab" onclick="switchDemo('integration', this)">Integration Agent</button>
       <button class="demo-tab" onclick="switchDemo('quantum', this)">Quantum Computing Agent</button>
       <button class="demo-tab" onclick="switchDemo('reverse', this)">Reverse Engineering Agent</button>
       <button class="demo-tab" onclick="switchDemo('crypto', this)">Encryption / Cryptography Agent</button>
@@ -278,18 +278,18 @@ const scenarios = {
       { num: "Node 08", title: "Closed-Loop Telemetry", desc: "Logs execution metrics, updates predictive carrier reliability scores in database." }
     ]
   },
-  infra: {
-    type: "LIVE INBOUND SIGNAL — INFRASTRUCTURE & OPS ENGINE",
-    payload: 'KUBERNETES & EBPF FALCO ALERT — "High memory pressure and unauthorized sys_execve process spawn detected on node worker-prod-04. Initiating zero-trust pod quarantine and node failover."',
+  integration: {
+    type: "LIVE INBOUND SIGNAL — SYSTEMS INTEGRATION ENGINE",
+    payload: 'SYSTEMS INTEGRATION EVENT — "Bridge legacy SAP R/3 ERP, Workday HR, and Salesforce CRM APIs. Reconcile schema field mismatches, transform XML payloads to JSON, and enforce bi-directional state sync."',
     nodes: [
-      { num: "Node 01", title: "eBPF Kernel Event Detector", desc: "Intercepts low-level sys_execve system calls directly inside Linux kernel using Falco." },
-      { num: "Node 02", title: "Zero-Trust Pod Isolation", desc: "Quarantines suspicious Kubernetes pod from production network via CNI network policy." },
-      { num: "Node 03", title: "Memory Pressure & Scale", desc: "Triggers Cluster Autoscaler to provision backup worker node in secondary availability zone." },
-      { num: "Node 04", title: "HashiCorp Vault Token Revocation", desc: "Revokes compromised microservice tokens and rotates secrets automatically." },
-      { num: "Node 05", title: "Infra Failover Orchestrator", desc: "Reroutes live HTTP/gRPC ingress traffic away from quarantined node without dropping requests." },
-      { num: "Node 06", title: "Root Cause & Heap Dump", desc: "Captures container memory heap dump and syscall trace for post-mortem analysis." },
-      { num: "Node 07", title: "Patch & Terraform Deploy", desc: "Applies security patch and deploys updated container image via Terraform pipeline." },
-      { num: "Node 08", title: "SOC Incident Report", desc: "Generates formatted Incident Report and files ticket with security operations team." }
+      { num: "Node 01", title: "Multi-Protocol Webhook & Ingestion", desc: "Captures real-time event triggers across REST, gRPC, SOAP, and Kafka messaging streams." },
+      { num: "Node 02", title: "Schema Mapping & Payload Transformer", desc: "Translates legacy XML/EDI schemas into unified JSON API data contracts." },
+      { num: "Node 03", title: "Bi-Directional State Sync & De-Dup", desc: "Prevents race conditions and resolves field-level conflicts across target endpoints." },
+      { num: "Node 04", title: "OAuth 2.0 & API Token Lifecycle", desc: "Manages secret rotation, mTLS handshake, and rate-limit backoff budgets." },
+      { num: "Node 05", title: "Transactional Circuit Breaker & Retry", desc: "Implements exponential backoff and dead-letter queue (DLQ) retry routing." },
+      { num: "Node 06", title: "ERP / CRM Endpoint Dispatcher", desc: "Executes concurrent batch mutation payloads across SAP, Workday, and Salesforce APIs." },
+      { num: "Node 07", title: "Cryptographic Audit Verification", desc: "Signs transaction payloads with HMAC SHA-256 for zero-trust compliance logs." },
+      { num: "Node 08", title: "Integration Health & Telemetry Logger", desc: "Publishes 99.999% delivery verification metrics to monitoring dashboard." }
     ]
   },
   quantum: {

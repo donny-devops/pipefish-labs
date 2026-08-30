@@ -1039,7 +1039,7 @@
       <button class="demo-tab active" onclick="switchDemo('receptionist', this)">Receptionist Agent (Voice &amp; Text)</button>
       <button class="demo-tab" onclick="switchDemo('sales', this)">Sales Operations Agent</button>
       <button class="demo-tab" onclick="switchDemo('logistics', this)">Logistics / Supply Chain Agent</button>
-      <button class="demo-tab" onclick="switchDemo('infra', this)">Infrastructure / Ops Agent</button>
+      <button class="demo-tab" onclick="switchDemo('integration', this)">Integration Agent</button>
       <button class="demo-tab" onclick="switchDemo('quantum', this)">Quantum Computing Agent</button>
       <button class="demo-tab" onclick="switchDemo('reverse', this)">Reverse Engineering Agent</button>
       <button class="demo-tab" onclick="switchDemo('crypto', this)">Encryption / Cryptography Agent</button>
@@ -1987,18 +1987,18 @@ const demoScenarios = {
       { n: '08', name: 'Consignee Alert & Exception Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   },
-  infra: {
-    payload: 'KUBERNETES & EBPF FALCO ALERT — "High memory pressure and unauthorized sys_execve process spawn detected on node worker-prod-04. Initiating zero-trust pod quarantine and node failover."',
-    channel: 'Channels Enabled: eBPF Telemetry · Kubernetes API · Terraform · AWS / GCP IAM · Vault KMS',
+  integration: {
+    payload: 'SYSTEMS INTEGRATION EVENT — "Bridge legacy SAP R/3 ERP, Workday HR, and Salesforce CRM APIs. Reconcile schema field mismatches, transform XML payloads to JSON, and enforce bi-directional state sync."',
+    channel: 'Channels Enabled: REST APIs · gRPC · GraphQL · Webhooks · Kafka Event Mesh · SAP RFC · Middleware',
     nodes: [
-      { n: '01', name: 'eBPF Kernel Event Detector Agent', sub: '(Falco Engine)', status: 'awaiting upstream signal…' },
-      { n: '02', name: 'Zero-Trust Pod Isolation Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '03', name: 'Memory Pressure & Scale Agent', sub: '(Autoscaler)', status: 'awaiting upstream signal…' },
-      { n: '04', name: 'HashiCorp Vault Token Revoker Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '05', name: 'Infra Failover Orchestrator Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '06', name: 'Root Cause & Heap Dump Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '07', name: 'Patch & Terraform Deploy Agent', sub: '', status: 'awaiting upstream signal…' },
-      { n: '08', name: 'SOC Incident Report Agent', sub: '', status: 'awaiting upstream signal…' }
+      { n: '01', name: 'Multi-Protocol Webhook & Ingestion Agent', sub: '(Kafka / Webhook)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Schema Mapping & Payload Transformer Agent', sub: '(XML to JSON)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Bi-Directional State Sync Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'OAuth 2.0 & API Token Lifecycle Agent', sub: '(Vault Integration)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Transactional Circuit Breaker & Retry Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'ERP / CRM Endpoint Dispatcher Agent', sub: '(SAP & Salesforce)', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Cryptographic Audit Verification Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Integration Health & Telemetry Logger Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   },
   quantum: {
