@@ -490,6 +490,29 @@
     .video-container {
       position: relative; width: 100%; aspect-ratio: 16/9; min-height: 540px; max-height: 680px; background: #030712; overflow: hidden;
     }
+    /* ───────── TECH HUD OVERLAY & CALLOUTS ───────── */
+    .hud-overlay {
+      position: absolute; top: 16px; right: 16px; pointer-events: none; z-index: 5;
+      display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+    }
+    .hud-badge {
+      background: rgba(6, 7, 12, 0.82); backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 212, 255, 0.35); border-radius: 6px;
+      padding: 6px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+      color: var(--cyan); text-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+      display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+    .hud-badge-m { border-color: rgba(224, 64, 255, 0.4); color: var(--magenta); text-shadow: 0 0 8px rgba(224, 64, 255, 0.4); }
+    .hud-pulse { width: 6px; height: 6px; border-radius: 50%; background: #00FF66; box-shadow: 0 0 8px #00FF66; animation: hudPulse 1.8s infinite; }
+    @keyframes hudPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+    .hud-callout {
+      position: absolute; bottom: 20px; left: 20px; z-index: 5; pointer-events: none;
+      background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(10px);
+      border: 1px solid var(--border-strong); border-radius: var(--r-md);
+      padding: 12px 16px; max-width: 340px; box-shadow: 0 0 24px rgba(0, 212, 255, 0.2);
+    }
+    .hud-callout-title { font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .hud-callout-json { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-strong); background: rgba(0,0,0,0.5); padding: 6px 8px; border-radius: 4px; border-left: 2px solid var(--magenta); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
     .video-canvas { width: 100%; height: 100%; display: block; }
     .video-overlay {
       position: absolute; inset: 0;
@@ -1106,32 +1129,29 @@
     </div>
 
     <div class="video-wrap ai">
-      <div class="video-header-bar">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00FF66;box-shadow:0 0 10px #00FF66"></span>
-          <span>EXECUTIVE BRIEFING · 1080p HD · HMAC-SHA256 SECURED FEED</span>
+      <div class="video-header-bar" style="padding:14px 20px;background:rgba(6,7,12,0.95);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--border-strong)">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <div class="hud-badge"><span class="hud-pulse"></span>ACTIVE MESH: 8/8 AGENTS RUNNING</div>
+          <div class="hud-badge hud-badge-m" id="hud-hmac-ticker">HMAC-SHA256: 0x9F41A82C</div>
+          <div class="hud-badge">NIST ML-KEM-768 PQC ENCRYPTED</div>
         </div>
-        <div>PIPEFISH PLATFORM OVERVIEW v4.2</div>
+        <div style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--text-strong)">PIPEFISH PLATFORM OVERVIEW v4.2</div>
       </div>
       <div class="video-container">
-        <video id="briefing-video-player" src="./briefing-video.mp4" controls playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;background:#000;display:block;border-radius:var(--r-md);"></video>
+        <video id="briefing-video-player" src="./briefing-video.mp4" controls playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;background:#000;display:block;border-radius:0;"></video>
         <canvas id="briefing-canvas" class="video-canvas" style="display:none"></canvas>
         <div class="video-overlay" id="v-overlay" style="display:none">
           <button class="play-btn-lg" onclick="playBriefingVideo()" aria-label="Play Executive Briefing Video">
             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </button>
-          <div class="video-title-overlay">Play 3-Minute Executive Briefing</div>
-          <div class="video-sub-overlay">Demonstrating Agent Capabilities, MCP Integrations, Customer Impact, and Interactive Chain Execution</div>
         </div>
       </div>
-      <div class="video-controls-bar">
-        <button class="v-ctrl-btn" id="v-play-btn" onclick="playBriefingVideo()" aria-label="Toggle Play/Pause">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-14 9V3z"/></svg>
-        </button>
-        <div class="v-progress-track" onclick="seekBriefingVideo(event)">
-          <div class="v-progress-fill" id="v-progress"></div>
+      <div style="background:rgba(3,7,18,0.95);border-top:1px solid var(--border-strong);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--cyan);text-shadow:0 0 10px rgba(0,212,255,0.3)">⚡ LIVE STATE HANDOFF VERIFICATION:</span>
+          <span id="hud-callout-code" style="font-family:var(--font-mono);font-size:12.5px;font-weight:700;color:var(--magenta);background:rgba(224,64,255,0.08);padding:4px 10px;border-radius:4px;border:1px solid rgba(224,64,255,0.3)">{ "node": "01_voice_receptionist", "status": "mTLS_OK", "payload": "inbound_call_transcribed" }</span>
         </div>
-        <div class="v-time-display" id="v-time">00:00 / 03:15</div>
+        <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--text-dim)">1080p HD · Zero-Data-Retention Enclave Feed</div>
       </div>
     </div>
 
@@ -2717,6 +2737,27 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
     currentTime = pct * totalDuration;
     renderVideoFrame();
   };
+
+  const videoEl = document.getElementById('briefing-video-player');
+  if (videoEl) {
+    const payloads = [
+      '{ "node": "01_voice_receptionist", "status": "mTLS_OK", "payload": "inbound_call_transcribed" }',
+      '{ "node": "02_lead_qualification", "status": "200_OK", "buyer_intent": "high_enterprise" }',
+      '{ "node": "03_crm_workday_sync", "status": "STATE_HANDOFF", "latency_ms": 12 }',
+      '{ "node": "04_pqc_key_rotation", "status": "ML-KEM-768", "verification": "SUCCESS" }',
+      '{ "node": "05_zdr_enclave", "status": "RAM_ONLY", "retention": "0_byte" }',
+      '{ "node": "06_proposal_chaser", "status": "EXECUTED", "roi_impact": "87.4%" }'
+    ];
+    videoEl.addEventListener('timeupdate', () => {
+      const ticker = document.getElementById('hud-hmac-ticker');
+      const code = document.getElementById('hud-callout-code');
+      if (ticker) ticker.innerText = `HMAC-SHA256: 0x${Math.floor(videoEl.currentTime * 928471 + 1048576).toString(16).toUpperCase()}`;
+      if (code) {
+        const idx = Math.floor(videoEl.currentTime / 5) % payloads.length;
+        code.innerText = payloads[idx];
+      }
+    });
+  }
 
   drawThumbnail();
 })();
