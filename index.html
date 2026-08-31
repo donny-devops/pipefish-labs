@@ -330,6 +330,8 @@
       align-items: center;
       gap: 8px;
       flex-wrap: nowrap;
+      mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
     }
     .subnav-item {
       font-family: var(--font-mono);
@@ -1186,7 +1188,7 @@
         <button onclick="seekToTime(28)" class="btn btn-sm btn-ghost" style="font-family:var(--font-mono);font-size:11px;padding:6px 12px;border:1px solid var(--border)">03 · InfoSec &amp; PQC (0:28)</button>
         <button onclick="seekToTime(42)" class="btn btn-sm btn-ghost" style="font-family:var(--font-mono);font-size:11px;padding:6px 12px;border:1px solid var(--border)">04 · Business ROI (0:42)</button>
       </div>
-      <button onclick="openBriefingModal()" class="btn btn-m" style="box-shadow:0 0 24px rgba(224,64,255,0.4);font-size:13.5px;cursor:pointer">Request Full Technical Briefing &rarr;</button>
+      <a href="#book-a-demo-contact" class="btn btn-m" style="box-shadow:0 0 24px rgba(224,64,255,0.4);font-size:13.5px">Book an Architecture Audit Session &rarr;</a>
     </div>
 
     <!-- NARRATIVE SUMMARY CARDS -->
@@ -2815,8 +2817,15 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
       Watch our interactive architecture briefing and download your enterprise zero-trust &amp; post-quantum compliance documentation packet.
     </p>
 
-    <div style="aspect-ratio:16/9;background:#000;border-radius:var(--r-md);overflow:hidden;margin-bottom:24px;box-shadow:0 0 30px rgba(0,212,255,0.15)">
-      <video id="modal-briefing-player" src="./briefing-video.mp4" controls playsinline style="width:100%;height:100%;object-fit:contain"></video>
+    <div style="position:relative;width:100%;aspect-ratio:16/9;background:#030712;border-radius:var(--r-md);overflow:hidden;margin-bottom:24px;box-shadow:0 0 40px rgba(0,212,255,0.25);border:1px solid var(--border-strong)">
+      <canvas id="briefing-canvas-full" style="width:100%;height:100%;display:block"></canvas>
+      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(6,7,12,0.92);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border)">
+        <button id="modal-play-btn" onclick="toggleFullBriefingPlay()" class="btn btn-sm btn-ghost" style="color:var(--cyan);font-family:var(--font-mono);font-weight:800">▶ PLAY FULL BRIEFING</button>
+        <div style="flex:1;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;cursor:pointer;overflow:hidden" onclick="seekFullBriefing(event)">
+          <div id="modal-progress-fill" style="width:0%;height:100%;background:linear-gradient(90deg,var(--cyan),var(--magenta))"></div>
+        </div>
+        <div id="modal-time-display" style="font-family:var(--font-mono);font-size:11.5px;color:var(--cyan);font-weight:700">00:00 / 03:15</div>
+      </div>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:24px">
@@ -2839,23 +2848,191 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
 <script>
 window.openBriefingModal = function() {
   var modal = document.getElementById('briefing-modal');
-  var player = document.getElementById('modal-briefing-player');
   if (modal) {
     modal.classList.add('open');
-    if (player) {
-      player.currentTime = 0;
-      player.play().catch(function(e) { console.log('Video autoplay:', e); });
+    if (typeof window.toggleFullBriefingPlay === 'function') {
+      window.toggleFullBriefingPlay(true);
     }
   }
 };
 window.closeBriefingModal = function() {
   var modal = document.getElementById('briefing-modal');
-  var player = document.getElementById('modal-briefing-player');
   if (modal) {
     modal.classList.remove('open');
-    if (player) player.pause();
+    if (typeof window.stopFullBriefing === 'function') {
+      window.stopFullBriefing();
+    }
   }
 };
+
+(function() {
+  function initEngine() {
+    var mCanvas = document.getElementById('briefing-canvas-full');
+    if (!mCanvas) return;
+    var ctx = mCanvas.getContext('2d');
+    var playing = false;
+    var currentTime = 0;
+    var totalDuration = 195; // 3:15 in seconds
+    var animId = null;
+
+    function resizeMCanvas() {
+      mCanvas.width = mCanvas.clientWidth || 800;
+      mCanvas.height = mCanvas.clientHeight || 450;
+    }
+    window.addEventListener('resize', resizeMCanvas);
+    resizeMCanvas();
+
+    function drawThumbnail() {
+      ctx.fillStyle = '#030712';
+      ctx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+      ctx.strokeStyle = 'rgba(0, 212, 255, 0.08)';
+      ctx.lineWidth = 1;
+      for (var x = 0; x < mCanvas.width; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, mCanvas.height); ctx.stroke();
+      }
+      for (var y = 0; y < mCanvas.height; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(mCanvas.width, y); ctx.stroke();
+      }
+      ctx.fillStyle = '#00D4FF';
+      ctx.font = 'bold 16px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('FULL 3-MINUTE TECHNICAL ARCHITECTURE BRIEFING', mCanvas.width / 2, mCanvas.height / 2 - 10);
+      ctx.fillStyle = '#E040FF';
+      ctx.font = '13px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Click ▶ PLAY FULL BRIEFING below to begin interactive 4-part walkthrough', mCanvas.width / 2, mCanvas.height / 2 + 20);
+      ctx.textAlign = 'left';
+    }
+
+    function renderFrame() {
+      if (!playing) return;
+      currentTime += 0.2;
+      if (currentTime >= totalDuration) {
+        currentTime = 0;
+        playing = false;
+        var btn = document.getElementById('modal-play-btn');
+        if (btn) btn.innerText = '▶ REPLAY FULL BRIEFING';
+        return;
+      }
+
+      var pct = (currentTime / totalDuration) * 100;
+      var fill = document.getElementById('modal-progress-fill');
+      if (fill) fill.style.width = pct + '%';
+
+      var curM = Math.floor(currentTime / 60);
+      var curS = Math.floor(currentTime % 60).toString().padStart(2, '0');
+      var disp = document.getElementById('modal-time-display');
+      if (disp) disp.innerText = `0${curM}:${curS} / 03:15`;
+
+      ctx.fillStyle = '#030712';
+      ctx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+
+      ctx.strokeStyle = 'rgba(0, 212, 255, 0.06)';
+      ctx.lineWidth = 1;
+      for (var x = 0; x < mCanvas.width; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, mCanvas.height); ctx.stroke();
+      }
+      for (var y = 0; y < mCanvas.height; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(mCanvas.width, y); ctx.stroke();
+      }
+
+      if (currentTime < 45) {
+        ctx.fillStyle = '#00D4FF';
+        ctx.font = 'bold 12px "JetBrains Mono", monospace';
+        ctx.fillText('PART 01 · THE ENTERPRISE PROBLEM & AGENTIC SOLUTIONS', 24, 36);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 20px "Outfit", sans-serif';
+        ctx.fillText('Why Chatbots Fail vs. Autonomous Multi-Agent Systems', 24, 75);
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = '14px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('• 90% of legacy AI agency projects fail due to isolated, unencrypted scripts.', 24, 115);
+        ctx.fillText('• PipeFish Labs builds cryptographically hardened, zero-trust infrastructure.', 24, 145);
+        var cx = mCanvas.width * 0.75, cy = mCanvas.height * 0.55;
+        ctx.beginPath(); ctx.arc(cx, cy, 60 + Math.sin(currentTime*2)*10, 0, Math.PI*2);
+        ctx.strokeStyle = '#E040FF'; ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = '#E040FF'; ctx.font = 'bold 12px monospace'; ctx.textAlign = 'center';
+        ctx.fillText('PIPEFISH ENCLAVE MESH', cx, cy); ctx.textAlign = 'left';
+      } else if (currentTime < 105) {
+        ctx.fillStyle = '#E040FF';
+        ctx.font = 'bold 12px "JetBrains Mono", monospace';
+        ctx.fillText('PART 02 · LIVE 8-NODE MULTI-AGENT DAG CHAIN RUN', 24, 36);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 20px "Outfit", sans-serif';
+        ctx.fillText('Autonomous State Handoffs Across Enterprise Stack', 24, 75);
+        var nodes = ['Receptionist', 'Qualification', 'CRM Sync', 'PQC Rotation', 'ZDR Enclave', 'ERP Payment'];
+        nodes.forEach(function(node, i) {
+          var nx = 40 + i * 110;
+          var ny = 160 + Math.sin(currentTime + i) * 15;
+          ctx.fillStyle = (i === Math.floor(currentTime/10)%nodes.length) ? '#00FF66' : '#00D4FF';
+          ctx.beginPath(); ctx.arc(nx, ny, 16, 0, Math.PI*2); ctx.fill();
+          ctx.fillStyle = '#94A3B8'; ctx.font = '10px monospace'; ctx.fillText(node, nx - 25, ny + 32);
+        });
+      } else if (currentTime < 150) {
+        ctx.fillStyle = '#00FF66';
+        ctx.font = 'bold 12px "JetBrains Mono", monospace';
+        ctx.fillText('PART 03 · INFOSEC, EBPF THREAT MONITORING & NIST PQC', 24, 36);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 20px "Outfit", sans-serif';
+        ctx.fillText('Zero-Data-Retention & Post-Quantum Cryptography', 24, 75);
+        ctx.fillStyle = '#00D4FF';
+        ctx.font = '12px "JetBrains Mono", monospace';
+        ctx.fillText(`eBPF FALCO LOG: [SYS_READ] container=zdr_enclave_${Math.floor(currentTime)} status=ALLOW`, 24, 130);
+        ctx.fillText(`NIST ML-KEM-768 KEY ROTATION: 0x${Math.floor(currentTime * 92847).toString(16).toUpperCase()}`, 24, 160);
+        ctx.fillText(`EU AI ACT ANNEX IV CONFORMITY AUDIT: 100% VERIFIED PASS`, 24, 190);
+      } else {
+        ctx.fillStyle = '#00D4FF';
+        ctx.font = 'bold 12px "JetBrains Mono", monospace';
+        ctx.fillText('PART 04 · BUSINESS ROI & EXECUTIVE ARCHITECTURE AUDIT', 24, 36);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 20px "Outfit", sans-serif';
+        ctx.fillText('87.4% Task Reduction · $240K+ Annual Dept Savings', 24, 75);
+        ctx.fillStyle = '#E040FF';
+        ctx.font = 'bold 16px "Outfit", sans-serif';
+        ctx.fillText('Ready to Modernize Your Stack? Book Your Audit Session Below', 24, 140);
+      }
+
+      animId = requestAnimationFrame(renderFrame);
+    }
+
+    window.toggleFullBriefingPlay = function(forcePlay) {
+      if (forcePlay === true) {
+        playing = true;
+      } else {
+        playing = !playing;
+      }
+      var btn = document.getElementById('modal-play-btn');
+      if (playing) {
+        if (btn) btn.innerText = '⏸ PAUSE BRIEFING';
+        renderFrame();
+      } else {
+        if (btn) btn.innerText = '▶ PLAY FULL BRIEFING';
+        cancelAnimationFrame(animId);
+      }
+    };
+
+    window.stopFullBriefing = function() {
+      playing = false;
+      cancelAnimationFrame(animId);
+      var btn = document.getElementById('modal-play-btn');
+      if (btn) btn.innerText = '▶ PLAY FULL BRIEFING';
+    };
+
+    window.seekFullBriefing = function(e) {
+      var track = e.currentTarget;
+      var rect = track.getBoundingClientRect();
+      var pct = (e.clientX - rect.left) / rect.width;
+      currentTime = pct * totalDuration;
+      if (!playing) toggleFullBriefingPlay(true);
+    };
+
+    drawThumbnail();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEngine);
+  } else {
+    initEngine();
+  }
+})();
 </script>
 </body>
 </html>
