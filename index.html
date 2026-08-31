@@ -2838,19 +2838,19 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
 
 <script>
 window.openBriefingModal = function() {
-  const modal = document.getElementById('briefing-modal');
-  const player = document.getElementById('modal-briefing-player');
+  var modal = document.getElementById('briefing-modal');
+  var player = document.getElementById('modal-briefing-player');
   if (modal) {
     modal.classList.add('open');
     if (player) {
       player.currentTime = 0;
-      player.play().catch(e => console.log(e));
+      player.play().catch(function(e) { console.log('Video autoplay:', e); });
     }
   }
 };
 window.closeBriefingModal = function() {
-  const modal = document.getElementById('briefing-modal');
-  const player = document.getElementById('modal-briefing-player');
+  var modal = document.getElementById('briefing-modal');
+  var player = document.getElementById('modal-briefing-player');
   if (modal) {
     modal.classList.remove('open');
     if (player) player.pause();
