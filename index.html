@@ -420,9 +420,9 @@
       }
     }
     .hero-eye {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+      display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px;
     }
-    .hero-eye-line { height: 1px; width: 36px; background: var(--cyan); }
+    .hero-eye-line { height: 1px; width: 36px; background: var(--cyan); margin-top: 11px; flex-shrink: 0; }
 
     .hero-h1 { margin-bottom: 8px; }
     .hero-h1-b { margin-bottom: 28px; }
@@ -940,7 +940,11 @@
         <div class="hero-main-col">
           <div class="hero-eye ai">
             <div class="hero-eye-line"></div>
-            <span class="label" style="font-size:16px;font-weight:800;letter-spacing:0.16em;color:var(--cyan);text-shadow:0 0 14px rgba(0,212,255,0.25)">AI Infrastructure &amp; Automation · Multi-Agent Orchestration · Cross-Systems Execution</span>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <span class="label" style="font-size:16px;font-weight:800;letter-spacing:0.16em;color:var(--cyan);text-shadow:0 0 14px rgba(0,212,255,0.25);line-height:1.2">AI Infrastructure &amp; Automation</span>
+              <span class="label" style="font-size:16px;font-weight:800;letter-spacing:0.16em;color:var(--cyan);text-shadow:0 0 14px rgba(0,212,255,0.25);line-height:1.2">Multi-Agent Orchestration</span>
+              <span class="label" style="font-size:16px;font-weight:800;letter-spacing:0.16em;color:var(--cyan);text-shadow:0 0 14px rgba(0,212,255,0.25);line-height:1.2">Cross-Systems Execution</span>
+            </div>
           </div>
           <h1 class="h1 hero-h1 ai" style="transition-delay:.08s">
             Your Systems Don't Talk.
