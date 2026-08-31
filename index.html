@@ -513,6 +513,28 @@
     }
     .hud-callout-title { font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
     .hud-callout-json { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-strong); background: rgba(0,0,0,0.5); padding: 6px 8px; border-radius: 4px; border-left: 2px solid var(--magenta); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    /* ───────── TECHNICAL BRIEFING MODAL ───────── */
+    .b-modal-backdrop {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(3, 7, 18, 0.92); backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .b-modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .b-modal-box {
+      background: var(--surface); border: 1px solid var(--border-strong);
+      border-radius: var(--r-lg); width: 100%; max-width: 860px; max-height: 90vh;
+      overflow-y: auto; box-shadow: 0 0 60px rgba(0, 212, 255, 0.25);
+      position: relative; padding: 32px;
+    }
+    .b-modal-close {
+      position: absolute; top: 20px; right: 20px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--cyan); width: 36px; height: 36px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; transition: all 0.2s ease;
+    }
+    .b-modal-close:hover { background: var(--cyan); color: #030712; }
     .video-canvas { width: 100%; height: 100%; display: block; }
     .video-overlay {
       position: absolute; inset: 0;
@@ -1164,7 +1186,7 @@
         <button onclick="seekToTime(28)" class="btn btn-sm btn-ghost" style="font-family:var(--font-mono);font-size:11px;padding:6px 12px;border:1px solid var(--border)">03 · InfoSec &amp; PQC (0:28)</button>
         <button onclick="seekToTime(42)" class="btn btn-sm btn-ghost" style="font-family:var(--font-mono);font-size:11px;padding:6px 12px;border:1px solid var(--border)">04 · Business ROI (0:42)</button>
       </div>
-      <a href="#book-a-demo-contact" class="btn btn-m" style="box-shadow:0 0 24px rgba(224,64,255,0.4);font-size:13.5px">Request Full Technical Briefing &rarr;</a>
+      <button onclick="openBriefingModal()" class="btn btn-m" style="box-shadow:0 0 24px rgba(224,64,255,0.4);font-size:13.5px;cursor:pointer">Request Full Technical Briefing &rarr;</button>
     </div>
 
     <!-- NARRATIVE SUMMARY CARDS -->
@@ -2781,6 +2803,59 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
 
   drawThumbnail();
 })();
+</script>
+
+<!-- ─── TECHNICAL BRIEFING MODAL ─── -->
+<div class="b-modal-backdrop" id="briefing-modal" onclick="if(event.target===this)closeBriefingModal()">
+  <div class="b-modal-box">
+    <button class="b-modal-close" onclick="closeBriefingModal()" aria-label="Close Modal">&times;</button>
+    <div style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--cyan);letter-spacing:0.16em;margin-bottom:8px">PIPEFISH LABS · EXECUTIVE BRIEFING PACKET</div>
+    <h3 style="font-family:var(--font-display);font-size:24px;font-weight:900;color:var(--text-strong);margin-bottom:16px">Full Technical Architecture Briefing</h3>
+    <p style="color:var(--text-body);font-size:15px;margin-bottom:24px">
+      Watch our interactive architecture briefing and download your enterprise zero-trust &amp; post-quantum compliance documentation packet.
+    </p>
+
+    <div style="aspect-ratio:16/9;background:#000;border-radius:var(--r-md);overflow:hidden;margin-bottom:24px;box-shadow:0 0 30px rgba(0,212,255,0.15)">
+      <video id="modal-briefing-player" src="./briefing-video.mp4" controls playsinline style="width:100%;height:100%;object-fit:contain"></video>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:24px">
+      <a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download class="btn btn-ghost" style="border:1px solid var(--border);padding:14px 18px;text-align:left;display:block">
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--cyan);font-weight:800;margin-bottom:4px">📄 DOCUMENT DOWNLOAD</div>
+        <div style="font-weight:700;color:var(--text-strong);font-size:14px">EU AI Act Compliance Checklist &rarr;</div>
+      </a>
+      <a href="/downloads/post-quantum-cryptography-migration-blueprint.txt" download class="btn btn-ghost" style="border:1px solid var(--border);padding:14px 18px;text-align:left;display:block">
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--magenta);font-weight:800;margin-bottom:4px">🛡️ ARCHITECTURE BLUEPRINT</div>
+        <div style="font-weight:700;color:var(--text-strong);font-size:14px">PQC Migration Blueprint &rarr;</div>
+      </a>
+    </div>
+
+    <div style="text-align:center;border-top:1px solid var(--border);padding-top:20px">
+      <a href="#book-a-demo-contact" onclick="closeBriefingModal()" class="btn btn-m" style="box-shadow:0 0 24px rgba(0,212,255,0.4)">Book an Architecture Audit Session &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<script>
+window.openBriefingModal = function() {
+  const modal = document.getElementById('briefing-modal');
+  const player = document.getElementById('modal-briefing-player');
+  if (modal) {
+    modal.classList.add('open');
+    if (player) {
+      player.currentTime = 0;
+      player.play().catch(e => console.log(e));
+    }
+  }
+};
+window.closeBriefingModal = function() {
+  const modal = document.getElementById('briefing-modal');
+  const player = document.getElementById('modal-briefing-player');
+  if (modal) {
+    modal.classList.remove('open');
+    if (player) player.pause();
+  }
+};
 </script>
 </body>
 </html>
