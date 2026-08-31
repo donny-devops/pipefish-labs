@@ -199,7 +199,7 @@
           <span id="demo-payload-type" style="font-size:15px;font-weight:800;letter-spacing:0.14em;color:var(--magenta);text-shadow:0 0 12px rgba(224,64,255,0.3)">LIVE INBOUND SIGNAL</span>
         </div>
         <div class="demo-payload-text" id="demo-payload-text">
-          INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."
+          INBOUND VOICE / TEXT - B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."
         </div>
       </div>
 
@@ -241,8 +241,8 @@
 <script>
 const scenarios = {
   receptionist: {
-    type: "LIVE INBOUND SIGNAL — VOICE & TEXT FRONT DESK",
-    payload: 'INBOUND VOICE / TEXT — B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."',
+    type: "LIVE INBOUND SIGNAL - VOICE & TEXT FRONT DESK",
+    payload: 'INBOUND VOICE / TEXT - B2B SaaS Technical Support: "Hello, we are experiencing an API authentication outage on our production tenant. I need to escalate this to a Tier 2 engineer immediately and check system status."',
     nodes: [
       { num: "Node 01", title: "Voice & Text Ingestion", desc: "Captures inbound voice stream, converts audio to text via zero-retention model, extracts metadata." },
       { num: "Node 02", title: "Intent & Priority Classifier", desc: "Classifies lead intent (Critical Incident), checks SLA policy, flags VIP tenant status." },
@@ -255,8 +255,8 @@ const scenarios = {
     ]
   },
   sales: {
-    type: "LIVE INBOUND SIGNAL — SALES OPERATIONS ENGINE",
-    payload: 'INBOUND WEB LEAD — Enterprise Growth Tier: "Looking for multi-agent sales automation across 40 sales reps. Budget $25k/mo. Need custom CRM integration and proposal auto-generation."',
+    type: "LIVE INBOUND SIGNAL - SALES OPERATIONS ENGINE",
+    payload: 'INBOUND WEB LEAD - Enterprise Growth Tier: "Looking for multi-agent sales automation across 40 sales reps. Budget $25k/mo. Need custom CRM integration and proposal auto-generation."',
     nodes: [
       { num: "Node 01", title: "Form & Lead Ingestion", desc: "Parses webform payload, extracts company domain, contact details, and intent keywords." },
       { num: "Node 02", title: "Firmographic Enrichment", desc: "Queries Clearbit/Apollo API to fetch revenue, headcount, technology stack, and funding data." },
@@ -269,8 +269,8 @@ const scenarios = {
     ]
   },
   logistics: {
-    type: "LIVE INBOUND SIGNAL — ENTERPRISE LOGISTICS ENGINE",
-    payload: 'TELEMETRY SIGNAL — GLOBAL CONTAINER MANIFEST: "Port congestion delay detected at Rotterdam Terminal Node 4. 1,400 TEU freight shipment route optimization required for cold-chain cargo."',
+    type: "LIVE INBOUND SIGNAL - ENTERPRISE LOGISTICS ENGINE",
+    payload: 'TELEMETRY SIGNAL - GLOBAL CONTAINER MANIFEST: "Port congestion delay detected at Rotterdam Terminal Node 4. 1,400 TEU freight shipment route optimization required for cold-chain cargo."',
     nodes: [
       { num: "Node 01", title: "EDI Telemetry Ingestion", desc: "Captures real-time warehouse event stream via EDI 214 / Kafka event mesh." },
       { num: "Node 02", title: "Exception Classifier", desc: "Evaluates SLA breach risk, calculates delay cascade across 1,400 affected TEU shipments." },
@@ -283,8 +283,8 @@ const scenarios = {
     ]
   },
   integration: {
-    type: "LIVE INBOUND SIGNAL — SYSTEMS INTEGRATION ENGINE",
-    payload: 'SYSTEMS INTEGRATION EVENT — "Bridge legacy SAP R/3 ERP, Workday HR, and Salesforce CRM APIs. Reconcile schema field mismatches, transform XML payloads to JSON, and enforce bi-directional state sync."',
+    type: "LIVE INBOUND SIGNAL - SYSTEMS INTEGRATION ENGINE",
+    payload: 'SYSTEMS INTEGRATION EVENT - "Bridge legacy SAP R/3 ERP, Workday HR, and Salesforce CRM APIs. Reconcile schema field mismatches, transform XML payloads to JSON, and enforce bi-directional state sync."',
     nodes: [
       { num: "Node 01", title: "Multi-Protocol Webhook & Ingestion", desc: "Captures real-time event triggers across REST, gRPC, SOAP, and Kafka messaging streams." },
       { num: "Node 02", title: "Schema Mapping & Payload Transformer", desc: "Translates legacy XML/EDI schemas into unified JSON API data contracts." },
@@ -297,8 +297,8 @@ const scenarios = {
     ]
   },
   quantum: {
-    type: "LIVE INBOUND SIGNAL — HYBRID QUANTUM COMPUTING ENGINE",
-    payload: 'HYBRID QUANTUM-CLASSICAL JOB — "Execute Variational Quantum Eigensolver (VQE) calculation for molecular lattice simulation (56 qubits) via Qiskit/Cirq API bridge with error mitigation."',
+    type: "LIVE INBOUND SIGNAL - HYBRID QUANTUM COMPUTING ENGINE",
+    payload: 'HYBRID QUANTUM-CLASSICAL JOB - "Execute Variational Quantum Eigensolver (VQE) calculation for molecular lattice simulation (56 qubits) via Qiskit/Cirq API bridge with error mitigation."',
     nodes: [
       { num: "Node 01", title: "Hamiltonian Formulation", desc: "Transforms molecular orbital coordinates into Pauli spin operator Hamiltonian matrix." },
       { num: "Node 02", title: "Circuit Transpiler", desc: "Compiles quantum circuit into native hardware gate set (CX, RZ, SX)." },
@@ -311,8 +311,8 @@ const scenarios = {
     ]
   },
   reverse: {
-    type: "LIVE INBOUND SIGNAL — REVERSE ENGINEERING ENGINE",
-    payload: 'BINARY INTEL SIGNAL — "Analyze obfuscated x86_64 ELF payload sample #0941. Decompile control flow graph, identify C2 communication routines, and generate YARA rules."',
+    type: "LIVE INBOUND SIGNAL - REVERSE ENGINEERING ENGINE",
+    payload: 'BINARY INTEL SIGNAL - "Analyze obfuscated x86_64 ELF payload sample #0941. Decompile control flow graph, identify C2 communication routines, and generate YARA rules."',
     nodes: [
       { num: "Node 01", title: "Binary Disassembly & Parsing", desc: "Parses ELF/PE headers, section tables, import address tables (IAT), and entropy metrics." },
       { num: "Node 02", title: "Control Flow Graph (CFG)", desc: "Builds basic block control flow graph and identifies indirect jump targets." },
@@ -325,8 +325,8 @@ const scenarios = {
     ]
   },
   crypto: {
-    type: "LIVE INBOUND SIGNAL — ENCRYPTION & CRYPTOGRAPHY ENGINE",
-    payload: 'POST-QUANTUM MIGRATION AUDIT — "Provision NIST FIPS 203 ML-KEM-768 key exchange & FIPS 204 ML-DSA signatures across internal mTLS microservices and rotate HSM keys."',
+    type: "LIVE INBOUND SIGNAL - ENCRYPTION & CRYPTOGRAPHY ENGINE",
+    payload: 'POST-QUANTUM MIGRATION AUDIT - "Provision NIST FIPS 203 ML-KEM-768 key exchange & FIPS 204 ML-DSA signatures across internal mTLS microservices and rotate HSM keys."',
     nodes: [
       { num: "Node 01", title: "Cryptographic Inventory", desc: "Scans enterprise repositories to catalog RSA/ECC keys vulnerable to quantum factorization." },
       { num: "Node 02", title: "Quantum Risk Auditor", desc: "Ranks microservice endpoints by harvest-now-decrypt-later vulnerability risk." },
@@ -339,8 +339,8 @@ const scenarios = {
     ]
   },
   errorcorr: {
-    type: "LIVE INBOUND SIGNAL — ERROR-CORRECTING CODE ENGINE",
-    payload: 'SYSTEM DIAGNOSTIC — "Detecting 4.2% byte corruption rate across distributed vector database shards. Reconstruct damaged payloads using Reed-Solomon LDPC error correction codes."',
+    type: "LIVE INBOUND SIGNAL - ERROR-CORRECTING CODE ENGINE",
+    payload: 'SYSTEM DIAGNOSTIC - "Detecting 4.2% byte corruption rate across distributed vector database shards. Reconstruct damaged payloads using Reed-Solomon LDPC error correction codes."',
     nodes: [
       { num: "Node 01", title: "Parity & Checksum Monitor", desc: "Scans data storage blocks for CRC32 / SHA-256 integrity mismatch signals." },
       { num: "Node 02", title: "Syndrome Calculation", desc: "Evaluates Galois Field GF(2^8) syndrome vector to detect bit error locations." },
@@ -353,8 +353,8 @@ const scenarios = {
     ]
   },
   trend: {
-    type: "LIVE INBOUND SIGNAL — TREND SPOTTING ENGINE",
-    payload: 'MARKET SIGNAL — CONSUMER INTENT & MACRO TREND ENGINES: "Detecting +410% velocity surge in post-quantum cryptography procurement discussions across Fortune 500 CISO forums."',
+    type: "LIVE INBOUND SIGNAL - TREND SPOTTING ENGINE",
+    payload: 'MARKET SIGNAL - CONSUMER INTENT & MACRO TREND ENGINES: "Detecting +410% velocity surge in post-quantum cryptography procurement discussions across Fortune 500 CISO forums."',
     nodes: [
       { num: "Node 01", title: "Multi-Source Signal Scraper", desc: "Scrapes global discussion forums, RSS feeds, social telemetry, and arXiv preprints." },
       { num: "Node 02", title: "Semantic Embedding & Clustering", desc: "Embeds unstructured text into vector space to group emerging technical topics." },
@@ -367,8 +367,8 @@ const scenarios = {
     ]
   },
   market: {
-    type: "LIVE INBOUND SIGNAL — MARKET RESEARCH ENGINE",
-    payload: 'ENTERPRISE RESEARCH REQUEST — "Synthesize TAM/SAM metrics, competitive moat analysis, pricing strategies, and buyer personas for European AI Act compliance software."',
+    type: "LIVE INBOUND SIGNAL - MARKET RESEARCH ENGINE",
+    payload: 'ENTERPRISE RESEARCH REQUEST - "Synthesize TAM/SAM metrics, competitive moat analysis, pricing strategies, and buyer personas for European AI Act compliance software."',
     nodes: [
       { num: "Node 01", title: "SEC 10-K & Financial Extractor", desc: "Extracts revenue, R&D spend, and risk factors from SEC EDGAR 10-K/10-Q filings." },
       { num: "Node 02", title: "Competitive & Feature Matrix", desc: "Maps feature parity and pricing models across 25 direct market competitors." },
@@ -381,8 +381,8 @@ const scenarios = {
     ]
   },
   codescan: {
-    type: "LIVE INBOUND SIGNAL — CODE-SCANNING & SAST ENGINE",
-    payload: 'SAST / DAST AUDIT PIPELINE — "Scanning commit #f98a21 across 1.4M LOC repository. Detecting SQL injection vulnerability in OAuth callback handler and hardcoded AWS secret keys."',
+    type: "LIVE INBOUND SIGNAL - CODE-SCANNING & SAST ENGINE",
+    payload: 'SAST / DAST AUDIT PIPELINE - "Scanning commit #f98a21 across 1.4M LOC repository. Detecting SQL injection vulnerability in OAuth callback handler and hardcoded AWS secret keys."',
     nodes: [
       { num: "Node 01", title: "AST Syntax Tree Parser", desc: "Parses Abstract Syntax Trees across multi-language repositories using Semgrep." },
       { num: "Node 02", title: "Secret & API Key Scanner", desc: "Scans code for entropy anomalies, hardcoded RSA private keys, and API tokens." },
@@ -395,8 +395,8 @@ const scenarios = {
     ]
   },
   docs: {
-    type: "LIVE INBOUND SIGNAL — AUTOMATED DOCUMENTATION ENGINE",
-    payload: 'AUTODOC GENERATION TRIGGER — "Parse TypeScript / Python codebase commit #0481. Generate OpenAPI 3.1 specifications, inline JSDoc comments, and interactive developer portal docs."',
+    type: "LIVE INBOUND SIGNAL - AUTOMATED DOCUMENTATION ENGINE",
+    payload: 'AUTODOC GENERATION TRIGGER - "Parse TypeScript / Python codebase commit #0481. Generate OpenAPI 3.1 specifications, inline JSDoc comments, and interactive developer portal docs."',
     nodes: [
       { num: "Node 01", title: "Code AST & Signature Extractor", desc: "Extracts function signatures, TypeScript interfaces, and Python docstrings." },
       { num: "Node 02", title: "OpenAPI 3.1 Spec Generator", desc: "Generates compliant OpenAPI 3.1 JSON/YAML REST API specifications." },
@@ -409,8 +409,8 @@ const scenarios = {
     ]
   },
   observability: {
-    type: "LIVE INBOUND SIGNAL — MONITORING & OBSERVABILITY ENGINE",
-    payload: 'TELEMETRY AGGREGATION SIGNAL — "Ingesting 140,000 logs/sec across Kubernetes worker clusters. Detecting HTTP 504 gateway timeout spike on /api/v2/checkout."',
+    type: "LIVE INBOUND SIGNAL - MONITORING & OBSERVABILITY ENGINE",
+    payload: 'TELEMETRY AGGREGATION SIGNAL - "Ingesting 140,000 logs/sec across Kubernetes worker clusters. Detecting HTTP 504 gateway timeout spike on /api/v2/checkout."',
     nodes: [
       { num: "Node 01", title: "OpenTelemetry Collector", desc: "Ingests real-time logs, metrics, and traces from distributed microservices." },
       { num: "Node 02", title: "Distributed Trace Correlator", desc: "Traces end-to-end HTTP request propagation using Jaeger trace IDs." },
@@ -423,8 +423,8 @@ const scenarios = {
     ]
   },
   ids: {
-    type: "LIVE INBOUND SIGNAL — INTRUSION DETECTION ENGINE",
-    payload: 'SIEM SECURITY TELEMETRY — "Correlating Snort/Suricata IDS network alerts: IP 192.168.1.104 performing lateral SMB relay scan and pass-the-hash authentication attempt."',
+    type: "LIVE INBOUND SIGNAL - INTRUSION DETECTION ENGINE",
+    payload: 'SIEM SECURITY TELEMETRY - "Correlating Snort/Suricata IDS network alerts: IP 192.168.1.104 performing lateral SMB relay scan and pass-the-hash authentication attempt."',
     nodes: [
       { num: "Node 01", title: "Packet Inspection & PCAP", desc: "Inspects raw network packets using Suricata and Zeek sensor nodes." },
       { num: "Node 02", title: "Pass-the-Hash Recognizer", desc: "Detects unauthorized NTLM hash reuse and privilege escalation attempts." },
@@ -437,8 +437,8 @@ const scenarios = {
     ]
   },
   threathunt: {
-    type: "LIVE INBOUND SIGNAL — THREAT HUNTING ENGINE",
-    payload: 'PROACTIVE SECURITY AUDIT — "Execute proactive threat hunt across 4,500 enterprise endpoints for dormant Cobalt Strike beacons and suspicious Kerberoasting activity."',
+    type: "LIVE INBOUND SIGNAL - THREAT HUNTING ENGINE",
+    payload: 'PROACTIVE SECURITY AUDIT - "Execute proactive threat hunt across 4,500 enterprise endpoints for dormant Cobalt Strike beacons and suspicious Kerberoasting activity."',
     nodes: [
       { num: "Node 01", title: "EDR Telemetry & Process Graph", desc: "Queries CrowdStrike / Defender EDR agent telemetry across 4,500 hosts." },
       { num: "Node 02", title: "Memory Injection & Beacon Hunter", desc: "Scans process memory space for unbacked executable code and C2 beacons." },
@@ -451,8 +451,8 @@ const scenarios = {
     ]
   },
   forensics: {
-    type: "LIVE INBOUND SIGNAL — DIGITAL FORENSICS ENGINE",
-    payload: 'INCIDENT RESPONSE FORENSICS — "Extract volatility memory dump, NTFS Master File Table ($MFT), and event logs from compromised domain controller DC-PROD-01."',
+    type: "LIVE INBOUND SIGNAL - DIGITAL FORENSICS ENGINE",
+    payload: 'INCIDENT RESPONSE FORENSICS - "Extract volatility memory dump, NTFS Master File Table ($MFT), and event logs from compromised domain controller DC-PROD-01."',
     nodes: [
       { num: "Node 01", title: "Memory & Disk Image Capture", desc: "Captures volatile RAM dumps and forensic raw disk images using FTK Imager." },
       { num: "Node 02", title: "Chain of Custody Hash Verifier", desc: "Generates SHA-256 cryptographic verification hashes to preserve evidence." },
@@ -465,8 +465,8 @@ const scenarios = {
     ]
   },
   malware: {
-    type: "LIVE INBOUND SIGNAL — MALWARE ANALYSIS ENGINE",
-    payload: 'SANDBOX EXECUTION SIGNAL — "Execute dynamic sandbox behavioral analysis of ransomware sample payload #7721 (LockBit 3.0 variant). Document C2 traffic and file encryption keys."',
+    type: "LIVE INBOUND SIGNAL - MALWARE ANALYSIS ENGINE",
+    payload: 'SANDBOX EXECUTION SIGNAL - "Execute dynamic sandbox behavioral analysis of ransomware sample payload #7721 (LockBit 3.0 variant). Document C2 traffic and file encryption keys."',
     nodes: [
       { num: "Node 01", title: "Isolated Dynamic Sandbox", desc: "Executes malware binary inside air-gapped CAPEv2 virtual machine sandbox." },
       { num: "Node 02", title: "Behavioral Process Tree", desc: "Monitors process spawning, DLL injection, and thread hijacking patterns." },
@@ -479,8 +479,8 @@ const scenarios = {
     ]
   },
   revops: {
-    type: "LIVE INBOUND SIGNAL — GROWTH STRATEGY ENGINE",
-    payload: 'REVOPS GROWTH SIGNAL — "Detecting 3.4x spike in sign-ups from fintech accounts ($50M+ ARR). Trigger automated outbound enrichment, personalized A/B landing page generation, and instant VP sales routing."',
+    type: "LIVE INBOUND SIGNAL - GROWTH STRATEGY ENGINE",
+    payload: 'REVOPS GROWTH SIGNAL - "Detecting 3.4x spike in sign-ups from fintech accounts ($50M+ ARR). Trigger automated outbound enrichment, personalized A/B landing page generation, and instant VP sales routing."',
     nodes: [
       { num: "Node 01", title: "Product Analytics & Sign-Up Monitor", desc: "Monitors real-time product sign-up events and user onboarding behavior using PostHog & Segment." },
       { num: "Node 02", title: "Firmographic & Intent Enrichment", desc: "Enriches domain profile with headcount, funding round, tech stack, and intent signals." },
@@ -493,8 +493,8 @@ const scenarios = {
     ]
   },
   analytics: {
-    type: "LIVE INBOUND SIGNAL — REAL-TIME ANALYTICS ENGINE",
-    payload: 'ANALYTICS STREAM TRIGGER — "Aggregate 250M event streams across Snowflake, ClickHouse, and Mixpanel. Compute real-time user retention cohorts and funnels."',
+    type: "LIVE INBOUND SIGNAL - REAL-TIME ANALYTICS ENGINE",
+    payload: 'ANALYTICS STREAM TRIGGER - "Aggregate 250M event streams across Snowflake, ClickHouse, and Mixpanel. Compute real-time user retention cohorts and funnels."',
     nodes: [
       { num: "Node 01", title: "High-Throughput Stream Ingestor", desc: "Ingests real-time clickstream events into columnar data stores." },
       { num: "Node 02", title: "Dimension Normalizer & Deduplicator", desc: "Standardizes user IDs, session tokens, and timezone timestamps." },
@@ -507,8 +507,8 @@ const scenarios = {
     ]
   },
   auditing: {
-    type: "LIVE INBOUND SIGNAL — COMPLIANCE & AUDITING ENGINE",
-    payload: 'SOC 2 & ISO 27001 AUDIT TRIGGER — "Verify zero-trust access logs, IAM key rotations, and encrypted data backups across 45 cloud accounts for Q3 audit proof."',
+    type: "LIVE INBOUND SIGNAL - COMPLIANCE & AUDITING ENGINE",
+    payload: 'SOC 2 & ISO 27001 AUDIT TRIGGER - "Verify zero-trust access logs, IAM key rotations, and encrypted data backups across 45 cloud accounts for Q3 audit proof."',
     nodes: [
       { num: "Node 01", title: "CloudTrail & IAM Audit Collector", desc: "Aggregates API activity logs and authentication events across accounts." },
       { num: "Node 02", title: "Access Control Policy Verifier", desc: "Evaluates Least Privilege access rules against IAM policy benchmarks." },
@@ -521,8 +521,8 @@ const scenarios = {
     ]
   },
   logtriage: {
-    type: "LIVE INBOUND SIGNAL — LOG TRIAGE ENGINE",
-    payload: 'LOG TRIAGE ALERT — "Ingesting 85,000 log events/sec. Classifying critical NullPointerExceptions, stack trace cascades, and API gateway timeouts."',
+    type: "LIVE INBOUND SIGNAL - LOG TRIAGE ENGINE",
+    payload: 'LOG TRIAGE ALERT - "Ingesting 85,000 log events/sec. Classifying critical NullPointerExceptions, stack trace cascades, and API gateway timeouts."',
     nodes: [
       { num: "Node 01", title: "High-Volume Log Parser & Tokenizer", desc: "Parses unstructured syslog and JSON log streams at 85k events/sec." },
       { num: "Node 02", title: "Stack Trace & Exception Extractor", desc: "Extracts multiline error stack traces and unhandled exception frames." },
@@ -535,8 +535,8 @@ const scenarios = {
     ]
   },
   erp: {
-    type: "LIVE INBOUND SIGNAL — ENTERPRISE ERP ORCHESTRATION ENGINE",
-    payload: 'SAP / ORACLE ERP EVENT — "Execute Q3 inventory rebalancing, PO reconciliation, and vendor ledger posting across 14 global distribution nodes."',
+    type: "LIVE INBOUND SIGNAL - ENTERPRISE ERP ORCHESTRATION ENGINE",
+    payload: 'SAP / ORACLE ERP EVENT - "Execute Q3 inventory rebalancing, PO reconciliation, and vendor ledger posting across 14 global distribution nodes."',
     nodes: [
       { num: "Node 01", title: "ERP Master Data Synchronizer", desc: "Synchronizes material master, vendor IDs, and ledger accounts across ERPs." },
       { num: "Node 02", title: "Purchase Order 3-Way Matcher", desc: "Matches invoices, receiving slips, and PO line items automatically." },
@@ -549,8 +549,8 @@ const scenarios = {
     ]
   },
   trafficrouter: {
-    type: "LIVE INBOUND SIGNAL — GLOBAL TRAFFIC ROUTING ENGINE",
-    payload: 'EDGE ROUTING SIGNAL — "Latency spike detected on US-East BGP routes. Re-routing 450,000 active HTTP/2 sessions to EU-West and Asia-South edge gateways."',
+    type: "LIVE INBOUND SIGNAL - GLOBAL TRAFFIC ROUTING ENGINE",
+    payload: 'EDGE ROUTING SIGNAL - "Latency spike detected on US-East BGP routes. Re-routing 450,000 active HTTP/2 sessions to EU-West and Asia-South edge gateways."',
     nodes: [
       { num: "Node 01", title: "BGP & Edge Health Monitor", desc: "Monitors real-time latency and packet loss across global edge POPs." },
       { num: "Node 02", title: "Geographic Traffic Balancer", desc: "Calculates lowest-latency geographic DNS routing paths." },
@@ -563,8 +563,8 @@ const scenarios = {
     ]
   },
   networkdispatch: {
-    type: "LIVE INBOUND SIGNAL — NETWORK DISPATCH & MESH ENGINE",
-    payload: 'NETWORK MESH DISPATCH — "Dispatching SD-WAN network routes for 350 enterprise branch offices. Optimizing QoS bandwidth for real-time VoIP and video streams."',
+    type: "LIVE INBOUND SIGNAL - NETWORK DISPATCH & MESH ENGINE",
+    payload: 'NETWORK MESH DISPATCH - "Dispatching SD-WAN network routes for 350 enterprise branch offices. Optimizing QoS bandwidth for real-time VoIP and video streams."',
     nodes: [
       { num: "Node 01", title: "SD-WAN Mesh Topology Analyzer", desc: "Inspects active MPLS, cellular, and broadband tunnel paths." },
       { num: "Node 02", title: "QoS & Traffic Prioritization", desc: "Prioritizes latency-sensitive VoIP and UCC video streams over backup data." },
@@ -577,8 +577,8 @@ const scenarios = {
     ]
   },
   selfimproving: {
-    type: "LIVE INBOUND SIGNAL — SELF-IMPROVING REINFORCEMENT ENGINE",
-    payload: 'AUTONOMOUS REINFORCEMENT SIGNAL — "Executing self-improving reflection loops, hyperparameter autotuning, prompt optimization, and error taxonomy feedback to optimize pipeline throughput."',
+    type: "LIVE INBOUND SIGNAL - SELF-IMPROVING REINFORCEMENT ENGINE",
+    payload: 'AUTONOMOUS REINFORCEMENT SIGNAL - "Executing self-improving reflection loops, hyperparameter autotuning, prompt optimization, and error taxonomy feedback to optimize pipeline throughput."',
     nodes: [
       { num: "Node 01", title: "Execution Telemetry & Trace Collector", desc: "Aggregates execution logs, latencies, and tool call traces across subagents." },
       { num: "Node 02", title: "Error Taxonomy & Failure Categorizer", desc: "Categorizes hallucination, API timeout, and schema mismatch failure modes." },
@@ -591,8 +591,8 @@ const scenarios = {
     ]
   },
   systemoptimizing: {
-    type: "LIVE INBOUND SIGNAL — CONTINUOUS SYSTEM OPTIMIZATION ENGINE",
-    payload: 'SYSTEM OPTIMIZATION SIGNAL — "Detecting CPU memory bottleneck, database indexing latency, and unoptimized RPC query plans across 12 distributed microservices. Executing continuous runtime tuning."',
+    type: "LIVE INBOUND SIGNAL - CONTINUOUS SYSTEM OPTIMIZATION ENGINE",
+    payload: 'SYSTEM OPTIMIZATION SIGNAL - "Detecting CPU memory bottleneck, database indexing latency, and unoptimized RPC query plans across 12 distributed microservices. Executing continuous runtime tuning."',
     nodes: [
       { num: "Node 01", title: "eBPF CPU & Memory Profiler", desc: "Monitors low-level kernel CPU cycles, memory allocations, and lock contention." },
       { num: "Node 02", title: "Database Index & Query Plan Optimizer", desc: "Analyzes slow query logs, recommends missing indexes, and tunes EXPLAIN plans." },
@@ -671,7 +671,7 @@ function runDemoGraph() {
       step++;
       demoTimeoutId = setTimeout(executeStep, 750);
     } else {
-      document.getElementById('demo-status-bar-text').textContent = 'Pipeline Complete — All 8 Nodes Executed & Synchronized cleanly (0 Errors).';
+      document.getElementById('demo-status-bar-text').textContent = 'Pipeline Complete - All 8 Nodes Executed & Synchronized cleanly (0 Errors).';
       isRunning = false;
       document.getElementById('run-demo-btn').disabled = false;
       document.getElementById('run-demo-btn').style.opacity = '1';

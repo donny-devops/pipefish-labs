@@ -1,4 +1,4 @@
-# 🌐 PipeFish Labs — Enterprise AI Automation & Autonomous Multi-Agent Systems
+# 🌐 PipeFish Labs - Enterprise AI Automation & Autonomous Multi-Agent Systems
 
 [**pipefishlabs.io**](https://pipefishlabs.io)
 

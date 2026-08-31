@@ -77,7 +77,7 @@
     <p>When orchestrating multi-agent systems at enterprise scale, non-deterministic payload passing and unvalidated state transitions represent catastrophic failure modes. PipeFish Labs implements Directed Acyclic Graph (DAG) state handoffs to guarantee deterministic state serialization, sub-second execution context passing, and immutable telemetry logs.</p>
 
     <h2>1. The Problem with Unstructured Multi-Agent Handoffs</h2>
-    <p>Most naive agent implementations pass free-form natural language prompts between LLM calls. This introduces state drift, hallucinations, latency amplification, and total lack of auditability. In mission-critical enterprise environments—such as financial underwriting or global logistics dispatch—every step must be deterministic.</p>
+    <p>Most naive agent implementations pass free-form natural language prompts between LLM calls. This introduces state drift, hallucinations, latency amplification, and total lack of auditability. In mission-critical enterprise environments-such as financial underwriting or global logistics dispatch-every step must be deterministic.</p>
 
     <h2>2. Directed Acyclic Graph (DAG) Execution Topology</h2>
     <p>In our architecture, every workflow is defined as a strict topological graph where vertices represent specialized subagents and edges represent cryptographically signed state handoffs.</p>

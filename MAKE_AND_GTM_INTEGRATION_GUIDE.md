@@ -1,4 +1,4 @@
-# PipeFish Labs — Make.com, Slack, Obsidian & Marketing Suite Integration Guide
+# PipeFish Labs - Make.com, Slack, Obsidian & Marketing Suite Integration Guide
 
 This document provides step-by-step instructions to connect your PipeFish Labs website (`https://pipefishlabs.io`) with **Make.com**, **Slack**, **Obsidian**, **Supabase / PostgreSQL**, **Google Analytics 4**, **Google Tag Manager**, **Meta Ads**, and **LinkedIn Ads**.
 
