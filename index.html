@@ -1060,6 +1060,7 @@
       <button class="demo-tab" onclick="switchDemo('erp', this)">Audit Agent</button>
       <button class="demo-tab" onclick="switchDemo('trafficrouter', this)">Traffic Router Agent</button>
       <button class="demo-tab" onclick="switchDemo('networkdispatch', this)">Network Dispatch Agent</button>
+      <button class="demo-tab" onclick="switchDemo('selfimproving', this)">Self-Improving Agent</button>
     </div>
 
     <!-- Demo Container -->
@@ -2288,6 +2289,20 @@ const demoScenarios = {
       { n: '06', name: 'BGP Peer & Community Setter Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '07', name: 'Zero-Touch Provisioning (ZTP) Agent', sub: '', status: 'awaiting upstream signal…' },
       { n: '08', name: 'Network Health & SLA Verifier Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  selfimproving: {
+    payload: 'AUTONOMOUS REINFORCEMENT SIGNAL — "Executing self-improving reflection loops, hyperparameter autotuning, prompt optimization, and error taxonomy feedback to optimize pipeline throughput."',
+    channel: 'Channels Enabled: Reflection Engine · Auto-Eval Harness · DSPy Optimizer · ML-KEM Verifier · Vector Memory · Feedback Loop',
+    nodes: [
+      { n: '01', name: 'Execution Telemetry & Trace Collector Agent', sub: '(OpenTelemetry / Traces)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Error Taxonomy & Failure Categorizer Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'LLM Reflection & Critique Synthesizer Agent', sub: '(Self-Correction Loop)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'Prompt & System Instruction Optimizer Agent', sub: '(DSPy Auto-Tune)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Hyperparameter & Few-Shot Selector Agent', sub: '', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Automated Regression Evaluation Harness Agent', sub: '(Eval Matrix)', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Vector Knowledge Base & Memory Synthesizer Agent', sub: '(Pinecone / Milvus)', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'Continuous Model Optimization & Deployer Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   }
 };

@@ -188,6 +188,7 @@
       <button class="demo-tab" onclick="switchDemo('erp', this)">Audit Agent</button>
       <button class="demo-tab" onclick="switchDemo('trafficrouter', this)">Traffic Router Agent</button>
       <button class="demo-tab" onclick="switchDemo('networkdispatch', this)">Network Dispatch Agent</button>
+      <button class="demo-tab" onclick="switchDemo('selfimproving', this)">Self-Improving Agent</button>
     </div>
 
     <div class="demo-container">
@@ -570,8 +571,22 @@ const scenarios = {
       { num: "Node 04", title: "gNMI / YANG Telemetry Collector", desc: "Streams low-level hardware interface telemetry from router switches." },
       { num: "Node 05", title: "Dynamic Path Selection Engine", desc: "Switches traffic away from degraded ISP circuits instantaneously." },
       { num: "Node 06", title: "BGP Peer & Community Setter", desc: "Updates BGP AS-Path and local-preference attributes dynamically." },
-      { num: "Node 07", title: "Zero-Touch Provisioning (ZTP)", desc: "Configures new branch router hardware automatically upon boot." },
-      { num: "Node 08", title: "Network Health & SLA Verifier", desc: "Verifies 99.999% uptime SLA compliance across all branch locations." }
+      { num: "Node 07", title: "Zero-Touch Provisioning (ZTP)", desc: "Deploys zero-touch router configurations to branch hardware nodes." },
+      { num: "Node 08", title: "Network Health & SLA Verifier", desc: "Validates mesh connectivity, SLA packet delivery, and tunnel security." }
+    ]
+  },
+  selfimproving: {
+    type: "LIVE INBOUND SIGNAL — SELF-IMPROVING REINFORCEMENT ENGINE",
+    payload: 'AUTONOMOUS REINFORCEMENT SIGNAL — "Executing self-improving reflection loops, hyperparameter autotuning, prompt optimization, and error taxonomy feedback to optimize pipeline throughput."',
+    nodes: [
+      { num: "Node 01", title: "Execution Telemetry & Trace Collector", desc: "Aggregates execution logs, latencies, and tool call traces across subagents." },
+      { num: "Node 02", title: "Error Taxonomy & Failure Categorizer", desc: "Categorizes hallucination, API timeout, and schema mismatch failure modes." },
+      { num: "Node 03", title: "LLM Reflection & Critique Synthesizer", desc: "Generates step-by-step critique and self-correction reasoning for subagents." },
+      { num: "Node 04", title: "Prompt & System Instruction Optimizer", desc: "Applies DSPy algorithmic prompt tuning to optimize system instructions." },
+      { num: "Node 05", title: "Hyperparameter & Few-Shot Selector", desc: "Dynamically selects optimal few-shot exemplars and temperature parameters." },
+      { num: "Node 06", title: "Automated Regression Evaluation Harness", desc: "Runs automated benchmark suites to ensure zero accuracy regressions." },
+      { num: "Node 07", title: "Vector Knowledge Base & Memory Synthesizer", desc: "Persists learned task strategies to vector memory for future execution." },
+      { num: "Node 08", title: "Continuous Model Optimization & Deployer", desc: "Deploys fine-tuned prompt parameters and optimized agent configurations." }
     ]
   }
 };
