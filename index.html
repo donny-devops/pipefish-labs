@@ -1114,9 +1114,9 @@
         <div>PIPEFISH PLATFORM OVERVIEW v4.2</div>
       </div>
       <div class="video-container">
-        <video id="briefing-video-player" src="/briefing-video.mp4" playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:none;"></video>
-        <canvas id="briefing-canvas" class="video-canvas"></canvas>
-        <div class="video-overlay" id="v-overlay">
+        <video id="briefing-video-player" src="./briefing-video.mp4" controls playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--r-md);"></video>
+        <canvas id="briefing-canvas" class="video-canvas" style="display:none"></canvas>
+        <div class="video-overlay" id="v-overlay" style="display:none">
           <button class="play-btn-lg" onclick="playBriefingVideo()" aria-label="Play Executive Briefing Video">
             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </button>
