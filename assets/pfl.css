@@ -84,7 +84,7 @@ section{padding-block:var(--sy)}
 .logo span:first-of-type{color:var(--cyan)}
 .logo span:last-of-type{color:var(--magenta)}
 .nav-links{display:flex;align-items:center;gap:28px}
-.nav-links a{font-size:15px;font-weight:600;color:var(--text-body);transition:color .2s}
+.nav-links a{font-size:15px;font-weight:800;color:var(--text-body);transition:color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--cyan)}
 .ham{display:none;flex-direction:column;gap:5px;padding:8px}
 .ham span{display:block;width:22px;height:2px;background:var(--text-strong);transition:all .3s}
