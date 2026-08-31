@@ -189,6 +189,7 @@
       <button class="demo-tab" onclick="switchDemo('trafficrouter', this)">Traffic Router Agent</button>
       <button class="demo-tab" onclick="switchDemo('networkdispatch', this)">Network Dispatch Agent</button>
       <button class="demo-tab" onclick="switchDemo('selfimproving', this)">Self-Improving Agent</button>
+      <button class="demo-tab" onclick="switchDemo('systemoptimizing', this)">System-Optimizing Agent</button>
     </div>
 
     <div class="demo-container">
@@ -587,6 +588,20 @@ const scenarios = {
       { num: "Node 06", title: "Automated Regression Evaluation Harness", desc: "Runs automated benchmark suites to ensure zero accuracy regressions." },
       { num: "Node 07", title: "Vector Knowledge Base & Memory Synthesizer", desc: "Persists learned task strategies to vector memory for future execution." },
       { num: "Node 08", title: "Continuous Model Optimization & Deployer", desc: "Deploys fine-tuned prompt parameters and optimized agent configurations." }
+    ]
+  },
+  systemoptimizing: {
+    type: "LIVE INBOUND SIGNAL — CONTINUOUS SYSTEM OPTIMIZATION ENGINE",
+    payload: 'SYSTEM OPTIMIZATION SIGNAL — "Detecting CPU memory bottleneck, database indexing latency, and unoptimized RPC query plans across 12 distributed microservices. Executing continuous runtime tuning."',
+    nodes: [
+      { num: "Node 01", title: "eBPF CPU & Memory Profiler", desc: "Monitors low-level kernel CPU cycles, memory allocations, and lock contention." },
+      { num: "Node 02", title: "Database Index & Query Plan Optimizer", desc: "Analyzes slow query logs, recommends missing indexes, and tunes EXPLAIN plans." },
+      { num: "Node 03", title: "Cache Invalidation & Hit Ratio Tuning", desc: "Optimizes Redis key TTLs, eviction policies, and cache hit ratios." },
+      { num: "Node 04", title: "RPC Payload & Serialization Compressor", desc: "Compresses JSON/gRPC wire payloads and optimizes serialization buffers." },
+      { num: "Node 05", title: "Kubernetes Autoscaling & HPA Tuner", desc: "Adjusts K8s pod CPU/Memory resource limits and HPA scaling thresholds." },
+      { num: "Node 06", title: "Garbage Collection & Memory Defragmenter", desc: "Tunes GC pauses and heap memory allocation across JVM and Go runtimes." },
+      { num: "Node 07", title: "Load Balancer & Connection Pool Optimizer", desc: "Tunes Envoy connection pooling, HTTP/2 multiplexing, and keep-alive timeouts." },
+      { num: "Node 08", title: "System Health & Throughput Benchmark Verifier", desc: "Verifies system latency reduction and confirms 99.99% throughput targets." }
     ]
   }
 };

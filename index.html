@@ -1061,6 +1061,7 @@
       <button class="demo-tab" onclick="switchDemo('trafficrouter', this)">Traffic Router Agent</button>
       <button class="demo-tab" onclick="switchDemo('networkdispatch', this)">Network Dispatch Agent</button>
       <button class="demo-tab" onclick="switchDemo('selfimproving', this)">Self-Improving Agent</button>
+      <button class="demo-tab" onclick="switchDemo('systemoptimizing', this)">System-Optimizing Agent</button>
     </div>
 
     <!-- Demo Container -->
@@ -2303,6 +2304,20 @@ const demoScenarios = {
       { n: '06', name: 'Automated Regression Evaluation Harness Agent', sub: '(Eval Matrix)', status: 'awaiting upstream signal…' },
       { n: '07', name: 'Vector Knowledge Base & Memory Synthesizer Agent', sub: '(Pinecone / Milvus)', status: 'awaiting upstream signal…' },
       { n: '08', name: 'Continuous Model Optimization & Deployer Agent', sub: '', status: 'awaiting upstream signal…' }
+    ]
+  },
+  systemoptimizing: {
+    payload: 'SYSTEM OPTIMIZATION SIGNAL — "Detecting CPU memory bottleneck, database indexing latency, and unoptimized RPC query plans across 12 distributed microservices. Executing continuous runtime tuning."',
+    channel: 'Channels Enabled: eBPF Profiler · PostgreSQL Query Planner · Kubernetes HPA · Redis Cache Optimizer · RPC Tuning · Vector Index',
+    nodes: [
+      { n: '01', name: 'eBPF CPU & Memory Profiler Agent', sub: '(Kernel Profiler)', status: 'awaiting upstream signal…' },
+      { n: '02', name: 'Database Index & Query Plan Optimizer Agent', sub: '(EXPLAIN ANALYZE)', status: 'awaiting upstream signal…' },
+      { n: '03', name: 'Cache Invalidation & Hit Ratio Tuning Agent', sub: '(Redis / Memcached)', status: 'awaiting upstream signal…' },
+      { n: '04', name: 'RPC Payload & Serialization Compressor Agent', sub: '(gRPC / Protobuf)', status: 'awaiting upstream signal…' },
+      { n: '05', name: 'Kubernetes Autoscaling & HPA Tuner Agent', sub: '(K8s Metrics API)', status: 'awaiting upstream signal…' },
+      { n: '06', name: 'Garbage Collection & Memory Defragmenter Agent', sub: '(JVM / Go Runtime)', status: 'awaiting upstream signal…' },
+      { n: '07', name: 'Load Balancer & Connection Pool Optimizer Agent', sub: '(Envoy / HAProxy)', status: 'awaiting upstream signal…' },
+      { n: '08', name: 'System Health & Throughput Benchmark Verifier Agent', sub: '', status: 'awaiting upstream signal…' }
     ]
   }
 };
