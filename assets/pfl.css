@@ -95,10 +95,10 @@ section{padding-block:var(--sy)}
 /* ── FOOTER ── */
 footer{background:var(--surface);border-top:1px solid var(--border);padding-block:52px 24px}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:48px}
-.ft-name{font-family:var(--fd);font-size:18px;font-weight:900}
-.ft-name span:first-child{color:var(--cyan)}
-.ft-name span:last-child{color:var(--magenta)}
-.ft-brand p{font-size:13.5px;line-height:1.75;margin-top:12px;max-width:28ch}
+.ft-name, .ft-brand-name{font-family:var(--fd);font-size:20.5px;font-weight:900}
+.ft-name span:first-child, .ft-brand-name span:first-child{color:var(--cyan)}
+.ft-name span:last-child, .ft-brand-name span:last-child{color:var(--magenta)}
+.ft-brand p{font-size:15px;line-height:1.75;margin-top:12px;max-width:32ch}
 .ft-col h4{font-family:var(--fd);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-strong);margin-bottom:16px}
 .ft-col a{display:block;font-size:13.5px;color:var(--text-body);padding-block:5px;transition:color .2s}
 .ft-col a:hover{color:var(--cyan)}
