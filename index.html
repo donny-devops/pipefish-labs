@@ -1114,6 +1114,7 @@
         <div>PIPEFISH PLATFORM OVERVIEW v4.2</div>
       </div>
       <div class="video-container">
+        <video id="briefing-video-player" src="/briefing-video.mp4" playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:none;"></video>
         <canvas id="briefing-canvas" class="video-canvas"></canvas>
         <div class="video-overlay" id="v-overlay">
           <button class="play-btn-lg" onclick="playBriefingVideo()" aria-label="Play Executive Briefing Video">
@@ -2675,8 +2676,30 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
   }
 
   window.playBriefingVideo = function() {
-    playing = !playing;
+    const videoEl = document.getElementById('briefing-video-player');
     const overlay = document.getElementById('v-overlay');
+    if (videoEl && videoEl.getAttribute('src')) {
+      if (videoEl.paused) {
+        videoEl.style.display = 'block';
+        if (canvas) canvas.style.display = 'none';
+        videoEl.play().then(() => {
+          if (overlay) overlay.classList.add('playing');
+        }).catch(err => {
+          console.warn('MP4 video playback error/not found, falling back to canvas:', err);
+          videoEl.style.display = 'none';
+          if (canvas) canvas.style.display = 'block';
+          playing = true;
+          if (overlay) overlay.classList.add('playing');
+          renderVideoFrame();
+        });
+      } else {
+        videoEl.pause();
+        if (overlay) overlay.classList.remove('playing');
+      }
+      return;
+    }
+
+    playing = !playing;
     if (playing) {
       if (overlay) overlay.classList.add('playing');
       renderVideoFrame();
