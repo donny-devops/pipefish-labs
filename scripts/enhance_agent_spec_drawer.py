@@ -92,6 +92,7 @@ spec_data = {
   },
   "trend": {
     "title": "Trend Spotting Agent",
+    "duties": "• Market Signal Monitoring: Continuously scans social APIs, forum discussions, patent registries, and RSS feeds to detect macro trends and consumer intent shifts.<br>• Velocity &amp; Anomaly Detection: Tracks metric surges (such as rapid spikes in post-quantum cryptography procurement discussions across CISO forums) to flag emerging industry movements early.<br>• Correlative Analysis: Works in tandem with patent and academic paper correlators to validate organic social trends against technical and scientific research.<br>• Upstream Telemetry Handoffs: Generates and passes structured JSON payloads downstream into semantic clustering, sentiment analysis, and executive trend dossier engines within the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">PipeFish Labs</a> agent mesh.",
     "skills": "multi-source-signal-scraper, semantic-embedding-cluster, patent-correlator, strategy-alert",
     "mcp": "mcp-server-patent-uspto, mcp-server-twitter-v2, mcp-server-rss-aggregator",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/macro-trend-alert",
@@ -249,7 +250,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Receptionist Agent spec_data into index.html")
+print("Successfully injected updated Trend Spotting Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -260,4 +261,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Receptionist Agent spec_data into demo/index.html")
+print("Successfully injected updated Trend Spotting Agent spec_data into demo/index.html")
