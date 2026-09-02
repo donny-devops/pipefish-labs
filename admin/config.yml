@@ -1,0 +1,31 @@
+backend:
+  name: github
+  repo: donny-devops/pipefish-labs
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "blog"
+    label: "Engineering Blog"
+    folder: "blog"
+    create: true
+    slug: "{{slug}}/index"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "PipeFish Labs Research" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "case_studies"
+    label: "Case Studies"
+    folder: "case-studies-results"
+    create: true
+    slug: "{{slug}}/index"
+    fields:
+      - { label: "Client Name", name: "client", widget: "string" }
+      - { label: "Industry", name: "industry", widget: "string" }
+      - { label: "ROI Metric", name: "roi_metric", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
