@@ -4,6 +4,7 @@ import json
 spec_data = {
   "receptionist": {
     "title": "Receptionist Agent (Voice & Text)",
+    "duties": "The Receptionist Agent combines voice and text handling into a unified intake pipeline for voice calls, SMS, web chats, and email channels:<br><br>• Multichannel Inbound Handling: Answers 100% of after-hours calls and incoming texts/emails with a low average voice latency of 3.2 seconds.<br>• Intent Classification &amp; Verification: Automatically classifies buyer intent, checks account eligibility, and verifies team capacity.<br>• Scheduling &amp; Sales Conversion: Books consultation calls directly into calendars, generates proposals, and handles follow-up contract and retainer signatures.<br>• Integrated Node Execution: Coordinates seamlessly downstream with availability checks, intake verification, CRM/EMR synchronization, automated payment requests, and escalation alerts.",
     "skills": "voice-receptionist, text-intent-classifier, calendar-sync, crm-emr-bridge",
     "mcp": "mcp-server-telephony (Twilio/Telnyx), mcp-server-google-calendar, mcp-server-hubspot",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/voice-intake | mailhook://support-inbound@pipefishlabs.io",
@@ -248,7 +249,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Encryption Agent spec_data into index.html")
+print("Successfully injected updated Receptionist Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -259,4 +260,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Encryption Agent spec_data into demo/index.html")
+print("Successfully injected updated Receptionist Agent spec_data into demo/index.html")
