@@ -1277,6 +1277,7 @@
       <!-- Action Controls -->
       <div class="demo-controls">
         <button id="run-demo-btn" onclick="runDemoGraph()" class="btn btn-p">Run Agents →</button>
+        <button id="copy-demo-payload-btn" onclick="copyDemoPayload()" class="btn btn-o">Copy Telemetry Payload 📋</button>
         <button id="reset-demo-btn" onclick="resetDemoGraph()" class="btn btn-o">Reset</button>
       </div>
 
@@ -2599,6 +2600,25 @@ function renderDemoRows() {
     `;
   }
 }
+
+window.copyDemoPayload = function() {
+  const sc = demoScenarios[currentDemoScenario];
+  const payloadData = {
+    agent: sc.nodes ? sc.nodes[0].name : currentDemoScenario,
+    telemetry: sc.payload,
+    channels: sc.channel,
+    timestamp: new Date().toISOString(),
+    hmac_signature: "0x9F41A82C" + Math.floor(Math.random()*900000 + 100000).toString(16).toUpperCase()
+  };
+  navigator.clipboard.writeText(JSON.stringify(payloadData, null, 2)).then(() => {
+    const btn = document.getElementById('copy-demo-payload-btn');
+    if (btn) {
+      const orig = btn.innerText;
+      btn.innerText = 'Copied to Clipboard! ✓';
+      setTimeout(() => { btn.innerText = orig; }, 2000);
+    }
+  });
+};
 
 let demoTimeoutId = null;
 
