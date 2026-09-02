@@ -4,13 +4,13 @@ import json
 spec_data = {
   "receptionist": {
     "title": "Receptionist Agent (Voice & Text)",
-    "duties": "The Receptionist Agent combines voice and text handling into a unified intake pipeline for voice calls, SMS, web chats, and email channels:<br><br>• Multichannel Inbound Handling: Answers 100% of after-hours calls and incoming texts/emails with a low average voice latency of 3.2 seconds.<br>• Intent Classification &amp; Verification: Automatically classifies buyer intent, checks account eligibility, and verifies team capacity.<br>• Scheduling &amp; Sales Conversion: Books consultation calls directly into calendars, generates proposals, and handles follow-up contract and retainer signatures.<br>• Integrated Node Execution: Coordinates seamlessly downstream with availability checks, intake verification, CRM/EMR synchronization, automated payment requests, and escalation alerts.",
+    "duties": "The Receptionist Agent combines voice and text handling into a unified intake pipeline for voice calls, SMS, web chats, and email channels:<br><br>• Multichannel Inbound Handling: Answers 100% of after-hours calls and incoming texts/emails with a low average voice latency of 3.2 seconds.<br>• Intent Classification &amp; Verification: Automatically classifies buyer intent, checks account eligibility, and verifies team capacity.<br>• Scheduling &amp; Sales Conversion: Books consultation calls directly into calendars, generates proposals, and handles follow-up contract and retainer signatures.<br>• Integrated Node Execution: Coordinates seamlessly downstream via Native Mistral Handoffs with availability checks, intake verification, CRM/EMR synchronization, automated payment requests, and escalation alerts.",
     "skills": "voice-receptionist, text-intent-classifier, calendar-sync, crm-emr-bridge",
     "mcp": "mcp-server-telephony (Twilio/Telnyx), mcp-server-google-calendar, mcp-server-hubspot",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/voice-intake | mailhook://support-inbound@pipefishlabs.io",
     "secrets": "Twilio Account SID/Auth Token (HashiCorp Vault KV v2), OAuth2 Refresh Tokens",
     "apis": "Twilio Voice API, Google Calendar API v3, HubSpot CRM API, Stripe Billing API",
-    "a2a": "mTLS gRPC DAG Handoff with HMAC-SHA256 state signature verification",
+    "a2a": "Mistral Native Handoff (Tool Call State Persistence across 8-Node Graph without Middleware)",
     "rbac": "Role: VoiceReceptionistBot | Perms: calendar.read_write, crm.contact.create (ZDR Enclave)"
   },
   "sales": {
@@ -21,7 +21,7 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/lead-form | mailhook://sales-inbound@pipefishlabs.io",
     "secrets": "Salesforce Connected App Client Secret (AWS KMS), Clearbit API Key (Vault)",
     "apis": "Salesforce REST API v58, Apollo.io Enrichment API, Pandadoc API, Slack Webhooks",
-    "a2a": "JSON-RPC over NATS JetStream with RSA-4096 Signed Payload Tokens",
+    "a2a": "Mistral Native Handoff with Seamless Tool Call State Persistence",
     "rbac": "Role: SalesEnablementBot | Perms: crm.opportunity.edit, email.send, doc.generate"
   },
   "logistics": {
@@ -32,7 +32,7 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/edi-ingest | mailhook://dispatch@pipefishlabs.io",
     "secrets": "EDI Trading Partner Certificates (Vault PKI), GPS Telematics API Token",
     "apis": "EDI 204/214/856 Standards, Samsara Telematics API, Project44 Visibility API",
-    "a2a": "Kafka Event Mesh with Avro Schema Validation & PQC Dilithium Signatures",
+    "a2a": "Mistral Native Handoff (8-Node Asynchronous State Flow)",
     "rbac": "Role: SupplyChainDispatcher | Perms: manifest.read, reroute.execute, edi.transmit"
   },
   "integration": {
@@ -43,19 +43,19 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/integration-mesh | mailhook://sync@pipefishlabs.io",
     "secrets": "SAP RFC Service Account Keys (Vault), OAuth2 Client Secret Store",
     "apis": "Kafka REST Proxy, SAP S/4HANA OData API, GraphQL Mesh, Workday REST API",
-    "a2a": "gRPC Streaming with Circuit Breaker & Automatic Retry Fallback",
+    "a2a": "Mistral Native Handoff with Zero-Middleware State Handoff",
     "rbac": "Role: MiddlewareIntegrator | Perms: stream.read_write, token.rotate, schema.transform"
   },
   "quantum": {
     "title": "Execution Agent",
     "duties": "• Independent Step Execution: Runs standalone tasks within the multi-agent DAG pipeline, processing serialized data payloads without blocking downstream nodes.<br>• Cryptographic State Verification: Validates incoming payloads signed with HMAC-SHA256 and NIST post-quantum encryption standards before executing core business logic.<br>• Ephemeral ZDR Processing: Operates inside Zero-Data Retention confidential enclaves (such as AWS Nitro and SGX) to ensure 0-byte persistent storage of sensitive data during runtime.<br>• Cross-System Interoperability: Bridges custom Model Context Protocol (MCP) servers, enterprise APIs, and legacy software systems to carry out automated actions.<br>• Autonomous Error Escalation: Detects execution anomalies and routes exceptions back through error-correcting or triage agents when criteria fall outside preset parameters.",
     "skills": "vqe-eigensolver, circuit-transpiler, quantum-error-mitigation, hpc-execution",
-    "mcp": "mcp-server-qiskit, mcp-server-ibm-quantum, mcp-server-aws-braket",
+    "mcp": "Managed Mistral MCP Connectors: mcp-server-qiskit, mcp-server-ibm-quantum, mcp-server-hashicorp-vault",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/quantum-job-results",
     "secrets": "IBM Quantum Platform API Key (Vault KV v2), AWS Braket Access Keys",
     "apis": "Qiskit Runtime API, IBM Q Cloud REST API, AWS Braket SDK, Cirq Engine",
-    "a2a": "Asynchronous Parallel Worker Threads with Zero-Noise Extrapolation Verification",
-    "rbac": "Role: QuantumExecutionEngine | Perms: qpu.submit, transpiler.compile, hpc.allocate"
+    "a2a": "Mistral Native Handoff (Ephemeral ZDR Enclave Tool Handoff)",
+    "rbac": "Role: QuantumExecutionEngine | Perms: qpu.submit, enclave.access (HashiCorp Vault Enclave Connector)"
   },
   "reverse": {
     "title": "Reverse Engineering Agent",
@@ -65,18 +65,18 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/binary-analysis-intel",
     "secrets": "Ghidra Server Auth Credentials, VirusTotal API Enterprise Key",
     "apis": "Ghidra Headless API, CAPEv2 Sandbox REST API, YARA C Engine, Binary Ninja API",
-    "a2a": "Isolated Container IPC Enclave with Cryptographic Hash Integrity Verification",
+    "a2a": "Mistral Native Handoff (Isolated AST Enclave Tool Call)",
     "rbac": "Role: ReverseEngineerBot | Perms: binary.disassemble, cfg.generate, yara.compile"
   },
   "crypto": {
     "title": "Encryption / Cryptography Agent",
     "duties": "<b>Encryption / Cryptography Agent Capabilities</b><br><br>• Post-Quantum Cryptography (PQC) Integration: Provisions and enforces NIST FIPS 203 ML-KEM-768 key encapsulation mechanisms and FIPS 204 ML-DSA signatures across internal mTLS microservices.<br>• Hardware Security Module (HSM) Operations: Manages automated master key rotation and secure cryptographic operations integrated with HashiCorp Vault, AWS KMS, and PKI Certificate Authorities.<br>• Hybrid Certificate Enforcement: Oversees mTLS hybrid certificate management to secure modern multi-agent communication streams.<br>• Cryptographic Inventory &amp; Auditing: Automatically tracks, audits, and verifies cryptographic assets, algorithms, and key lifecycles across distributed systems.<br>• Zero-Data-Retention (ZDR) Handoffs: Coordinates with enclaves to ensure that sensitive payloads processed during multi-agent state transitions are kept secure in RAM-only environments with strict zero-byte retention policies.",
     "skills": "nist-ml-kem-768, nist-ml-dsa-signatures, hsm-vault-rotation, mtls-hybrid-pki",
-    "mcp": "mcp-server-openssl-pqc, mcp-server-hashicorp-vault, mcp-server-aws-kms",
+    "mcp": "Managed Mistral MCP Connectors: mcp-server-openssl-pqc, mcp-server-hashicorp-vault, mcp-server-aws-kms",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/pqc-key-rotation-alert",
     "secrets": "Vault Root CA Master Token, AWS KMS Hardware Security Module Master Key",
     "apis": "OpenSSL 3.2 PQC Module, HashiCorp Vault Transit API, AWS KMS Sign/Verify",
-    "a2a": "NIST FIPS 203 (ML-KEM-768) Encapsulated Key Exchange over mTLS 1.3",
+    "a2a": "Mistral Native Handoff (NIST FIPS 203 ML-KEM-768 Tool Exchange)",
     "rbac": "Role: CryptoArchitectBot | Perms: kms.rotate, cert.issue, enclave.encrypt"
   },
   "errorcorr": {
@@ -87,29 +87,29 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/parity-corruption-repair",
     "secrets": "Vector Database Storage Encryption Keys (Vault KV v2)",
     "apis": "Reed-Solomon C++ Native Library, Pinecone Shard Management API, Qdrant API",
-    "a2a": "High-Speed Memory Bus RPC with Parity Check Bit Verification",
+    "a2a": "Mistral Native Handoff (Zero-Loss Memory Bus Tool Call)",
     "rbac": "Role: ErrorCorrectionEngine | Perms: shard.repair, parity.compute, storage.write"
   },
   "trend": {
     "title": "Trend Spotting Agent",
     "duties": "• Market Signal Monitoring: Continuously scans social APIs, forum discussions, patent registries, and RSS feeds to detect macro trends and consumer intent shifts.<br>• Velocity &amp; Anomaly Detection: Tracks metric surges (such as rapid spikes in post-quantum cryptography procurement discussions across CISO forums) to flag emerging industry movements early.<br>• Correlative Analysis: Works in tandem with patent and academic paper correlators to validate organic social trends against technical and scientific research.<br>• Upstream Telemetry Handoffs: Generates and passes structured JSON payloads downstream into semantic clustering, sentiment analysis, and executive trend dossier engines within the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">PipeFish Labs</a> agent mesh.",
     "skills": "multi-source-signal-scraper, semantic-embedding-cluster, patent-correlator, strategy-alert",
-    "mcp": "mcp-server-patent-uspto, mcp-server-twitter-v2, mcp-server-rss-aggregator",
+    "mcp": "Mistral Websearch Connector, mcp-server-patent-uspto, mcp-server-twitter-v2, mcp-server-rss-aggregator",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/macro-trend-alert",
     "secrets": "X/Twitter API v2 Bearer Token, USPTO Patent Search Key (Vault)",
     "apis": "USPTO Open Data API, arXiv API, NewsAPI, Pinecone Vector Index",
-    "a2a": "Pub/Sub Stream with Isolation Forest Velocity Anomaly Triggering",
+    "a2a": "Mistral Native Handoff (Isolation Forest Pub/Sub Tool Handoff)",
     "rbac": "Role: TrendSpottingBot | Perms: signal.scrape, embedding.compute, alert.dispatch"
   },
   "market": {
     "title": "Market Research Agent",
     "duties": "Market Research Agent functions as an autonomous data collection and intelligence node designed to monitor external market landscapes, aggregate competitive data, and synthesize macro trends without manual oversight.<br><br><b>Core Capabilities</b><br>• Automated Signal Scrapping &amp; Ingestion: Continuously pulling data from external industry sources, social forums, patent registries, academic papers, and RSS feeds.<br>• Trend &amp; Sentiment Analysis: Processing velocity surges in market demand, consumer sentiment, and emerging technology or procurement shifts (such as post-quantum cryptography adoption or competitor product releases).<br>• Competitor Horizon Mapping: Tracking market shifts, parsing competitive adjustments, and updating internal commercial opportunity scoring metrics.<br>• Executive Dossier Generation: Synthesizing disparate qualitative and quantitative data points into structured operational briefings, strategic alerts, and handoff payloads for upstream/downstream nodes like strategy or sales enablement agents.",
-    "skills": "sec-10k-extractor, competitive-matrix, tam-sam-calculator, swot-synthesizer",
-    "mcp": "mcp-server-sec-edgar, mcp-server-gartner-search, mcp-server-rag-vector-db",
+    "skills": "sec-filing-rag, websearch-connector, sec-10k-extractor, competitive-matrix, swot-synthesizer",
+    "mcp": "Mistral Document Library RAG Tool, Mistral Websearch Connector, mcp-server-sec-edgar",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/market-research-digest",
     "secrets": "SEC EDGAR User-Agent Auth Headers, Financial Data API Key (Vault)",
     "apis": "SEC EDGAR REST API, Financial Modeling Prep API, OpenAI Embeddings API",
-    "a2a": "RAG Vector Context Retrieval with Cross-Encoder Reranking",
+    "a2a": "Mistral Native Handoff (RAG & Websearch Context Persistence)",
     "rbac": "Role: MarketAnalystBot | Perms: edgar.fetch, rag.query, dossier.build"
   },
   "codescan": {
@@ -120,7 +120,7 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/sast-dast-audit-event",
     "secrets": "GitHub App Private Key (Vault), SonarQube Auth Token",
     "apis": "GitHub GraphQL API v4, Semgrep CLI API, Dependency-Track REST API",
-    "a2a": "Git Commit Hook Trigger with Automated PR Inline Blocking",
+    "a2a": "Mistral Native Handoff (Git Commit Hook PR Tool Handoff)",
     "rbac": "Role: SecurityScannerBot | Perms: code.scan, pr.comment, build.block"
   },
   "docs": {
@@ -131,7 +131,7 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/autodoc-build-complete",
     "secrets": "Developer Portal Deployment Token (Vault v2)",
     "apis": "TypeDoc CLI API, Sphinx Builder, OpenAPI v3.1 Spec Generator",
-    "a2a": "CI/CD Pipeline Hook with Automated Markdown & Diagram Generation",
+    "a2a": "Mistral Native Handoff (CI/CD Markdown & Diagram Tool Handoff)",
     "rbac": "Role: DocGeneratorBot | Perms: ast.parse, doc.publish, site.build"
   },
   "observability": {
@@ -142,7 +142,7 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/opentelemetry-alert",
     "secrets": "Grafana Admin API Token, Datadog Application Key (Vault)",
     "apis": "OpenTelemetry Collector Protocol (OTLP), Prometheus Query API (PromQL), Jaeger Tracing",
-    "a2a": "OTLP gRPC Trace Mesh with SLA Violation Triggering",
+    "a2a": "Mistral Native Handoff (OTLP Trace Mesh SLA Tool Handoff)",
     "rbac": "Role: ObservabilityEngine | Perms: telemetry.read, alert.fire, pod.restart"
   },
   "revops": {
@@ -153,30 +153,30 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/growth-intent-trigger",
     "secrets": "PostHog Project Key, Stripe Secret Key (Vault v2)",
     "apis": "PostHog Insights API, Segment Stream, Clearbit Reveal API, Stripe API",
-    "a2a": "Real-Time Event Stream with Dynamic Landing Page Personalization",
+    "a2a": "Mistral Native Handoff (Real-Time Event Stream Personalization)",
     "rbac": "Role: RevOpsGrowthBot | Perms: analytics.read, crm.enrich, variant.deploy"
   },
   "analytics": {
     "title": "Research Agent",
-    "duties": "<b>Research Agent Core Capabilities</b><br><br>• Autonomous Signal &amp; Telemetry Ingestion: Processes high-throughput data streams, ingests disparate enterprise signals, and prepares unstructured inputs for upstream processing.<br>• Contextual Information Retrieval: Searches, aggregates, and synthesizes multi-source data across databases, APIs, and document stores to build coherent research dossiers.<br>• Directed Acyclic Graph (DAG) State Handoffs: Packages verified JSON payloads and passes structured context securely to downstream analysis and execution agents with zero payload exposure.<br>• Zero-Data Retention (ZDR) Security Enforcement: Operates inside ephemeral confidential enclaves (AWS Nitro/SGX) to guarantee that sensitive research parameters and retrieved payloads leave zero retention footprints.<br>• Continuous Multi-Agent Coordination: Collaborates asynchronously with specialized nodes—such as the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Analysis Agent</a>, <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Audit Agent</a>, and <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Execution Agent</a>—to maintain continuous operational momentum without human intervention.",
-    "skills": "clickhouse-stream-ingest, cohort-funnel-calc, churn-predictor, bi-dashboard-synth",
-    "mcp": "mcp-server-snowflake, mcp-server-clickhouse, mcp-server-mixpanel",
+    "duties": "<b>Research Agent Core Capabilities</b><br><br>• Autonomous Signal &amp; Telemetry Ingestion: Processes high-throughput data streams, ingests disparate enterprise signals, and prepares unstructured inputs for upstream processing.<br>• Built-In SEC Filing Synthesis &amp; RAG: Utilizes Mistral's out-of-the-box Document Library RAG tool and Websearch connector to parse SEC 10-K/10-Q filings, financial reports, and live market intelligence.<br>• Contextual Information Retrieval: Searches, aggregates, and synthesizes multi-source data across databases, APIs, and document stores to build coherent research dossiers.<br>• Directed Acyclic Graph (DAG) State Handoffs: Packages verified JSON payloads and passes structured context securely via Native Mistral Handoffs to downstream analysis and execution agents with persistent state.<br>• Zero-Data Retention (ZDR) Security Enforcement: Operates inside ephemeral confidential enclaves (AWS Nitro/SGX) to guarantee that sensitive research parameters leave zero retention footprints.<br>• Continuous Multi-Agent Coordination: Collaborates asynchronously with specialized nodes—such as the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Analysis Agent</a>, <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Audit Agent</a>, and <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Execution Agent</a>—to maintain continuous operational momentum without human intervention.",
+    "skills": "sec-filing-rag, websearch-connector, clickhouse-stream-ingest, cohort-funnel-calc, bi-dashboard-synth",
+    "mcp": "Mistral Document Library RAG Tool, Mistral Websearch Connector, mcp-server-snowflake, mcp-server-clickhouse",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/analytics-digest",
     "secrets": "Snowflake Key-Pair Auth Credentials (Vault), ClickHouse SSL Key",
     "apis": "ClickHouse HTTP Query API, Snowflake SQL REST API, Mixpanel Export API",
-    "a2a": "High-Throughput Vector Embedding Query Loop over Distributed Shards",
-    "rbac": "Role: ResearchAnalystBot | Perms: db.query, cohort.compute, bi.export"
+    "a2a": "Mistral Native Handoff (Document Library RAG & Websearch Context Persistence)",
+    "rbac": "Role: ResearchAnalystBot | Perms: db.query, cohort.compute, bi.export, rag.query"
   },
   "auditing": {
     "title": "Analysis Agent",
-    "duties": "• Contextual Synthesis: Processes and analyzes structured signals, telemetry data, and multi-source inputs to extract actionable insights and operational requirements.<br>• State Verification: Evaluates data integrity and operational parameters before handing off verified payloads through cryptographic Directed Acyclic Graph (DAG) state transitions.<br>• Decision Support: Powers automated decision-making engines by classifying intent, checking enterprise capacity, and flagging non-conformities or exceptions in real time.",
-    "skills": "cloudtrail-audit-collector, iam-policy-verifier, kms-vault-auditor, nonconformity-detector",
-    "mcp": "mcp-server-aws-cloudtrail, mcp-server-gcp-audit, mcp-server-vault-sys",
+    "duties": "• Contextual Synthesis: Processes and analyzes structured signals, telemetry data, and multi-source inputs to extract actionable insights and operational requirements.<br>• Native Code Interpreter Execution: Attaches Mistral's native Code Interpreter to execute Python scripts directly within the context window for retention cohort calculations and stream telemetry analysis.<br>• State Verification: Evaluates data integrity and operational parameters before handing off verified payloads through Native Mistral Handoff state transitions.<br>• Decision Support: Powers automated decision-making engines by classifying intent, checking enterprise capacity, and flagging non-conformities or exceptions in real time.",
+    "skills": "code-interpreter-python, cloudtrail-audit-collector, iam-policy-verifier, retention-cohort-calc, telemetry-stream-eval",
+    "mcp": "Mistral Code Interpreter (Python Execution Sandbox), mcp-server-aws-cloudtrail, mcp-server-vault-sys",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/soc2-audit-proof",
     "secrets": "AWS ReadOnlyAudit Access Key (Vault), GCP Audit Service Account",
-    "apis": "AWS CloudTrail API, GCP Cloud Audit Logs API, HashiCorp Vault Sys API",
-    "a2a": "Immutable Merkle Tree Ledger Verification Protocol",
-    "rbac": "Role: AuditAnalysisBot | Perms: audit.read, policy.verify, report.sign"
+    "apis": "AWS CloudTrail API, GCP Cloud Audit Logs API, HashiCorp Vault Sys API, Python Execution Sandbox",
+    "a2a": "Mistral Native Handoff (Code Interpreter Python Context Window Execution)",
+    "rbac": "Role: AuditAnalysisBot | Perms: audit.read, policy.verify, python.execute, report.sign"
   },
   "logtriage": {
     "title": "Log Triage Agent",
@@ -186,7 +186,7 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/log-exception-ingest",
     "secrets": "Elasticsearch API Key (Vault), PagerDuty Events v2 API Key",
     "apis": "Vector Log Engine API, Elasticsearch Search API, PagerDuty Events v2 API",
-    "a2a": "Zero-Loss Vector Stream Tokenizer with P1 Escalation Triggers",
+    "a2a": "Mistral Native Handoff (Zero-Loss Vector Stream Tool Handoff)",
     "rbac": "Role: LogTriageBot | Perms: logs.ingest, issue.link, incident.trigger"
   },
   "erp": {
@@ -197,7 +197,7 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/erp-financial-event",
     "secrets": "SAP Client Certificates (Vault PKI), Avalara Tax API Password",
     "apis": "SAP S/4HANA Financials OData API, Oracle ERP Cloud REST API, Avalara AvaTax",
-    "a2a": "Double-Entry Cryptographic Balance Audit Handoff",
+    "a2a": "Mistral Native Handoff (Double-Entry Cryptographic Balance Handoff)",
     "rbac": "Role: FinancialAuditBot | Perms: ledger.post, po.match, edi.dispatch"
   },
   "trafficrouter": {
@@ -208,18 +208,18 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/edge-latency-alert",
     "secrets": "Cloudflare Global API Key (Vault v2), AWS Route 53 IAM Token",
     "apis": "Cloudflare v4 REST API, AWS Route 53 API, Envoy Control Plane gRPC",
-    "a2a": "BGP Anycast Dynamic Routing Control Plane Protocol",
+    "a2a": "Mistral Native Handoff (BGP Anycast Dynamic Routing Handoff)",
     "rbac": "Role: EdgeTrafficRouter | Perms: dns.update, WAF.block, proxy.configure"
   },
   "networkdispatch": {
     "title": "Network Dispatch Agent",
-    "duties": "• Cross-system network routing: Dispatches operational traffic, data payloads, and service events securely across hybrid infrastructure, custom MCP servers, and integrated carrier systems.<br>• Asynchronous DAG state coordination: Manages cryptographically signed payloads (using HMAC-SHA256 and NIST ML-KEM-768 post-quantum encryption) to route transactional state transitions seamlessly between specialized multi-agent nodes.<br>• Multi-channel endpoint dispatch: Coordinates external signal handoffs across voice, email, SMS, UCC/VTC, and API surfaces as part of the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">PipeFish Labs</a> orchestration platform.",
+    "duties": "• Cross-system network routing: Dispatches operational traffic, data payloads, and service events securely across hybrid infrastructure, custom MCP servers, and integrated carrier systems.<br>• Asynchronous DAG state coordination: Manages cryptographically signed payloads (using HMAC-SHA256 and NIST ML-KEM-768 post-quantum encryption) to route transactional state transitions seamlessly between specialized multi-agent nodes via Native Mistral Handoffs.<br>• Multi-channel endpoint dispatch: Coordinates external signal handoffs across voice, email, SMS, UCC/VTC, and API surfaces as part of the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">PipeFish Labs</a> orchestration platform.",
     "skills": "sdwan-topology-analyzer, qos-dssc-prioritizer, wireguard-provisioner, zero-touch-provisioner",
     "mcp": "mcp-server-cisco-sdwan, mcp-server-juniper-pyez, mcp-server-wireguard",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/sdwan-mesh-alert",
     "secrets": "Cisco vManage Authentication Token (Vault), WireGuard Private Key Store",
     "apis": "Cisco SD-WAN REST API, Juniper PyEZ RPC API, WireGuard Kernel API",
-    "a2a": "gNMI / YANG Network Telemetry Stream over Encrypted WireGuard Tunnel",
+    "a2a": "Mistral Native Handoff (gNMI / YANG Network Telemetry Stream Handoff)",
     "rbac": "Role: NetworkDispatchEngine | Perms: sdwan.configure, tunnel.create, qos.set"
   },
   "selfimproving": {
@@ -229,19 +229,19 @@ spec_data = {
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/reflection-loop-complete",
     "secrets": "Pinecone Vector DB Master Key (Vault v2), DSPy Optimization Secret",
     "apis": "DSPy Optimization Engine, Pinecone Vector API, OpenTelemetry Trace API",
-    "a2a": "LLM Self-Critique & Automated Instruction Mutation Reflection Loop",
+    "a2a": "Mistral Native Handoff (LLM Self-Critique Instruction Mutation Handoff)",
     "rbac": "Role: SelfImprovingEngine | Perms: prompt.mutate, memory.write, eval.run"
   },
   "systemoptimizing": {
     "title": "System-Optimizing Agent",
     "duties": "The System-Optimizing Agent acts as an automated infrastructure tuning engine designed to diagnose and resolve performance bottlenecks across distributed microservice architectures.<br><br>• Target Signal Processing: Ingests live inbound telemetry signals such as CPU/memory bottlenecks, database indexing latency, and unoptimized RPC query plans across distributed systems.<br>• Continuous Runtime Tuning: Automatically coordinates execution across specialized subagents to resolve performance constraints in real-time.<br>• Associated Subagent Chain: Works alongside foundational modules in the live agent mesh, including the eBPF CPU &amp; Memory Profiler Agent (Kernel Profiler), Database Index &amp; Query Plan Optimizer Agent (EXPLAIN ANALYZE), Cache Invalidation &amp; Hit Ratio Tuning Agent (Redis/Memcached), RPC Payload &amp; Serialization Compressor Agent (gRPC/Protobuf), Kubernetes Autoscaling &amp; HPA Tuner Agent (K8s Metrics API), Garbage Collection &amp; Memory Defragmenter Agent (JVM/Go Runtime), and Load Balancer &amp; Connection Pool Optimizer Agent (Envoy/HAProxy).",
     "skills": "ebpf-cpu-memory-profiler, explain-analyze-planner, redis-cache-tuner, k8s-hpa-autoscaler",
-    "mcp": "mcp-server-ebpf-profiler, mcp-server-postgres-planner, mcp-server-k8s-metrics",
+    "mcp": "Managed Mistral MCP Connectors: mcp-server-ebpf-profiler, mcp-server-postgres-planner, mcp-server-k8s-metrics",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/runtime-tuning-event",
     "secrets": "Kubernetes Service Account Token (Vault), Redis Cluster Auth Pass",
     "apis": "eBPF Kernel Profiler, PostgreSQL EXPLAIN API, Kubernetes Metrics Server API",
-    "a2a": "Low-Overhead Kernel Telemetry Stream with Automated HPA Scaling Triggers",
-    "rbac": "Role: SystemOptimizerBot | Perms: k8s.autoscale, query.optimize, cache.flush"
+    "a2a": "Mistral Native Handoff (Kernel Telemetry Stream with K8s HPA Scaling Connector)",
+    "rbac": "Role: SystemOptimizerBot | Perms: k8s.autoscale (K8s HPA Connector), query.optimize, cache.flush (Zero-Trust Scoped)"
   }
 }
 
@@ -255,7 +255,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Network Dispatch Agent spec_data into index.html")
+print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -266,4 +266,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Network Dispatch Agent spec_data into demo/index.html")
+print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into demo/index.html")
