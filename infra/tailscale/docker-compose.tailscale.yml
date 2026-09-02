@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  tailscale-mesh-router:
+    image: tailscale/tailscale:latest
+    container_name: pipefish-tailscale
+    hostname: pipefish-agent-mesh-node
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_EXTRA_ARGS=--advertise-tags=tag:agent-mesh --accept-routes
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    volumes:
+      - tailscale-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    restart: unless-stopped
+    networks:
+      - pipefish-internal
+
+  # Protected Internal MCP Service reachable via Tailscale VPN
+  pipefish-mcp-internal:
+    build:
+      context: ../../
+      dockerfile: Dockerfile.mcp
+    container_name: pipefish-mcp-internal
+    restart: unless-stopped
+    networks:
+      - pipefish-internal
+    depends_on:
+      - tailscale-mesh-router
+
+networks:
+  pipefish-internal:
+    name: pipefish-internal
+    driver: bridge
+
+volumes:
+  tailscale-data:

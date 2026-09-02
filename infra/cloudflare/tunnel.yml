@@ -1,0 +1,29 @@
+# PipeFish Labs — Cloudflare Tunnel (cloudflared) Configuration
+# Provides zero-trust ingress to agent nodes and API services without opening public firewall ports
+
+tunnel: pipefish-agent-mesh-tunnel
+credentials-file: /etc/cloudflared/creds.json
+
+# Ingress Rules
+ingress:
+  # 1. API & Model Context Protocol Service
+  - hostname: api.pipefishlabs.io
+    service: http://localhost:8000
+    originRequest:
+      connectTimeout: 10s
+      noTLSVerify: false
+      http2Origin: true
+      keepAliveTimeout: 90s
+
+  # 2. Internal Agent Telemetry WebSocket Stream
+  - hostname: ws.pipefishlabs.internal
+    service: http://localhost:8001
+    originRequest:
+      originServerName: ws.pipefishlabs.internal
+
+  # 3. Secure SSH Bastion (Access via Cloudflare Access Zero-Trust)
+  - hostname: ssh.pipefishlabs.internal
+    service: ssh://localhost:22
+
+  # 4. Default Catch-All (Drop unmatched traffic)
+  - service: http_status:404

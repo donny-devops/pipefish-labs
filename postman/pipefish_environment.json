@@ -1,0 +1,18 @@
+{
+  "id": "e491a001-9941-4812-pipefish-env",
+  "name": "PipeFish Labs Environment (Staging/Production)",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pipefishlabs.io/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "apiKey",
+      "value": "pfl_live_demo_test_token_8841",
+      "type": "secret",
+      "enabled": true
+    }
+  ]
+}

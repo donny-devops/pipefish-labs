@@ -1,0 +1,38 @@
+name: Newman Automated API Regression Suite
+
+on:
+  push:
+    paths:
+      - 'sdk/openapi.yaml'
+      - 'postman/**'
+      - '.github/workflows/newman.yml'
+  pull_request:
+    paths:
+      - 'sdk/openapi.yaml'
+      - 'postman/**'
+
+permissions:
+  contents: read
+
+jobs:
+  newman-tests:
+    name: Execute Postman/Newman API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Newman Test Collection
+        run: |
+          newman run postman/pipefish_collection.json \
+            -e postman/pipefish_environment.json \
+            --reporters cli \
+            --bail false

@@ -1,0 +1,32 @@
+{
+  "target": {
+    "scope": {
+      "advanced_mode": true,
+      "include": [
+        {
+          "enabled": true,
+          "host": "^api\\.pipefishlabs\\.io$",
+          "protocol": "https"
+        },
+        {
+          "enabled": true,
+          "host": "^127\\.0\\.0\\.1$",
+          "port": "^8000$",
+          "protocol": "http"
+        }
+      ]
+    }
+  },
+  "proxy": {
+    "match_replace_rules": [
+      {
+        "comment": "Inject Valid Test HMAC Signature Header for Automated Auditing",
+        "enabled": true,
+        "is_simple_match": false,
+        "match_string": "^X-PipeFish-Test-Bypass:.*$",
+        "replace_string": "X-PipeFish-Signature: t=1725240000,v1=automated_burp_test_sig",
+        "rule_type": "request_header"
+      }
+    ]
+  }
+}

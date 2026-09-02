@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "name": "PipeFish Labs Multi-Agent Infrastructure",
+  "nodes": [
+    {
+      "name": "PipeFish Production Gateway",
+      "type": "ssh",
+      "host": "ssh.pipefishlabs.internal",
+      "user": "pfl-operator",
+      "port": 22,
+      "identityFile": "~/.ssh/pipefish_ed25519",
+      "tailscale": true,
+      "tags": ["production", "gateway", "zero-trust"]
+    },
+    {
+      "name": "PipeFish Nitro Enclave Host",
+      "type": "docker",
+      "host": "ssh.pipefishlabs.internal",
+      "container": "pipefish-mcp-internal",
+      "tags": ["nitro-enclave", "zdr", "mcp-server"]
+    }
+  ]
+}

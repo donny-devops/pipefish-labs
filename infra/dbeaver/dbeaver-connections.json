@@ -1,0 +1,45 @@
+{
+  "project": "PipeFish-Labs-Mesh",
+  "connections": {
+    "supabase-postgres-production": {
+      "provider": "postgresql",
+      "driver": "postgres-jdbc",
+      "name": "PipeFish Supabase PostgreSQL (Production)",
+      "save-password": false,
+      "configuration": {
+        "host": "db.pipefishlabs.internal",
+        "port": "5432",
+        "database": "pipefish_production",
+        "user": "pfl_admin",
+        "type": "dev",
+        "auth-model": "native",
+        "properties": {
+          "ssl": "true",
+          "sslmode": "verify-full",
+          "sslrootcert": "/etc/ssl/certs/pipefish-ca.crt"
+        },
+        "network": {
+          "ssh": {
+            "enabled": true,
+            "host": "ssh.pipefishlabs.internal",
+            "port": 22,
+            "authType": "PUBLIC_KEY",
+            "keyPath": "~/.ssh/pipefish_ed25519"
+          }
+        }
+      }
+    },
+    "local-sqlite-cache": {
+      "provider": "generic",
+      "driver": "sqlite_jdbc",
+      "name": "PipeFish Local Zero-Retention SQLite",
+      "configuration": {
+        "database": ":memory:",
+        "properties": {
+          "cipher": "sqlcipher",
+          "kdf_iter": "256000"
+        }
+      }
+    }
+  }
+}
