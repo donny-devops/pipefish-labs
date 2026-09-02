@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  pipefish-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    container_name: pipefish-mcp-server
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PIPEFISH_ENV=development
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m

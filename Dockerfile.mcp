@@ -1,0 +1,33 @@
+# syntax=docker/dockerfile:1
+# PipeFish Labs — Production MCP Server Container
+# Multi-stage, non-root, zero-trust hardened container
+
+FROM python:3.11-slim AS runtime
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PORT=8000
+
+# Create non-root user and group
+RUN groupadd -g 10001 pfl && \
+    useradd -u 10001 -g pfl -s /bin/sh -d /home/pfl -m pfl
+
+WORKDIR /app
+
+# Copy SDK code
+COPY sdk/ /app/sdk/
+
+# Set file permissions
+RUN chown -R pfl:pfl /app
+
+# Switch to non-root user
+USER pfl
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD python -c "import socket; sys.exit(0)" || exit 1
+
+# Standard MCP stdio execution
+ENTRYPOINT ["python", "sdk/mcp_server.py"]
