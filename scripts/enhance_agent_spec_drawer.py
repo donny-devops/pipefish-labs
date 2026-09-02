@@ -149,6 +149,7 @@ spec_data = {
   },
   "analytics": {
     "title": "Research Agent",
+    "duties": "<b>Research Agent Core Capabilities</b><br><br>• Autonomous Signal &amp; Telemetry Ingestion: Processes high-throughput data streams, ingests disparate enterprise signals, and prepares unstructured inputs for upstream processing.<br>• Contextual Information Retrieval: Searches, aggregates, and synthesizes multi-source data across databases, APIs, and document stores to build coherent research dossiers.<br>• Directed Acyclic Graph (DAG) State Handoffs: Packages verified JSON payloads and passes structured context securely to downstream analysis and execution agents with zero payload exposure.<br>• Zero-Data Retention (ZDR) Security Enforcement: Operates inside ephemeral confidential enclaves (AWS Nitro/SGX) to guarantee that sensitive research parameters and retrieved payloads leave zero retention footprints.<br>• Continuous Multi-Agent Coordination: Collaborates asynchronously with specialized nodes—such as the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Analysis Agent</a>, <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Audit Agent</a>, and <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Execution Agent</a>—to maintain continuous operational momentum without human intervention.",
     "skills": "clickhouse-stream-ingest, cohort-funnel-calc, churn-predictor, bi-dashboard-synth",
     "mcp": "mcp-server-snowflake, mcp-server-clickhouse, mcp-server-mixpanel",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/analytics-digest",
@@ -241,7 +242,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Execution Agent spec_data into index.html")
+print("Successfully injected updated Research Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -252,4 +253,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Execution Agent spec_data into demo/index.html")
+print("Successfully injected updated Research Agent spec_data into demo/index.html")
