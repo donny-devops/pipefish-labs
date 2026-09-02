@@ -74,6 +74,7 @@ spec_data = {
   },
   "errorcorr": {
     "title": "Error-Correcting Agent",
+    "duties": "• Error Detection and Monitoring: Continuously scans distributed vector database shards and inbound telemetry streams to detect byte corruption rates and anomalous payloads.<br>• Reed-Solomon and LDPC Decoding: Utilizes error-correcting codes such as Reed-Solomon byte repair, LDPC parity checkers, and syndrome calculations to reconstruct damaged data payloads.<br>• Polynomial Evaluation: Employs specialized components like the Error Locator Polynomial Agent (Berlekamp-Massey) and Chien Search &amp; Evaluator Agent to isolate and correct transmission faults.<br>• Automated Data Integrity Verification: Validates restored data chunks through sequential pipeline handoffs before downstream synchronization or storage ingestion.",
     "skills": "reed-solomon-repair, ldpc-parity-checker, berlekamp-massey-locator, vector-shard-rebuilder",
     "mcp": "mcp-server-reed-solomon, mcp-server-vector-shard-manager, mcp-server-parity",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/parity-corruption-repair",
@@ -236,7 +237,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Audit Agent spec_data into index.html")
+print("Successfully injected updated Error-Correcting Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -247,4 +248,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Audit Agent spec_data into demo/index.html")
+print("Successfully injected updated Error-Correcting Agent spec_data into demo/index.html")
