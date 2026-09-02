@@ -175,6 +175,7 @@ spec_data = {
   },
   "erp": {
     "title": "Audit Agent",
+    "duties": "• Append-Only Logging: Records immutable, verifiable logs of prompt hashes, model versions, temperature parameters, and decision outputs to maintain a tamper-proof audit trail.<br>• Compliance Verification: Continuously cross-references agent operations and state transitions against regulatory mandates like EU AI Act Annex IV, SOC 2 Type II, and HIPAA.<br>• Traceability Tracking: Monitors multi-agent directed acyclic graph (DAG) state handoffs and cryptographic token scoping to verify that every node executes within its authorized boundaries.<br>• Real-Time Telemetry: Captures and reports execution metrics, exception handling logs, and anomaly detection events to ensure enterprise readiness and operational transparency.",
     "skills": "sap-oracle-master-sync, po-3way-matcher, general-ledger-double-entry, edi-dispatcher",
     "mcp": "mcp-server-sap-s4hana, mcp-server-oracle-fusion, mcp-server-avalara",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/erp-financial-event",
@@ -229,29 +230,21 @@ spec_data = {
 with open('index.html', 'r', encoding='utf-8') as fp:
     index_content = fp.read()
 
-# Make sure window.agentSpecsData statement is placed before demoScenarios
-js_assignment = f"window.agentSpecsData = {json.dumps(spec_data)};\n"
-
-if 'window.agentSpecsData =' in index_content:
-    old_data = index_content.split('window.agentSpecsData = ')[1].split(';\nconst demoScenarios =')[0]
-    index_content = index_content.replace('window.agentSpecsData = ' + old_data, 'window.agentSpecsData = ' + json.dumps(spec_data))
-else:
-    index_content = index_content.replace('const demoScenarios = {', js_assignment + 'const demoScenarios = {')
+old_json_str = index_content.split('window.agentSpecsData = ')[1].split(';\nconst demoScenarios =')[0]
+new_json_str = json.dumps(spec_data)
+index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated agentSpecsData into index.html")
+print("Successfully injected updated Audit Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
     demo_content = fp.read()
 
-if 'window.agentSpecsData =' in demo_content:
-    old_demo_data = demo_content.split('window.agentSpecsData = ')[1].split(';\nconst scenarios =')[0]
-    demo_content = demo_content.replace('window.agentSpecsData = ' + old_demo_data, 'window.agentSpecsData = ' + json.dumps(spec_data))
-else:
-    demo_content = demo_content.replace('const scenarios = {', js_assignment + 'const scenarios = {')
+old_demo_json_str = demo_content.split('window.agentSpecsData = ')[1].split(';\nconst scenarios =')[0]
+demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated agentSpecsData into demo/index.html")
+print("Successfully injected updated Audit Agent spec_data into demo/index.html")
