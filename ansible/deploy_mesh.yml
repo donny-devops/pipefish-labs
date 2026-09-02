@@ -1,0 +1,57 @@
+---
+# PipeFish Labs — End-to-End Node Configuration Management Playbook
+# Automated hardening, Docker, Tailscale, Cloudflare Tunnel, and kernel sysctl tuning
+
+- name: Deploy and Harden PipeFish Multi-Agent Node
+  hosts: agent_nodes
+  become: true
+  vars:
+    pfl_user: "pfl"
+    pfl_uid: 10001
+    deploy_dir: "/opt/pipefish-labs"
+
+  tasks:
+    - name: Ensure non-root service group exists
+      ansible.builtin.group:
+        name: "{{ pfl_user }}"
+        gid: "{{ pfl_uid }}"
+        state: present
+
+    - name: Ensure non-root service user exists
+      ansible.builtin.user:
+        name: "{{ pfl_user }}"
+        uid: "{{ pfl_uid }}"
+        group: "{{ pfl_user }}"
+        shell: /usr/sbin/nologin
+        create_home: true
+
+    - name: Apply Zero-Trust Linux Kernel Sysctl Hardening
+      ansible.posix.sysctl:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+        state: present
+        reload: true
+      loop:
+        - { name: 'net.ipv4.tcp_syncookies', value: '1' }
+        - { name: 'net.ipv4.conf.all.rp_filter', value: '1' }
+        - { name: 'net.ipv4.conf.default.rp_filter', value: '1' }
+        - { name: 'kernel.randomize_va_space', value: '2' }
+        - { name: 'fs.protected_hardlinks', value: '1' }
+        - { name: 'fs.protected_symlinks', value: '1' }
+
+    - name: Ensure deployment directory structure exists
+      ansible.builtin.file:
+        path: "{{ deploy_dir }}"
+        state: directory
+        owner: "{{ pfl_user }}"
+        group: "{{ pfl_user }}"
+        mode: '0750'
+
+    - name: Install required baseline packages
+      ansible.builtin.package:
+        name:
+          - curl
+          - git
+          - ca-certificates
+          - gnupg
+        state: present

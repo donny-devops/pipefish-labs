@@ -1,0 +1,38 @@
+name: Policy & Infrastructure Validation (OPA & Envoy)
+
+on:
+  push:
+    paths:
+      - 'security/*.rego'
+      - 'infra/envoy/**'
+      - 'ansible/**'
+      - '.github/workflows/policy-test.yml'
+  pull_request:
+    paths:
+      - 'security/*.rego'
+      - 'infra/envoy/**'
+      - 'ansible/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-policies:
+    name: Validate OPA Rego Policies & Envoy Config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up OPA
+        uses: open-policy-agent/setup-opa@v2
+        with:
+          version: 'latest'
+
+      - name: Check Rego Syntax
+        run: |
+          opa check security/*.rego
+
+      - name: Validate Envoy YAML Syntax
+        run: |
+          python -c "import yaml; yaml.safe_load(open('infra/envoy/envoy.yaml'))"
