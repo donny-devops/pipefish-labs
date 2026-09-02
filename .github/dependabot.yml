@@ -1,8 +1,4 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
+# Dependabot configuration for PipeFish Labs
 version: 2
 updates:
   # Maintain dependencies for GitHub Actions
@@ -14,7 +10,7 @@ updates:
       - "dependencies"
       - "actions"
 
-  # Maintain Python dependencies (e.g., FastAPI, SQLAlchemy, Pydantic)
+  # Maintain Python dependencies
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
@@ -32,18 +28,9 @@ updates:
       - "dependencies"
       - "docker"
 
-  # Maintain Rust dependencies (Cargo)
-  - package-ecosystem: "cargo"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-      - "rust"
-
-  # Maintain npm dependencies
+  # Maintain npm dependencies in sdk/
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/sdk"
     schedule:
       interval: "weekly"
     labels:
