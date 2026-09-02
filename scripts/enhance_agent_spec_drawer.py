@@ -192,6 +192,7 @@ spec_data = {
   },
   "trafficrouter": {
     "title": "Traffic Router Agent",
+    "duties": "• Inbound Telemetry Ingestion: Captures and evaluates real-time network and routing signals, such as BGP route latency spikes or edge gateway congestion alerts.<br>• Intelligent Traffic Re-Routing: Automatically reroutes active sessions (such as thousands of concurrent HTTP/2 connections) across distributed global edge gateways, cloud providers (e.g., AWS Route 53, Cloudflare), and proxy layers (Envoy, NGINX, HAProxy).<br>• Asynchronous DAG State Handoff: Passes cryptographically signed operational payloads and routing metrics downstream to failover, shield, and health-monitoring nodes without blocking or latency bottlenecks.<br>• Autonomous Edge Optimization: Coordinates with telemetry and balancer agents to dynamically balance geographic traffic loads and maintain high availability under fluctuating traffic spikes.",
     "skills": "bgp-edge-health-monitor, route53-geo-balancer, cloudflare-waf-shield, canary-shifter",
     "mcp": "mcp-server-cloudflare-workers, mcp-server-aws-route53, mcp-server-envoy-proxy",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/edge-latency-alert",
@@ -243,7 +244,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated System-Optimizing Agent spec_data into index.html")
+print("Successfully injected updated Traffic Router Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -254,4 +255,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated System-Optimizing Agent spec_data into demo/index.html")
+print("Successfully injected updated Traffic Router Agent spec_data into demo/index.html")
