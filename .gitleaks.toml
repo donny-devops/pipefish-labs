@@ -1,0 +1,48 @@
+# PipeFish Labs — Gitleaks Enterprise Secret Scanning Configuration
+title = "PipeFish Labs Secret Scanning Rules"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "pipefish-api-key"
+description = "Detected PipeFish Labs Live API Key"
+regex = '''(?i)(pipefish|pfl)[-_]?(?:api)?[-_]?(?:key|token|secret)[\s:='\"]+([a-zA-Z0-9_\-]{24,})'''
+secretGroup = 2
+tags = ["pipefish", "api-key", "credentials"]
+
+[[rules]]
+id = "pipefish-webhook-secret"
+description = "Detected PipeFish Webhook HMAC Secret"
+regex = '''(?i)(whsec|webhook_secret)[-_]?(?:key|token)?[\s:='\"]+([a-zA-Z0-9_\-]{24,})'''
+secretGroup = 2
+tags = ["pipefish", "webhook", "hmac"]
+
+[[rules]]
+id = "mistral-api-key"
+description = "Detected Mistral AI API Key"
+regex = '''\b(mk-[a-zA-Z0-9]{32,})\b'''
+secretGroup = 1
+tags = ["mistral", "api-key", "ai"]
+
+[[rules]]
+id = "lemon-squeezy-api-key"
+description = "Detected Lemon Squeezy API / Webhook Secret"
+regex = '''(?i)(lemonsqueezy|ls_var|ls_key)[-_]?(?:key|token|secret)[\s:='\"]+([a-zA-Z0-9_\-]{20,})'''
+secretGroup = 2
+tags = ["lemonsqueezy", "billing"]
+
+[allowlist]
+description = "Allowlisted test and demo mock tokens"
+paths = [
+    '''tests/.*''',
+    '''postman/pipefish_environment\.json''',
+    '''examples/.*'''
+]
+regexes = [
+    '''demo_.*''',
+    '''mock_.*''',
+    '''test_.*''',
+    '''placeholder_.*''',
+    '''change_in_production_env'''
+]

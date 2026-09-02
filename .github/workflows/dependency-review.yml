@@ -1,0 +1,24 @@
+name: 'Dependency Review (GitHub Advanced Security)'
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    name: Dependency Review & Vulnerability Enforcement
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          deny-licenses: GPL-1.0-only, GPL-1.0-or-later, AGPL-1.0-only, AGPL-1.0-or-later
+          comment-summary-in-pr: always

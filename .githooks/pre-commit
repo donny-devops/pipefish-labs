@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# PipeFish Labs — Local Git Pre-Commit Hook
+# Prevents accidental commits containing credentials, API keys, or private keys.
+
+echo "🔍 [PipeFish Security] Running pre-commit secret protection audit..."
+
+# Check if git is available
+if ! command -v git >/dev/null 2>&1; then
+    exit 0
+fi
+
+# Scan staged changes for forbidden secret patterns
+STAGED_DIFF=$(git diff --cached --name-only)
+
+if [ -z "$STAGED_DIFF" ]; then
+    exit 0
+fi
+
+SECRETS_DETECTED=0
+
+for FILE in $STAGED_DIFF; do
+    # Skip binary files or test files
+    if [[ "$FILE" =~ \.(png|jpg|mp4|ico|woff2)$ ]] || [[ "$FILE" =~ tests/ ]]; then
+        continue
+    fi
+
+    # Check for AWS Secret Key
+    if git diff --cached "$FILE" | grep -E "^\+[[:space:]]*AKIA[0-9A-Z]{16}" >/dev/null 2>&1; then
+        echo "❌ [BLOCK] AWS Access Key detected in staged file: $FILE"
+        SECRETS_DETECTED=1
+    fi
+
+    # Check for Mistral API Key
+    if git diff --cached "$FILE" | grep -E "^\+[[:space:]]*mk-[a-zA-Z0-9]{32,}" >/dev/null 2>&1; then
+        echo "❌ [BLOCK] Mistral API Key detected in staged file: $FILE"
+        SECRETS_DETECTED=1
+    fi
+
+    # Check for Private Keys
+    if git diff --cached "$FILE" | grep -E "^\+[[:space:]]*-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----" >/dev/null 2>&1; then
+        echo "❌ [BLOCK] Private Key detected in staged file: $FILE"
+        SECRETS_DETECTED=1
+    fi
+done
+
+if [ $SECRETS_DETECTED -eq 1 ]; then
+    echo "🚫 Commit rejected! Secrets detected in staged changes."
+    echo "Please remove the exposed secret(s) before committing."
+    exit 1
+fi
+
+echo "✅ [PipeFish Security] Pre-commit audit passed cleanly."
+exit 0
