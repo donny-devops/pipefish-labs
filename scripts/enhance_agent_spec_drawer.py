@@ -103,6 +103,7 @@ spec_data = {
   },
   "market": {
     "title": "Market Research Agent",
+    "duties": "Market Research Agent functions as an autonomous data collection and intelligence node designed to monitor external market landscapes, aggregate competitive data, and synthesize macro trends without manual oversight.<br><br><b>Core Capabilities</b><br>• Automated Signal Scrapping &amp; Ingestion: Continuously pulling data from external industry sources, social forums, patent registries, academic papers, and RSS feeds.<br>• Trend &amp; Sentiment Analysis: Processing velocity surges in market demand, consumer sentiment, and emerging technology or procurement shifts (such as post-quantum cryptography adoption or competitor product releases).<br>• Competitor Horizon Mapping: Tracking market shifts, parsing competitive adjustments, and updating internal commercial opportunity scoring metrics.<br>• Executive Dossier Generation: Synthesizing disparate qualitative and quantitative data points into structured operational briefings, strategic alerts, and handoff payloads for upstream/downstream nodes like strategy or sales enablement agents.",
     "skills": "sec-10k-extractor, competitive-matrix, tam-sam-calculator, swot-synthesizer",
     "mcp": "mcp-server-sec-edgar, mcp-server-gartner-search, mcp-server-rag-vector-db",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/market-research-digest",
@@ -251,7 +252,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Monitoring / Observability Agent spec_data into index.html")
+print("Successfully injected updated Market Research Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -262,4 +263,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Monitoring / Observability Agent spec_data into demo/index.html")
+print("Successfully injected updated Market Research Agent spec_data into demo/index.html")
