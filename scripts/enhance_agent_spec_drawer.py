@@ -105,6 +105,7 @@ spec_data = {
   },
   "codescan": {
     "title": "Code-Scanning Agent",
+    "duties": "Code-Scanning Agent functions as part of a SAST/DAST audit pipeline designed to scan repositories and commits for security flaws, code vulnerabilities, and exposed secrets.<br><br><b>Core Capabilities</b><br>• AST Syntax Tree Parsing: Utilizes engines like Semgrep to parse source code structures across large repositories (e.g., millions of lines of code) to identify logic flaws and code anti-patterns.<br>• Vulnerability Detection: Scans for critical security issues such as SQL injection vectors (e.g., in OAuth callback handlers) and other common application vulnerabilities.<br>• Secret &amp; API Key Scanning: Performs entropy checks and pattern matching to discover hardcoded API tokens, private keys, and cloud credentials (such as AWS secrets).<br>• Dependency Analysis: Matches somatic dependencies against known CVE databases to flag vulnerable software components.<br>• Automated Remediation &amp; Enforcement: Works alongside automated refatch/patch agents, generates inline pull request (PR) comments, and blocks unsafe code merges through deep integration with CI/CD systems, SonarQube, and Git hooks.",
     "skills": "ast-semgrep-parser, entropy-secret-scanner, owasp-cve-matcher, pr-inline-blocking",
     "mcp": "mcp-server-semgrep, mcp-server-github-actions, mcp-server-dependency-track",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/sast-dast-audit-event",
@@ -237,7 +238,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Error-Correcting Agent spec_data into index.html")
+print("Successfully injected updated Code-Scanning Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -248,4 +249,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Error-Correcting Agent spec_data into demo/index.html")
+print("Successfully injected updated Code-Scanning Agent spec_data into demo/index.html")
