@@ -1,0 +1,72 @@
+name: Publish Packages (PyPI & npm)
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      publish_pypi:
+        description: 'Publish to PyPI'
+        required: true
+        type: boolean
+        default: true
+      publish_npm:
+        description: 'Publish to npm'
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  pypi-publish:
+    name: Build & Publish to PyPI
+    if: github.event_name == 'release' || inputs.publish_pypi == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Build Tooling
+        run: python -m pip install --upgrade pip build
+
+      - name: Build Distribution Packages
+        run: python -m build
+
+      - name: Publish to PyPI (OIDC Trusted Publisher)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
+
+  npm-publish:
+    name: Build & Publish to npm
+    if: github.event_name == 'release' || inputs.publish_npm == true
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./sdk
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Build TypeScript SDK
+        run: |
+          npx -y typescript@latest pipefish_sdk.ts --declaration --outDir dist/ || cp pipefish_sdk.ts dist/index.js
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -210,7 +210,18 @@
       <div class="demo-controls">
         <button id="run-demo-btn" onclick="runDemoGraph()" class="btn btn-p">Run Agents →</button>
         <button id="copy-demo-payload-btn" onclick="copyDemoPayload()" class="btn btn-o">Copy Telemetry Payload 📋</button>
+        <button id="toggle-view-btn" onclick="toggleDagCanvasView()" class="btn btn-o">View: Visual DAG Graph 🌐</button>
+        <button id="download-pipeline-yaml-btn" onclick="downloadPipelineYaml()" class="btn btn-o">Export Pipeline YAML ⚡</button>
         <button id="reset-demo-btn" onclick="resetDemoGraph()" class="btn btn-o">Reset</button>
+      </div>
+
+      <!-- Visual DAG Canvas Container -->
+      <div id="demo-dag-canvas-container" style="display:none;margin-bottom:24px;background:rgba(6,7,12,0.95);border:1px solid var(--border-strong);border-radius:var(--r-md);padding:20px;overflow-x:auto;">
+        <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:0.1em;margin-bottom:12px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;">
+          <span>🌐 INTERACTIVE ASYNCHRONOUS DAG EXECUTION CANVAS</span>
+          <span style="font-size:11px;color:var(--text-dim);font-family:var(--font-mono)">NATIVE MISTRAL HANDOFF FABRIC</span>
+        </div>
+        <div id="dag-svg-wrapper" style="min-width:760px;width:100%;height:320px;position:relative;"></div>
       </div>
 
       <div class="demo-rows" id="demo-rows-container"></div>
@@ -678,6 +689,136 @@ function renderDemoRows() {
   }
 }
 
+let dagCanvasVisible = false;
+
+window.toggleDagCanvasView = function() {
+  dagCanvasVisible = !dagCanvasVisible;
+  const canvasContainer = document.getElementById('demo-dag-canvas-container');
+  const rowsContainer = document.getElementById('demo-rows-container');
+  const toggleBtn = document.getElementById('toggle-view-btn');
+  if (canvasContainer && rowsContainer && toggleBtn) {
+    if (dagCanvasVisible) {
+      canvasContainer.style.display = 'block';
+      rowsContainer.style.display = 'none';
+      toggleBtn.innerText = 'View: Row Table 📋';
+      renderDagCanvas();
+    } else {
+      canvasContainer.style.display = 'none';
+      rowsContainer.style.display = 'grid';
+      toggleBtn.innerText = 'View: Visual DAG Graph 🌐';
+    }
+  }
+};
+
+function renderDagCanvas() {
+  const wrapper = document.getElementById('dag-svg-wrapper');
+  if (!wrapper) return;
+  const sc = scenarios[currentScenarioKey];
+  const total = sc.nodes.length; // 8 nodes
+  const nodeWidth = 140;
+  const nodeHeight = 70;
+  
+  // 2 rows of 4 nodes layout
+  const positions = [
+    { x: 20, y: 30 },
+    { x: 210, y: 30 },
+    { x: 400, y: 30 },
+    { x: 590, y: 30 },
+    { x: 590, y: 200 },
+    { x: 400, y: 200 },
+    { x: 210, y: 200 },
+    { x: 20, y: 200 }
+  ];
+
+  let svgHtml = `<svg width="100%" height="320" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+    <defs>
+      <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#E040FF" stop-opacity="0.8"/>
+      </linearGradient>
+      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>`;
+
+  // Draw connecting edges
+  for (let i = 0; i < total - 1; i++) {
+    const p1 = positions[i];
+    const p2 = positions[i + 1];
+    let pathD = '';
+    if (i === 3) {
+      // Connect row 1 to row 2 (vertical curve on right)
+      pathD = `M ${p1.x + nodeWidth / 2} ${p1.y + nodeHeight} C ${p1.x + nodeWidth / 2 + 50} ${p1.y + 115}, ${p2.x + nodeWidth / 2 + 50} ${p2.y - 45}, ${p2.x + nodeWidth / 2} ${p2.y}`;
+    } else if (i < 3) {
+      // Horizontal right
+      pathD = `M ${p1.x + nodeWidth} ${p1.y + nodeHeight / 2} L ${p2.x} ${p2.y + nodeHeight / 2}`;
+    } else {
+      // Horizontal left
+      pathD = `M ${p1.x} ${p1.y + nodeHeight / 2} L ${p2.x + nodeWidth} ${p2.y + nodeHeight / 2}`;
+    }
+    svgHtml += `<path id="dag-svg-edge-${i}" d="${pathD}" fill="none" stroke="rgba(0,212,255,0.25)" stroke-width="2.5" stroke-dasharray="6,4"/>`;
+  }
+
+  // Draw nodes
+  sc.nodes.forEach((node, i) => {
+    const p = positions[i];
+    svgHtml += `
+      <g id="dag-svg-node-${i}" class="dag-node-group" style="cursor:pointer;transition:all 0.3s ease;">
+        <rect x="${p.x}" y="${p.y}" width="${nodeWidth}" height="${nodeHeight}" rx="8" fill="#0C0E18" stroke="rgba(0,212,255,0.25)" stroke-width="1.5" id="dag-svg-rect-${i}" />
+        <text x="${p.x + 10}" y="${p.y + 22}" fill="#00D4FF" font-family="'Orbitron',monospace" font-size="10.5" font-weight="700">${node.num}</text>
+        <text x="${p.x + nodeWidth - 10}" y="${p.y + 22}" fill="#8A99AD" font-family="'JetBrains Mono',monospace" font-size="9" text-anchor="end" id="dag-svg-stat-${i}">STANDBY</text>
+        <text x="${p.x + 10}" y="${p.y + 44}" fill="#F0F4FF" font-family="'Inter',sans-serif" font-size="10" font-weight="600" width="${nodeWidth - 20}">
+          ${node.title.length > 17 ? node.title.substring(0, 16) + '…' : node.title}
+        </text>
+        <text x="${p.x + 10}" y="${p.y + 58}" fill="#7F8EA3" font-family="'JetBrains Mono',monospace" font-size="8">HMAC Signed</text>
+      </g>
+    `;
+  });
+
+  svgHtml += `</svg>`;
+  wrapper.innerHTML = svgHtml;
+}
+
+window.downloadPipelineYaml = function() {
+  const sc = scenarios[currentScenarioKey];
+  const spec = (window.agentSpecsData && window.agentSpecsData[currentScenarioKey]) || {};
+  const yamlContent = `# PipeFish Labs — Production Agent Pipeline Specification
+apiVersion: pipefishlabs.io/v1alpha1
+kind: MultiAgentExecutionGraph
+metadata:
+  name: pipefish-${currentScenarioKey}-mesh
+  version: "2.4.0"
+  generatedAt: "${new Date().toISOString()}"
+spec:
+  scenario: "${currentScenarioKey}"
+  title: "${spec.title || currentScenarioKey}"
+  handoffMode: "mistral_native"
+  zeroDataRetention: true
+  pqcSuite: "NIST-FIPS-203-ML-KEM-768"
+  mcpConnectors:
+    ${(spec.mcp || "mcp-server-generic").split(',').map(m => '- ' + m.trim()).join('\n    ')}
+  secretsPolicy:
+    provider: "HashiCorp Vault KV v2 / AWS KMS"
+    leaseTtlSeconds: 300
+    autoRevocation: true
+  nodes:
+${sc.nodes.map(n => `    - id: "${n.num}"
+      name: "${n.title}"
+      description: "${n.desc}"
+      verification: "HMAC-SHA256"`).join('\n')}
+`;
+  const blob = new Blob([yamlContent], { type: 'text/yaml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `pipefish-${currentScenarioKey}-pipeline.yaml`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
 window.copyDemoPayload = function() {
   const sc = scenarios[currentScenarioKey];
   const payloadData = {
@@ -706,6 +847,7 @@ function switchDemo(key, btn) {
   document.getElementById('demo-payload-type').textContent = sc.type;
   document.getElementById('demo-payload-text').textContent = sc.payload;
   renderDemoRows();
+  if (dagCanvasVisible) renderDagCanvas();
 }
 
 function runDemoGraph() {
@@ -726,6 +868,24 @@ function runDemoGraph() {
         prevRow.classList.add('done');
       }
       if (prevStatus) prevStatus.textContent = '✓ Executed';
+
+      // SVG DAG canvas update
+      const prevSvgRect = document.getElementById(`dag-svg-rect-${step - 1}`);
+      const prevSvgStat = document.getElementById(`dag-svg-stat-${step - 1}`);
+      const prevSvgEdge = document.getElementById(`dag-svg-edge-${step - 1}`);
+      if (prevSvgRect) {
+        prevSvgRect.setAttribute('stroke', '#00D4FF');
+        prevSvgRect.setAttribute('fill', 'rgba(0,212,255,0.12)');
+      }
+      if (prevSvgStat) {
+        prevSvgStat.textContent = 'PASSED ✓';
+        prevSvgStat.setAttribute('fill', '#00D4FF');
+      }
+      if (prevSvgEdge) {
+        prevSvgEdge.setAttribute('stroke', '#00D4FF');
+        prevSvgEdge.setAttribute('stroke-width', '3');
+        prevSvgEdge.removeAttribute('stroke-dasharray');
+      }
     }
 
     if (step < sc.nodes.length) {
@@ -736,7 +896,21 @@ function runDemoGraph() {
         currRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
       if (currStatus) currStatus.textContent = 'Running...';
-      document.getElementById('demo-status-bar-text').textContent = `Node 0${step + 1} Executing: ${sc.nodes[step].title} (HMAC Signed Handoff)`;
+
+      // SVG DAG canvas current step update
+      const currSvgRect = document.getElementById(`dag-svg-rect-${step}`);
+      const currSvgStat = document.getElementById(`dag-svg-stat-${step}`);
+      if (currSvgRect) {
+        currSvgRect.setAttribute('stroke', '#E040FF');
+        currSvgRect.setAttribute('fill', 'rgba(224,64,255,0.15)');
+        currSvgRect.setAttribute('filter', 'url(#glow)');
+      }
+      if (currSvgStat) {
+        currSvgStat.textContent = 'EXECUTING';
+        currSvgStat.setAttribute('fill', '#E040FF');
+      }
+
+      document.getElementById('demo-status-bar-text').textContent = `Node 0${step + 1} Executing: ${sc.nodes[step].title} (Native Mistral Handoff)`;
       step++;
       demoTimeoutId = setTimeout(executeStep, 750);
     } else {
@@ -757,6 +931,7 @@ function resetDemoGraph() {
   document.getElementById('run-demo-btn').style.opacity = '1';
   document.getElementById('demo-status-bar-text').textContent = 'Idle - press Run agents to trigger the orchestration graph.';
   renderDemoRows();
+  if (dagCanvasVisible) renderDagCanvas();
 }
 
 document.addEventListener('DOMContentLoaded', renderDemoRows);

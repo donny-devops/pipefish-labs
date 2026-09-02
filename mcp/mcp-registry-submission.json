@@ -1,0 +1,80 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/server.json",
+  "name": "pipefish-labs-mcp-server",
+  "description": "Enterprise Model Context Protocol (MCP) server for the PipeFish Labs autonomous multi-agent mesh. Supports 22 scenario graphs, Native Mistral Handoffs, zero-trust Vault leases, eBPF kernel telemetry, and NIST FIPS 203 ML-KEM-768 post-quantum cryptographic verification.",
+  "version": "2.4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donny-devops/pipefish-labs"
+  },
+  "homepage": "https://pipefishlabs.io/sdk/",
+  "license": "MIT",
+  "author": {
+    "name": "PipeFish Labs Core Engineering",
+    "email": "security@pipefishlabs.io",
+    "url": "https://pipefishlabs.io"
+  },
+  "keywords": [
+    "multi-agent",
+    "autonomous-agents",
+    "mcp",
+    "model-context-protocol",
+    "mistral-handoffs",
+    "post-quantum-cryptography",
+    "zero-trust",
+    "ebpf",
+    "vault",
+    "kubernetes"
+  ],
+  "transport": {
+    "type": "stdio",
+    "command": "python",
+    "args": ["-m", "sdk.mcp_server"],
+    "docker": {
+      "image": "ghcr.io/donny-devops/pipefish-labs/mcp-server:latest",
+      "command": ["python", "sdk/mcp_server.py"]
+    }
+  },
+  "capabilities": {
+    "tools": [
+      {
+        "name": "trigger_agent_graph",
+        "description": "Trigger an 8-node autonomous agent graph execution with Native Mistral Handoffs and Zero-Data Retention."
+      },
+      {
+        "name": "get_agent_spec",
+        "description": "Inspect detailed architecture, MCP connectors, RBAC permissions, and PQC cryptographic handoff specs for an agent."
+      },
+      {
+        "name": "verify_enclave_status",
+        "description": "Verify Zero-Data Retention (ZDR) confidential enclave integrity and NIST FIPS 203 ML-KEM-768 encryption readiness."
+      },
+      {
+        "name": "k8s_autoscale_check",
+        "description": "Check Kubernetes pod resource metrics and evaluate Horizontal Pod Autoscaler (HPA) scaling recommendations."
+      },
+      {
+        "name": "vault_lease_issue",
+        "description": "Issue an ephemeral dynamic secret lease with automated revocation upon DAG task completion."
+      },
+      {
+        "name": "ebpf_kernel_profile",
+        "description": "Profile eBPF kernel tracepoints to identify RPC serialization bottlenecks and latency anomalies."
+      },
+      {
+        "name": "db_zdr_query",
+        "description": "Execute a Zero-Data Retention (ZDR) database read with automated PII masking and RAM-only logging."
+      }
+    ]
+  },
+  "env": {
+    "PIPEFISH_API_KEY": {
+      "description": "PipeFish Labs API authentication key",
+      "required": false
+    },
+    "ZDR_ENCLAVE_ENFORCED": {
+      "description": "Enforce Zero-Data Retention RAM-only execution",
+      "default": "true"
+    }
+  }
+}
