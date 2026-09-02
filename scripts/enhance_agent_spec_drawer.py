@@ -154,6 +154,7 @@ spec_data = {
   },
   "auditing": {
     "title": "Analysis Agent",
+    "duties": "• Contextual Synthesis: Processes and analyzes structured signals, telemetry data, and multi-source inputs to extract actionable insights and operational requirements.<br>• State Verification: Evaluates data integrity and operational parameters before handing off verified payloads through cryptographic Directed Acyclic Graph (DAG) state transitions.<br>• Decision Support: Powers automated decision-making engines by classifying intent, checking enterprise capacity, and flagging non-conformities or exceptions in real time.",
     "skills": "cloudtrail-audit-collector, iam-policy-verifier, kms-vault-auditor, nonconformity-detector",
     "mcp": "mcp-server-aws-cloudtrail, mcp-server-gcp-audit, mcp-server-vault-sys",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/soc2-audit-proof",
@@ -224,102 +225,33 @@ spec_data = {
   }
 }
 
-# Update demo/index.html as well
+# 1. Update index.html
+with open('index.html', 'r', encoding='utf-8') as fp:
+    index_content = fp.read()
+
+# Make sure window.agentSpecsData statement is placed before demoScenarios
+js_assignment = f"window.agentSpecsData = {json.dumps(spec_data)};\n"
+
+if 'window.agentSpecsData =' in index_content:
+    old_data = index_content.split('window.agentSpecsData = ')[1].split(';\nconst demoScenarios =')[0]
+    index_content = index_content.replace('window.agentSpecsData = ' + old_data, 'window.agentSpecsData = ' + json.dumps(spec_data))
+else:
+    index_content = index_content.replace('const demoScenarios = {', js_assignment + 'const demoScenarios = {')
+
+with open('index.html', 'w', encoding='utf-8') as fp:
+    fp.write(index_content)
+print("Successfully injected updated agentSpecsData into index.html")
+
+# 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
     demo_content = fp.read()
 
-js_code = f"window.agentSpecsData = {json.dumps(spec_data)};\n"
-if 'window.agentSpecsData' not in demo_content:
-    demo_content = demo_content.replace('const scenarios = {', js_code + 'const scenarios = {')
-
-drawer_html = '''
-      <!-- Dynamic Agent Architecture Spec Drawer -->
-      <div id="demo-spec-drawer" style="margin-top:24px;background:rgba(6,7,12,0.92);border:1px solid var(--border-strong);border-radius:var(--r-md);padding:24px;box-shadow:0 0 30px rgba(0,212,255,0.08)">
-        <!-- Rendered dynamically -->
-      </div>
-'''
-if 'id="demo-spec-drawer"' not in demo_content:
-    demo_content = demo_content.replace('<div class="demo-status-bar">', drawer_html + '\n      <div class="demo-status-bar">')
-
-# Update renderDemoRows in demo/index.html
-old_render = '''function renderDemoRows() {
-  const container = document.getElementById('demo-rows-container');
-  const sc = scenarios[currentScenarioKey];
-  container.innerHTML = '';
-  sc.nodes.forEach((node, index) => {
-    const row = document.createElement('div');
-    row.className = 'demo-row';
-    row.id = `demo-node-${index}`;
-    row.innerHTML = `
-      <div class="demo-node-num">${node.num}</div>
-      <div class="demo-node-title">${node.title}</div>
-      <div class="demo-node-desc">${node.desc}</div>
-      <div class="demo-node-status" id="demo-status-${index}">Standby</div>
-    `;
-    container.appendChild(row);
-  });
-}'''
-
-new_render = '''function renderDemoRows() {
-  const container = document.getElementById('demo-rows-container');
-  const drawerEl = document.getElementById('demo-spec-drawer');
-  const sc = scenarios[currentScenarioKey];
-  container.innerHTML = '';
-  sc.nodes.forEach((node, index) => {
-    const row = document.createElement('div');
-    row.className = 'demo-row';
-    row.id = `demo-node-${index}`;
-    row.innerHTML = `
-      <div class="demo-node-num">${node.num}</div>
-      <div class="demo-node-title">${node.title}</div>
-      <div class="demo-node-desc">${node.desc}</div>
-      <div class="demo-node-status" id="demo-status-${index}">Standby</div>
-    `;
-    container.appendChild(row);
-  });
-
-  if (drawerEl && window.agentSpecsData && window.agentSpecsData[currentScenarioKey]) {
-    const spec = window.agentSpecsData[currentScenarioKey];
-    drawerEl.innerHTML = `
-      <div style="font-family:var(--font-display);font-size:14px;font-weight:800;color:var(--cyan);letter-spacing:0.12em;margin-bottom:14px;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
-        <span>⚡ AGENT ARCHITECTURE &amp; SECRETS DRAWER: ${spec.title}</span>
-        <span style="font-size:11px;color:var(--text-dim);font-family:var(--font-mono)">ZERO-TRUST ENCLAVE VERIFIED</span>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;font-size:12.5px;line-height:1.6">
-        <div style="background:rgba(12,14,24,0.8);padding:12px;border:1px solid var(--border-strong);border-radius:6px">
-          <strong style="color:var(--cyan);display:block;margin-bottom:4px;font-family:var(--font-mono)">🛠️ SKILL Files &amp; MCP Servers:</strong>
-          <div style="color:var(--text-strong)">SKILLS: <span style="color:var(--magenta)">${spec.skills}</span></div>
-          <div style="color:var(--text-body);margin-top:2px">MCP: ${spec.mcp}</div>
-        </div>
-        <div style="background:rgba(12,14,24,0.8);padding:12px;border:1px solid var(--border-strong);border-radius:6px">
-          <strong style="color:var(--cyan);display:block;margin-bottom:4px;font-family:var(--font-mono)">🌐 Webhooks &amp; Mailhooks:</strong>
-          <div style="color:var(--text-strong);font-family:var(--font-mono);font-size:11.5px">${spec.webhooks}</div>
-        </div>
-        <div style="background:rgba(12,14,24,0.8);padding:12px;border:1px solid var(--border-strong);border-radius:6px">
-          <strong style="color:var(--cyan);display:block;margin-bottom:4px;font-family:var(--font-mono)">🔐 Secrets &amp; Management Platform:</strong>
-          <div style="color:var(--text-strong)">${spec.secrets}</div>
-        </div>
-        <div style="background:rgba(12,14,24,0.8);padding:12px;border:1px solid var(--border-strong);border-radius:6px">
-          <strong style="color:var(--cyan);display:block;margin-bottom:4px;font-family:var(--font-mono)">🔌 Target APIs &amp; Dependencies:</strong>
-          <div style="color:var(--text-strong)">${spec.apis}</div>
-        </div>
-        <div style="background:rgba(12,14,24,0.8);padding:12px;border:1px solid var(--border-strong);border-radius:6px">
-          <strong style="color:var(--cyan);display:block;margin-bottom:4px;font-family:var(--font-mono)">🛰️ A2A Communication Protocols:</strong>
-          <div style="color:var(--text-strong)">${spec.a2a}</div>
-        </div>
-        <div style="background:rgba(12,14,24,0.8);padding:12px;border:1px solid var(--border-strong);border-radius:6px">
-          <strong style="color:var(--cyan);display:block;margin-bottom:4px;font-family:var(--font-mono)">🛡️ Access Control, Roles &amp; Permissions:</strong>
-          <div style="color:var(--text-strong);font-family:var(--font-mono);font-size:11.5px">${spec.rbac}</div>
-        </div>
-      </div>
-    `;
-  }
-}'''
-
-if old_render in demo_content:
-    demo_content = demo_content.replace(old_render, new_render)
+if 'window.agentSpecsData =' in demo_content:
+    old_demo_data = demo_content.split('window.agentSpecsData = ')[1].split(';\nconst scenarios =')[0]
+    demo_content = demo_content.replace('window.agentSpecsData = ' + old_demo_data, 'window.agentSpecsData = ' + json.dumps(spec_data))
+else:
+    demo_content = demo_content.replace('const scenarios = {', js_assignment + 'const scenarios = {')
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-
-print("Successfully updated demo/index.html with Spec Drawer data.")
+print("Successfully injected updated agentSpecsData into demo/index.html")
