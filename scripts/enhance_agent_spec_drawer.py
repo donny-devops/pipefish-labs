@@ -45,6 +45,7 @@ spec_data = {
   },
   "quantum": {
     "title": "Execution Agent",
+    "duties": "• Independent Step Execution: Runs standalone tasks within the multi-agent DAG pipeline, processing serialized data payloads without blocking downstream nodes.<br>• Cryptographic State Verification: Validates incoming payloads signed with HMAC-SHA256 and NIST post-quantum encryption standards before executing core business logic.<br>• Ephemeral ZDR Processing: Operates inside Zero-Data Retention confidential enclaves (such as AWS Nitro and SGX) to ensure 0-byte persistent storage of sensitive data during runtime.<br>• Cross-System Interoperability: Bridges custom Model Context Protocol (MCP) servers, enterprise APIs, and legacy software systems to carry out automated actions.<br>• Autonomous Error Escalation: Detects execution anomalies and routes exceptions back through error-correcting or triage agents when criteria fall outside preset parameters.",
     "skills": "vqe-eigensolver, circuit-transpiler, quantum-error-mitigation, hpc-execution",
     "mcp": "mcp-server-qiskit, mcp-server-ibm-quantum, mcp-server-aws-braket",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/quantum-job-results",
@@ -240,7 +241,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Integration Agent spec_data into index.html")
+print("Successfully injected updated Execution Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -251,4 +252,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Integration Agent spec_data into demo/index.html")
+print("Successfully injected updated Execution Agent spec_data into demo/index.html")
