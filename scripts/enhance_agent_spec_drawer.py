@@ -125,6 +125,7 @@ spec_data = {
   },
   "docs": {
     "title": "Documentation Agent",
+    "duties": "A documentation-focused AI agent combines automated tools, context-retrieval loops, and structured instructions to manage, write, and maintain documentation.<br><br><b>Core Capabilities</b><br>• Automated Content Generation: Drafts initial documentation, user guides, README files, or release notes directly from codebases, commit histories, or technical specifications.<br>• API Reference Synchronization: Monitors code or endpoint updates, detects parameter changes, and updates reference documentation automatically to prevent drift between code and docs.<br>• Style &amp; Quality Enforcement: Applies team-specific style guides, checks for clarity, flags terminology violations, and performs structural quality control (QC) checks.<br>• Interactive Q&amp;A and Support: Acts as an intelligent assistant capable of answering user or developer questions in natural language by parsing internal knowledge bases or product manuals.<br>• Workflow &amp; Task Execution: Operates within an agentic loop—reading files, running linters or formatters, executing scripts, and opening pull requests or change requests without manual step-by-step human intervention.",
     "skills": "ast-code-extractor, openapi-31-gen, mermaid-diagram-gen, portal-publisher",
     "mcp": "mcp-server-typedoc, mcp-server-mermaid, mcp-server-openapi-generator",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/autodoc-build-complete",
@@ -252,7 +253,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Market Research Agent spec_data into index.html")
+print("Successfully injected updated Documentation Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -263,4 +264,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Market Research Agent spec_data into demo/index.html")
+print("Successfully injected updated Documentation Agent spec_data into demo/index.html")
