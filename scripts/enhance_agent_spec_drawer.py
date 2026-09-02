@@ -147,6 +147,7 @@ spec_data = {
   },
   "revops": {
     "title": "Growth Strategy Agent",
+    "duties": "• Market Opportunity Analysis: Scans industry trends, competitor positioning, and customer feedback data to identify high-potential revenue channels and untapped audience segments.<br>• Funnel Optimization: Audits user acquisition, activation, retention, referral, and revenue (AARRR) metrics to pinpoint friction points and recommend conversion rate optimization (CRO) tactics.<br>• Automated Lead Generation: Executes multi-channel prospecting workflows, leveraging scrapers, API integrations, and enrichment tools to build targeted target-account lists.<br>• Content &amp; SEO Scaling: Analyzes search intent, keyword gaps, and traffic performance data to generate data-driven content outlines and programmatic SEO strategies.<br>• Experimentation &amp; A/B Testing: Designs, monitors, and evaluates rapid-fire growth experiments, calculating statistical significance and iteration roadmaps.<br>• Customer Retention Modelling: Analyzes churn triggers, engagement drops, and usage patterns to deploy automated re-engagement triggers and lifecycle marketing flows.",
     "skills": "posthog-signup-monitor, plg-lead-scorer, dynamic-personalization, stripe-ltv-predictor",
     "mcp": "mcp-server-posthog, mcp-server-clearbit, mcp-server-stripe-billing",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/growth-intent-trigger",
@@ -253,7 +254,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Documentation Agent spec_data into index.html")
+print("Successfully injected updated Growth Strategy Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -264,4 +265,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Documentation Agent spec_data into demo/index.html")
+print("Successfully injected updated Growth Strategy Agent spec_data into demo/index.html")
