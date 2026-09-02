@@ -213,6 +213,7 @@ spec_data = {
   },
   "networkdispatch": {
     "title": "Network Dispatch Agent",
+    "duties": "• Cross-system network routing: Dispatches operational traffic, data payloads, and service events securely across hybrid infrastructure, custom MCP servers, and integrated carrier systems.<br>• Asynchronous DAG state coordination: Manages cryptographically signed payloads (using HMAC-SHA256 and NIST ML-KEM-768 post-quantum encryption) to route transactional state transitions seamlessly between specialized multi-agent nodes.<br>• Multi-channel endpoint dispatch: Coordinates external signal handoffs across voice, email, SMS, UCC/VTC, and API surfaces as part of the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">PipeFish Labs</a> orchestration platform.",
     "skills": "sdwan-topology-analyzer, qos-dssc-prioritizer, wireguard-provisioner, zero-touch-provisioner",
     "mcp": "mcp-server-cisco-sdwan, mcp-server-juniper-pyez, mcp-server-wireguard",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/sdwan-mesh-alert",
@@ -254,7 +255,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Growth Strategy Agent spec_data into index.html")
+print("Successfully injected updated Network Dispatch Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -265,4 +266,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Growth Strategy Agent spec_data into demo/index.html")
+print("Successfully injected updated Network Dispatch Agent spec_data into demo/index.html")
