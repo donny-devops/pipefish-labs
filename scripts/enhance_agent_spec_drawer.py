@@ -222,6 +222,7 @@ spec_data = {
   },
   "systemoptimizing": {
     "title": "System-Optimizing Agent",
+    "duties": "The System-Optimizing Agent acts as an automated infrastructure tuning engine designed to diagnose and resolve performance bottlenecks across distributed microservice architectures.<br><br>• Target Signal Processing: Ingests live inbound telemetry signals such as CPU/memory bottlenecks, database indexing latency, and unoptimized RPC query plans across distributed systems.<br>• Continuous Runtime Tuning: Automatically coordinates execution across specialized subagents to resolve performance constraints in real-time.<br>• Associated Subagent Chain: Works alongside foundational modules in the live agent mesh, including the eBPF CPU &amp; Memory Profiler Agent (Kernel Profiler), Database Index &amp; Query Plan Optimizer Agent (EXPLAIN ANALYZE), Cache Invalidation &amp; Hit Ratio Tuning Agent (Redis/Memcached), RPC Payload &amp; Serialization Compressor Agent (gRPC/Protobuf), Kubernetes Autoscaling &amp; HPA Tuner Agent (K8s Metrics API), Garbage Collection &amp; Memory Defragmenter Agent (JVM/Go Runtime), and Load Balancer &amp; Connection Pool Optimizer Agent (Envoy/HAProxy).",
     "skills": "ebpf-cpu-memory-profiler, explain-analyze-planner, redis-cache-tuner, k8s-hpa-autoscaler",
     "mcp": "mcp-server-ebpf-profiler, mcp-server-postgres-planner, mcp-server-k8s-metrics",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/runtime-tuning-event",
@@ -242,7 +243,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Research Agent spec_data into index.html")
+print("Successfully injected updated System-Optimizing Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -253,4 +254,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Research Agent spec_data into demo/index.html")
+print("Successfully injected updated System-Optimizing Agent spec_data into demo/index.html")
