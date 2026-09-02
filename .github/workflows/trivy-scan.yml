@@ -1,0 +1,36 @@
+name: Container Security Scan (Trivy)
+
+on:
+  push:
+    paths:
+      - 'Dockerfile.mcp'
+      - 'docker-compose.yml'
+      - '.github/workflows/trivy-scan.yml'
+  pull_request:
+    paths:
+      - 'Dockerfile.mcp'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  trivy-scan:
+    name: Trivy Container Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Build Local Image
+        run: docker build -t pipefish-mcp:local -f Dockerfile.mcp .
+
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'pipefish-mcp:local'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'

@@ -1,0 +1,36 @@
+name: Site & Docs Link Checker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  link-checker:
+    name: Check Broken Links (Lychee)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Run Lychee Link Checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --exclude-mail
+            --exclude 'https://linkedin.com.*'
+            --exclude 'https://www.linkedin.com.*'
+            --exclude 'https://api.pipefishlabs.io.*'
+            --max-concurrency 8
+            '**/*.md' '**/*.html'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

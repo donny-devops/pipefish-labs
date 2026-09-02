@@ -1,0 +1,119 @@
+asyncapi: 3.0.0
+info:
+  title: PipeFish Labs Autonomous Agent Event Fabric API
+  version: 2.4.0
+  description: >
+    Real-time asynchronous event streaming API for the PipeFish Labs multi-agent mesh.
+    Supports NATS JetStream, Apache Kafka, and WebSocket transports with Native Mistral Handoffs,
+    HMAC-SHA256 state signatures, and NIST FIPS 203 ML-KEM-768 post-quantum encryption.
+  contact:
+    name: PipeFish Labs Architecture
+    url: https://pipefishlabs.io
+    email: security@pipefishlabs.io
+
+servers:
+  productionNats:
+    host: nats.pipefishlabs.internal:4222
+    protocol: nats
+    description: Production NATS JetStream cluster for ultra-low-latency inter-agent state coordination.
+  productionWebSocket:
+    host: api.pipefishlabs.io
+    pathname: /v1/telemetry/ws
+    protocol: wss
+    description: Encrypted WebSocket stream for live browser dashboard and real-time simulator events.
+
+channels:
+  agentTelemetry:
+    address: telemetry.stream.{agentKey}
+    messages:
+      telemetryMessage:
+        $ref: '#/components/messages/AgentTelemetryMessage'
+    description: Stream of real-time operational telemetry emitted during agent node execution.
+
+  dagStateHandoff:
+    address: graph.handoff.{graphId}
+    messages:
+      handoffMessage:
+        $ref: '#/components/messages/StateHandoffMessage'
+    description: Asynchronous DAG state handoffs passed between adjacent agent nodes.
+
+  slaViolationAlerts:
+    address: alerts.sla.{priority}
+    messages:
+      slaAlertMessage:
+        $ref: '#/components/messages/SlaAlertMessage'
+    description: Critical SLA breach and escalation events routed to triage and on-call responders.
+
+operations:
+  subscribeTelemetry:
+    action: receive
+    channel:
+      $ref: '#/channels/agentTelemetry'
+    summary: Ingest live telemetry signals from executing agent nodes.
+
+  publishStateHandoff:
+    action: send
+    channel:
+      $ref: '#/channels/dagStateHandoff'
+    summary: Emit signed state transition payload to trigger downstream agent execution.
+
+components:
+  messages:
+    AgentTelemetryMessage:
+      name: AgentTelemetry
+      title: Agent Telemetry Event
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          timestamp:
+            type: string
+            format: date-time
+          agentKey:
+            type: string
+          cpuUsagePct:
+            type: number
+          memoryAllocBytes:
+            type: integer
+          activeConnections:
+            type: integer
+          zdrEnclaveStatus:
+            type: string
+            enum: [VERIFIED, DRIFT_DETECTED]
+
+    StateHandoffMessage:
+      name: StateHandoff
+      title: Inter-Agent State Handoff
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          graphId:
+            type: string
+          sourceNode:
+            type: string
+          targetNode:
+            type: string
+          stateSignature:
+            type: string
+          pqcKeyId:
+            type: string
+          payloadDigest:
+            type: string
+
+    SlaAlertMessage:
+      name: SlaAlert
+      title: SLA Escalation Alert
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          alertId:
+            type: string
+          severity:
+            type: string
+            enum: [P1, P2, P3]
+          incidentContext:
+            type: string
+          latencySpikeMs:
+            type: number

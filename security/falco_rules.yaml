@@ -1,0 +1,50 @@
+# PipeFish Labs — Cloud-Native Runtime Security Rules (Falco / eBPF)
+# Protects Autonomous Multi-Agent Containers, ZDR Enclaves, and PQC Key Stores
+
+- list: agent_containers
+  items: [pipefish-mcp-server, pipefish-agent-mesh, pipefish-execution-engine]
+
+- macro: is_agent_container
+  condition: container.name in (agent_containers)
+
+# Rule 1: Violation of Zero-Data Retention (ZDR) Enclave Disk Writes
+- rule: ZDR Enclave Unauthorized Disk Write
+  desc: Detects file write operations to persistent disk inside a RAM-only zero-data-retention enclave container
+  condition: >
+    is_agent_container and
+    evt.type in (open, openat, creat) and
+    evt.is_open_write = true and
+    not fd.name startswith "/tmp" and
+    not fd.name startswith "/dev/null"
+  output: >
+    CRITICAL: ZDR Enclave disk write attempted (user=%user.name container=%container.name
+    command=%proc.cmdline file=%fd.name gparent=%proc.aname[2])
+  priority: CRITICAL
+  tags: [pipefish, zdr, security, compliance]
+
+# Rule 2: Memory Dump Attempt (PQC Private Key & Enclave Token Protection)
+- rule: Agent Memory Scraping or Process Dump Attempt
+  desc: Detects unauthorized ptrace or process memory dumping targeting agent execution threads
+  condition: >
+    is_agent_container and
+    evt.type in (ptrace, process_vm_readv, process_vm_writev)
+  output: >
+    ALERT: Memory dump attempt on agent runtime (user=%user.name command=%proc.cmdline
+    target_pid=%proc.pid container=%container.name)
+  priority: EMERGENCY
+  tags: [pipefish, pqc, secrets, ptrace]
+
+# Rule 3: Unexpected Outbound Network Connection from Isolated Agent Node
+- rule: Agent Node Unauthorized Network Egress
+  desc: Detects unexpected TCP/UDP connections initiated by an agent container outside authorized internal mesh ports
+  condition: >
+    is_agent_container and
+    evt.type in (connect, sendto) and
+    evt.dir = < and
+    not fd.sip in ("127.0.0.1", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16") and
+    not fd.sport in (443, 8000, 8443, 9090)
+  output: >
+    WARNING: Outbound egress anomaly from agent node (user=%user.name container=%container.name
+    dest_ip=%fd.rip dest_port=%fd.rport command=%proc.cmdline)
+  priority: WARNING
+  tags: [pipefish, egress, zero-trust, network]

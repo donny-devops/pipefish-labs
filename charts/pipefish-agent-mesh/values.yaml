@@ -1,0 +1,79 @@
+replicaCount: 3
+
+image:
+  repository: ghcr.io/donny-devops/pipefish-labs/mcp-server
+  pullPolicy: IfNotPresent
+  tag: "2.4.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "pipefish-mesh-sa"
+
+podAnnotations:
+  seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 10001
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 8000
+  targetPort: 8000
+
+ingress:
+  enabled: false
+  className: "cilium"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - host: mesh.pipefishlabs.internal
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 2Gi
+  requests:
+    cpu: 250m
+    memory: 512Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 20
+  targetCPUUtilizationPercentage: 75
+  targetMemoryUtilizationPercentage: 80
+
+networkPolicy:
+  enabled: true
+  ingress:
+    fromSameNamespace: true
+  egress:
+    allowKubeDNS: true
+    allowVault: true
+
+env:
+  PIPEFISH_ENV: "production"
+  ZDR_ENCLAVE_ENFORCED: "true"
+  PQC_CIPHER_SUITE: "NIST-FIPS-203-ML-KEM-768"
