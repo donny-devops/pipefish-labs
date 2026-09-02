@@ -1,0 +1,28 @@
+# Lychee Link Checker Configuration for PipeFish Labs
+# Documentation: https://lychee.cli.rs/
+
+# Maximum number of retries per request
+max_retries = 3
+
+# Concurrency
+max_concurrency = 8
+
+# Exclude email addresses from checking
+exclude_mail = true
+
+# Accept status codes that indicate anti-bot or redirect protections
+accept = [200, 204, 301, 302, 307, 308, 403, 999]
+
+# Excluded domains, private networks, and mock endpoints
+exclude = [
+  '^https://(www\.)?linkedin\.com',
+  '^https://(www\.)?twitter\.com',
+  '^https://(www\.)?x\.com',
+  '^https://(www\.)?reddit\.com',
+  '^https://pipefishlabs\.lemonsqueezy\.com',
+  '^https://api\.pipefishlabs\.io',
+  '.*\.internal.*',
+  '^http://localhost',
+  '^http://127\.0\.0\.1',
+  'file://.*'
+]

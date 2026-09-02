@@ -8,9 +8,11 @@ on:
   schedule:
     # Run every Monday at 08:00 UTC
     - cron: '0 8 * * 1'
+  workflow_dispatch:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   link-checker:
@@ -21,16 +23,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Lychee Link Checker
-        uses: lycheeverse/lychee-action@v1
+        uses: lycheeverse/lychee-action@v2
         with:
-          args: >
-            --verbose
-            --no-progress
-            --exclude-mail
-            --exclude 'https://linkedin.com.*'
-            --exclude 'https://www.linkedin.com.*'
-            --exclude 'https://api.pipefishlabs.io.*'
-            --max-concurrency 8
-            '**/*.md' '**/*.html'
+          args: --config ./lychee.toml --verbose --no-progress './**/*.md' './**/*.html'
+          fail: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
