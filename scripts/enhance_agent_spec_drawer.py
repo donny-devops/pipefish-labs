@@ -54,6 +54,7 @@ spec_data = {
   },
   "reverse": {
     "title": "Reverse Engineering Agent",
+    "duties": "• Binary Disassembly &amp; PE/ELF Agent: Ingests obfuscated binaries or payload samples to map out initial file structures, headers, and export/import tables.<br>• Control Flow Graph (CFG) Agent: Decompiles and reconstructs control flow structures to visualize execution blocks, branching logic, and subroutine paths.<br>• Decompilation &amp; AST Agent (Ghidra Bridge): Interfaces with decompilation frameworks (such as Ghidra Headless API, IDA Pro, or Binary Ninja) to transform low-level assembly into clean Abstract Syntax Trees.<br>• Anti-Analysis &amp; Unpacker Agent: Detects, isolates, and neutralizes packing routines, anti-debugging checks, and environment evasion traps.<br>• API Hashing &amp; String Decrypter Agent: Resolves dynamic API hashing routines and automatically decrypts obfuscated string tables to reveal hidden configurations or indicators of compromise.<br>• C2 Network Protocol Agent: Analyzes network communication routines, protocol framing, and command-and-control beaconing mechanics embedded in the binary.<br>• YARA Signature Generator Agent: Automatically distills behavioral and structural traits into production-ready YARA rules for threat hunting and detection engineering.<br>• Threat Intel Dossier Agent: Synthesizes outputs across the entire analysis chain into a structured, comprehensive technical dossier and report.",
     "skills": "binary-disassembly, control-flow-graph, ghidra-ast, yara-generator",
     "mcp": "mcp-server-ghidra-headless, mcp-server-yara-compiler, mcp-server-cape-sandbox",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/binary-analysis-intel",
@@ -238,7 +239,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Code-Scanning Agent spec_data into index.html")
+print("Successfully injected updated Reverse Engineering Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -249,4 +250,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Code-Scanning Agent spec_data into demo/index.html")
+print("Successfully injected updated Reverse Engineering Agent spec_data into demo/index.html")
