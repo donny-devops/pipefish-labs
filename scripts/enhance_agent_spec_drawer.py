@@ -24,6 +24,7 @@ spec_data = {
   },
   "logistics": {
     "title": "Logistics / Supply Chain Agent",
+    "duties": "Logistics and supply chain capabilities are engineered around an automated 8-node asynchronous agent chain that handles high-throughput freight orchestration, tracking, and exception management.<br><br>• EDI &amp; Manifest Parsing: Automatically extracts load details, transport specs, and status updates using standards like EDI 214.<br>• Cold-Chain &amp; Telematics Monitoring: Continuously monitors GPS and IoT telemetry signals to track temperature-sensitive cargo and transit milestones.<br>• Dynamic Re-Routing: Evaluates port and rail APIs in real-time (such as reacting to congestion at terminals like Rotterdam) to optimize shipment routes.<br>• Customs &amp; Tariff Clearing: Streamlines customs documentation and tariff processing to prevent border bottlenecks.<br>• Carrier Dispatch &amp; Tender: Coordinates tender offers and dispatches carriers based on availability, capacity, and historical performance.<br>• ETA Recalculation: Dynamically updates arrival projections based on live traffic, weather, and transit anomalies.<br>• Warehouse Intake Booking: Automatically schedules dock doors and books warehouse intake upon freight arrival.<br>• Consignee Alerts &amp; Exceptions: Resolves operational exceptions and alerts consignees proactively before delays impact delivery.",
     "skills": "edi-manifest-parser, telematics-gps-monitor, port-rerouting, customs-clearing",
     "mcp": "mcp-server-edi-214, mcp-server-port-rotterdam-api, mcp-server-freight-crm",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/edi-ingest | mailhook://dispatch@pipefishlabs.io",
@@ -245,7 +246,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Log Triage Agent spec_data into index.html")
+print("Successfully injected updated Logistics Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -256,4 +257,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Log Triage Agent spec_data into demo/index.html")
+print("Successfully injected updated Logistics Agent spec_data into demo/index.html")
