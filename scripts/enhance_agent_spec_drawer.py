@@ -14,6 +14,7 @@ spec_data = {
   },
   "sales": {
     "title": "Sales Enablement Agent",
+    "duties": "• Sales Operations Agent: Orchestrates backend pipeline mechanics, manages data workflows, and coordinates cross-functional task handoffs across enterprise systems.<br>• Sales Follow-Up Agent: Manages automated, context-aware touchpoints to keep prospects engaged after initial meetings without human intervention.<br>• Sales Outreach Agent: Crafts and executes hyper-personalized inbound and outbound messaging sequences tailored to buyer intent signals.<br>• Email Agent: Handles high-volume email composition, delivery tracking, and intelligent response parsing across communication threads.<br>• Lead Qualification Agent: Evaluates incoming leads against predefined account criteria, verifying budget, authority, need, and timeline instantly.<br>• CRM Hygiene Agent: Automatically cleans, enriches, and updates CRM records to ensure continuous data accuracy and eliminate manual data-entry lag.<br>• Proposal Generator Agent: Instantly synthesizes scoping data, pricing matrices, and terms to dynamically produce customized sales proposals.<br>• Deal Recovery Agent: Detects stalled pipelines or dormant opportunities, executing automated re-engagement triggers to resurrect dead deals.",
     "skills": "lead-scoring-icp, salesforce-hubspot-sync, proposal-gen, clearbit-enrichment",
     "mcp": "mcp-server-salesforce, mcp-server-apollo, mcp-server-doc-generator",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/lead-form | mailhook://sales-inbound@pipefishlabs.io",
@@ -246,7 +247,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Logistics Agent spec_data into index.html")
+print("Successfully injected updated Sales Enablement Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -257,4 +258,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Logistics Agent spec_data into demo/index.html")
+print("Successfully injected updated Sales Enablement Agent spec_data into demo/index.html")
