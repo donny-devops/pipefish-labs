@@ -134,6 +134,7 @@ spec_data = {
   },
   "observability": {
     "title": "Monitoring / Observability Agent",
+    "duties": "Autonomous agents engineered for infrastructure monitoring and observability perform tasks spanning metric collection, log aggregation, automated anomaly detection, root cause analysis (RCA), and incident remediation. Unlike traditional static dashboards or rigid alerting rules (like Prometheus thresholds or PagerDuty triggers), observability agents utilize LLMs and deterministic tools to query telemetry pipelines, correlate cross-stack events, and execute safe triage workflows.<br><br><b>Core Capabilities</b><br>• Natural Language Telemetry Querying: Translates plain-text queries into structured metric or log expressions, querying Prometheus (PromQL), Loki (LogQL), OpenTelemetry, or Datadog APIs without requiring engineers to manually construct complex queries.<br>• Automated Root Cause Analysis: Cross-correlates alerts, recent deployments, infrastructure logs, and trace spans during an incident to isolate anomalies and pinpoint faulty code commits, misconfigured environment variables, or exhausted resource limits.<br>• Log Pattern Recognition &amp; Summarization: Aggregates noisy stack traces, error bursts, and warning logs into concise summaries, categorizing recurring exceptions and flagging novel error signatures.<br>• Proactive Anomaly Detection: Continuously evaluates baseline performance metrics (latency, CPU, memory, error rates) to flag subtle behavioral shifts or capacity exhaustion trends before they trigger hard alert thresholds.<br>• Self-Healing &amp; Remediation Orchestration: Triggers predefined, safety-checked remediation runbooks—such as restarting unhealthy microservices, scaling Kubernetes pods, flushing bloated caches, or rolling back faulty container deployments via CI/CD webhooks.<br>• Context-Aware Alert Enrichment: Automatically enriches alert notifications dispatched to Slack, PagerDuty, or Jira with relevant diagnostic context, including recent deployment diffs, affected pod IPs, and correlated dashboard links.<br><br><b>Underlying Architecture</b><br>• Data Ingestion &amp; APM Integration: Connects with observability backends via OpenTelemetry Collector, Prometheus, Grafana, Datadog, New Relic, or cloud-native providers (AWS CloudWatch, GCP Operations Suite).<br>• Execution Sandbox: Implements strict permission boundaries and human-in-the-loop (HITL) approval gates before executing destructive or high-impact remediation scripts (e.g., database failovers or traffic rerouting).<br>• Vector Memory &amp; Knowledge Retrieval: Utilizes vector databases to index past incident post-mortems, runbook documentation, and historical error logs, enabling the agent to retrieve relevant historical resolution steps for ongoing alerts.",
     "skills": "opentelemetry-collector, trace-correlator-jaeger, prometheus-anomaly, self-healing-remediation",
     "mcp": "mcp-server-prometheus, mcp-server-jaeger, mcp-server-grafana-api",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/opentelemetry-alert",
@@ -250,7 +251,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Trend Spotting Agent spec_data into index.html")
+print("Successfully injected updated Monitoring / Observability Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -261,4 +262,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Trend Spotting Agent spec_data into demo/index.html")
+print("Successfully injected updated Monitoring / Observability Agent spec_data into demo/index.html")
