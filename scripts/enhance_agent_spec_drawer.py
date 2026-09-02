@@ -34,6 +34,7 @@ spec_data = {
   },
   "integration": {
     "title": "Integration Agent",
+    "duties": "<b>Integration Agent Capabilities</b><br><br>• Multi-Protocol Ingestion: Ingests events and signals across REST APIs, gRPC, GraphQL, webhooks, Kafka event meshes, and SAP RFC endpoints.<br>• Payload Transformation: Automatically reconciles schema field mismatches, transforming disparate formats such as converting XML payloads to JSON.<br>• Bi-Directional State Sync: Enforces real-time, synchronized state updates across enterprise systems, CRMs, and legacy architectures.<br>• Token Lifecycle Management: Manages OAuth 2.0 flows and API token lifecycles with secure vault integrations.<br>• Transactional Reliability: Implements transactional circuit breakers and automated retry loops to maintain fault-tolerant pipeline execution.<br>• Cryptographic Verification: Secures state handoffs and data pipelines using HMAC-SHA256 payload signing and NIST post-quantum encryption protocols.",
     "skills": "multi-protocol-ingest, schema-transformer-xml-json, state-sync, Vault-oauth-lifecycle",
     "mcp": "mcp-server-kafka, mcp-server-sap-rfc, mcp-server-graphql-gateway",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/integration-mesh | mailhook://sync@pipefishlabs.io",
@@ -239,7 +240,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Reverse Engineering Agent spec_data into index.html")
+print("Successfully injected updated Integration Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -250,4 +251,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Reverse Engineering Agent spec_data into demo/index.html")
+print("Successfully injected updated Integration Agent spec_data into demo/index.html")
