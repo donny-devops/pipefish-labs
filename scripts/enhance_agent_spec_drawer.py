@@ -171,6 +171,7 @@ spec_data = {
   },
   "logtriage": {
     "title": "Log Triage Agent",
+    "duties": "• Inbound Log Ingestion: Parses high-volume telemetry streams (handling up to 85,000 log events per second) to classify critical exceptions, stack trace cascades, and API gateway timeouts.<br>• Vector Parsing &amp; Tokenization: Utilizes the <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">High-Volume Log Parser &amp; Tokenizer Agent</a> engine to process incoming signals concurrently.<br>• Extraction &amp; Clustering: Automatically extracts stack traces and exception payloads, clustering and deduplicating noisy log events.<br>• Severity Classification &amp; SLA Matching: Matches incidents against P1, P2, and P3 severity tiers and SLAs.<br>• Root Cause Correlation: Correlates exceptions with source code files via Git Blame synchronization and links issues directly to tracking tools like <a href=\"https://pipefishlabs.io/\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline\">Sentry</a> or Rollbar.<br>• Noise Suppression &amp; Automated Dispatch: Filters out alert fatigue and dispatches verified incidents to on-call engineers through platforms like PagerDuty or Opsgenie.",
     "skills": "vector-log-tokenizer, stack-trace-extractor, severity-classifier, pagerduty-dispatcher",
     "mcp": "mcp-server-elasticsearch, mcp-server-sentry, mcp-server-pagerduty",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/log-exception-ingest",
@@ -244,7 +245,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Traffic Router Agent spec_data into index.html")
+print("Successfully injected updated Log Triage Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -255,4 +256,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Traffic Router Agent spec_data into demo/index.html")
+print("Successfully injected updated Log Triage Agent spec_data into demo/index.html")
