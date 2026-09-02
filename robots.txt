@@ -1,8 +1,10 @@
 # PipeFish Labs Robots Configuration
+# https://pipefishlabs.io
 User-agent: *
 Allow: /
 Disallow: /scratch/
 Disallow: /.git/
+Disallow: /scripts/
 
 # AI & LLM Search Crawlers (Perplexity, ChatGPT, Claude, Gemini, Applebot)
 User-agent: GPTBot
@@ -18,6 +20,15 @@ User-agent: ClaudeBot
 Allow: /
 
 User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: anthropic-ai
 Allow: /
 
 Sitemap: https://pipefishlabs.io/sitemap.xml

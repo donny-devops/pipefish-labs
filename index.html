@@ -29,9 +29,74 @@
   <meta name="twitter:image:alt" content="PipeFish Labs Logo">
   <link rel="icon" type="image/png" href="https://pipefishlabs.io/logo.png">
   <link rel="apple-touch-icon" href="https://pipefishlabs.io/logo.png">
+  <link rel="preload" as="video" href="briefing-video.mp4" type="video/mp4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://pipefishlabs.io/#organization",
+        "name": "PipeFish Labs",
+        "url": "https://pipefishlabs.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://pipefishlabs.io/logo.png",
+          "width": 1200,
+          "height": 630
+        },
+        "description": "Enterprise AI automation agency specializing in autonomous multi-agent orchestration, zero-trust security, post-quantum cryptography (NIST FIPS 203 ML-KEM-768), Native Mistral Handoffs, and Managed MCP Connector governance.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "pipefish.labs@gmail.com",
+          "url": "https://pipefishlabs.io/book-a-demo-contact/"
+        },
+        "sameAs": [
+          "https://github.com/donny-devops/pipefish-labs",
+          "https://linkedin.com/in/pipefishlabs",
+          "https://linkedin.com/in/adonisjimenez"
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://pipefishlabs.io/#software",
+        "name": "PipeFish Labs Agent Orchestration Platform",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Cloud",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Interactive 8-node multi-agent execution simulator with 22 enterprise scenario graphs"
+        },
+        "featureList": [
+          "Native Mistral Handoffs with persistent state across 8-node execution graphs",
+          "Managed MCP Connectors for Zero-Trust tool scoping (K8s HPA, HashiCorp Vault)",
+          "NIST FIPS 203 ML-KEM-768 Post-Quantum Cryptography",
+          "Mistral Document Library RAG Tool & Websearch Connector",
+          "Mistral Code Interpreter for Python execution sandbox",
+          "Zero-Data-Retention (ZDR) confidential enclave processing",
+          "EU AI Act Annex IV compliance automation",
+          "22 specialized autonomous agent types"
+        ],
+        "author": { "@id": "https://pipefishlabs.io/#organization" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://pipefishlabs.io/#website",
+        "name": "PipeFish Labs",
+        "url": "https://pipefishlabs.io",
+        "publisher": { "@id": "https://pipefishlabs.io/#organization" },
+        "inLanguage": "en-US"
+      }
+    ]
+  }
+  </script>
   <style>
     /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

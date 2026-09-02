@@ -1,0 +1,387 @@
+openapi: 3.1.0
+info:
+  title: PipeFish Labs Agent Orchestration API
+  version: '2.4.0'
+  description: >
+    The PipeFish Labs Agent Orchestration API enables programmatic access to
+    multi-agent execution graphs with Native Mistral Handoffs. Orchestrate
+    22 specialized agents across 8-node execution graphs, manage webhooks,
+    and monitor system health — all secured with Bearer token authentication
+    and optional Zero-Data-Retention (ZDR) enclaves.
+  contact:
+    name: PipeFish Labs API Support
+    url: https://pipefishlabs.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+x-logo:
+  url: https://pipefishlabs.io/logo.png
+  altText: PipeFish Labs Logo
+
+servers:
+  - url: https://api.pipefishlabs.io/v1
+    description: Production
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Graphs
+    description: Execution graph operations
+  - name: Agents
+    description: Agent discovery and specification
+  - name: Webhooks
+    description: Inbound webhook triggers
+  - name: System
+    description: Health and status endpoints
+
+paths:
+  /graphs/{scenario_key}/execute:
+    post:
+      operationId: executeGraph
+      summary: Execute an 8-node agent graph
+      description: >
+        Triggers an 8-node execution graph for the specified scenario. Supports
+        Native Mistral Handoffs and optional Zero-Data-Retention (ZDR) enclave
+        mode.
+      tags:
+        - Graphs
+      parameters:
+        - name: scenario_key
+          in: path
+          required: true
+          description: The unique key identifying the agent scenario to execute.
+          schema:
+            type: string
+            enum:
+              - receptionist
+              - sales
+              - logistics
+              - integration
+              - quantum
+              - reverse
+              - crypto
+              - errorcorr
+              - trend
+              - market
+              - codescan
+              - docs
+              - observability
+              - revops
+              - analytics
+              - auditing
+              - logtriage
+              - erp
+              - trafficrouter
+              - networkdispatch
+              - selfimproving
+              - systemoptimizing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - payload
+              properties:
+                payload:
+                  type: object
+                  description: Arbitrary JSON payload forwarded to the execution graph.
+                handoff_mode:
+                  type: string
+                  default: mistral_native
+                  description: >
+                    The handoff protocol to use between agent nodes.
+                  examples:
+                    - mistral_native
+                zdr_enabled:
+                  type: boolean
+                  default: true
+                  description: >
+                    Whether to enable Zero-Data-Retention enclave mode for this
+                    execution.
+      responses:
+        '200':
+          description: Graph execution completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphExecutionResult'
+        '401':
+          description: Unauthorized — missing or invalid Bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /agents:
+    get:
+      operationId: listAgents
+      summary: List all available agents
+      description: Returns an array of all available agents with their specifications.
+      tags:
+        - Agents
+      responses:
+        '200':
+          description: A list of agent objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+        '401':
+          description: Unauthorized — missing or invalid Bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /agents/{agent_key}/spec:
+    get:
+      operationId: getAgentSpec
+      summary: Get full specification for a single agent
+      description: Returns the complete specification for the agent identified by the given key.
+      tags:
+        - Agents
+      parameters:
+        - name: agent_key
+          in: path
+          required: true
+          description: The unique key identifying the agent.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Full agent specification.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSpec'
+        '401':
+          description: Unauthorized — missing or invalid Bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Agent not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /webhooks/{agent_key}/trigger:
+    post:
+      operationId: triggerWebhook
+      summary: Trigger inbound webhook for an agent
+      description: >
+        Triggers the inbound webhook endpoint for the specified agent, forwarding
+        the request body as the webhook payload.
+      tags:
+        - Webhooks
+      parameters:
+        - name: agent_key
+          in: path
+          required: true
+          description: The unique key identifying the target agent.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Arbitrary JSON payload to deliver to the agent webhook.
+      responses:
+        '200':
+          description: Webhook triggered successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accepted:
+                    type: boolean
+                    description: Whether the webhook payload was accepted.
+                  agent_key:
+                    type: string
+                    description: The agent that received the webhook.
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: Server timestamp of webhook receipt.
+        '401':
+          description: Unauthorized — missing or invalid Bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Agent not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /health:
+    get:
+      operationId: healthCheck
+      summary: Health check
+      description: Returns the current health status and API version.
+      tags:
+        - System
+      security: []
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        Provide a valid Bearer token in the Authorization header.
+        Example: `Authorization: Bearer <token>`
+
+  schemas:
+    GraphExecutionResult:
+      type: object
+      properties:
+        scenario:
+          type: string
+          description: The scenario key that was executed.
+        status:
+          type: string
+          description: Overall execution status.
+          examples:
+            - completed
+            - partial
+            - failed
+        nodes_executed:
+          type: integer
+          description: Number of nodes that were executed in the graph.
+          examples:
+            - 8
+        handoff_mode:
+          type: string
+          description: The handoff protocol used during execution.
+          examples:
+            - mistral_native
+        mcp_connectors_verified:
+          type: boolean
+          description: Whether all MCP connectors were verified before execution.
+        zdr_enclave_retention_bytes:
+          type: integer
+          description: >
+            Number of bytes retained in the ZDR enclave during execution.
+            Zero when ZDR mode is enabled and operating correctly.
+          examples:
+            - 0
+        execution_summary:
+          type: object
+          description: >
+            Detailed summary of the execution, including per-node results and
+            timing information.
+
+    Agent:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique identifier for the agent.
+        title:
+          type: string
+          description: Human-readable display name of the agent.
+        skills:
+          type: array
+          items:
+            type: string
+          description: List of skills the agent is equipped with.
+        mcp:
+          type: object
+          description: MCP (Model Context Protocol) connector configuration.
+          properties:
+            enabled:
+              type: boolean
+            connectors:
+              type: array
+              items:
+                type: string
+        a2a:
+          type: object
+          description: Agent-to-Agent communication configuration.
+          properties:
+            enabled:
+              type: boolean
+            protocols:
+              type: array
+              items:
+                type: string
+        rbac:
+          type: object
+          description: Role-Based Access Control settings for the agent.
+          properties:
+            roles:
+              type: array
+              items:
+                type: string
+            default_role:
+              type: string
+
+    AgentSpec:
+      allOf:
+        - $ref: '#/components/schemas/Agent'
+        - type: object
+          properties:
+            description:
+              type: string
+              description: Full description of the agent's purpose and capabilities.
+            version:
+              type: string
+              description: Agent specification version.
+            supported_handoff_modes:
+              type: array
+              items:
+                type: string
+              description: Handoff modes this agent supports.
+            webhook_url:
+              type: string
+              format: uri
+              description: The inbound webhook URL for this agent.
+            execution_config:
+              type: object
+              description: Default execution configuration for the agent.
+
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current health status of the API.
+          examples:
+            - ok
+        version:
+          type: string
+          description: Current API version.
+          examples:
+            - '2.4.0'
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable error message.

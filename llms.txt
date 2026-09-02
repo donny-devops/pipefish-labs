@@ -1,6 +1,6 @@
 # PipeFish Labs
 
-> PipeFish Labs is an enterprise AI automation agency specializing in autonomous multi-agent orchestration, zero-trust security architecture, post-quantum cryptography, scalable data pipelines, and management consulting.
+> PipeFish Labs is an enterprise AI automation agency specializing in autonomous multi-agent orchestration, Native Mistral Handoffs, Managed MCP Connectors, zero-trust security architecture, post-quantum cryptography, scalable data pipelines, and management consulting.
 
 ## Core Offerings
 
@@ -13,15 +13,40 @@
 ## Technical Architecture
 
 - **Multi-Agent Orchestration**: Asynchronous DAG state handoffs passing cryptographically signed JSON payloads across CRM, EMR, ERP, Phone, Email, and custom MCP servers.
+- **Native Mistral Handoffs**: Tool-call state persistence across agent chains enabling seamless inter-agent communication with cryptographic payload signing.
+- **Managed MCP Connectors**: Pre-built, security-audited Model Context Protocol connectors for CRM, EMR, ERP, Phone, Email, and custom enterprise integrations.
+- **Code Interpreter**: On-demand sandboxed code execution environment for dynamic computation within agent workflows.
+- **Document Library RAG**: Retrieval-augmented generation over enterprise document libraries for context-aware agent responses.
 - **Zero-Trust Security**: mTLS identity, automated secret rotation via HashiCorp Vault, eBPF Falco threat IDS, and zero-data-retention AI enclaves.
 - **Post-Quantum Cryptography**: Production-ready NIST FIPS 203 (ML-KEM-768) and FIPS 204 (ML-DSA) key encapsulation and digital signatures.
 - **Compliance**: EU AI Act Annex IV conformity, automated explainability audit logs, and human-in-the-loop override controls.
+
+## Python SDK
+
+- [`sdk/pipefish_sdk.py`](https://github.com/donny-devops/pipefish-labs/blob/main/sdk/pipefish_sdk.py): Python SDK (v2.4.0) for programmatic access to the PipeFish Labs autonomous multi-agent orchestration platform. Supports Native Mistral Handoffs, Managed MCP Connectors, and ZDR Confidential Enclave State Sync.
+
+## CI/CD Security Pipeline
+
+- **CodeQL**: Semantic static analysis and vulnerability scanning on every push and pull request.
+- **Gitleaks Secret Scanning**: Continuous detection of hardcoded secrets, API keys, and credentials across all commits.
+- **SLSA Provenance**: OpenSSF SLSA Level 3 supply-chain integrity verification via `generator-generic-ossf-slsa3-publish.yml`.
+- **DOM Integrity**: Automated DOM structure validation for the platform landing page via `verify-dom.yml`.
+
+## Engineering Blog Articles
+
+- [Architecting Autonomous Multi-Agent Systems](https://pipefishlabs.io/blog/architecting-autonomous-multi-agent-systems/)
+- [eBPF Falco Runtime Threat Detection for AI Workloads](https://pipefishlabs.io/blog/ebpf-falco-runtime-threat-detection-ai-workloads/)
+- [EU AI Act Annex IV Conformity Guide](https://pipefishlabs.io/blog/eu-ai-act-annex-iv-conformity-guide/)
+- [Model Context Protocol (MCP) Server Security](https://pipefishlabs.io/blog/model-context-protocol-mcp-server-security/)
+- [Post-Quantum Cryptography Production Guide](https://pipefishlabs.io/blog/post-quantum-cryptography-production-guide/)
+- [Zero-Data-Retention AI Enclaves for Enterprise Privacy](https://pipefishlabs.io/blog/zero-data-retention-ai-enclaves-enterprise-privacy/)
+- [DAG State Handoff in Multi-Agent Execution](https://pipefishlabs.io/blog/dag-state-handoff-multi-agent-execution/)
+- [Zero-Downtime SOC 2 Compliance Modernization](https://pipefishlabs.io/blog/zero-downtime-soc2-compliance-modernization/)
 
 ## Executive Leadership
 
 - **Jason F.** — Co-Founder | Chief Executive & Financial Officer | Sales Administrator
 - **Donny J.** — Co-Founder | Chief Operations Officer | DevOps & AI Automation Engineer
-- **Chris F.** — Chief Information Security Officer (U.S. Navy SEAL veteran, Encryption & Cryptography Specialist)
 
 ## Contact & Audit Booking
 

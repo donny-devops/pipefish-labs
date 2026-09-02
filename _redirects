@@ -1,0 +1,11 @@
+# PipeFish Labs — Cloudflare Pages Redirects Configuration
+
+# Redirect www to apex domain
+https://www.pipefishlabs.io/* https://pipefishlabs.io/:splat 301
+
+# Redirect legacy paths
+/contact    /book-a-demo-contact/  301
+/pricing    /services-solutions/   301
+/about      /benefits-testimonials/ 301
+/docs       /sdk/                  301
+/api        /sdk/                  301

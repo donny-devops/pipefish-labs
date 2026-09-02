@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | PipeFish Labs</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="https://pipefishlabs.io/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: #06070C;
+      color: #F0F4FF;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+    .code {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #00D4FF 0%, #E040FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #8A99AD;
+      margin-top: 1rem;
+      letter-spacing: 0.08em;
+    }
+    .message {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #8A99AD;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+    .back-link {
+      margin-top: 2rem;
+      display: inline-block;
+      padding: 12px 32px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 8px;
+      color: #00D4FF;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .back-link:hover {
+      background: rgba(0, 212, 255, 0.08);
+      border-color: #00D4FF;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="code">404</div>
+  <div class="subtitle">AGENT NODE NOT FOUND</div>
+  <p class="message">
+    The requested resource does not exist in the PipeFish Labs agent mesh.
+    The execution graph has no node mapped to this endpoint.
+  </p>
+  <a href="https://pipefishlabs.io/" class="back-link">← RETURN TO COMMAND CENTER</a>
+</body>
+</html>
