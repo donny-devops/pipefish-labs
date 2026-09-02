@@ -69,6 +69,7 @@ spec_data = {
   },
   "crypto": {
     "title": "Encryption / Cryptography Agent",
+    "duties": "<b>Encryption / Cryptography Agent Capabilities</b><br><br>• Post-Quantum Cryptography (PQC) Integration: Provisions and enforces NIST FIPS 203 ML-KEM-768 key encapsulation mechanisms and FIPS 204 ML-DSA signatures across internal mTLS microservices.<br>• Hardware Security Module (HSM) Operations: Manages automated master key rotation and secure cryptographic operations integrated with HashiCorp Vault, AWS KMS, and PKI Certificate Authorities.<br>• Hybrid Certificate Enforcement: Oversees mTLS hybrid certificate management to secure modern multi-agent communication streams.<br>• Cryptographic Inventory &amp; Auditing: Automatically tracks, audits, and verifies cryptographic assets, algorithms, and key lifecycles across distributed systems.<br>• Zero-Data-Retention (ZDR) Handoffs: Coordinates with enclaves to ensure that sensitive payloads processed during multi-agent state transitions are kept secure in RAM-only environments with strict zero-byte retention policies.",
     "skills": "nist-ml-kem-768, nist-ml-dsa-signatures, hsm-vault-rotation, mtls-hybrid-pki",
     "mcp": "mcp-server-openssl-pqc, mcp-server-hashicorp-vault, mcp-server-aws-kms",
     "webhooks": "https://api.pipefishlabs.io/v1/webhooks/pqc-key-rotation-alert",
@@ -247,7 +248,7 @@ index_content = index_content.replace(old_json_str, new_json_str)
 
 with open('index.html', 'w', encoding='utf-8') as fp:
     fp.write(index_content)
-print("Successfully injected updated Sales Enablement Agent spec_data into index.html")
+print("Successfully injected updated Encryption Agent spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
@@ -258,4 +259,4 @@ demo_content = demo_content.replace(old_demo_json_str, new_json_str)
 
 with open('demo/index.html', 'w', encoding='utf-8') as fp:
     fp.write(demo_content)
-print("Successfully injected updated Sales Enablement Agent spec_data into demo/index.html")
+print("Successfully injected updated Encryption Agent spec_data into demo/index.html")
