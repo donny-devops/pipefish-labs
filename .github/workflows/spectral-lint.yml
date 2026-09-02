@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - 'sdk/openapi.yaml'
+      - '.spectral.yaml'
       - '.github/workflows/spectral-lint.yml'
   pull_request:
     paths:
       - 'sdk/openapi.yaml'
+      - '.spectral.yaml'
 
 permissions:
   contents: read
@@ -24,3 +26,4 @@ jobs:
         uses: stoplightio/spectral-action@v0.8.10
         with:
           file_glob: 'sdk/openapi.yaml'
+          spectral_ruleset: '.spectral.yaml'

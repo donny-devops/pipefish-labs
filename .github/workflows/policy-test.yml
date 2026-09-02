@@ -29,6 +29,14 @@ jobs:
         with:
           version: 'latest'
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
       - name: Check Rego Syntax
         run: |
           opa check security/*.rego

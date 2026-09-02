@@ -64,6 +64,7 @@ jobs:
 
       - name: Build TypeScript SDK
         run: |
+          mkdir -p dist
           npx -y typescript@latest pipefish_sdk.ts --declaration --outDir dist/ || cp pipefish_sdk.ts dist/index.js
 
       - name: Publish to npm

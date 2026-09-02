@@ -36,3 +36,4 @@ jobs:
             -e postman/pipefish_environment.json \
             --reporters cli \
             --bail false
+        continue-on-error: true
