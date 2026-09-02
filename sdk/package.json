@@ -1,0 +1,31 @@
+{
+  "name": "@pipefish-labs/sdk",
+  "version": "2.4.0",
+  "description": "Official TypeScript & JavaScript SDK for the PipeFish Labs Autonomous Multi-Agent Mesh with Native Mistral Handoffs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test"
+  },
+  "keywords": [
+    "pipefish-labs",
+    "multi-agent",
+    "autonomous-agents",
+    "mcp",
+    "model-context-protocol",
+    "mistral-handoffs",
+    "post-quantum-cryptography",
+    "zero-trust"
+  ],
+  "author": "PipeFish Labs <security@pipefishlabs.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donny-devops/pipefish-labs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/donny-devops/pipefish-labs/issues"
+  },
+  "homepage": "https://pipefishlabs.io/sdk/"
+}

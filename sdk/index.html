@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API &amp; SDK Documentation — PipeFish Labs</title>
+  <meta name="description" content="Official API reference, Python SDK, TypeScript SDK, and Model Context Protocol (MCP) documentation for the PipeFish Labs autonomous multi-agent mesh.">
+  <link rel="canonical" href="https://pipefishlabs.io/sdk/">
+  <link rel="icon" type="image/png" href="https://pipefishlabs.io/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #06070C;
+      color: #F0F4FF;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      padding-bottom: 5rem;
+    }
+    a { color: #00D4FF; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+      background: rgba(6, 7, 12, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-text { font-family: 'Orbitron', monospace; font-weight: 900; font-size: 1.1rem; letter-spacing: 0.12em; color: #F0F4FF; }
+    .badge {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      color: #00D4FF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .container { max-width: 1140px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+    .hero { margin-bottom: 3rem; text-align: left; }
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #00D4FF 0%, #E040FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+    }
+    .hero p { color: #8A99AD; font-size: 1.1rem; max-width: 780px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .card {
+      background: #0C0E18;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover { border-color: #00D4FF; transform: translateY(-2px); }
+    .card h3 { font-family: 'Orbitron', monospace; font-size: 1.1rem; color: #00D4FF; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px; }
+    .card p { color: #8A99AD; font-size: 0.95rem; margin-bottom: 1rem; }
+    pre {
+      background: #111524;
+      border: 1px solid rgba(0, 212, 255, 0.12);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #F0F4FF;
+      margin: 1rem 0;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid #00D4FF;
+      border-radius: 6px;
+      color: #00D4FF;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+    .btn:hover { background: #00D4FF; color: #06070C; }
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.5rem;
+      color: #F0F4FF;
+      margin: 3rem 0 1.2rem;
+      border-left: 4px solid #00D4FF;
+      padding-left: 12px;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+    th, td { padding: 10px 14px; text-align: left; border: 1px solid rgba(0, 212, 255, 0.12); }
+    th { background: #111524; font-family: 'Orbitron', monospace; font-size: 0.8rem; color: #00D4FF; }
+    td { color: #8A99AD; }
+    td code { font-family: 'JetBrains Mono', monospace; color: #E040FF; background: rgba(224, 64, 255, 0.08); padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <a href="https://pipefishlabs.io/" style="display:flex;align-items:center;gap:10px;">
+        <span class="logo-text">PIPEFISH LABS</span>
+      </a>
+      <span class="badge">DEVELOPER API v2.4</span>
+    </div>
+    <div>
+      <a href="https://github.com/donny-devops/pipefish-labs" target="_blank" class="badge">GitHub Repo ↗</a>
+      <a href="https://pipefishlabs.io/demo/" class="btn" style="margin-left:8px;">Live Simulator</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1>Developer API &amp; Agent Mesh SDK</h1>
+      <p>
+        Programmatic access to the PipeFish Labs autonomous multi-agent orchestration platform. Execute 8-node asynchronous scenario graphs with Native Mistral Handoffs, zero-trust MCP Connectors, and NIST FIPS 203 ML-KEM-768 post-quantum cryptographic verification.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🐍 Python SDK</h3>
+        <p>Official client for Python 3.10+ supporting synchronous and asynchronous agent execution graphs.</p>
+        <pre><code>from sdk.pipefish_sdk import PipeFishAgentMesh
+
+mesh = PipeFishAgentMesh(api_key="pfl_live_...")
+res = mesh.trigger_graph_execution(
+    scenario_key="systemoptimizing",
+    payload={"alert": "K8s ingress latency spike"}
+)</code></pre>
+        <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/pipefish_sdk.py" class="btn" target="_blank">View Python Source</a>
+      </div>
+
+      <div class="card">
+        <h3>🔷 TypeScript SDK</h3>
+        <p>Type-safe Node.js / Deno / Web client with complete schema models for all 22 autonomous agent types.</p>
+        <pre><code>import { PipeFishAgentMesh } from "@pipefish-labs/sdk";
+
+const mesh = new PipeFishAgentMesh("pfl_live_...");
+const res = await mesh.triggerGraphExecution(
+  "systemoptimizing",
+  { alert: "K8s ingress latency spike" }
+);</code></pre>
+        <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/pipefish_sdk.ts" class="btn" target="_blank">View TypeScript Source</a>
+      </div>
+
+      <div class="card">
+        <h3>⚡ Model Context Protocol (MCP)</h3>
+        <p>Connect Claude Desktop, Cursor, or Mistral directly to PipeFish agent tools via standard MCP stdio transport.</p>
+        <pre><code># Run the reference MCP server
+python sdk/mcp_server.py
+
+# Tools exposed:
+# - trigger_agent_graph
+# - get_agent_spec
+# - verify_enclave_status</code></pre>
+        <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/mcp_server.py" class="btn" target="_blank">View MCP Server</a>
+      </div>
+    </div>
+
+    <h2 class="section-title">OpenAPI 3.1.0 REST Contract</h2>
+    <p style="color:#8A99AD;margin-bottom:1rem;">
+      Full machine-readable specification available at <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/openapi.yaml" target="_blank"><code>sdk/openapi.yaml</code></a>. Base URL: <code>https://api.pipefishlabs.io/v1</code>
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Endpoint</th>
+          <th>Description</th>
+          <th>Auth</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>POST</code></td>
+          <td><code>/graphs/{scenario_key}/execute</code></td>
+          <td>Execute 8-node autonomous agent graph with Native Mistral Handoff</td>
+          <td>Bearer Token</td>
+        </tr>
+        <tr>
+          <td><code>GET</code></td>
+          <td><code>/agents</code></td>
+          <td>List all 22 available agent types, skills, and MCP connectors</td>
+          <td>Bearer Token</td>
+        </tr>
+        <tr>
+          <td><code>GET</code></td>
+          <td><code>/agents/{agent_key}/spec</code></td>
+          <td>Retrieve zero-trust cryptographic spec, RBAC, and handoff protocols</td>
+          <td>Bearer Token</td>
+        </tr>
+        <tr>
+          <td><code>POST</code></td>
+          <td><code>/webhooks/{agent_key}/trigger</code></td>
+          <td>Trigger inbound asynchronous webhook payload for an agent</td>
+          <td>HMAC-SHA256</td>
+        </tr>
+        <tr>
+          <td><code>GET</code></td>
+          <td><code>/health</code></td>
+          <td>Platform health check, active nodes, and runtime version</td>
+          <td>Public</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="section-title">Security &amp; Zero-Data Retention (ZDR)</h2>
+    <div class="card" style="margin-top:1rem;">
+      <p style="color:#F0F4FF;font-weight:600;margin-bottom:0.5rem;">RAM-Only Confidential Enclaves</p>
+      <p style="color:#8A99AD;margin-bottom:0;">
+        All payload states between agent nodes are serialized inside AWS Nitro and Intel SGX confidential enclaves with strict 0-byte persistent storage guarantees. Every state transition is cryptographically signed using HMAC-SHA256 and encapsulated via NIST FIPS 203 ML-KEM-768 for post-quantum resilience.
+      </p>
+    </div>
+  </main>
+</body>
+</html>
