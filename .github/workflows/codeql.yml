@@ -46,11 +46,12 @@ jobs:
         with:
           category: "/language:${{ matrix.language }}"
           upload: false
-          output: ../results
+          upload-database: false
+          output: results
 
       - name: Upload CodeQL SARIF report
         uses: actions/upload-artifact@v4
         with:
           name: codeql-report-${{ matrix.language }}
-          path: ../results
+          path: results
           if-no-files-found: ignore
