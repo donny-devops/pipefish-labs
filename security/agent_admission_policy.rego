@@ -1,7 +1,9 @@
 package pipefish.admission
 
+import rego.v1
+
 # Deny any container running as root
-deny[msg] {
+deny contains msg if {
     input.request.kind.kind == "Pod"
     container := input.request.object.spec.containers[_]
     not container.securityContext.runAsNonRoot
@@ -9,7 +11,7 @@ deny[msg] {
 }
 
 # Deny containers without readOnlyRootFilesystem
-deny[msg] {
+deny contains msg if {
     input.request.kind.kind == "Pod"
     container := input.request.object.spec.containers[_]
     container.securityContext.readOnlyRootFilesystem != true
@@ -17,7 +19,7 @@ deny[msg] {
 }
 
 # Deny hostPath mounts (prevents container breakout to host filesystem)
-deny[msg] {
+deny contains msg if {
     input.request.kind.kind == "Pod"
     volume := input.request.object.spec.volumes[_]
     volume.hostPath
@@ -25,7 +27,7 @@ deny[msg] {
 }
 
 # Require CPU & memory resource limits
-deny[msg] {
+deny contains msg if {
     input.request.kind.kind == "Pod"
     container := input.request.object.spec.containers[_]
     not container.resources.limits.cpu
