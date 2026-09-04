@@ -29,7 +29,7 @@
   <meta name="twitter:image:alt" content="PipeFish Labs Logo">
   <link rel="icon" type="image/png" href="https://pipefishlabs.io/logo.png">
   <link rel="apple-touch-icon" href="https://pipefishlabs.io/logo.png">
-  <link rel="preload" as="video" href="briefing-video.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="/hero-logo.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -524,6 +524,7 @@
     .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 72px; }
 
     .hero-stats { display: flex; flex-wrap: wrap; gap: 36px; }
+    #hero .ai { opacity: 1 !important; transform: none !important; transition: none !important; }
     .hstat { border-left: 2px solid var(--border-strong); padding-left: 14px; }
     .hstat-n {
       font-family: var(--font-display);
@@ -1292,9 +1293,12 @@
           </div>
         </div>
 
-        <div class="hero-logo-col ai" style="transition-delay:.16s">
+        <div class="hero-logo-col">
           <div class="hero-logo-frame">
-            <img src="/hero-logo.png" alt="PipeFish Labs Logo Badge" class="hero-logo-img">
+            <picture>
+              <source srcset="/hero-logo.webp" type="image/webp">
+              <img src="/hero-logo.png" alt="PipeFish Labs Logo Badge" class="hero-logo-img" width="1024" height="813" fetchpriority="high" decoding="async">
+            </picture>
           </div>
         </div>
       </div>
