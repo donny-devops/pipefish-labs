@@ -128,12 +128,9 @@ edge routing, headers, and redirects applied.
 
 ### Deploying
 
-Pushes to `main` deploy automatically. Two repository secrets are required:
-
-| Secret | Value |
-| --- | --- |
-| `CLOUDFLARE_API_TOKEN` | API token with the **Edit Cloudflare Workers** template, scoped to the `pipefishlabs.io` zone |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID from the dashboard sidebar |
+Cloudflare **Workers Builds** is connected to this repository and deploys on
+every push to `main`. It runs the build command declared in `wrangler.jsonc`,
+so no build step needs configuring in the dashboard and no secrets are needed.
 
 To deploy by hand instead:
 
@@ -141,12 +138,28 @@ To deploy by hand instead:
 make deploy
 ```
 
+`.github/workflows/deploy.yml` always verifies the build and re-scans the output
+for source files. It deploys as well, but only if `CLOUDFLARE_API_TOKEN` is set
+as a repository secret, so it cannot deploy over Workers Builds by accident.
+Set both secrets below only if you want GitHub Actions to own the deploy:
+
+| Secret | Value |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN` | Token using the **Edit Cloudflare Workers** template, scoped to the `pipefishlabs.io` zone |
+| `CLOUDFLARE_ACCOUNT_ID` | Account ID from the Cloudflare dashboard sidebar |
+
 ### Notes on domains
 
 `wrangler.jsonc` claims `pipefishlabs.io` and `www.pipefishlabs.io` as custom
-domains, which also provisions the DNS records. If the first deploy reports that
-a hostname is already attached to another Worker, remove the stale duplicate
-Worker in the Cloudflare dashboard and re-run the deploy.
+domains, which also provisions the DNS records.
+
+The account has two Workers with identical code, `pipefish-labs` and
+`pipefishlabs`, and both are connected to this repository. Workers Builds
+requires the dashboard Worker name to match `name` in `wrangler.jsonc`, so every
+build for `pipefishlabs` fails on that mismatch. Delete that duplicate Worker,
+or disconnect it from the repository, and re-run the deploy. If the deploy then
+reports that a hostname is still attached elsewhere, detach it from the stale
+Worker first.
 
 A host-level `www` to apex 301 cannot be expressed in `_redirects`, which only
 accepts relative paths. Until a zone Redirect Rule is added in the dashboard,

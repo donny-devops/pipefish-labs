@@ -30,5 +30,5 @@ build-site:
 preview: build-site
 	npx wrangler dev
 
-deploy: build-site
+deploy:
 	npx wrangler deploy

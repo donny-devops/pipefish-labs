@@ -4,6 +4,12 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-09-01",
 
+  // Runs before every deploy, including Cloudflare Workers Builds, so dist/ is
+  // always regenerated from the committed sources and never has to be checked in.
+  "build": {
+    "command": "python3 scripts/build_site.py || python scripts/build_site.py"
+  },
+
   // The site is served directly from Cloudflare's edge as static assets.
   // There is no separate origin server, so there is nothing that can time out.
   "assets": {
