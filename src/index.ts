@@ -1,17 +1,20 @@
 /**
  * PipeFish Labs - Edge Routing Proxy & Security Gateway
- * High-performance edge worker for routing, security header injection, and health checks.
+ * High-performance edge worker serving site via Cloudflare Workers Static Assets
+ * with zero-trust security header injection, CORS preflight, and health telemetry.
  */
 
 export interface Env {
-  UPSTREAM_URL?: string;
   ENVIRONMENT?: string;
+  UPSTREAM_URL?: string;
+  ASSETS?: {
+    fetch: (request: Request | string) => Promise<Response>;
+  };
 }
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
-    const upstream = env.UPSTREAM_URL || "https://pipefishlabs.io";
 
     // 1. Edge Health & Status Check Endpoint
     if (url.pathname === "/health" || url.pathname === "/api/health") {
@@ -20,8 +23,9 @@ export default {
           status: "healthy",
           service: "pipefish-labs-edge-proxy",
           timestamp: new Date().toISOString(),
-          region: request.cf?.colo || "global",
-          protocol: request.cf?.httpProtocol || "HTTP/3",
+          region: (request as any).cf?.colo || "global",
+          protocol: (request as any).cf?.httpProtocol || "HTTP/3",
+          delivery: env.ASSETS ? "Workers Static Assets" : "Origin Proxy",
           security: "Zero-Trust TLS 1.3 / Post-Quantum Ready",
         }),
         {
@@ -48,7 +52,40 @@ export default {
       });
     }
 
-    // 3. Forward request to Upstream
+    // Helper to inject zero-trust enterprise security headers
+    const applySecurityHeaders = (headers: Headers): Headers => {
+      const newHeaders = new Headers(headers);
+      newHeaders.set("X-Edge-Proxy", "PipeFish-Labs-Cloudflare");
+      newHeaders.set("X-Content-Type-Options", "nosniff");
+      newHeaders.set("X-Frame-Options", "DENY");
+      newHeaders.set("Referrer-Policy", "strict-origin-when-cross-origin");
+      newHeaders.set(
+        "Strict-Transport-Security",
+        "max-age=63072000; includeSubDomains; preload"
+      );
+      return newHeaders;
+    };
+
+    // 3. Serve from Cloudflare Workers Static Assets binding directly
+    if (env.ASSETS) {
+      try {
+        const assetResponse = await env.ASSETS.fetch(request);
+        // If asset is found or we have no alternative upstream, serve the asset response (including 404.html)
+        if (assetResponse.status !== 404 || !env.UPSTREAM_URL) {
+          const securedHeaders = applySecurityHeaders(assetResponse.headers);
+          return new Response(assetResponse.body, {
+            status: assetResponse.status,
+            statusText: assetResponse.statusText,
+            headers: securedHeaders,
+          });
+        }
+      } catch (assetErr) {
+        console.warn("[ASSETS] Static asset fetch error, falling back to upstream if configured:", assetErr);
+      }
+    }
+
+    // 4. Fallback to Upstream URL (if ASSETS binding not present or upstream fallback needed)
+    const upstream = env.UPSTREAM_URL || "https://pipefishlabs.io";
     const upstreamUrl = new URL(url.pathname + url.search, upstream);
     const modifiedRequest = new Request(upstreamUrl.toString(), {
       method: request.method,
@@ -59,22 +96,11 @@ export default {
 
     try {
       const response = await fetch(modifiedRequest);
-      const newHeaders = new Headers(response.headers);
-
-      // 4. Inject Enterprise Zero-Trust Security Headers
-      newHeaders.set("X-Edge-Proxy", "PipeFish-Labs-Cloudflare");
-      newHeaders.set("X-Content-Type-Options", "nosniff");
-      newHeaders.set("X-Frame-Options", "DENY");
-      newHeaders.set("Referrer-Policy", "strict-origin-when-cross-origin");
-      newHeaders.set(
-        "Strict-Transport-Security",
-        "max-age=63072000; includeSubDomains; preload"
-      );
-
+      const securedHeaders = applySecurityHeaders(response.headers);
       return new Response(response.body, {
         status: response.status,
         statusText: response.statusText,
-        headers: newHeaders,
+        headers: securedHeaders,
       });
     } catch (error) {
       return new Response(
