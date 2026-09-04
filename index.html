@@ -142,8 +142,8 @@
 
       --nav-h: 72px;
       --max-w: 1280px;
-      --pad-x: clamp(1.5rem, 5vw, 4rem);
-      --sec-y: clamp(80px, 10vw, 130px);
+      --pad-x: clamp(1.1rem, 4vw, 3.5rem);
+      --sec-y: clamp(56px, 8vw, 110px);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -182,16 +182,16 @@
     }
     .h1 {
       font-family: var(--font-display);
-      font-size: clamp(2.6rem, 5.5vw, 5rem);
+      font-size: clamp(2rem, 5vw, 4.8rem);
       font-weight: 900;
-      line-height: 1.02;
+      line-height: 1.04;
       letter-spacing: -0.02em;
       text-wrap: balance;
       color: var(--text-strong);
     }
     .h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-size: clamp(1.6rem, 3.2vw, 2.6rem);
       font-weight: 700;
       line-height: 1.15;
       text-wrap: balance;
@@ -348,17 +348,37 @@
     .mob-nav {
       display: none; position: fixed;
       top: var(--nav-h); left: 0; right: 0;
-      background: rgba(6,7,12,0.97);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 20px var(--pad-x);
-      flex-direction: column; gap: 4px; z-index: 99;
+      background: rgba(6,7,12,0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-strong);
+      padding: 24px var(--pad-x);
+      flex-direction: column; gap: 6px; z-index: 999;
+      max-height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      transform: translateY(-8px);
+      opacity: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      pointer-events: none;
     }
-    .mob-nav.open { display: flex; }
+    .mob-nav.open {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
     .mob-nav a {
-      font-size: 15px; font-weight: 500;
-      color: var(--text-strong); padding: 12px 0;
+      font-size: 15.5px; font-weight: 600;
+      color: var(--text-strong); padding: 13px 8px;
       border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 48px;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .mob-nav a:hover, .mob-nav a:focus-visible {
+      color: var(--cyan);
+      padding-left: 14px;
     }
 
     /* ───────── STICKY HOMEPAGE SUB-NAV ───────── */
@@ -379,6 +399,8 @@
       overflow-x: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      padding-block: 4px;
     }
     .subnav-inner::-webkit-scrollbar { display: none; }
     .subnav-title {
@@ -397,6 +419,7 @@
       align-items: center;
       gap: 8px;
       flex-wrap: nowrap;
+      padding-right: 20px;
       mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
     }
@@ -925,6 +948,30 @@
     .ft-bot { border-top: 1px solid var(--border); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
     .ft-bot p { font-size: 12.5px; color: var(--text-dim); }
 
+    /* ───────── ABOUT / TEAM ───────── */
+    #about-team { position: relative; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 40px;
+    }
+    .team-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    .team-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
     /* ───────── ANIMATION ───────── */
     @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
     @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
@@ -932,35 +979,120 @@
     .ai { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .ai.vis { opacity: 1; transform: translateY(0); }
 
-    /* ───────── RESPONSIVE ───────── */
-    @media (max-width: 1100px) {
-      .svc-grid { grid-template-columns: repeat(3,1fr); }
-      .ft-grid  { grid-template-columns: 1fr 1fr; }
-      .tech-cols { grid-template-columns: repeat(2,1fr); }
+    /* ───────── RESPONSIVE BREAKPOINTS ───────── */
+    @media (max-width: 1200px) {
+      .ft-grid { grid-template-columns: 2fr repeat(4, 1fr); gap: 24px; }
+      .svc-grid { grid-template-columns: repeat(3, 1fr); }
     }
+
+    @media (max-width: 1024px) {
+      .ft-grid { grid-template-columns: 1fr 1fr; }
+      .tech-cols { grid-template-columns: repeat(2, 1fr); }
+      .arch-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .briefing-cards { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    }
+
     @media (max-width: 900px) {
-      :root { --sec-y: 72px; }
-      .pillars-grid { grid-template-columns: repeat(2,1fr); }
-      .prob-grid, .q-grid { grid-template-columns: 1fr; gap: 44px; }
-      .proc-steps { grid-template-columns: repeat(2,1fr); }
-      .proc-steps::before { display: none; }
-      .svc-grid { grid-template-columns: repeat(2,1fr); }
-      .stats-row { grid-template-columns: repeat(2,1fr); }
-      .agents-cards { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 660px) {
-      :root { --sec-y: 56px; }
+      :root { --sec-y: 64px; }
       .nav-links, #nav .btn { display: none; }
       .ham { display: flex; }
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+      .prob-grid, .q-grid { grid-template-columns: 1fr; gap: 40px; }
+      .proc-steps { grid-template-columns: repeat(2, 1fr); }
+      .proc-steps::before { display: none; }
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .agents-cards { grid-template-columns: 1fr; }
+      .cap-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --sec-y: 56px; }
+      .video-container {
+        min-height: unset;
+        height: auto;
+      }
+      .demo-container {
+        padding: 18px 14px;
+      }
+      .demo-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+      .demo-tab {
+        flex-shrink: 0;
+        padding: 8px 16px;
+        font-size: 11.5px;
+      }
+      .demo-row {
+        grid-template-columns: 28px 1fr auto;
+        gap: 8px 12px;
+        padding: 10px 14px;
+      }
+      .demo-row-status {
+        grid-column: 2 / -1;
+        font-size: 11px;
+        margin-top: 2px;
+      }
+      .demo-status-bar {
+        padding: 12px 14px;
+        font-size: 13.5px;
+      }
+      .hud-callout {
+        max-width: calc(100% - 32px);
+        left: 16px;
+        bottom: 14px;
+        padding: 10px 12px;
+      }
+      .hud-overlay {
+        top: 10px;
+        right: 10px;
+      }
+      .hud-badge {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .b-modal-box {
+        padding: 24px 16px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root { --sec-y: 50px; --pad-x: 16px; }
       .pillars-grid { grid-template-columns: 1fr; }
       .svc-grid { grid-template-columns: 1fr; }
       .proc-steps { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: 1fr 1fr; }
-      .ft-grid { grid-template-columns: 1fr; gap: 36px; }
-      .hero-btns { flex-direction: column; }
-      .hero-btns .btn { justify-content: center; }
+      .arch-grid { grid-template-columns: 1fr; }
+      .briefing-cards { grid-template-columns: 1fr; gap: 12px; }
+      .team-grid { grid-template-columns: 1fr; gap: 16px; }
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-b { padding: 24px 16px; }
+      .ft-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-btns { flex-direction: column; width: 100%; }
+      .hero-btns .btn { justify-content: center; width: 100%; }
+      .hero-stats { grid-template-columns: 1fr; gap: 12px; }
+      .hstat { border-left: none; border-top: 2px solid var(--border-strong); padding-left: 0; padding-top: 10px; }
       .tech-cols { grid-template-columns: 1fr; }
+      .cta-btns { flex-direction: column; width: 100%; }
+      .cta-btns .btn { justify-content: center; width: 100%; }
+      .callout-box { padding: 24px 18px; }
+      .video-header-bar { padding: 10px 14px; font-size: 10px; }
+      .video-controls-bar { padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+      .play-btn-lg { width: 56px; height: 56px; }
+      .play-btn-lg svg { width: 22px; height: 22px; }
+      .video-title-overlay { font-size: 17px; }
     }
+
     @media (prefers-reduced-motion: reduce) {
       .ai { opacity:1; transform:none; transition:none; }
     }
@@ -1985,9 +2117,9 @@
       </p>
     </div>
 
-    <div class="team-grid ai" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px">
+    <div class="team-grid ai">
       <!-- TEAM MEMBER 1 -->
-      <div class="team-card" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px">
+      <div class="team-card">
         <div style="margin-bottom:16px">
           <h3 style="font-family:var(--font-fd);font-size:15px;font-weight:700;color:var(--text-strong)">Jason F.</h3>
           <div style="font-family:var(--font-fm);font-size:12px;color:var(--cyan)">Founder in Principal | Chief Executive &amp; Financial Officer | Sales Administrator</div>
@@ -1999,7 +2131,7 @@
       </div>
 
       <!-- TEAM MEMBER 2 -->
-      <div class="team-card" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;transition-delay:.05s">
+      <div class="team-card" style="transition-delay:.05s">
         <div style="margin-bottom:16px">
           <h3 style="font-family:var(--font-fd);font-size:15px;font-weight:700;color:var(--text-strong)">Donny J.</h3>
           <div style="font-family:var(--font-fm);font-size:12px;color:var(--cyan)">Co-Founder | Chief Information &amp; Operations Officer | DevOps &amp; Automation Engineer</div>
@@ -2011,7 +2143,7 @@
       </div>
 
       <!-- TEAM MEMBER 3 -->
-      <div class="team-card" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;transition-delay:.1s">
+      <div class="team-card" style="transition-delay:.1s">
         <div style="margin-bottom:16px">
           <h3 style="font-family:var(--font-fd);font-size:15px;font-weight:700;color:var(--text-strong)">Chris F.</h3>
           <div style="font-family:var(--font-fm);font-size:12px;color:var(--cyan)">Chief Information Security Officer | Encryption Specialist</div>
@@ -2119,13 +2251,27 @@ window.addEventListener('scroll', () => {
 /* ── MOBILE NAV ── */
 const ham    = document.getElementById('ham');
 const mobnav = document.getElementById('mobnav');
-ham.addEventListener('click', () => {
-  const open = mobnav.classList.toggle('open');
-  ham.setAttribute('aria-expanded', open);
-});
-function closeNav() {
-  mobnav.classList.remove('open');
-  ham.setAttribute('aria-expanded', false);
+if (ham && mobnav) {
+  ham.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = mobnav.classList.toggle('open');
+    ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  function closeNav() {
+    mobnav.classList.remove('open');
+    ham.setAttribute('aria-expanded', 'false');
+  }
+  document.addEventListener('click', (e) => {
+    if (mobnav.classList.contains('open') && !mobnav.contains(e.target) && e.target !== ham && !ham.contains(e.target)) {
+      closeNav();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobnav.classList.contains('open')) {
+      closeNav();
+      ham.focus();
+    }
+  });
 }
 
 /* ── SCROLL ANIMATIONS ── */
@@ -2636,7 +2782,7 @@ function renderDemoRows() {
         <span>⚡ AGENT ARCHITECTURE &amp; SECRETS DRAWER: ${spec.title}</span>
         <span style="font-size:11px;color:var(--text-dim);font-family:var(--font-mono)">ZERO-TRUST ENCLAVE VERIFIED</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;font-size:12.5px;line-height:1.6">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;font-size:12.5px;line-height:1.6">
         <div style="background:rgba(12,14,24,0.8);padding:12px;border:1px solid var(--border-strong);border-radius:6px">
           <strong style="color:var(--cyan);display:block;margin-bottom:4px;font-family:var(--font-mono)">🛠️ SKILL Files &amp; MCP Servers:</strong>
           <div style="color:var(--text-strong)">SKILLS: <span style="color:var(--magenta)">${spec.skills}</span></div>
