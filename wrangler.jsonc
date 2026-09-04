@@ -6,9 +6,14 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
   "vars": {
-    "ENVIRONMENT": "production",
-    "UPSTREAM_URL": "https://pipefishlabs.io"
+    "ENVIRONMENT": "production"
   },
   "observability": {
     "enabled": true
