@@ -50,13 +50,14 @@ jobs:
 
       - name: Execute Autonomous Agent Mesh
         id: run_agent
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SCENARIO: ${{ github.event.inputs.scenario || 'codescan' }}
+          TITLE: ${{ github.event.issue.title || github.event.pull_request.title || github.event.inputs.task_description || 'CI/CD Automated Mesh Trigger' }}
+          BODY: ${{ github.event.issue.body || github.event.pull_request.body || '' }}
         run: |
-          SCENARIO="${{ github.event.inputs.scenario || 'codescan' }}"
-          TITLE="${{ github.event.issue.title || github.event.pull_request.title || github.event.inputs.task_description || 'CI/CD Automated Mesh Trigger' }}"
-          BODY="${{ github.event.issue.body || github.event.pull_request.body || '' }}"
-
           python scripts/agentic_workflow_runner.py \
-            --event-name "${{ github.event_name }}" \
+            --event-name "$EVENT_NAME" \
             --scenario "$SCENARIO" \
             --issue-title "$TITLE" \
             --issue-body "$BODY" \
