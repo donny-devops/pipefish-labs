@@ -48,7 +48,9 @@ def main():
             print(f"[GUARDRAIL BLOCK] Adversarial input detected: {pie}")
             with open(args.output_file, "w", encoding="utf-8") as f:
                 f.write(f"### 🛑 Autonomous Security Intercept\n\nAdversarial prompt injection pattern was blocked by `PromptGuardrail`.\n\n**Reason:** `{pie}`\n")
-            sys.exit(0)
+            # Fail the job so status checks and merge gates surface the block
+            # instead of reporting a green run on detected adversarial input.
+            sys.exit(1)
 
     # 2. Initialize Agent Mesh & Gateway
     mesh = PipeFishAgentMesh(api_key=os.environ.get("PIPEFISH_API_KEY", "agentic_ci_runner_key"))

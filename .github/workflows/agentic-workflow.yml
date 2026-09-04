@@ -50,24 +50,28 @@ jobs:
 
       - name: Execute Autonomous Agent Mesh
         id: run_agent
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SCENARIO: ${{ github.event.inputs.scenario || 'codescan' }}
+          TITLE: ${{ github.event.issue.title || github.event.pull_request.title || github.event.inputs.task_description || 'CI/CD Automated Mesh Trigger' }}
+          BODY: ${{ github.event.issue.body || github.event.pull_request.body || '' }}
         run: |
-          SCENARIO="${{ github.event.inputs.scenario || 'codescan' }}"
-          TITLE="${{ github.event.issue.title || github.event.pull_request.title || github.event.inputs.task_description || 'CI/CD Automated Mesh Trigger' }}"
-          BODY="${{ github.event.issue.body || github.event.pull_request.body || '' }}"
-
           python scripts/agentic_workflow_runner.py \
-            --event-name "${{ github.event_name }}" \
+            --event-name "$EVENT_NAME" \
             --scenario "$SCENARIO" \
             --issue-title "$TITLE" \
             --issue-body "$BODY" \
             --output-file "agentic_report.md"
 
+      # The reporting steps below run even when the agent step fails, so a
+      # guardrail intercept (non-zero exit) still gets surfaced on the issue/PR.
       - name: Output Step Summary
+        if: ${{ !cancelled() && hashFiles('agentic_report.md') != '' }}
         run: |
-          cat agentic_report.md >> $GITHUB_STEP_SUMMARY
+          cat agentic_report.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Comment on Issue or Pull Request
-        if: github.event_name == 'issues' || github.event_name == 'pull_request'
+        if: ${{ !cancelled() && hashFiles('agentic_report.md') != '' && (github.event_name == 'issues' || github.event_name == 'pull_request') }}
         uses: actions/github-script@v7
         with:
           script: |
@@ -84,6 +88,7 @@ jobs:
             }
 
       - name: Upload Agentic Report Artifact
+        if: ${{ !cancelled() && hashFiles('agentic_report.md') != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: pipefish-agentic-report
