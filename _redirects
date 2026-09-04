@@ -1,9 +1,11 @@
-# PipeFish Labs — Cloudflare Pages Redirects Configuration
+# PipeFish Labs — Cloudflare static asset redirects
+#
+# Note: this file only supports relative paths. A host-level www -> apex 301
+# cannot be expressed here and must be configured as a zone Redirect Rule in
+# the Cloudflare dashboard. Until then www.pipefishlabs.io serves the same
+# site, and every page carries a rel=canonical pointing at the apex domain.
 
-# Redirect www to apex domain
-https://www.pipefishlabs.io/* https://pipefishlabs.io/:splat 301
-
-# Redirect legacy paths
+# Legacy paths
 /contact    /book-a-demo-contact/  301
 /pricing    /services-solutions/   301
 /about      /benefits-testimonials/ 301

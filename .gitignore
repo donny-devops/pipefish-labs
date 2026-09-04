@@ -44,3 +44,7 @@ desktop.ini
 .idea/
 scratch/
 agentic_report.md
+
+# Cloudflare / site build output
+/dist/
+.wrangler/

@@ -1,0 +1,82 @@
+name: Deploy Site to Cloudflare Workers
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-cloudflare
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build static site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build site into dist/
+        run: python scripts/build_site.py
+
+      - name: Confirm no source files were published
+        run: |
+          leaked=$(find dist -type f \
+            \( -name '*.py' -o -name '*.tf' -o -name '*.rego' -o -name '*.sql' \
+               -o -name '*.env' -o -name '*.pem' -o -name '*.key' \))
+          if [ -n "$leaked" ]; then
+            echo "Refusing to deploy, non-public files present in dist/:"
+            echo "$leaked"
+            exit 1
+          fi
+
+  deploy:
+    name: Deploy to Cloudflare
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build site into dist/
+        run: python scripts/build_site.py
+
+      - name: Deploy Worker and static assets
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      # Provisioning a custom domain for the first time can take a couple of
+      # minutes, so this polls rather than checking once.
+      - name: Verify the site is serving
+        run: |
+          for attempt in $(seq 1 12); do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' https://pipefishlabs.io/ || echo 000)
+            if [ "$code" = "200" ]; then
+              echo "Site responded 200 on attempt $attempt."
+              exit 0
+            fi
+            echo "Attempt $attempt: got HTTP $code, retrying in 15s."
+            sleep 15
+          done
+          echo "Site did not return 200 within 3 minutes of deploying."
+          exit 1

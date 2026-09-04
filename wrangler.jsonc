@@ -3,18 +3,26 @@
   "name": "pipefish-labs",
   "main": "src/index.ts",
   "compatibility_date": "2026-09-01",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
+
+  // The site is served directly from Cloudflare's edge as static assets.
+  // There is no separate origin server, so there is nothing that can time out.
   "assets": {
-    "directory": ".",
+    "directory": "./dist",
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
+
+  // Custom domains also provision the DNS records for these hostnames.
+  "routes": [
+    { "pattern": "pipefishlabs.io", "custom_domain": true },
+    { "pattern": "www.pipefishlabs.io", "custom_domain": true }
+  ],
+
   "vars": {
     "ENVIRONMENT": "production"
   },
+
   "observability": {
     "enabled": true
   }

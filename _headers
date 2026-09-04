@@ -1,5 +1,5 @@
-# PipeFish Labs — Cloudflare Pages Headers Configuration
-# Enforces security headers, caching, and CORS policies
+# PipeFish Labs — Cloudflare static asset headers
+# Enforces security headers, caching, and CORS policies.
 
 /*
   X-Content-Type-Options: nosniff
@@ -7,7 +7,7 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.pipefishlabs.io; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.pipefishlabs.io; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
 /assets/*
@@ -22,3 +22,15 @@
 /sdk/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=3600
+
+# The Decap CMS admin console loads its bundle and identity widget from third
+# party origins and talks to the GitHub API, so it needs its own policy.
+# The site-wide policy is detached first; otherwise both policies apply and the
+# browser enforces the intersection of the two, which blocks the console.
+# 'unsafe-eval' is required because Decap compiles its config schema validator
+# at runtime. It is scoped to /admin/* only and never applies to the public site.
+/admin/*
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://identity.netlify.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://unpkg.com https://identity.netlify.com; frame-src https://identity.netlify.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store

@@ -97,6 +97,62 @@ PipeFish Labs takes security seriously. Our security posture includes:
 
 ---
 
+## 🌍 Website Hosting & Deployment
+
+The public site at [pipefishlabs.io](https://pipefishlabs.io) is served directly
+from Cloudflare's edge as [Workers static assets](https://developers.cloudflare.com/workers/static-assets/).
+There is no separate origin server, so there is no origin that can go down.
+
+### How it works
+
+| Piece | Role |
+| --- | --- |
+| `scripts/build_site.py` | Copies the publishable site into `dist/` using a strict allowlist |
+| `wrangler.jsonc` | Points Cloudflare at `dist/`, sets routing and the custom domains |
+| `src/index.ts` | Serves `/health`, answers CORS preflight, defers everything else to the asset layer |
+| `_headers` / `_redirects` | Security headers, caching, and path redirects, applied at the edge |
+| `.github/workflows/deploy.yml` | Builds and deploys on every push to `main` |
+
+The build script publishes only web file types. Python, Terraform, Rego, SQL,
+Helm charts, Postman collections, and tests can never be uploaded by accident,
+and the deploy workflow re-checks `dist/` before it ships.
+
+### Local preview
+
+```bash
+make preview
+```
+
+This builds `dist/` and runs the site on `http://127.0.0.1:8787` with the real
+edge routing, headers, and redirects applied.
+
+### Deploying
+
+Pushes to `main` deploy automatically. Two repository secrets are required:
+
+| Secret | Value |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN` | API token with the **Edit Cloudflare Workers** template, scoped to the `pipefishlabs.io` zone |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID from the dashboard sidebar |
+
+To deploy by hand instead:
+
+```bash
+make deploy
+```
+
+### Notes on domains
+
+`wrangler.jsonc` claims `pipefishlabs.io` and `www.pipefishlabs.io` as custom
+domains, which also provisions the DNS records. If the first deploy reports that
+a hostname is already attached to another Worker, remove the stale duplicate
+Worker in the Cloudflare dashboard and re-run the deploy.
+
+A host-level `www` to apex 301 cannot be expressed in `_redirects`, which only
+accepts relative paths. Until a zone Redirect Rule is added in the dashboard,
+`www` serves the same content and every page carries a `rel=canonical` pointing
+at the apex domain.
+
 ## ⚙️ CI/CD Pipeline
 
 This repository is protected by four GitHub Actions workflows:

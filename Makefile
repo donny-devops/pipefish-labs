@@ -1,4 +1,4 @@
-.PHONY: test verify-dom mcp compliance clean lint build health
+.PHONY: test verify-dom mcp compliance clean lint build health build-site preview deploy
 
 test:
 	python -m unittest discover -s tests -p "test_*.py" -v
@@ -23,3 +23,12 @@ lint:
 
 build:
 	python -m build
+
+build-site:
+	python scripts/build_site.py
+
+preview: build-site
+	npx wrangler dev
+
+deploy: build-site
+	npx wrangler deploy
