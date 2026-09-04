@@ -1,4 +1,4 @@
-# 🌐 PipeFish Labs — Enterprise AI Automation & Autonomous Multi-Agent Systems
+# 🌐 PipeFish Labs - Enterprise AI Automation & Autonomous Multi-Agent Systems
 
 [![CI - Verify DOM](https://github.com/donny-devops/pipefish-labs/actions/workflows/verify-dom.yml/badge.svg)](https://github.com/donny-devops/pipefish-labs/actions/workflows/verify-dom.yml)
 [![CodeQL](https://github.com/donny-devops/pipefish-labs/actions/workflows/codeql.yml/badge.svg)](https://github.com/donny-devops/pipefish-labs/actions/workflows/codeql.yml)
