@@ -5,6 +5,8 @@ Allow: /
 Disallow: /scratch/
 Disallow: /.git/
 Disallow: /scripts/
+Disallow: /admin/
+Disallow: /api/
 
 # AI & LLM Search Crawlers (Perplexity, ChatGPT, Claude, Gemini, Applebot)
 User-agent: GPTBot
