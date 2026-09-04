@@ -77,6 +77,7 @@ EXCLUDED_DIRS = frozenset(
 # Extensionless or otherwise non-allowlisted files that must still be published,
 # as paths relative to the repository root.
 EXTRA_FILES = (
+    "CNAME",
     "_headers",
     "_redirects",
     "admin/config.yml",
