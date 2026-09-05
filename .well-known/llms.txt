@@ -45,8 +45,8 @@
 
 ## Executive Leadership
 
-- **Chris F.** — Chief Executive & Information Security Officer | Encryption Specialist | AES / TDES / ECC / FPE
-- **Donny J.** — Co-Founder | Chief Information & Operations Officer | DevOps & Automation Engineer
+- **Chris F. - Co-Founder** — Chief Executive & Information Security Officer | Encryption Specialist | AES / TDES / ECC / FPE
+- **Donny J. - Co-Founder** — Chief Information & Operations Officer | DevOps & Automation Engineer
 
 ## Contact & Audit Booking
 
