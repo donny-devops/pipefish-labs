@@ -18,8 +18,9 @@ var/
 wheels/
 *.egg-info/
 .installed.cfg
-*.egg
 .pytest_cache/
+.venv/
+venv/
 
 # Node.js
 node_modules/

@@ -64,7 +64,7 @@ def main():
         "reverse", "crypto", "errorcorr", "trend", "market", "codescan",
         "docs", "observability", "revops", "analytics", "auditing",
         "logtriage", "erp", "trafficrouter", "networkdispatch",
-        "selfimproving", "systemoptimizing"
+        "selfimproving", "systemoptimizing", "finops", "contractintel"
     ], help="Scenario key")
     sub_sim.add_argument("--payload", default=None, help="JSON telemetry payload string")
     sub_sim.add_argument("--api-key", default=None, help="PipeFish API key")
