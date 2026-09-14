@@ -12,8 +12,10 @@ edge routing, `_headers`, and `_redirects`.
 from __future__ import annotations
 
 import argparse
+import errno
 import http.server
 import os
+import socket
 import subprocess
 import sys
 import time
@@ -25,7 +27,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PORT = 8787
 DEFAULT_BIND = "0.0.0.0"
-LOG_PATH = Path("/tmp/pfl-preview.log")
+
+
+class QuietRequestHandler(http.server.SimpleHTTPRequestHandler):
+    """Serve files without writing request paths to stderr."""
+
+    def log_message(self, format: str, *args: object) -> None:
+        return
 
 
 def dist_dir() -> Path:
@@ -48,15 +56,30 @@ def is_ready(port: int, host: str = "127.0.0.1") -> bool:
         return False
 
 
+def port_bound(port: int, host: str = "127.0.0.1") -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.settimeout(0.2)
+        try:
+            sock.connect((host, port))
+        except OSError:
+            return False
+    return True
+
+
 def serve_forever(bind: str, port: int, directory: Path) -> None:
-    handler = partial(http.server.SimpleHTTPRequestHandler, directory=str(directory))
-    httpd = http.server.ThreadingHTTPServer((bind, port), handler)
+    handler = partial(QuietRequestHandler, directory=str(directory))
+    try:
+        httpd = http.server.ThreadingHTTPServer((bind, port), handler)
+    except OSError as exc:
+        if exc.errno != errno.EADDRINUSE:
+            raise
+        wait_ready(port)
+        print(f"preview already running on :{port}")
+        return
     httpd.serve_forever()
 
 
 def spawn_detached(bind: str, port: int) -> None:
-    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    log = open(LOG_PATH, "ab", buffering=0)
     subprocess.Popen(
         [
             sys.executable,
@@ -68,8 +91,8 @@ def spawn_detached(bind: str, port: int) -> None:
             str(port),
         ],
         cwd=str(ROOT),
-        stdout=log,
-        stderr=log,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
         start_new_session=True,
         close_fds=True,
     )
@@ -81,7 +104,7 @@ def wait_ready(port: int, attempts: int = 50) -> None:
             print(f"preview ready on :{port}")
             return
         time.sleep(0.1)
-    raise SystemExit(f"preview failed to start on :{port}; see {LOG_PATH}")
+    raise SystemExit(f"preview failed to start on :{port}")
 
 
 def main() -> int:
@@ -100,6 +123,10 @@ def main() -> int:
 
     if is_ready(args.port):
         print(f"preview already running on :{args.port}")
+        return 0
+
+    if port_bound(args.port):
+        wait_ready(args.port)
         return 0
 
     if args.foreground:
