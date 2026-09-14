@@ -167,8 +167,11 @@ process described in our [SECURITY.md](SECURITY.md). In short:
 
 ### Prerequisites
 
-- **Python 3.11+**
+- **Python 3.11+** (3.12 is fine; CI uses 3.11)
 - **Git**
+- **Node.js 22+** only if you need `make preview` / `make deploy` (Wrangler via `npx`; no global install)
+
+Prefer `python3 -m …` and `make` targets over bare `pytest` / `pipefish` binaries. A `--user` pip install puts scripts in `~/.local/bin`, which is often not on `PATH`.
 
 ### Getting Started
 
@@ -182,31 +185,52 @@ process described in our [SECURITY.md](SECURITY.md). In short:
 2. **Create a virtual environment (recommended):**
 
    ```bash
-   python -m venv .venv
+   python3 -m venv .venv
    source .venv/bin/activate   # macOS/Linux
    .venv\Scripts\activate      # Windows
    ```
 
-3. **Install dependencies (if applicable):**
+3. **Install the package and dev extras** (same command as CI; there is no `requirements.txt`):
 
    ```bash
-   pip install -r requirements.txt
+   python3 -m pip install -e ".[dev]"
    ```
 
-4. **Run the DOM integrity verification script:**
+4. **Run the checks required before a PR:**
 
    ```bash
-   python scripts/verify_dom_integrity.py
+   make test
+   make verify-dom
    ```
 
-   This script validates that the site's HTML structure meets PipeFish Labs standards.
-   All checks must pass before submitting a PR.
+   `make test` runs `python -m unittest discover -s tests -p "test_*.py"`.
+   `make verify-dom` validates landing-page DOM and media integrity.
 
-5. **Create a feature branch and start coding:**
+5. **Preview the site:**
+
+   ```bash
+   make serve
+   ```
+
+   This builds `dist/` and serves it on `http://127.0.0.1:8787` with the stdlib HTTP server. It does not need Wrangler, npm credentials, or a Cloudflare account.
+
+   For production-parity edge routing, `_headers`, and `_redirects`:
+
+   ```bash
+   make preview
+   ```
+
+   That runs `npx wrangler dev` (Wrangler is downloaded on first use; do not `npm install -g wrangler`).
+
+6. **Create a feature branch and start coding:**
 
    ```bash
    git checkout -b feature/your-feature-name
    ```
+
+### Cloud Agents
+
+[`.cursor/environment.json`](../.cursor/environment.json) is the repo-managed Cloud Agent environment. `install` runs the same editable install as CI and builds `dist/`. `start` runs `python3 scripts/serve_preview.py`, which is idempotent: it reuses a listener already bound on port 8787, or detaches a new one and returns once `GET /` succeeds.
 
 ---
 
