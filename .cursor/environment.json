@@ -1,0 +1,5 @@
+{
+  "name": "PipeFish Labs",
+  "install": "python3 -m pip install -e \".[dev]\"\npython3 scripts/build_site.py",
+  "start": "python3 scripts/serve_preview.py"
+}
