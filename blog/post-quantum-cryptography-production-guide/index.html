@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics 4 + Google Consent Mode v2 -->
+      <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTNJ73LVX1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
 
+    // Google Consent Mode v2
     var pflConsent = localStorage.getItem('pfl_consent_mode');
     if (pflConsent === 'granted') {
       gtag('consent', 'default', {
@@ -27,7 +29,6 @@
     gtag('js', new Date());
     gtag('config', 'G-NTNJ73LVX1');
   </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTNJ73LVX1"></script>
   <script defer src="/assets/consent-banner.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
