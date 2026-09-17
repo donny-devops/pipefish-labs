@@ -10,13 +10,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>API &amp; SDK Documentation — PipeFish Labs</title>
-  <meta name="description" content="Official API reference, Python SDK, TypeScript SDK, and Model Context Protocol (MCP) documentation for the PipeFish Labs autonomous multi-agent mesh.">
+  <title>API &amp; SDK Documentation — PipeFish Labs Autonomous Agent Mesh</title>
+  <meta name="description" content="Official API reference, Python SDK, TypeScript SDK, and Model Context Protocol (MCP) documentation for PipeFish Labs' autonomous multi-agent DAG mesh. Zero-trust handoffs and NIST ML-KEM-768 encryption.">
+  <meta name="keywords" content="PipeFish Labs SDK, Multi-Agent API, Python Agent SDK, TypeScript Agent SDK, MCP Server, Autonomous AI Mesh, RevOps Automation API, ERP Agent Orchestration">
   <link rel="canonical" href="https://pipefishlabs.io/sdk/">
   <link rel="icon" type="image/png" href="https://pipefishlabs.io/logo.png">
+  <link rel="apple-touch-icon" href="https://pipefishlabs.io/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <meta property="og:title" content="Developer API &amp; Agent Mesh SDK | PipeFish Labs">
+  <meta property="og:description" content="Programmatic access to PipeFish Labs' autonomous multi-agent orchestration platform. Execute 8-node asynchronous scenario graphs with Native Mistral Handoffs and post-quantum encryption.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pipefishlabs.io/sdk/">
+  <meta property="og:image" content="https://pipefishlabs.io/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@pipefishlabs">
+  <meta name="twitter:title" content="Developer API &amp; Agent Mesh SDK | PipeFish Labs">
+  <meta name="twitter:description" content="Programmatic access to PipeFish Labs' autonomous multi-agent orchestration platform. Execute 8-node asynchronous scenario graphs with Native Mistral Handoffs.">
+  <meta name="twitter:image" content="https://pipefishlabs.io/logo.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebAPI",
+        "name": "PipeFish Labs Agent Orchestration API",
+        "description": "REST and MCP API for executing autonomous 8-node multi-agent graphs with cryptographic state verification.",
+        "documentation": "https://pipefishlabs.io/sdk/",
+        "provider": {
+          "@type": "Organization",
+          "name": "PipeFish Labs",
+          "url": "https://pipefishlabs.io"
+        }
+      }
+    ]
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -231,12 +264,47 @@ python sdk/mcp_server.py
     </table>
 
     <h2 class="section-title">Security &amp; Zero-Data Retention (ZDR)</h2>
-    <div class="card" style="margin-top:1rem;">
+    <div class="card" style="margin-top:1rem;margin-bottom:3rem">
       <p style="color:#F0F4FF;font-weight:600;margin-bottom:0.5rem;">RAM-Only Confidential Enclaves</p>
       <p style="color:#8A99AD;margin-bottom:0;">
         All payload states between agent nodes are serialized inside AWS Nitro and Intel SGX confidential enclaves with strict 0-byte persistent storage guarantees. Every state transition is cryptographically signed using HMAC-SHA256 and encapsulated via NIST FIPS 203 ML-KEM-768 for post-quantum resilience.
       </p>
     </div>
+
+    <!-- High-Converting Bottom Conversion Module -->
+    <div style="background:linear-gradient(135deg,#0B0E17 0%,#111625 100%);border:1px solid rgba(0,212,255,0.3);border-radius:12px;padding:3rem 2rem;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.4)">
+      <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1.6rem,3vw,2.2rem);color:#F0F4FF;margin-bottom:0.8rem;">
+        Integrate the <span style="color:#00D4FF">PipeFish Agent Mesh</span> Today
+      </h2>
+      <p style="color:#8A99AD;font-size:1.05rem;max-width:700px;margin:0 auto 1.8rem;line-height:1.7;">
+        Schedule a dedicated technical architecture session with our engineering leads to review API schemas, design custom subagent DAG workflows, and implement zero-data retention enclaves.
+      </p>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+        <a href="/book-a-demo-contact/?intent=audit" class="btn" style="background:#E040FF;border-color:#E040FF;color:#000;padding:12px 26px;font-size:0.85rem">Book Technical Audit →</a>
+        <a href="/demo/" class="btn" style="padding:12px 26px;font-size:0.85rem">Launch Interactive Demo</a>
+      </div>
+    </div>
   </main>
+
+  <!-- SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS -->
+  <script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'];
+    var utmQuery = [];
+    utmKeys.forEach(function(k) {
+      if (params.has(k)) utmQuery.push(k + '=' + encodeURIComponent(params.get(k)));
+    });
+    if (utmQuery.length > 0) {
+      var qs = utmQuery.join('&');
+      document.querySelectorAll('a[href^="/"]').forEach(function(a) {
+        var href = a.getAttribute('href');
+        if (href && !href.includes('utm_')) {
+          a.setAttribute('href', href + (href.includes('?') ? '&' : '?') + qs);
+        }
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
