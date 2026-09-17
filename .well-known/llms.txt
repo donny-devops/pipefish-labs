@@ -46,7 +46,7 @@
 ## Executive Leadership
 
 - **Chris F.** — Chief Administrative, Digital, & Information Security Officer | Encryption Specialist | AES / TDES / ECC / FPE | Threat Defense Strategist
-- **Donny J.** — Chief Innovation, Technology, & Operations Officer | cPanel Pro & UiPath RPA Certified | DevOps & Automation Engineer
+- **Donny J.** — Chief Innovation, Technology, & Operations Officer | cPanel Pro & UiPath RPA Certified | DevOps & Automation Engineer | Distributed DAG Systems Architect | SRE & Edge Infrastructure Lead
 - **Jason F.** — Chief Information, Revenue, & Financial Officer | HubSpot Certified | Financial Consultant | Data Management Specialist | Enterprise RevOps Architect | Fiscal & Capital Strategist
 
 ## Contact & Audit Booking
