@@ -855,8 +855,8 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 #about-team { position: relative; }
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
   margin-top: 40px;
 }
 .team-card {

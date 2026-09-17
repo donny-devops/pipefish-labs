@@ -45,8 +45,9 @@
 
 ## Executive Leadership
 
-- **Chris F.** — Co-Founder | Chief Executive & Information Security Officer | Encryption Specialist | AES / TDES / ECC / FPE
-- **Donny J.** — Co-Founder | Chief Information & Operations Officer | DevOps & Automation Engineer
+- **Chris F.** — Chief Administrative, Digital, & Information Security Officer
+- **Donny J.** — Chief Innovation, Technology, & Operations Officer | cPanel Pro & UiPath RPA Certified | DevOps & Automation Engineer
+- **Jason F.** — Chief Information, Revenue, & Financial Officer | HubSpot Certified | Financial Consultant | Data Management Specialist
 - **Jessica N.** — Chief Financial & Marketing Officer | Certified Financial Consultant | Digital Marketing Expert
 
 ## Contact & Audit Booking
