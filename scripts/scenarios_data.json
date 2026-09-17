@@ -1,0 +1,1502 @@
+{
+  "receptionist": {
+    "category": "beginner",
+    "icon": "\ud83d\udcde",
+    "badge": "\u2b50 Beginner Friendly",
+    "friendlyName": "Emergency Support Call & Live Booking",
+    "techName": "Receptionist Agent (Voice & Text)",
+    "friendlyProblem": "A customer calls in panic at 2:00 AM because an API is returning errors on their production account.",
+    "friendlyGoal": "Understand caller, verify account, locate on-call engineer, file a P1 ticket, book an emergency triage meeting, and send an SMS confirmation\u2014all in under 3 seconds.",
+    "friendlyTakeaway": "Instead of putting the caller on hold for 30 minutes or waiting for business hours, 8 specialized AI agents pass the baton in seconds to resolve the emergency with zero human data entry.",
+    "nodes": [
+      {
+        "name": "Voice Ingestion",
+        "friendlyTitle": "\ud83d\udc42 1. Listen & Transcribe Voice Call",
+        "friendlyDesc": "Listens to the caller's voice message, transcribes every word with 100% accuracy, and extracts their contact details.",
+        "tools": "\ud83d\udcde Phone System \u00b7 Speech AI"
+      },
+      {
+        "name": "Intent Classifier",
+        "friendlyTitle": "\ud83c\udfaf 2. Understand Urgency & Severity",
+        "friendlyDesc": "Analyzes the problem and flags it as a high-priority 'P0 Outage' because the customer is an enterprise VIP.",
+        "tools": "\ud83e\udde0 Intent Engine \u00b7 SLA Rules"
+      },
+      {
+        "name": "Account Verifier",
+        "friendlyTitle": "\ud83d\udd10 3. Verify Customer Account",
+        "friendlyDesc": "Checks the database securely to make sure the caller is an active customer and matches their phone number.",
+        "tools": "\ud83d\uddc4\ufe0f Database Bridge \u00b7 Zero-Trust Auth"
+      },
+      {
+        "name": "Engineer Router",
+        "friendlyTitle": "\ud83d\udc65 4. Find Active On-Call Engineer",
+        "friendlyDesc": "Scans the team's schedule to find the exact on-call engineer awake and available right now.",
+        "tools": "\ud83d\udcac Slack \u00b7 PagerDuty Schedule"
+      },
+      {
+        "name": "Ticket Generator",
+        "friendlyTitle": "\ud83c\udfab 5. Open Official Support Ticket",
+        "friendlyDesc": "Automatically files a complete support ticket with error logs attached so the engineer doesn't have to ask questions.",
+        "tools": "\ud83d\udccb Jira \u00b7 Helpdesk Bridge"
+      },
+      {
+        "name": "Calendar Sync",
+        "friendlyTitle": "\ud83d\udcc5 6. Schedule Meeting & Video Link",
+        "friendlyDesc": "Books an emergency triage bridge on Google Calendar and sends a Zoom link to both the engineer and the customer.",
+        "tools": "\ud83d\udcc6 Google Calendar \u00b7 Zoom Bridge"
+      },
+      {
+        "name": "SMS Responder",
+        "friendlyTitle": "\ud83d\udcac 7. Text Customer Back Instantly",
+        "friendlyDesc": "Texts the customer a clear confirmation with their ticket number, ETA, and calendar invite within 2 seconds.",
+        "tools": "\ud83d\udcf1 SMS Carrier \u00b7 Voice Synthesizer"
+      },
+      {
+        "name": "Audit Logger",
+        "friendlyTitle": "\ud83d\udee1\ufe0f 8. Seal Tamper-Proof Audit Log",
+        "friendlyDesc": "Permanently logs every single step and handoff into an encrypted audit record for 100% compliance and accountability.",
+        "tools": "\ud83d\udd12 Encrypted Audit Log \u00b7 Webhook"
+      }
+    ]
+  },
+  "sales": {
+    "category": "beginner",
+    "icon": "\ud83d\udcbc",
+    "badge": "\u2b50 Beginner Friendly",
+    "friendlyName": "Instant Inbound Sales Lead Closing",
+    "techName": "Sales Enablement Agent",
+    "friendlyProblem": "A $25k/month enterprise lead submits a contact form requesting custom automation.",
+    "friendlyGoal": "Research the company, score the deal, match the best Solutions Architect, draft a custom proposal, and book a meeting.",
+    "friendlyTakeaway": "Leads contacted in under 5 minutes are 21x more likely to convert. AI agent chains eliminate the 24-hour waiting gap entirely.",
+    "nodes": [
+      {
+        "name": "Lead Ingestion",
+        "friendlyTitle": "\ud83d\udce5 1. Capture Inbound Lead",
+        "friendlyDesc": "Reads the website contact form, extracts the visitor's email, company name, and budget requirements.",
+        "tools": "\ud83c\udf10 Website Webhook \u00b7 Form Parser"
+      },
+      {
+        "name": "Company Research",
+        "friendlyTitle": "\ud83d\udd0d 2. Research Company Background",
+        "friendlyDesc": "Instantly looks up company revenue, headcount, tech stack, and recent funding rounds without manual Googling.",
+        "tools": "\ud83d\udcca Company Intel Database \u00b7 API"
+      },
+      {
+        "name": "ICP Qualification",
+        "friendlyTitle": "\u2b50 3. Calculate Fit Score",
+        "friendlyDesc": "Scores the lead as 96/100 (Tier A+ VIP) based on budget ($25k/mo) and enterprise company size.",
+        "tools": "\ud83c\udfaf Scoring AI \u00b7 Qualification Rules"
+      },
+      {
+        "name": "AE Matching",
+        "friendlyTitle": "\ud83e\udd1d 4. Match Senior Sales Architect",
+        "friendlyDesc": "Finds the best-matched senior sales engineer specializing in enterprise CRM integrations.",
+        "tools": "\ud83d\udcc5 Google Calendar \u00b7 AE Skill Matrix"
+      },
+      {
+        "name": "Proposal Drafter",
+        "friendlyTitle": "\ud83d\udcd1 5. Draft Tailored Proposal",
+        "friendlyDesc": "Automatically drafts a custom scope proposal PDF with tailored ROI calculations and deliverables.",
+        "tools": "\ud83d\udcc4 Document Engine \u00b7 PDF Builder"
+      },
+      {
+        "name": "CRM Sync",
+        "friendlyTitle": "\ud83d\udcbc 6. Update Salesforce & HubSpot",
+        "friendlyDesc": "Creates a new deal stage in CRM and attaches full company research so the sales rep is prepared.",
+        "tools": "\u2601\ufe0f Salesforce \u00b7 HubSpot CRM Bridge"
+      },
+      {
+        "name": "Slack Alert",
+        "friendlyTitle": "\ud83d\udd14 7. Alert Sales Team on Slack",
+        "friendlyDesc": "Sends a message into the team's Slack channel with a 1-click button to approve the meeting and proposal.",
+        "tools": "\ud83d\udcac Slack Bot \u00b7 Interactive Buttons"
+      },
+      {
+        "name": "Email Outbound",
+        "friendlyTitle": "\u2709\ufe0f 8. Send Personalized Invitation",
+        "friendlyDesc": "Sends the prospect a personalized welcome email with calendar invite and next steps within 3 seconds.",
+        "tools": "\ud83d\udce7 Email Engine \u00b7 Calendar Invite"
+      }
+    ]
+  },
+  "logistics": {
+    "category": "beginner",
+    "icon": "\ud83d\ude9a",
+    "badge": "\u2b50 Beginner Friendly",
+    "friendlyName": "Cargo Port Congestion Rerouting",
+    "techName": "Logistics / Supply Chain Agent",
+    "friendlyProblem": "A massive shipping port is delayed, risking spoiling 1,400 refrigerated freight containers.",
+    "friendlyGoal": "Detect port congestion, find alternate rail & truck routes, rebook freight carriers, and alert customers automatically.",
+    "friendlyTakeaway": "Autonomous supply chain chains prevent millions of dollars in spoiled cargo by solving delays in seconds instead of days.",
+    "nodes": [
+      {
+        "name": "EDI Telemetry",
+        "friendlyTitle": "\ud83d\udce1 1. Receive Port Delay Alert",
+        "friendlyDesc": "Picks up live satellite and port radar feeds showing a 48-hour backlog at the destination terminal.",
+        "tools": "\ud83d\udef0\ufe0f GPS Telematics \u00b7 EDI Stream"
+      },
+      {
+        "name": "Risk Classifier",
+        "friendlyTitle": "\u26a0\ufe0f 2. Assess Cold-Chain Risk",
+        "friendlyDesc": "Calculates that the cargo will spoil if delayed more than 12 hours and flags emergency reroute.",
+        "tools": "\ud83c\udf21\ufe0f Temperature Sensors \u00b7 SLA Rules"
+      },
+      {
+        "name": "Carrier Query",
+        "friendlyTitle": "\ud83d\udd0e 3. Find Available Trains & Trucks",
+        "friendlyDesc": "Searches regional rail yards and refrigerated trucking fleets to find backup transport capacity.",
+        "tools": "\ud83d\ude9b Carrier Network \u00b7 Cross-Dock API"
+      },
+      {
+        "name": "Route Optimizer",
+        "friendlyTitle": "\ud83d\uddfa\ufe0f 4. Calculate Fastest Bypass Route",
+        "friendlyDesc": "Finds a rail route bypassing the congested port that gets the cargo delivered 8 hours ahead of schedule.",
+        "tools": "\ud83e\udded Route Optimization Engine"
+      },
+      {
+        "name": "Carrier Dispatch",
+        "friendlyTitle": "\ud83d\udce6 5. Book Alternate Carriers",
+        "friendlyDesc": "Instantly books and transmits electronic shipping orders to the new rail and trucking partners.",
+        "tools": "\u26a1 Automated Booking API \u00b7 EDI 204"
+      },
+      {
+        "name": "ERP Ledger Sync",
+        "friendlyTitle": "\ud83d\udcd1 6. Update Warehouse ERP Records",
+        "friendlyDesc": "Updates inventory schedules in SAP ERP so the receiving warehouse knows the new dock arrival time.",
+        "tools": "\ud83c\udfe2 SAP ERP \u00b7 Oracle Cloud Bridge"
+      },
+      {
+        "name": "Customer Alert",
+        "friendlyTitle": "\ud83d\udcf1 7. Notify Receiving Customers",
+        "friendlyDesc": "Sends proactive updates to retail buyers with live GPS tracking before they even noticed the port delay.",
+        "tools": "\ud83d\udcf2 Tracking Portal \u00b7 SMS/Email"
+      },
+      {
+        "name": "Reliability AI",
+        "friendlyTitle": "\ud83d\udcc8 8. Learn & Save Record",
+        "friendlyDesc": "Records performance metrics so future supply chain decisions get even smarter and faster.",
+        "tools": "\ud83d\udd12 Immutable Log \u00b7 Reliability AI"
+      }
+    ]
+  },
+  "docs": {
+    "category": "beginner",
+    "icon": "\ud83d\udcdd",
+    "badge": "\u2b50 Beginner Friendly",
+    "friendlyName": "Instant Software Manual & API Documentation",
+    "techName": "Documentation Agent",
+    "friendlyProblem": "Engineering team pushed new code, but nobody wrote the instruction manual or updated API docs.",
+    "friendlyGoal": "Scan code changes, generate user manuals, create interactive diagrams, and publish them online.",
+    "friendlyTakeaway": "Documentation is normally the most neglected part of software. AI agent chains keep user guides 100% updated automatically.",
+    "nodes": [
+      {
+        "name": "Code Scanner",
+        "friendlyTitle": "\ud83d\udd0d 1. Read Code Changes",
+        "friendlyDesc": "Extracts all new functions, parameters, and features added in the latest software update.",
+        "tools": "\ud83d\udcbb Code Parser \u00b7 Git Commit Hook"
+      },
+      {
+        "name": "OpenAPI Generator",
+        "friendlyTitle": "\ud83d\udcdc 2. Build API Specifications",
+        "friendlyDesc": "Generates official OpenAPI 3.1 technical specifications for developers.",
+        "tools": "\ud83d\udccb OpenAPI Generator \u00b7 Schema Bridge"
+      },
+      {
+        "name": "Code Examples",
+        "friendlyTitle": "\ud83d\udca1 3. Write Working Code Examples",
+        "friendlyDesc": "Writes step-by-step example code in Python, JavaScript, and Go showing how to use the feature.",
+        "tools": "\u2728 Code Synthesizer \u00b7 Multi-Language"
+      },
+      {
+        "name": "Diagram Builder",
+        "friendlyTitle": "\ud83d\udcca 4. Draw System Flowcharts",
+        "friendlyDesc": "Creates clean interactive Mermaid diagrams showing how data flows through the system.",
+        "tools": "\ud83c\udfa8 Mermaid.js Diagram Engine"
+      },
+      {
+        "name": "Tutorial Writer",
+        "friendlyTitle": "\ud83d\udcd6 5. Write Beginner Guides",
+        "friendlyDesc": "Drafts plain-English tutorials and quickstart guides with clear explanations.",
+        "tools": "\u270d\ufe0f Technical Writer AI"
+      },
+      {
+        "name": "QC Validator",
+        "friendlyTitle": "\ud83d\udd17 6. Verify Links & Quality",
+        "friendlyDesc": "Checks that all hyperlinks work and ensures no outdated terminology is present.",
+        "tools": "\ud83d\udd0e Link Checker \u00b7 QC Validator"
+      },
+      {
+        "name": "Portal Publisher",
+        "friendlyTitle": "\ud83d\ude80 7. Publish to Developer Portal",
+        "friendlyDesc": "Deploys the polished documentation directly to the live website.",
+        "tools": "\ud83c\udf10 Cloudflare / Static Publisher"
+      },
+      {
+        "name": "Release Notes",
+        "friendlyTitle": "\ud83c\udff7\ufe0f 8. Generate Release Notes",
+        "friendlyDesc": "Creates a human-readable changelog announcing what is new in version 2.4.",
+        "tools": "\ud83d\udce2 Changelog Generator"
+      }
+    ]
+  },
+  "codescan": {
+    "category": "security",
+    "icon": "\ud83d\udee1\ufe0f",
+    "badge": "Security & Privacy",
+    "friendlyName": "Instant Code Vulnerability & Secret Patching",
+    "techName": "Code-Scanning Agent",
+    "friendlyProblem": "A developer accidentally committed a database password and a security bug into the main codebase.",
+    "friendlyGoal": "Scan 1.4 million lines of code, detect the leaked password, block dangerous deployments, and create a verified fix.",
+    "friendlyTakeaway": "Security breaches happen in seconds when humans miss small details. AI code-scanning chains protect apps automatically before bad code goes live.",
+    "nodes": [
+      {
+        "name": "AST Parser",
+        "friendlyTitle": "\ud83d\udd0d 1. Scan Codebase Structure",
+        "friendlyDesc": "Parses every file in the code commit to analyze logic patterns and data pathways.",
+        "tools": "\ud83d\udcbb Code Parser \u00b7 AST Analyzer"
+      },
+      {
+        "name": "Secret Scanner",
+        "friendlyTitle": "\ud83d\udd11 2. Find Leaked Passwords & Keys",
+        "friendlyDesc": "Spots an exposed cloud password left in line 42 of a configuration file.",
+        "tools": "\ud83d\udd75\ufe0f Secret Detector \u00b7 Entropy Filter"
+      },
+      {
+        "name": "Vulnerability Engine",
+        "friendlyTitle": "\ud83d\udee1\ufe0f 3. Detect Security Vulnerabilities",
+        "friendlyDesc": "Identifies an unescaped database query that could let malicious hackers steal data.",
+        "tools": "\ud83d\udd12 OWASP Security Engine"
+      },
+      {
+        "name": "Dependency Tracker",
+        "friendlyTitle": "\ud83d\udce6 4. Check External Libraries",
+        "friendlyDesc": "Cross-references all installed packages against national cybersecurity vulnerability lists.",
+        "tools": "\ud83d\udcda National Vulnerability Database"
+      },
+      {
+        "name": "Auto Patch AI",
+        "friendlyTitle": "\u2728 5. Write Safe Code Fix",
+        "friendlyDesc": "Automatically writes the exact code fix to replace the exposed password with secure vault storage.",
+        "tools": "\ud83e\udd16 Safe Code Refactor AI"
+      },
+      {
+        "name": "CI/CD Gate",
+        "friendlyTitle": "\ud83d\udeab 6. Block Unsafe Release",
+        "friendlyDesc": "Temporarily pauses deployment and leaves a helpful comment on GitHub with the fix ready to merge.",
+        "tools": "\ud83d\udc19 GitHub CI/CD Gate \u00b7 Code Review"
+      },
+      {
+        "name": "Compliance Vault",
+        "friendlyTitle": "\ud83d\udccb 7. Save Security Proof",
+        "friendlyDesc": "Stores a signed audit log proving the issue was caught and patched for upcoming SOC 2 audits.",
+        "tools": "\ud83d\udd10 SOC 2 Compliance Vault"
+      },
+      {
+        "name": "Security Dashboard",
+        "friendlyTitle": "\ud83d\udcca 8. Update Security Scorecard",
+        "friendlyDesc": "Recalculates company security health score to 99.8% and notifies the security team.",
+        "tools": "\ud83d\udcc8 Security Dashboard \u00b7 Metrics"
+      }
+    ]
+  },
+  "crypto": {
+    "category": "security",
+    "icon": "\ud83d\udd10",
+    "badge": "Security & Privacy",
+    "friendlyName": "Post-Quantum Encryption & Key Protection",
+    "techName": "Encryption / Cryptography Agent",
+    "friendlyProblem": "Legacy RSA encryption is vulnerable to future quantum computer decryption attacks.",
+    "friendlyGoal": "Audit encryption keys, generate post-quantum ML-KEM keys, rotate hardware security modules, and certify quantum safety.",
+    "friendlyTakeaway": "Upgrading encryption across thousands of servers normally takes 6 months of IT meetings. Agent chains execute the transition safely in seconds.",
+    "nodes": [
+      {
+        "name": "Crypto Scanner",
+        "friendlyTitle": "\ud83d\udd0d 1. Audit Current Keys",
+        "friendlyDesc": "Scans all servers to identify old encryption algorithms that need quantum-safe upgrades.",
+        "tools": "\ud83d\udd0e Crypto Inventory Scanner"
+      },
+      {
+        "name": "Risk Evaluator",
+        "friendlyTitle": "\u26a0\ufe0f 2. Rank Risk Priorities",
+        "friendlyDesc": "Prioritizes which databases need immediate quantum-proof protection.",
+        "tools": "\ud83d\udcca Quantum Risk Evaluator"
+      },
+      {
+        "name": "NIST Key Gen",
+        "friendlyTitle": "\ud83d\udd11 3. Generate ML-KEM-768 Keys",
+        "friendlyDesc": "Generates NIST-standard post-quantum mathematical encryption keys.",
+        "tools": "\ud83d\udd10 NIST PQC Engine"
+      },
+      {
+        "name": "DSA Signer",
+        "friendlyTitle": "\u270d\ufe0f 4. Sign Data Payloads",
+        "friendlyDesc": "Signs outgoing messages with post-quantum digital signatures to prevent tampering.",
+        "tools": "\ud83d\udee1\ufe0f ML-DSA Digital Signer"
+      },
+      {
+        "name": "HSM Key Rotation",
+        "friendlyTitle": "\ud83d\udd04 5. Rotate Hardware Keys",
+        "friendlyDesc": "Securely rotates master keys inside hardware security modules without downtime.",
+        "tools": "\ud83d\udd12 AWS KMS / Vault HSM"
+      },
+      {
+        "name": "Hybrid TLS",
+        "friendlyTitle": "\ud83d\udcdc 6. Issue Hybrid Certificates",
+        "friendlyDesc": "Deploys dual-layer security certificates that work with both old and new web browsers.",
+        "tools": "\ud83c\udf10 Hybrid TLS PKI"
+      },
+      {
+        "name": "ZDR Enclave",
+        "friendlyTitle": "\ud83d\udee1\ufe0f 7. Spin Up Secure Enclaves",
+        "friendlyDesc": "Creates private memory spaces where secret data exists only for milliseconds before vanishing.",
+        "tools": "\u26a1 Zero-Data-Retention Enclave"
+      },
+      {
+        "name": "Audit Certificate",
+        "friendlyTitle": "\u2705 8. Issue Quantum-Safe Proof",
+        "friendlyDesc": "Issues a cryptographically signed compliance token confirming 100% post-quantum readiness.",
+        "tools": "\ud83d\udccb PQC Audit Certificate"
+      }
+    ]
+  },
+  "integration": {
+    "category": "it",
+    "icon": "\ud83d\udd17",
+    "badge": "IT & Systems",
+    "friendlyName": "Multi-App Real-Time Data Sync",
+    "techName": "Integration Agent",
+    "friendlyProblem": "Salesforce, Workday, and SAP have conflicting customer data and mismatching formats.",
+    "friendlyGoal": "Ingest data across all 3 platforms, translate formats, resolve conflicting edits, and sync them bi-directionally.",
+    "friendlyTakeaway": "Instead of brittle Zapier zaps or manual CSV uploads, agent chains reconcile complex enterprise databases with zero data loss.",
+    "nodes": [
+      {
+        "name": "Multi-Protocol Ingest",
+        "friendlyTitle": "\ud83d\udce5 1. Receive App Signals",
+        "friendlyDesc": "Listens to real-time events across SAP, Workday, and Salesforce at once.",
+        "tools": "\ud83c\udf10 Multi-Protocol Ingest"
+      },
+      {
+        "name": "Schema Transformer",
+        "friendlyTitle": "\ud83d\udd04 2. Translate Formats",
+        "friendlyDesc": "Converts messy legacy XML schemas into clean, standardized JSON data contracts.",
+        "tools": "\ud83d\udcd1 Schema Transformer"
+      },
+      {
+        "name": "State Sync Resolver",
+        "friendlyTitle": "\u2696\ufe0f 3. Resolve Edit Conflicts",
+        "friendlyDesc": "Detects when two users edit the same account and smartly merges the most recent updates.",
+        "tools": "\ud83e\udd1d Bi-Directional State Sync"
+      },
+      {
+        "name": "OAuth Manager",
+        "friendlyTitle": "\ud83d\udd11 4. Manage Login Tokens",
+        "friendlyDesc": "Handles secure API keys and rate limits so no connections get blocked.",
+        "tools": "\ud83d\udd12 OAuth Token Manager"
+      },
+      {
+        "name": "Circuit Breaker",
+        "friendlyTitle": "\u26a1 5. Prevent System Crashes",
+        "friendlyDesc": "Uses automatic retries and backoff timers so high traffic never breaks the connection.",
+        "tools": "\ud83d\udee1\ufe0f Circuit Breaker & Retry"
+      },
+      {
+        "name": "API Dispatcher",
+        "friendlyTitle": "\ud83d\udce4 6. Update All Systems",
+        "friendlyDesc": "Sends synchronized updates simultaneously to SAP, Workday, and Salesforce.",
+        "tools": "\ud83c\udfe2 Enterprise API Dispatcher"
+      },
+      {
+        "name": "HMAC Seal",
+        "friendlyTitle": "\ud83d\udd10 7. Sign Security Seal",
+        "friendlyDesc": "Signs every transaction with cryptographic verification for compliance proof.",
+        "tools": "\u270d\ufe0f HMAC SHA-256 Seal"
+      },
+      {
+        "name": "Telemetry Health",
+        "friendlyTitle": "\ud83d\udcca 8. Confirm 99.999% Sync",
+        "friendlyDesc": "Publishes real-time delivery confirmation metrics to the central system dashboard.",
+        "tools": "\ud83d\udcc8 Telemetry Health Monitor"
+      }
+    ]
+  },
+  "finops": {
+    "category": "finance",
+    "icon": "\ud83d\udcb3",
+    "badge": "Finance & Legal",
+    "friendlyName": "Cloud & AI Token Spend Optimizer",
+    "techName": "FinTech Ops Agent",
+    "friendlyProblem": "Cloud computing and AI token costs are surging unpredictably across multiple teams.",
+    "friendlyGoal": "Monitor per-second GPU and token spend, detect budget surges, enforce spend limits, and cut wasted compute.",
+    "friendlyTakeaway": "Companies waste up to 30% of their cloud budget on oversized servers. FinOps agent chains keep AI spending tightly controlled automatically.",
+    "nodes": [
+      {
+        "name": "Token Cost Tracker",
+        "friendlyTitle": "\ud83d\udcca 1. Track Live Token Usage",
+        "friendlyDesc": "Monitors exact AI token consumption and cloud compute costs down to the penny.",
+        "tools": "\ud83d\udcc8 Real-Time Cost Tracker"
+      },
+      {
+        "name": "Cloud Allocator",
+        "friendlyTitle": "\u2601\ufe0f 2. Allocate Cloud Spend",
+        "friendlyDesc": "Attributes AWS, GCP, and Azure server costs to specific teams and projects.",
+        "tools": "\ud83c\udfe2 Multi-Cloud Cost Allocator"
+      },
+      {
+        "name": "Unit Economics",
+        "friendlyTitle": "\ud83d\udca1 3. Calculate ROI per Task",
+        "friendlyDesc": "Calculates the exact return on investment for each AI model and task.",
+        "tools": "\ud83e\udde0 Unit Economics Engine"
+      },
+      {
+        "name": "Server Rightsizer",
+        "friendlyTitle": "\ud83d\udcc9 4. Rightsize Servers",
+        "friendlyDesc": "Recommends switching idle large servers to smaller, faster, cheaper alternatives.",
+        "tools": "\u2699\ufe0f Compute Rightsizer"
+      },
+      {
+        "name": "Spend Cap Enforcer",
+        "friendlyTitle": "\ud83d\uded1 5. Enforce Budget Caps",
+        "friendlyDesc": "Applies automated spending limits to prevent runaway cloud bills before they happen.",
+        "tools": "\ud83d\udee1\ufe0f Spend Cap Enforcer"
+      },
+      {
+        "name": "Anomaly Detector",
+        "friendlyTitle": "\ud83d\udea8 6. Detect Cost Surges",
+        "friendlyDesc": "Flags unusual spending spikes instantly using kernel metrics.",
+        "tools": "\u26a0\ufe0f Anomaly Detector"
+      },
+      {
+        "name": "ERP Ledger Bridge",
+        "friendlyTitle": "\ud83d\udcd1 7. Sync Financial Ledger",
+        "friendlyDesc": "Posts organized cost breakdowns directly into company accounting software.",
+        "tools": "\ud83c\udfe2 ERP / Ledger Bridge"
+      },
+      {
+        "name": "FinOps Attestation",
+        "friendlyTitle": "\u2705 8. Verify Cost Reductions",
+        "friendlyDesc": "Certifies that 28% in cloud costs was saved and logs the audit trail.",
+        "tools": "\ud83d\udccb FinOps Attestation"
+      }
+    ]
+  },
+  "contractintel": {
+    "category": "finance",
+    "icon": "\u2696\ufe0f",
+    "badge": "Finance & Legal",
+    "friendlyName": "Instant Legal Contract Review & Risk Scoring",
+    "techName": "Contract Intelligence Agent",
+    "friendlyProblem": "A 45-page enterprise contract needs urgent review for hidden liability risks and compliance traps.",
+    "friendlyGoal": "Parse contract clauses, flag high-risk terms, check GDPR/HIPAA compliance, track renewal dates, and draft redlines.",
+    "friendlyTakeaway": "Legal reviews that take lawyers 3 days can be analyzed, risk-scored, and redlined in 3 seconds by specialized agent chains.",
+    "nodes": [
+      {
+        "name": "Legal OCR Parser",
+        "friendlyTitle": "\ud83d\udcc4 1. Read Legal Document",
+        "friendlyDesc": "Extracts all text, clauses, and tables from PDFs, scanned documents, and Word files.",
+        "tools": "\ud83d\udc41\ufe0f Multimodal OCR Parser"
+      },
+      {
+        "name": "Clause Classifier",
+        "friendlyTitle": "\ud83c\udff7\ufe0f 2. Classify Every Clause",
+        "friendlyDesc": "Categorizes confidentiality, indemnification, payment terms, and termination rights.",
+        "tools": "\ud83d\udcda Legal Clause Taxonomy"
+      },
+      {
+        "name": "Regulatory Auditor",
+        "friendlyTitle": "\ud83d\udee1\ufe0f 3. Check Privacy Laws",
+        "friendlyDesc": "Verifies compliance against GDPR, HIPAA, and SOC 2 data protection standards.",
+        "tools": "\u2696\ufe0f Regulatory Auditor"
+      },
+      {
+        "name": "Risk Matrix",
+        "friendlyTitle": "\u26a0\ufe0f 4. Score Liability Risks",
+        "friendlyDesc": "Flags unlimited liability clauses and high-risk penalty terms with a warning score.",
+        "tools": "\ud83c\udfaf Risk Scoring Matrix"
+      },
+      {
+        "name": "Deadline Extractor",
+        "friendlyTitle": "\ud83d\udcc5 5. Extract Key Deadlines",
+        "friendlyDesc": "Pulls out auto-renewal dates, cancellation windows, and milestone deadlines.",
+        "tools": "\ud83d\udcc6 Deadline Extractor"
+      },
+      {
+        "name": "Redline AI",
+        "friendlyTitle": "\u270d\ufe0f 6. Draft Redline Revisions",
+        "friendlyDesc": "Generates protective clause amendments ready for executive approval.",
+        "tools": "\u2728 Redline Clause AI"
+      },
+      {
+        "name": "PQC Seal",
+        "friendlyTitle": "\ud83d\udd10 7. Seal Document Proof",
+        "friendlyDesc": "Applies post-quantum cryptographic hashing to protect document authenticity.",
+        "tools": "\ud83d\udd12 ML-KEM Cryptographic Seal"
+      },
+      {
+        "name": "Executive Registry",
+        "friendlyTitle": "\ud83d\udccb 8. Deliver Executive Summary",
+        "friendlyDesc": "Publishes a 1-page executive summary with key recommendations and risk findings.",
+        "tools": "\ud83d\udcca Structured Registry"
+      }
+    ]
+  },
+  "observability": {
+    "category": "it",
+    "icon": "\ud83d\udce1",
+    "badge": "IT & Systems",
+    "friendlyName": "Self-Healing Server Health & Anomaly Fixer",
+    "techName": "Monitoring / Observability Agent",
+    "friendlyProblem": "Server latency spikes to 5 seconds on checkout API, causing customer cart drop-offs.",
+    "friendlyGoal": "Ingest 140,000 logs/sec, locate the faulty microservice, restart failed containers, and restore 99.99% speed.",
+    "friendlyTakeaway": "Instead of waiting for on-call engineers to wake up and read logs, observability agents detect and heal server slowdowns autonomously.",
+    "nodes": [
+      {
+        "name": "OTel Collector",
+        "friendlyTitle": "\ud83d\udce1 1. Collect Live Telemetry",
+        "friendlyDesc": "Monitors 140,000 server logs per second across Kubernetes clusters in real time.",
+        "tools": "\ud83d\udcca OpenTelemetry Collector"
+      },
+      {
+        "name": "Distributed Tracing",
+        "friendlyTitle": "\ud83d\udd17 2. Trace Broken Pathways",
+        "friendlyDesc": "Traces the exact path of slowed checkout requests across distributed web servers.",
+        "tools": "\ud83d\udd0d Jaeger Distributed Tracing"
+      },
+      {
+        "name": "Anomaly Engine",
+        "friendlyTitle": "\u26a0\ufe0f 3. Detect Latency Spike",
+        "friendlyDesc": "Identifies that the /checkout payment gateway is timing out.",
+        "tools": "\ud83d\udcc8 Anomaly Engine"
+      },
+      {
+        "name": "Root Cause AI",
+        "friendlyTitle": "\ud83d\udd0e 4. Pinpoint Root Cause",
+        "friendlyDesc": "Isolates a database lock on server #4 as the exact root cause of the slowdown.",
+        "tools": "\ud83e\udde0 Root Cause Analyzer"
+      },
+      {
+        "name": "Grafana Dashboard",
+        "friendlyTitle": "\ud83d\udcca 5. Render Incident View",
+        "friendlyDesc": "Draws a live Grafana dashboard highlighting the bottleneck for the engineering team.",
+        "tools": "\ud83d\udda5\ufe0f Grafana Visualization"
+      },
+      {
+        "name": "Alert Filter",
+        "friendlyTitle": "\ud83d\udd15 6. Silence Noise Alerts",
+        "friendlyDesc": "Suppresses 500 duplicate alerts so engineers don't get flooded with alarm fatigue.",
+        "tools": "\ud83d\udee1\ufe0f Alert Filter & Suppressor"
+      },
+      {
+        "name": "Self-Healing Action",
+        "friendlyTitle": "\ud83d\udd04 7. Trigger Auto-Restart",
+        "friendlyDesc": "Safely restarts the frozen database container and reroutes traffic automatically.",
+        "tools": "\u26a1 Self-Healing Playbook"
+      },
+      {
+        "name": "SLA Logger",
+        "friendlyTitle": "\u2705 8. Confirm 99.99% Uptime",
+        "friendlyDesc": "Verifies checkout response times return to 45ms and records 100% uptime SLA proof.",
+        "tools": "\ud83d\udccb SLA Compliance Logger"
+      }
+    ]
+  },
+  "trend": {
+    "category": "sales",
+    "icon": "\ud83d\udcc8",
+    "badge": "Sales & Growth",
+    "friendlyName": "Real-Time Market Trend Spotting Engine",
+    "techName": "Trend Spotting Agent",
+    "friendlyProblem": "Executive team wants to discover explosive new industry shifts before competitors notice.",
+    "friendlyGoal": "Scrape discussion forums, patent filings, and arXiv preprints to spot +410% spikes in emerging technology adoption.",
+    "friendlyTakeaway": "Spotting market trends early gives businesses months of head start. Agent chains turn noisy web data into actionable market intelligence.",
+    "nodes": [
+      {
+        "name": "Signal Scraper",
+        "friendlyTitle": "\ud83c\udf10 1. Scrape Global Discussions",
+        "friendlyDesc": "Scans forums, news, patent filings, and scientific papers for new conversation topics.",
+        "tools": "\ud83d\udd77\ufe0f Multi-Source Signal Scraper"
+      },
+      {
+        "name": "Vector Cluster",
+        "friendlyTitle": "\ud83e\udde9 2. Group Related Topics",
+        "friendlyDesc": "Uses AI embeddings to cluster thousands of messy posts into clean topic categories.",
+        "tools": "\ud83e\udde0 Semantic Vector Clustering"
+      },
+      {
+        "name": "Velocity Engine",
+        "friendlyTitle": "\ud83d\udcc8 3. Measure Growth Velocity",
+        "friendlyDesc": "Calculates that interest in post-quantum cryptography has surged +410% this quarter.",
+        "tools": "\ud83d\udcca Velocity Acceleration Engine"
+      },
+      {
+        "name": "Patent Correlator",
+        "friendlyTitle": "\ud83d\udcdc 4. Check Patent Filings",
+        "friendlyDesc": "Cross-references trends with actual US Patent Office filings to verify real commercial interest.",
+        "tools": "\ud83c\udfdb\ufe0f USPTO Patent Correlator"
+      },
+      {
+        "name": "Opportunity Scorer",
+        "friendlyTitle": "\ud83d\udcb0 5. Score Market Opportunity",
+        "friendlyDesc": "Ranks the business revenue potential and market readiness of the trend.",
+        "tools": "\ud83c\udfaf Opportunity Scoring Engine"
+      },
+      {
+        "name": "Competitor Mapper",
+        "friendlyTitle": "\ud83d\uddfa\ufe0f 6. Map Competitor Activity",
+        "friendlyDesc": "Checks what competitors are building or hiring for in this space.",
+        "tools": "\ud83d\udd0e Competitor Horizon Mapper"
+      },
+      {
+        "name": "Strategy Briefing",
+        "friendlyTitle": "\ud83d\udcd1 7. Build Executive Dossier",
+        "friendlyDesc": "Compiles a clean 1-page summary with clear strategic timing advice.",
+        "tools": "\ud83d\udcc4 Strategy Briefing Builder"
+      },
+      {
+        "name": "Slack Dispatcher",
+        "friendlyTitle": "\ud83d\udd14 8. Push Strategic Alert",
+        "friendlyDesc": "Sends a notification into executive Slack channels with key findings.",
+        "tools": "\ud83d\udcac Slack Strategy Dispatcher"
+      }
+    ]
+  },
+  "quantum": {
+    "category": "it",
+    "icon": "\u26a1",
+    "badge": "IT & Systems",
+    "friendlyName": "Quantum Simulation Task Dispatch",
+    "techName": "Execution Agent",
+    "friendlyProblem": "A complex 56-qubit molecular simulation job requires quantum error mitigation and hardware execution.",
+    "friendlyGoal": "Transpile quantum circuits, map physical qubits, execute across IBM Quantum QPU, and optimize results in seconds.",
+    "friendlyTakeaway": "Bridging quantum hardware with enterprise AI takes seconds with native DAG handoffs.",
+    "nodes": [
+      {
+        "name": "Circuit Ingestion",
+        "friendlyTitle": "\ud83d\udce5 1. Parse Quantum Circuit",
+        "friendlyDesc": "Ingests serialized Qiskit circuit representation and decomposes gates.",
+        "tools": "\u26a1 Qiskit Ingestion Bridge"
+      },
+      {
+        "name": "Error Mitigation",
+        "friendlyTitle": "\ud83d\udee1\ufe0f 2. Apply Zero-Noise Extrapolation",
+        "friendlyDesc": "Calculates mitigation curves to eliminate quantum noise.",
+        "tools": "\ud83e\uddee QEM Mitigation Solver"
+      },
+      {
+        "name": "QPU Transpiler",
+        "friendlyTitle": "\ud83d\udd04 3. Transpile Physical Topology",
+        "friendlyDesc": "Maps virtual qubits onto physical superconducting hardware.",
+        "tools": "\u2699\ufe0f Hardware Transpiler"
+      },
+      {
+        "name": "Confidential Enclave",
+        "friendlyTitle": "\ud83d\udd12 4. Spin Up RAM Enclave",
+        "friendlyDesc": "Encrypts payload in AWS Nitro memory enclave.",
+        "tools": "\ud83d\udee1\ufe0f AWS Nitro ZDR"
+      },
+      {
+        "name": "QPU Dispatch",
+        "friendlyTitle": "\u26a1 5. Submit to Quantum Processor",
+        "friendlyDesc": "Executes 8,192 measurement shots on IBM Quantum Eagle QPU.",
+        "tools": "\u2601\ufe0f IBM Quantum REST API"
+      },
+      {
+        "name": "State Tomography",
+        "friendlyTitle": "\ud83d\udcca 6. Compute Density Matrix",
+        "friendlyDesc": "Reconstructs quantum state from shot measurements.",
+        "tools": "\ud83d\udcc8 Tomography Engine"
+      },
+      {
+        "name": "Result Optimizer",
+        "friendlyTitle": "\u2728 7. Synthesize Eigenstate Value",
+        "friendlyDesc": "Extracts ground state energy eigenvalue to 6 decimals.",
+        "tools": "\ud83e\udde0 VQE Optimizer"
+      },
+      {
+        "name": "Audit Handoff",
+        "friendlyTitle": "\u2705 8. Seal Quantum Execution Proof",
+        "friendlyDesc": "Records cryptographically signed execution proof.",
+        "tools": "\ud83d\udd12 HMAC Execution Seal"
+      }
+    ]
+  },
+  "reverse": {
+    "category": "security",
+    "icon": "\ud83d\udd2c",
+    "badge": "Security & Privacy",
+    "friendlyName": "Binary Malware Reverse Engineering",
+    "techName": "Reverse Engineering Agent",
+    "friendlyProblem": "An unknown obfuscated binary file was detected on a corporate server.",
+    "friendlyGoal": "Disassemble machine code, decompile control flow graphs, extract hidden C2 IP addresses, and generate YARA detection rules.",
+    "friendlyTakeaway": "Automating binary reverse engineering protects corporate infrastructure before malware can propagate.",
+    "nodes": [
+      {
+        "name": "Binary Ingestion",
+        "friendlyTitle": "\ud83d\udce5 1. Ingest PE/ELF Binary",
+        "friendlyDesc": "Extracts headers, sections, and import tables from the suspicious file.",
+        "tools": "\ud83d\udd2c Binary Ingestion"
+      },
+      {
+        "name": "CFG Reconstruction",
+        "friendlyTitle": "\ud83d\uddfa\ufe0f 2. Reconstruct Control Flow",
+        "friendlyDesc": "Builds complete graph of all execution branching paths.",
+        "tools": "\ud83e\udde9 Ghidra Headless API"
+      },
+      {
+        "name": "Unpacker AI",
+        "friendlyTitle": "\ud83d\udd13 3. Neutralize Packing & Anti-Debug",
+        "friendlyDesc": "Detects evasion routines and strips packers.",
+        "tools": "\ud83d\udee1\ufe0f Dynamic Unpacker"
+      },
+      {
+        "name": "String Decrypter",
+        "friendlyTitle": "\ud83d\udd11 4. Decrypt Hidden Strings",
+        "friendlyDesc": "Uncovers hidden command-and-control server URLs.",
+        "tools": "\ud83d\udd75\ufe0f Entropy Solver"
+      },
+      {
+        "name": "Protocol Analyzer",
+        "friendlyTitle": "\ud83d\udce1 5. Decode Network Framing",
+        "friendlyDesc": "Identifies encrypted beaconing protocol mechanics.",
+        "tools": "\ud83c\udf10 C2 Protocol Parser"
+      },
+      {
+        "name": "YARA Rule Gen",
+        "friendlyTitle": "\ud83d\udcdd 6. Generate YARA Rule",
+        "friendlyDesc": "Synthesizes production YARA rule for threat hunting.",
+        "tools": "\u2728 YARA Compiler"
+      },
+      {
+        "name": "Intel Dossier",
+        "friendlyTitle": "\ud83d\udcd1 7. Build Threat Dossier",
+        "friendlyDesc": "Compiles technical reverse engineering dossier.",
+        "tools": "\ud83d\udcc4 Threat Intel Builder"
+      },
+      {
+        "name": "EDR Dispatch",
+        "friendlyTitle": "\ud83d\udee1\ufe0f 8. Deploy Endpoint Defense",
+        "friendlyDesc": "Pushes detection signatures to corporate EDR.",
+        "tools": "\ud83d\udd12 EDR Webhook API"
+      }
+    ]
+  },
+  "errorcorr": {
+    "category": "it",
+    "icon": "\ud83d\udee0\ufe0f",
+    "badge": "IT & Systems",
+    "friendlyName": "Self-Healing Data Corruption Repair",
+    "techName": "Self-Healing Agent",
+    "friendlyProblem": "4.2% byte corruption detected across distributed vector database shards.",
+    "friendlyGoal": "Calculate syndrome matrices, locate corrupt byte offsets with Berlekamp-Massey, and restore data shards with zero loss.",
+    "friendlyTakeaway": "Self-healing database meshes keep vector search 100% available without human intervention.",
+    "nodes": [
+      {
+        "name": "Shard Monitor",
+        "friendlyTitle": "\ud83d\udce1 1. Detect Corrupt Bytes",
+        "friendlyDesc": "Scans distributed vector shards and flags byte errors.",
+        "tools": "\ud83d\udcca Storage Telemetry"
+      },
+      {
+        "name": "Syndrome Solver",
+        "friendlyTitle": "\ud83e\uddee 2. Compute Syndrome Matrix",
+        "friendlyDesc": "Calculates algebraic parity syndromes.",
+        "tools": "\ud83d\udcd0 Galois Field Matrix"
+      },
+      {
+        "name": "Polynomial Locator",
+        "friendlyTitle": "\ud83d\udd0d 3. Locate Error Offsets",
+        "friendlyDesc": "Identifies exact faulty memory coordinates.",
+        "tools": "\ud83e\udde0 Berlekamp-Massey"
+      },
+      {
+        "name": "Chien Search",
+        "friendlyTitle": "\ud83c\udfaf 4. Evaluate Error Values",
+        "friendlyDesc": "Solves for precise original byte values.",
+        "tools": "\u26a1 Chien Evaluator"
+      },
+      {
+        "name": "Byte Reconstruction",
+        "friendlyTitle": "\ud83d\udee0\ufe0f 5. Reconstruct Damaged Shard",
+        "friendlyDesc": "Applies Reed-Solomon algebraic byte repair.",
+        "tools": "\ud83d\udd27 C++ RS Engine"
+      },
+      {
+        "name": "Integrity Check",
+        "friendlyTitle": "\u2705 6. Verify Checksum",
+        "friendlyDesc": "Validates cryptographic SHA-256 hash match.",
+        "tools": "\ud83d\udd12 SHA-256 Validator"
+      },
+      {
+        "name": "Shard Hot-Swap",
+        "friendlyTitle": "\ud83d\udd04 7. Hot-Swap Vector Memory",
+        "friendlyDesc": "Deploys repaired shard into vector index with zero downtime.",
+        "tools": "\ud83d\uddc4\ufe0f Qdrant / Pinecone"
+      },
+      {
+        "name": "Audit Logging",
+        "friendlyTitle": "\ud83d\udccb 8. Log Parity Health Proof",
+        "friendlyDesc": "Records data repair metrics into compliance ledger.",
+        "tools": "\ud83d\udcdc Parity Audit Store"
+      }
+    ]
+  },
+  "market": {
+    "category": "sales",
+    "icon": "\ud83d\udcca",
+    "badge": "Sales & Growth",
+    "friendlyName": "Enterprise Market & Competitor Research",
+    "techName": "Market Research Agent",
+    "friendlyProblem": "Executive team needs complete competitive intelligence and TAM/SAM sizing for European AI compliance software.",
+    "friendlyGoal": "Analyze SEC 10-K filings, map competitor pricing parity, synthesize customer reviews, and publish a SWOT dossier.",
+    "friendlyTakeaway": "Autonomous market analysis condenses weeks of consultant research into 3 seconds of verifiable data.",
+    "nodes": [
+      {
+        "name": "SEC Edgar Ingest",
+        "friendlyTitle": "\ud83d\udcd1 1. Ingest SEC 10-K Filings",
+        "friendlyDesc": "Parses public filings, balance sheets, and risk factors.",
+        "tools": "\ud83c\udfdb\ufe0f SEC EDGAR RAG"
+      },
+      {
+        "name": "Competitor Scraper",
+        "friendlyTitle": "\ud83c\udf10 2. Audit Competitor Offerings",
+        "friendlyDesc": "Extracts pricing tiers, features, and partner programs.",
+        "tools": "\ud83d\udd77\ufe0f Live Web Scraper"
+      },
+      {
+        "name": "TAM/SAM Calculator",
+        "friendlyTitle": "\ud83d\udca1 3. Compute Market Sizing",
+        "friendlyDesc": "Calculates addressable market size across European sectors.",
+        "tools": "\ud83e\udde0 Market Math Engine"
+      },
+      {
+        "name": "Pricing Matrix",
+        "friendlyTitle": "\ud83d\udcb0 4. Map Pricing Parity",
+        "friendlyDesc": "Ranks feature pricing against industry competitors.",
+        "tools": "\ud83d\udcca Pricing Benchmark"
+      },
+      {
+        "name": "Customer Sentiment",
+        "friendlyTitle": "\ud83d\udde3\ufe0f 5. Analyze User Reviews",
+        "friendlyDesc": "Extracts top user complaints and feature wishlists.",
+        "tools": "\ud83e\udde0 Sentiment NLP"
+      },
+      {
+        "name": "SWOT Synthesis",
+        "friendlyTitle": "\ud83c\udfaf 6. Assemble SWOT Matrix",
+        "friendlyDesc": "Compiles strengths, weaknesses, and opportunities.",
+        "tools": "\ud83d\udccb SWOT Builder"
+      },
+      {
+        "name": "Executive PDF",
+        "friendlyTitle": "\ud83d\udcc4 7. Generate Briefing PDF",
+        "friendlyDesc": "Assembles high-res executive market briefing.",
+        "tools": "\ud83d\udcd1 Document Synthesizer"
+      },
+      {
+        "name": "CRM Enrichment",
+        "friendlyTitle": "\ud83d\udcbc 8. Sync Market Data to CRM",
+        "friendlyDesc": "Attaches competitive battlecards directly to active deals.",
+        "tools": "\u2601\ufe0f HubSpot / Salesforce"
+      }
+    ]
+  },
+  "revops": {
+    "category": "sales",
+    "icon": "\ud83d\ude80",
+    "badge": "Sales & Growth",
+    "friendlyName": "Growth Funnel & Enterprise Personalization",
+    "techName": "Growth Strategy Agent",
+    "friendlyProblem": "A 3.4x spike in sign-ups from fintech companies ($50M+ ARR) was detected.",
+    "friendlyGoal": "Enrich account firmographics, calculate PLG lead score, generate custom personalized landing pages, and route directly to VP Sales.",
+    "friendlyTakeaway": "Converting enterprise traffic on first visit requires hyper-personalized sales execution at machine speed.",
+    "nodes": [
+      {
+        "name": "Event Stream",
+        "friendlyTitle": "\ud83d\udce1 1. Capture Sign-Up Surge",
+        "friendlyDesc": "Detects real-time surge in enterprise visitor traffic.",
+        "tools": "\ud83d\udcca PostHog Event Stream"
+      },
+      {
+        "name": "Firmographic Intel",
+        "friendlyTitle": "\ud83d\udd0d 2. Enrich Company Details",
+        "friendlyDesc": "Fetches ARR, technology stack, and decision maker names.",
+        "tools": "\ud83c\udfe2 Clearbit Reveal API"
+      },
+      {
+        "name": "PLG Scorer",
+        "friendlyTitle": "\u2b50 3. Calculate PLG Lead Score",
+        "friendlyDesc": "Scores account as Tier-1 enterprise growth prospect.",
+        "tools": "\ud83c\udfaf PLG Scoring Model"
+      },
+      {
+        "name": "Dynamic Landing Page",
+        "friendlyTitle": "\ud83c\udfa8 4. Generate Custom Page",
+        "friendlyDesc": "Renders personalized landing page tailored to fintech security.",
+        "tools": "\u2728 Dynamic UI Engine"
+      },
+      {
+        "name": "LTV Predictor",
+        "friendlyTitle": "\ud83d\udcb5 5. Forecast Contract LTV",
+        "friendlyDesc": "Projects $180k annual expansion revenue.",
+        "tools": "\ud83d\udcc8 Stripe LTV Predictor"
+      },
+      {
+        "name": "Sales Route",
+        "friendlyTitle": "\ud83e\udd1d 6. Route to VP of Sales",
+        "friendlyDesc": "Assigns lead directly to top Enterprise Account Executive.",
+        "tools": "\ud83d\udcc5 Cal / AE Matrix"
+      },
+      {
+        "name": "Slack War Room",
+        "friendlyTitle": "\ud83d\udd14 7. Launch Slack Deal Room",
+        "friendlyDesc": "Creates dedicated private channel with deal battlecard.",
+        "tools": "\ud83d\udcac Slack API Bot"
+      },
+      {
+        "name": "Outbound Sequence",
+        "friendlyTitle": "\u2709\ufe0f 8. Dispatch VIP Outreach",
+        "friendlyDesc": "Sends executive invitation with custom demo video link.",
+        "tools": "\ud83d\udce7 Personalized Outreach"
+      }
+    ]
+  },
+  "analytics": {
+    "category": "sales",
+    "icon": "\ud83e\udde0",
+    "badge": "Sales & Growth",
+    "friendlyName": "Big Data Clickstream & Retention Cohorts",
+    "techName": "Research Agent",
+    "friendlyProblem": "250 million user event streams across Snowflake and ClickHouse need retention analysis.",
+    "friendlyGoal": "Ingest high-throughput streams, deduplicate user sessions, compute N-day retention curves, and dispatch anomaly alerts.",
+    "friendlyTakeaway": "Eliminating SQL data bottlenecks empowers executive teams to make real-time product decisions.",
+    "nodes": [
+      {
+        "name": "Stream Ingest",
+        "friendlyTitle": "\ud83d\udce5 1. Ingest 250M Event Stream",
+        "friendlyDesc": "Pulls real-time analytics events across distributed databases.",
+        "tools": "\u26a1 ClickHouse HTTP API"
+      },
+      {
+        "name": "Session Dedupe",
+        "friendlyTitle": "\ud83d\udd04 2. Deduplicate User Sessions",
+        "friendlyDesc": "Cleans bot traffic and isolates authentic user journeys.",
+        "tools": "\ud83e\uddf9 Stream Deduplicator"
+      },
+      {
+        "name": "Cohort Calculator",
+        "friendlyTitle": "\ud83d\udcca 3. Calculate 30-Day Retention",
+        "friendlyDesc": "Computes behavioral cohort curves across customer segments.",
+        "tools": "\ud83e\uddee Python Code Interpreter"
+      },
+      {
+        "name": "Feature Attribution",
+        "friendlyTitle": "\ud83d\udd0d 4. Attribute Key Conversion Drivers",
+        "friendlyDesc": "Discovers features that drive 4.2x higher renewal rates.",
+        "tools": "\ud83e\udde0 Attribution Model"
+      },
+      {
+        "name": "Anomaly Check",
+        "friendlyTitle": "\u26a0\ufe0f 5. Detect Drop-Off Bottleneck",
+        "friendlyDesc": "Flags sudden 14% drop in step 3 of onboarding flow.",
+        "tools": "\ud83d\udcc8 Anomaly Detector"
+      },
+      {
+        "name": "Executive Dashboard",
+        "friendlyTitle": "\ud83d\udda5\ufe0f 6. Render BI Visualizations",
+        "friendlyDesc": "Builds interactive metric dashboard for product leaders.",
+        "tools": "\ud83d\udcca BI Dashboard Engine"
+      },
+      {
+        "name": "Actionable Alert",
+        "friendlyTitle": "\ud83d\udd14 7. Dispatch Product Alert",
+        "friendlyDesc": "Notifies UX team with exact screen coordinates to fix.",
+        "tools": "\ud83d\udcac Slack Alert Hook"
+      },
+      {
+        "name": "Audit Trail",
+        "friendlyTitle": "\ud83d\udccb 8. Log Analytics Dataset Hash",
+        "friendlyDesc": "Records dataset checksum in data governance registry.",
+        "tools": "\ud83d\udd12 Governance Hash Log"
+      }
+    ]
+  },
+  "auditing": {
+    "category": "security",
+    "icon": "\ud83d\udccb",
+    "badge": "Security & Privacy",
+    "friendlyName": "SOC 2 / ISO 27001 Cloud Compliance Proof",
+    "techName": "Analysis Agent",
+    "friendlyProblem": "Annual compliance audit requires verification of IAM key rotation and backup encryption across 45 cloud accounts.",
+    "friendlyGoal": "Aggregate CloudTrail logs, verify Least Privilege access, validate immutable backups, and compile signed auditor evidence packages.",
+    "friendlyTakeaway": "Turning 300 hours of painful spreadsheet compliance audits into 3 seconds of verifiable cryptographic proof.",
+    "nodes": [
+      {
+        "name": "CloudTrail Ingest",
+        "friendlyTitle": "\ud83d\udce5 1. Ingest 45 Cloud Audit Logs",
+        "friendlyDesc": "Streams AWS, GCP, and Azure management logs.",
+        "tools": "\ud83d\udcca CloudTrail API"
+      },
+      {
+        "name": "IAM Policy Check",
+        "friendlyTitle": "\ud83d\udd10 2. Verify Least Privilege IAM",
+        "friendlyDesc": "Checks that zero service accounts have wildcards (*).",
+        "tools": "\ud83d\udee1\ufe0f IAM Verifier Engine"
+      },
+      {
+        "name": "Key Rotation Audit",
+        "friendlyTitle": "\ud83d\udd04 3. Audit Key Rotation Dates",
+        "friendlyDesc": "Validates that all encryption keys rotate every 90 days.",
+        "tools": "\ud83d\udd12 Vault Transit Sys"
+      },
+      {
+        "name": "Backup Verification",
+        "friendlyTitle": "\ud83d\udcbe 4. Verify Immutable Backups",
+        "friendlyDesc": "Checks that daily database snapshots are air-gapped.",
+        "tools": "\ud83d\uddc4\ufe0f S3 Object Lock Check"
+      },
+      {
+        "name": "SOC 2 Matrix",
+        "friendlyTitle": "\ud83d\udccb 5. Map Controls to SOC 2 Trust",
+        "friendlyDesc": "Maps verified checks against SOC 2 Type II criteria.",
+        "tools": "\ud83d\udcda Compliance Taxonomy"
+      },
+      {
+        "name": "Annex IV Packager",
+        "friendlyTitle": "\ud83c\uddea\ud83c\uddfa 6. Build EU AI Act Dossier",
+        "friendlyDesc": "Generates Annex IV technical documentation package.",
+        "tools": "\u2696\ufe0f Regulatory Packager"
+      },
+      {
+        "name": "Cryptographic Signer",
+        "friendlyTitle": "\u270d\ufe0f 7. Sign Audit Evidence Token",
+        "friendlyDesc": "Applies digital signature to prevent auditor evidence tampering.",
+        "tools": "\ud83d\udd12 ML-DSA Digital Seal"
+      },
+      {
+        "name": "Auditor Delivery",
+        "friendlyTitle": "\ud83d\udce6 8. Deliver Compliance Portal",
+        "friendlyDesc": "Publishes 1-click evidence zip file for auditor download.",
+        "tools": "\ud83c\udf10 Auditor Portal API"
+      }
+    ]
+  },
+  "logtriage": {
+    "category": "it",
+    "icon": "\ud83d\udea8",
+    "badge": "IT & Systems",
+    "friendlyName": "High-Volume Error Log Triage & Dispatch",
+    "techName": "Log Triage Agent",
+    "friendlyProblem": "85,000 log events per second are flooding the logging pipeline with cascading timeouts.",
+    "friendlyGoal": "Parse logs, extract stack traces, group recurring error signatures, correlate with git commits, and dispatch P1 PagerDuty alerts.",
+    "friendlyTakeaway": "Preventing alert fatigue allows engineering teams to fix outages before users notice.",
+    "nodes": [
+      {
+        "name": "Log Tokenizer",
+        "friendlyTitle": "\ud83d\udce5 1. Parse 85k Logs/Second",
+        "friendlyDesc": "Ingests raw telemetry stream at high throughput.",
+        "tools": "\u26a1 Vector Log Tokenizer"
+      },
+      {
+        "name": "Stack Extractor",
+        "friendlyTitle": "\ud83d\udd0d 2. Extract Stack Traces",
+        "friendlyDesc": "Isolates Python and Node.js crash exception traces.",
+        "tools": "\ud83e\udde0 Regex Stack Extractor"
+      },
+      {
+        "name": "Error Clustering",
+        "friendlyTitle": "\ud83e\udde9 3. Deduplicate 4,200 Errors",
+        "friendlyDesc": "Groups 4,200 repeated crashes into 1 root bug.",
+        "tools": "\ud83d\udcca Vector Clustering"
+      },
+      {
+        "name": "Git Blame Correlator",
+        "friendlyTitle": "\ud83d\udcbb 4. Correlate with Git Commit",
+        "friendlyDesc": "Matches stack trace to commit #84a2f merged 12m ago.",
+        "tools": "\ud83d\udc19 GitHub Blame API"
+      },
+      {
+        "name": "Severity Scorer",
+        "friendlyTitle": "\u26a0\ufe0f 5. Classify Severity as P1",
+        "friendlyDesc": "Ranks issue as high severity due to revenue impact.",
+        "tools": "\ud83c\udfaf SLA Classifier"
+      },
+      {
+        "name": "Sentry Bridge",
+        "friendlyTitle": "\ud83c\udfab 6. Open Tracking Issue",
+        "friendlyDesc": "Creates linked incident in Sentry with diagnostic data.",
+        "tools": "\ud83d\udc1b Sentry API Bridge"
+      },
+      {
+        "name": "PagerDuty Trigger",
+        "friendlyTitle": "\ud83d\udea8 7. Alert On-Call Engineer",
+        "friendlyDesc": "Dispatches phone and push notification to lead engineer.",
+        "tools": "\ud83d\udcf1 PagerDuty Events v2"
+      },
+      {
+        "name": "Triage Telemetry",
+        "friendlyTitle": "\u2705 8. Log Triage Attestation",
+        "friendlyDesc": "Records response latency in engineering reliability SLA.",
+        "tools": "\ud83d\udcdc Immutable Triage Store"
+      }
+    ]
+  },
+  "erp": {
+    "category": "finance",
+    "icon": "\ud83d\udcd1",
+    "badge": "Finance & Legal",
+    "friendlyName": "Enterprise ERP Ledger & 3-Way Matching",
+    "techName": "Audit Agent",
+    "friendlyProblem": "Q3 inventory rebalancing, PO reconciliation, and vendor ledger postings across 14 distribution nodes.",
+    "friendlyGoal": "Synchronize ERP master data, execute 3-way matching on invoices, calculate regional VAT/GST taxes, and post double-entry ledgers.",
+    "friendlyTakeaway": "Eliminating invoice errors saves millions in vendor overcharges and accounting delays.",
+    "nodes": [
+      {
+        "name": "ERP Master Sync",
+        "friendlyTitle": "\ud83d\udce5 1. Sync SAP & Oracle Master Data",
+        "friendlyDesc": "Pulls vendor registries, chart of accounts, and POs.",
+        "tools": "\ud83c\udfe2 SAP S/4HANA OData"
+      },
+      {
+        "name": "Invoice OCR Parser",
+        "friendlyTitle": "\ud83d\udcc4 2. Parse Vendor Invoice PDF",
+        "friendlyDesc": "Extracts line items, taxes, quantities, and terms.",
+        "tools": "\ud83d\udc41\ufe0f OCR Document AI"
+      },
+      {
+        "name": "3-Way Matcher",
+        "friendlyTitle": "\u2696\ufe0f 3. Execute 3-Way Reconciliation",
+        "friendlyDesc": "Compares PO, warehouse receipt, and invoice amounts.",
+        "tools": "\ud83e\udde0 PO 3-Way Matcher"
+      },
+      {
+        "name": "Tax Calculator",
+        "friendlyTitle": "\ud83d\udcb5 4. Compute Regional VAT/GST",
+        "friendlyDesc": "Validates regional sales tax across 14 states.",
+        "tools": "\ud83c\udfdb\ufe0f Avalara AvaTax API"
+      },
+      {
+        "name": "Discrepancy Resolver",
+        "friendlyTitle": "\ud83d\udd0d 5. Flag $140 Pricing Variance",
+        "friendlyDesc": "Catches pricing discrepancy and requests vendor credit.",
+        "tools": "\u26a0\ufe0f Exception Handler"
+      },
+      {
+        "name": "Double Entry Poster",
+        "friendlyTitle": "\ud83d\udcd1 6. Post Double-Entry Ledger",
+        "friendlyDesc": "Generates verified debit and credit journal entries.",
+        "tools": "\ud83c\udfe2 Oracle Fusion ERP"
+      },
+      {
+        "name": "EDI Dispatcher",
+        "friendlyTitle": "\ud83d\udce4 7. Transmit EDI Remittance",
+        "friendlyDesc": "Sends EDI 820 payment advice to vendor bank.",
+        "tools": "\u26a1 EDI 820 Gateway"
+      },
+      {
+        "name": "Audit Cryptoseal",
+        "friendlyTitle": "\ud83d\udd12 8. Seal Financial Ledger Hash",
+        "friendlyDesc": "Applies cryptographic balance seal to journal log.",
+        "tools": "\ud83d\udee1\ufe0f Cryptographic Ledger"
+      }
+    ]
+  },
+  "trafficrouter": {
+    "category": "it",
+    "icon": "\ud83c\udf10",
+    "badge": "IT & Systems",
+    "friendlyName": "Global Edge Traffic & DNS Failover",
+    "techName": "Traffic Router Agent",
+    "friendlyProblem": "A major ISP cable cut caused latency spikes on US-East routes.",
+    "friendlyGoal": "Monitor edge health, calculate lowest-latency DNS paths, transfer active HTTP/2 sessions without dropped requests, and shield from DDoS.",
+    "friendlyTakeaway": "Multi-cloud traffic routing guarantees 100% uptime even when underlying cloud providers fail.",
+    "nodes": [
+      {
+        "name": "BGP Health Monitor",
+        "friendlyTitle": "\ud83d\udce1 1. Ingest BGP Latency Feed",
+        "friendlyDesc": "Detects 340ms latency surge on US-East data center routes.",
+        "tools": "\ud83d\udcca Edge Telemetry Feed"
+      },
+      {
+        "name": "Anycast Resolver",
+        "friendlyTitle": "\ud83d\uddfa\ufe0f 2. Calculate Optimal Failover",
+        "friendlyDesc": "Identifies Frankfurt and US-West nodes as lowest latency.",
+        "tools": "\ud83e\udded Anycast Route Solver"
+      },
+      {
+        "name": "WAF Shield",
+        "friendlyTitle": "\ud83d\udee1\ufe0f 3. Verify Clean Traffic Flow",
+        "friendlyDesc": "Filters malicious DDoS bot floods before rerouting.",
+        "tools": "\ud83d\udd12 Cloudflare WAF API"
+      },
+      {
+        "name": "Session Shift",
+        "friendlyTitle": "\ud83d\udd04 4. Migrate Active HTTP/2 Sessions",
+        "friendlyDesc": "Transfers 12,000 active sessions with zero dropped packets.",
+        "tools": "\u26a1 Envoy Control Plane"
+      },
+      {
+        "name": "DNS Update",
+        "friendlyTitle": "\ud83c\udf10 5. Update Geo-DNS Records",
+        "friendlyDesc": "Updates Route 53 latency routing records in 500ms.",
+        "tools": "\u2601\ufe0f AWS Route 53 API"
+      },
+      {
+        "name": "Canary Verification",
+        "friendlyTitle": "\ud83e\uddea 6. Run Canary Health Checks",
+        "friendlyDesc": "Tests synthetic transactions across failover routes.",
+        "tools": "\ud83d\udd2c Synthetic Checker"
+      },
+      {
+        "name": "Edge Cache Warm",
+        "friendlyTitle": "\u26a1 7. Pre-Warm Edge Caches",
+        "friendlyDesc": "Syncs top cached assets to new regional data centers.",
+        "tools": "\ud83d\uddc4\ufe0f Redis Edge Cache"
+      },
+      {
+        "name": "Routing Attestation",
+        "friendlyTitle": "\ud83d\udccb 8. Log Failover Attestation",
+        "friendlyDesc": "Records failover duration (1.2s total) in SLA audit.",
+        "tools": "\ud83d\udcdc SLA Compliance Log"
+      }
+    ]
+  },
+  "networkdispatch": {
+    "category": "it",
+    "icon": "\ud83d\udef0\ufe0f",
+    "badge": "IT & Systems",
+    "friendlyName": "Enterprise SD-WAN Mesh & Bandwidth QoS",
+    "techName": "Network Dispatch Agent",
+    "friendlyProblem": "350 remote branch offices require network routing optimization for VoIP and video.",
+    "friendlyGoal": "Analyze SD-WAN mesh topology, prioritize video traffic with QoS, provision encrypted WireGuard tunnels, and verify SLA uptime.",
+    "friendlyTakeaway": "Autonomous network dispatch maintains crisp video calls and zero packet loss across global offices.",
+    "nodes": [
+      {
+        "name": "Topology Ingest",
+        "friendlyTitle": "\ud83d\udce5 1. Read 350-Branch SD-WAN Mesh",
+        "friendlyDesc": "Monitors network load across 350 global office routers.",
+        "tools": "\ud83c\udfe2 Cisco vManage REST"
+      },
+      {
+        "name": "Jitter Analyzer",
+        "friendlyTitle": "\ud83d\udcca 2. Detect VoIP Packet Jitter",
+        "friendlyDesc": "Identifies 4.8% packet loss impacting video calls in Sydney.",
+        "tools": "\ud83d\udcc8 Jitter Analyzer"
+      },
+      {
+        "name": "QoS Prioritizer",
+        "friendlyTitle": "\ud83c\udfaf 3. Set Dynamic QoS Rules",
+        "friendlyDesc": "Gives top priority to video calls over background file downloads.",
+        "tools": "\u26a1 DiffServ QoS Policy"
+      },
+      {
+        "name": "Tunnel Provisioner",
+        "friendlyTitle": "\ud83d\udd10 4. Provision WireGuard Tunnel",
+        "friendlyDesc": "Spins up encrypted peer-to-peer backup tunnel in 400ms.",
+        "tools": "\ud83d\udd12 WireGuard Kernel API"
+      },
+      {
+        "name": "Juniper Config",
+        "friendlyTitle": "\u2699\ufe0f 5. Push Juniper RPC Config",
+        "friendlyDesc": "Updates routing tables across branch gateway hardware.",
+        "tools": "\ud83d\udd27 Juniper PyEZ RPC"
+      },
+      {
+        "name": "Zero-Touch Sync",
+        "friendlyTitle": "\ud83d\udd04 6. Zero-Touch Synchronize",
+        "friendlyDesc": "Applies synchronized policies with zero branch downtime.",
+        "tools": "\ud83c\udf10 Zero-Touch Mesh"
+      },
+      {
+        "name": "Bandwidth Test",
+        "friendlyTitle": "\ud83e\uddea 7. Test Synthetic Video Stream",
+        "friendlyDesc": "Verifies packet loss drops to 0.00% and latency is < 28ms.",
+        "tools": "\ud83d\udd2c Synthetic Stream Test"
+      },
+      {
+        "name": "Network Audit",
+        "friendlyTitle": "\ud83d\udccb 8. Commit Network Audit State",
+        "friendlyDesc": "Stores cryptographically signed network configuration state.",
+        "tools": "\ud83d\udcdc PQC Network Ledger"
+      }
+    ]
+  },
+  "selfimproving": {
+    "category": "it",
+    "icon": "\ud83d\udd04",
+    "badge": "IT & Systems",
+    "friendlyName": "Self-Improving AI Reflection & Prompt Autotune",
+    "techName": "Self-Improving Agent",
+    "friendlyProblem": "AI agent pipeline throughput dropped by 8% due to complex prompt variations.",
+    "friendlyGoal": "Collect execution traces, classify error patterns, generate step-by-step LLM critiques, and autotune system instructions using DSPy.",
+    "friendlyTakeaway": "Autonomous systems optimize their own instructions over time, getting faster, cheaper, and smarter with every execution.",
+    "nodes": [
+      {
+        "name": "Trace Collector",
+        "friendlyTitle": "\ud83d\udce5 1. Ingest Execution Traces",
+        "friendlyDesc": "Pulls 10,000 multi-agent decision steps from vector memory.",
+        "tools": "\ud83d\udcca OpenTelemetry Traces"
+      },
+      {
+        "name": "Failure Taxonomy",
+        "friendlyTitle": "\ud83d\udd0d 2. Classify Weak Decision Points",
+        "friendlyDesc": "Finds where agent reasoning loops hesitated or took sub-optimal steps.",
+        "tools": "\ud83e\udde0 Failure Taxonomy AI"
+      },
+      {
+        "name": "Self-Critique AI",
+        "friendlyTitle": "\ud83d\udca1 3. Generate LLM Self-Critiques",
+        "friendlyDesc": "Runs recursive reflection prompts explaining how to do better.",
+        "tools": "\u2728 Reflection Critique"
+      },
+      {
+        "name": "DSPy Optimizer",
+        "friendlyTitle": "\u2699\ufe0f 4. Autotune Instructions via DSPy",
+        "friendlyDesc": "Mutates agent prompt tokens using Bayesian optimization.",
+        "tools": "\ud83d\udd27 DSPy Optimization"
+      },
+      {
+        "name": "Eval Sandbox",
+        "friendlyTitle": "\ud83e\uddea 5. Run Evaluation Benchmark",
+        "friendlyDesc": "Tests 500 synthetic test cases to verify 0 regressions.",
+        "tools": "\ud83d\udd2c Eval Harness Suite"
+      },
+      {
+        "name": "Memory Commit",
+        "friendlyTitle": "\ud83e\udde0 6. Store Golden Examples in Vector DB",
+        "friendlyDesc": "Saves top high-performing reasoning paths into Pinecone.",
+        "tools": "\ud83d\uddc4\ufe0f Pinecone Vector DB"
+      },
+      {
+        "name": "Canary Rollout",
+        "friendlyTitle": "\ud83d\ude80 7. Canary Deploy New System Prompt",
+        "friendlyDesc": "Rolls out optimized prompt to 10% of production traffic.",
+        "tools": "\u26a1 Prompt Canary Deploy"
+      },
+      {
+        "name": "Evolution Attestation",
+        "friendlyTitle": "\u2705 8. Certify +14% Speed Improvement",
+        "friendlyDesc": "Records verified +14% latency improvement in audit logs.",
+        "tools": "\ud83d\udcdc Evolution Audit Hash"
+      }
+    ]
+  },
+  "systemoptimizing": {
+    "category": "it",
+    "icon": "\u2699\ufe0f",
+    "badge": "IT & Systems",
+    "friendlyName": "Continuous Server & Memory Kernel Tuning",
+    "techName": "System-Optimizing Agent",
+    "friendlyProblem": "Server CPU and memory bottlenecks detected across 12 microservices.",
+    "friendlyGoal": "Profile low-level kernel cycles with eBPF, tune slow database query execution plans, optimize Redis cache TTLs, and scale Kubernetes pods.",
+    "friendlyTakeaway": "Autonomous kernel profiling fixes infrastructure slowdowns before they can trigger user-facing outages.",
+    "nodes": [
+      {
+        "name": "eBPF Profiler",
+        "friendlyTitle": "\ud83d\udce1 1. Profile Linux Kernel Cycles",
+        "friendlyDesc": "Attaches eBPF probes to profile CPU cycles and memory locks.",
+        "tools": "\u26a1 eBPF Kernel Probe"
+      },
+      {
+        "name": "Query Plan Optimizer",
+        "friendlyTitle": "\ud83d\uddc4\ufe0f 2. Analyze Slow SQL Queries",
+        "friendlyDesc": "Runs EXPLAIN ANALYZE on slow database queries and adds missing index.",
+        "tools": "\ud83e\udde0 Postgres EXPLAIN API"
+      },
+      {
+        "name": "Redis Cache Tuner",
+        "friendlyTitle": "\u26a1 3. Optimize Cache Hit Ratio",
+        "friendlyDesc": "Tunes Redis TTLs, boosting cache hit rates from 71% to 96%.",
+        "tools": "\ud83d\uddc4\ufe0f Redis Cluster API"
+      },
+      {
+        "name": "Protobuf Compressor",
+        "friendlyTitle": "\ud83d\udce6 4. Compress gRPC RPC Payloads",
+        "friendlyDesc": "Applies snappy compression to cut inter-service network bandwidth by 54%.",
+        "tools": "\ud83d\udd27 gRPC Compressor"
+      },
+      {
+        "name": "K8s HPA Autoscaler",
+        "friendlyTitle": "\ud83d\udcc8 5. Autoscale Kubernetes Pods",
+        "friendlyDesc": "Adjusts HPA target metrics to spin up 4 new pods in 1.4s.",
+        "tools": "\u2601\ufe0f K8s Metrics Server"
+      },
+      {
+        "name": "GC Defragmenter",
+        "friendlyTitle": "\ud83e\uddf9 6. Defragment Runtime Memory",
+        "friendlyDesc": "Triggers concurrent garbage collection to free 6.2 GB RAM.",
+        "tools": "\u2699\ufe0f JVM / Go GC Tuner"
+      },
+      {
+        "name": "Envoy Pool Tuner",
+        "friendlyTitle": "\ud83c\udf10 7. Optimize Connection Pools",
+        "friendlyDesc": "Expands connection pools on edge proxies to eliminate TCP handshakes.",
+        "tools": "\ud83d\udd27 Envoy Proxy API"
+      },
+      {
+        "name": "Tuning Certificate",
+        "friendlyTitle": "\u2705 8. Issue System Performance Seal",
+        "friendlyDesc": "Certifies that average server latency dropped to 18ms.",
+        "tools": "\ud83d\udcdc Performance Seal"
+      }
+    ]
+  },
+  "missedcalltextback": {
+    "category": "beginner",
+    "icon": "\ud83d\udcf1",
+    "badge": "\u2b50 Beginner Friendly",
+    "friendlyName": "Missed Call Auto-Recovery & Instant Text-Back",
+    "techName": "Missed Call / Text Back Agent",
+    "friendlyProblem": "A potential customer calls your business after hours but nobody picks up \u2014 the lead is lost forever.",
+    "friendlyGoal": "Detect the missed call within 3 seconds, identify the caller, compose a personalized SMS, send it instantly, log the interaction, and schedule a follow-up callback.",
+    "friendlyTakeaway": "Businesses lose 62% of callers who reach voicemail. An autonomous text-back agent recovers those leads instantly \u2014 no human intervention needed, 24/7/365.",
+    "nodes": [
+      {
+        "name": "Missed Call Detector",
+        "friendlyTitle": "\ud83d\udcde 1. Detect Unanswered Call",
+        "friendlyDesc": "Catches the incoming call-drop webhook event from the telephony provider the instant a call goes unanswered or hits overflow.",
+        "tools": "\ud83d\udcde Telephony Webhook \u00b7 Call Events API"
+      },
+      {
+        "name": "Caller ID Resolver",
+        "friendlyTitle": "\ud83d\udd0d 2. Look Up Caller Identity",
+        "friendlyDesc": "Resolves the phone number to a name, company, and existing CRM record so the response feels personal, not robotic.",
+        "tools": "\ud83d\udcda Caller ID API \u00b7 CRM Lookup"
+      },
+      {
+        "name": "Voicemail Analyzer",
+        "friendlyTitle": "\ud83e\udde0 3. Analyze Voicemail Intent",
+        "friendlyDesc": "Transcribes and classifies any voicemail left behind to understand what the caller actually wanted.",
+        "tools": "\ud83c\udfa4 Speech-to-Text \u00b7 Intent Engine"
+      },
+      {
+        "name": "SMS Composer",
+        "friendlyTitle": "\u270d\ufe0f 4. Draft Personalized Text-Back",
+        "friendlyDesc": "Writes a warm, personalized SMS response using the caller's name and reason for calling \u2014 not a generic template.",
+        "tools": "\ud83d\udcdd Message Template Engine \u00b7 Personalization AI"
+      },
+      {
+        "name": "SMS Dispatcher",
+        "friendlyTitle": "\ud83d\udce4 5. Send Text Within 3 Seconds",
+        "friendlyDesc": "Fires the personalized SMS through the carrier API so the caller gets a response before they even put their phone down.",
+        "tools": "\ud83d\udcf1 Twilio SMS API \u00b7 Carrier Gateway"
+      },
+      {
+        "name": "Callback Scheduler",
+        "friendlyTitle": "\ud83d\udcc5 6. Book Follow-Up Callback",
+        "friendlyDesc": "Finds the next available rep and books a callback slot on their calendar so no lead falls through the cracks.",
+        "tools": "\ud83d\udcc6 Google Calendar \u00b7 Rep Availability API"
+      },
+      {
+        "name": "CRM Logger",
+        "friendlyTitle": "\ud83d\udcca 7. Update CRM with Full Record",
+        "friendlyDesc": "Creates a complete CRM entry: missed call timestamp, SMS sent, callback scheduled, and voicemail transcript attached.",
+        "tools": "\ud83d\uddc4\ufe0f CRM Bridge \u00b7 Activity Logger"
+      },
+      {
+        "name": "Recovery Attestation",
+        "friendlyTitle": "\u2705 8. Seal Lead Recovery Audit Log",
+        "friendlyDesc": "Stamps a tamper-proof audit record proving the entire recovery chain completed in under 3 seconds for compliance.",
+        "tools": "\ud83d\udd12 Encrypted Audit Log \u00b7 Recovery Webhook"
+      }
+    ]
+  }
+}
