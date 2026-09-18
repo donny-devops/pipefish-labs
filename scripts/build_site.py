@@ -85,6 +85,8 @@ EXTRA_FILES = (
     "admin/config.yml",
     "sdk/openapi.yaml",
     "sdk/asyncapi.yaml",
+    "site.webmanifest",
+    ".well-known/security.txt",
 )
 
 # Cloudflare rejects any single static asset larger than this.

@@ -161,6 +161,11 @@ export default {
       });
     }
 
+    // 2b. Status alias
+    if (url.pathname === "/api/v1/status" && request.method === "GET") {
+      return jsonResponse({ status: "operational", version: "2.4.0", timestamp: new Date().toISOString() });
+    }
+
     // 3. Agent Catalog API
     if (url.pathname === "/api/v1/agents" && request.method === "GET") {
       return jsonResponse({
@@ -261,6 +266,8 @@ export default {
           targetKey = "contractintel";
         } else if (lowerText.includes("bug") || lowerText.includes("error") || lowerText.includes("exception")) {
           targetKey = "errorcorr";
+        } else if (lowerText.includes("missed call") || lowerText.includes("no answer") || lowerText.includes("voicemail") || lowerText.includes("call back") || lowerText.includes("text back")) {
+          targetKey = "missedcalltextback";
         }
 
         const livEnvelope = {
@@ -302,7 +309,20 @@ export default {
       }
     }
 
-    // 7. Graph Execution Simulation API (/api/v1/graphs/:scenario/execute)
+    // 7. Graph Scenarios Listing API (/api/v1/graphs)
+    if (url.pathname === "/api/v1/graphs" && request.method === "GET") {
+      return jsonResponse({
+        total_scenarios: Object.keys(AGENT_CATALOG).length,
+        scenarios: Object.keys(AGENT_CATALOG).map((key) => ({
+          key,
+          name: AGENT_CATALOG[key].name,
+          domain: AGENT_CATALOG[key].domain,
+          execute_url: `https://pipefishlabs.io/api/v1/graphs/${key}/execute`,
+        })),
+      });
+    }
+
+    // 7b. Graph Execution Simulation API (/api/v1/graphs/:scenario/execute)
     if (url.pathname.startsWith("/api/v1/graphs/") && url.pathname.endsWith("/execute") && request.method === "POST") {
       const parts = url.pathname.split("/");
       const scenarioKey = parts[parts.length - 2]?.toLowerCase() || "receptionist";

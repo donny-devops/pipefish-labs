@@ -1,0 +1,19 @@
+{
+  "name": "PipeFish Labs",
+  "short_name": "PipeFish",
+  "description": "Autonomous multi-agent AI orchestration platform for enterprise",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06070C",
+  "theme_color": "#00D4FF",
+  "icons": [
+    { "src": "/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/logo.webp", "sizes": "192x192", "type": "image/webp" }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "orientation": "any",
+  "scope": "/"
+}
