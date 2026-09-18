@@ -364,7 +364,7 @@ section { padding-block: var(--sec-y); }
 }
 .hero-grid-layout {
   display: grid;
-  grid-template-columns: 1.25fr 0.9fr;
+  grid-template-columns: 1.4fr 0.7fr;
   gap: 48px;
   align-items: center;
 }
@@ -376,11 +376,11 @@ section { padding-block: var(--sec-y); }
 .hero-logo-frame {
   position: relative;
   width: 100%;
-  max-width: 760px;
+  max-width: 420px;
   border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--border-strong);
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 0 50px rgba(0, 212, 255, 0.25), 0 0 100px rgba(224, 64, 255, 0.18);
   transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   animation: floatHeroLogo 6s ease-in-out infinite alternate;
@@ -396,6 +396,7 @@ section { padding-block: var(--sec-y); }
   display: block;
   border-radius: var(--r-md);
   object-fit: contain;
+  max-height: 360px;
 }
 @keyframes floatHeroLogo {
   0% { transform: translateY(0px); }
@@ -407,10 +408,13 @@ section { padding-block: var(--sec-y); }
     gap: 40px;
   }
   .hero-logo-col {
-    order: -1;
+    order: 1; /* logo goes AFTER text on mobile, not before */
   }
   .hero-logo-frame {
-    max-width: 560px;
+    max-width: 320px;
+  }
+  .hero-logo-img {
+    max-height: 280px;
   }
 }
 .hero-eye {
