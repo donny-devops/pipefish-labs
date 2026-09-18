@@ -135,6 +135,15 @@ TOOLS = [
             },
             "required": ["query"]
         }
+    },
+    {
+        "name": "list_agents",
+        "description": "List all 25 registered PipeFish Labs autonomous agent scenario keys with their domain and execution mode metadata.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": False
+        }
     }
 ]
 
@@ -259,6 +268,45 @@ def handle_call_tool(params: Dict[str, Any]) -> Dict[str, Any]:
                         "enclave_isolation": "RAM_ONLY",
                         "records_returned": 1,
                         "status": "SUCCESS"
+                    }, indent=2)
+                }
+            ]
+        }
+    elif name == "list_agents":
+        agents = [
+            {"key": "receptionist",     "domain": "COMMS",                  "mode": "TRANSFORM → ROUTE"},
+            {"key": "sales",            "domain": "SALES",                  "mode": "ANALYZE → GENERATE"},
+            {"key": "logistics",        "domain": "OPS",                    "mode": "POLL → DISPATCH"},
+            {"key": "integration",      "domain": "INFRA",                  "mode": "SYNC → TRANSLATE"},
+            {"key": "quantum",          "domain": "SECURITY",               "mode": "ENCRYPT → ATTEST"},
+            {"key": "reverse",          "domain": "SECURITY",               "mode": "DECOMPILE → REPORT"},
+            {"key": "crypto",           "domain": "SECURITY",               "mode": "ENCRYPT → ATTEST"},
+            {"key": "errorcorr",        "domain": "RELIABILITY",            "mode": "DIFF → REPAIR"},
+            {"key": "trend",            "domain": "INTELLIGENCE",           "mode": "CLUSTER → FORECAST"},
+            {"key": "market",           "domain": "INTELLIGENCE",           "mode": "SCRAPE → SYNTHESIZE"},
+            {"key": "codescan",         "domain": "SECURITY",               "mode": "AST-PARSE → FLAG"},
+            {"key": "docs",             "domain": "ENG",                    "mode": "PARSE → PUBLISH"},
+            {"key": "observability",    "domain": "OPS",                    "mode": "INGEST → ALERT"},
+            {"key": "revops",           "domain": "STRATEGY",               "mode": "ANALYZE → RECOMMEND"},
+            {"key": "analytics",        "domain": "STRATEGY",               "mode": "MODEL → PREDICT"},
+            {"key": "auditing",         "domain": "COMPLIANCE",             "mode": "VERIFY → SEAL"},
+            {"key": "logtriage",        "domain": "OPS",                    "mode": "STREAM → CLASSIFY"},
+            {"key": "erp",              "domain": "OPS",                    "mode": "SYNC → RECONCILE"},
+            {"key": "trafficrouter",    "domain": "NETWORKING",             "mode": "EVALUATE → SWITCH"},
+            {"key": "networkdispatch",  "domain": "NETWORKING",             "mode": "DISPATCH → MONITOR"},
+            {"key": "selfimproving",    "domain": "AI-META",                "mode": "EVALUATE → REFINE"},
+            {"key": "systemoptimizing", "domain": "INFRA",                  "mode": "PROFILE → TUNE"},
+            {"key": "finops",           "domain": "FINTECH · PAYMENTS",     "mode": "VALIDATE → RECONCILE → ROUTE"},
+            {"key": "contractintel",    "domain": "SECURITY · COMPLIANCE",  "mode": "PARSE → CLASSIFY → FLAG"},
+            {"key": "missedcalltextback", "domain": "COMMS",               "mode": "DETECT → COMPOSE → DISPATCH"},
+        ]
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": json.dumps({
+                        "total_agents": len(agents),
+                        "agents": agents
                     }, indent=2)
                 }
             ]

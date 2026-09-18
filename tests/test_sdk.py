@@ -38,5 +38,63 @@ class TestPipeFishAgentMesh(unittest.TestCase):
         self.assertEqual(result["status"], "COMPLETED")
         self.assertEqual(result["nodes_executed"], 8)
 
+    def test_trigger_graph_execution_missedcalltextback(self):
+        """Agent 25 — missed call / text-back; COMMS domain."""
+        payload = {
+            "caller_id": "+15559876543",
+            "channel": "voice",
+            "event": "missed_call",
+            "priority": "P1"
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="missedcalltextback",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "missedcalltextback")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertIn("Mistral Native Handoff", result["handoff_mode"])
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
+    def test_trigger_graph_execution_finops(self):
+        """Agent 23 — FinTech Ops; FINTECH · PAYMENTS domain."""
+        payload = {
+            "transaction_id": "txn_9Kq1fR2w",
+            "amount_cents": 500000,
+            "currency": "usd",
+            "reconciliation_required": True
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="finops",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "finops")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
+    def test_trigger_graph_execution_contractintel(self):
+        """Agent 24 — Contract Intelligence; SECURITY · COMPLIANCE domain."""
+        payload = {
+            "document_id": "doc_NDA_2026_001",
+            "document_type": "NDA",
+            "parties": ["PipeFish Labs", "Acme Corp"],
+            "flag_pii": True
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="contractintel",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "contractintel")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
 if __name__ == "__main__":
     unittest.main()

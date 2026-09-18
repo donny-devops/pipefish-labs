@@ -93,7 +93,7 @@ When submitting to [modelcontextprotocol/servers](https://github.com/modelcontex
 https://github.com/donny-devops/pipefish-labs
 
 ### Description
-Enterprise MCP server for the PipeFish Labs autonomous multi-agent mesh. Supports 22 scenario graphs, Native Mistral Handoffs, zero-trust Vault leases, eBPF kernel telemetry, and NIST FIPS 203 ML-KEM-768 post-quantum cryptographic verification.
+Enterprise MCP server for the PipeFish Labs autonomous multi-agent mesh. Supports 25 scenario graphs, Native Mistral Handoffs, zero-trust Vault leases, eBPF kernel telemetry, and NIST FIPS 203 ML-KEM-768 post-quantum cryptographic verification.
 
 ### Tools Provided
 - `trigger_agent_graph`
