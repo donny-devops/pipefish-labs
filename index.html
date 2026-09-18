@@ -38,11 +38,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" as="image" href="/hero-logo.webp" type="image/webp" fetchpriority="high">
-  <!-- Hero: single-column full-width layout -->
+  <!-- Hero layout: 2-col grid, logo capped at 400px -->
   <style>
-    .hero-grid-layout{display:block!important}
-    .hero-logo-col{display:none!important}
-    .hero-main-col{width:100%!important;max-width:860px!important}
+    .hero-grid-layout{display:grid!important;grid-template-columns:1.3fr 0.8fr!important;gap:48px!important;align-items:center!important}
+    .hero-logo-col{display:flex!important;justify-content:center!important;align-items:center!important;overflow:hidden!important}
+    .hero-logo-frame{max-width:400px!important;width:100%!important;overflow:hidden!important;animation:none!important;transform:none!important}
+    .hero-logo-img{max-width:400px!important;max-height:318px!important;width:100%!important;height:auto!important;display:block!important}
+    .hero-main-col{width:100%!important}
+    @media(max-width:1024px){
+      .hero-grid-layout{grid-template-columns:1fr!important}
+      .hero-logo-col{order:1!important;max-width:260px!important;margin:0 auto!important}
+      .hero-logo-frame{max-width:240px!important}
+      .hero-logo-img{max-height:190px!important;max-width:240px!important}
+    }
+    @media(max-width:600px){
+      .hero-logo-col{max-width:180px!important}
+      .hero-logo-frame{max-width:160px!important}
+      .hero-logo-img{max-height:127px!important;max-width:160px!important}
+    }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -308,6 +321,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="hstat-n glow-m">$1.4M+</div>
               <div class="hstat-l">Avg. Enterprise ROI Generated</div>
             </div>
+          </div>
+        </div>
+
+        <div class="hero-logo-col">
+          <div class="hero-logo-frame">
+            <img src="/hero-logo.png" alt="PipeFish Labs" class="hero-logo-img" width="400" height="318" loading="eager" decoding="async">
           </div>
         </div>
 
