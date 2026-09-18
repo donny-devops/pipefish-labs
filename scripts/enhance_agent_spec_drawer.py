@@ -282,21 +282,20 @@ spec_data = {
 with open('index.html', 'r', encoding='utf-8') as fp:
     index_content = fp.read()
 
-old_json_str = index_content.split('window.agentSpecsData = ')[1].split(';\nconst demoScenarios =')[0]
+import re
 new_json_str = json.dumps(spec_data)
-index_content = index_content.replace(old_json_str, new_json_str)
-
-with open('index.html', 'w', encoding='utf-8') as fp:
-    fp.write(index_content)
-print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into index.html")
+if 'window.agentSpecsData = ' in index_content:
+    index_content = re.sub(r'window\.agentSpecsData\s*=\s*\{.*?\};', f'window.agentSpecsData = {new_json_str};', index_content, flags=re.DOTALL)
+    with open('index.html', 'w', encoding='utf-8') as fp:
+        fp.write(index_content)
+    print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
     demo_content = fp.read()
 
-old_demo_json_str = demo_content.split('window.agentSpecsData = ')[1].split(';\nconst scenarios =')[0]
-demo_content = demo_content.replace(old_demo_json_str, new_json_str)
-
-with open('demo/index.html', 'w', encoding='utf-8') as fp:
-    fp.write(demo_content)
-print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into demo/index.html")
+if 'window.agentSpecsData = ' in demo_content:
+    demo_content = re.sub(r'window\.agentSpecsData\s*=\s*\{.*?\};', f'window.agentSpecsData = {new_json_str};', demo_content, flags=re.DOTALL)
+    with open('demo/index.html', 'w', encoding='utf-8') as fp:
+        fp.write(demo_content)
+    print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into demo/index.html")

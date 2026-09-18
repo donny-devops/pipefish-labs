@@ -364,62 +364,61 @@ section { padding-block: var(--sec-y); }
 }
 .hero-grid-layout {
   display: grid;
-  grid-template-columns: 1.3fr 0.8fr;
-  gap: 48px;
-  align-items: center;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 36px;
+  align-items: flex-start;
 }
 .hero-logo-col {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
 }
 .hero-logo-frame {
   position: relative;
   width: 100%;
-  max-width: 400px;
-  overflow: hidden;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: 0;
   border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--border-strong);
   padding: 16px;
-  box-shadow: 0 0 50px rgba(0, 212, 255, 0.25), 0 0 100px rgba(224, 64, 255, 0.18);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.2), 0 0 80px rgba(224, 64, 255, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 .hero-logo-frame:hover {
-  box-shadow: 0 0 75px rgba(0, 212, 255, 0.38), 0 0 120px rgba(224, 64, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 0 70px rgba(0, 212, 255, 0.35), 0 0 110px rgba(224, 64, 255, 0.25);
   border-color: var(--cyan);
 }
 .hero-logo-img {
   width: 100%;
-  max-width: 368px;
-  max-height: 295px;
+  max-width: 100%;
+  max-height: 250px;
   height: auto;
   display: block;
   border-radius: var(--r-md);
   object-fit: contain;
 }
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .hero-grid-layout {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
   .hero-logo-col {
-    order: 1;
-    max-width: 260px;
-    margin: 0 auto;
+    order: 2;
+    justify-content: center;
+    max-width: 220px;
+    margin: 16px auto 0;
   }
   .hero-logo-frame {
-    max-width: 240px;
+    max-width: 220px;
+    margin: 0 auto;
   }
   .hero-logo-img {
-    max-width: 208px;
-    max-height: 166px;
+    max-height: 170px;
   }
-}
-@media (max-width: 600px) {
-  .hero-logo-col { max-width: 180px; }
-  .hero-logo-frame { max-width: 160px; }
-  .hero-logo-img { max-width: 128px; max-height: 102px; }
 }
 .hero-eye {
   display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px;
