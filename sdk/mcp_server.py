@@ -30,7 +30,8 @@ TOOLS = [
                         "reverse", "crypto", "errorcorr", "trend", "market", "codescan",
                         "docs", "observability", "revops", "analytics", "auditing",
                         "logtriage", "erp", "trafficrouter", "networkdispatch",
-                        "selfimproving", "systemoptimizing"
+                        "selfimproving", "systemoptimizing", "finops", "contractintel",
+                        "missedcalltextback"
                     ],
                     "description": "The specific agent scenario graph to execute."
                 },

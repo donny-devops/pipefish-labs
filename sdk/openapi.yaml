@@ -5,7 +5,7 @@ info:
   description: >
     The PipeFish Labs Agent Orchestration API enables programmatic access to
     multi-agent execution graphs with Native Mistral Handoffs. Orchestrate
-    24 specialized agents across 8-node execution graphs, manage webhooks,
+    25 specialized agents across 8-node execution graphs, manage webhooks,
     and monitor system health — all secured with Bearer token authentication
     and optional Zero-Data-Retention (ZDR) enclaves.
   contact:
@@ -79,6 +79,7 @@ paths:
               - systemoptimizing
               - finops
               - contractintel
+              - missedcalltextback
       requestBody:
         required: true
         content:

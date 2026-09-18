@@ -26,7 +26,8 @@ export type AgentScenarioKey =
   | "trafficrouter"
   | "networkdispatch"
   | "selfimproving"
-  | "systemoptimizing";
+  | "systemoptimizing"
+  | "missedcalltextback";
 
 export interface GraphExecutionOptions {
   handoffMode?: "mistral_native" | "async_dag" | "mtls_grpc";

@@ -5,7 +5,7 @@
  * Edge Capabilities:
  * - Inbound Webhook Router with HMAC-SHA256 signature verification & anti-replay
  * - Inbound Mailhook parser converting email triggers to Inbound Telemetry Payloads (LIV)
- * - Autonomous Multi-Agent DAG Execution Graph Dispatcher (24 Nodes)
+ * - Autonomous Multi-Agent DAG Execution Graph Dispatcher (25 Nodes)
  * - Cron Trigger Scheduled Task Handler for periodic log triage & compliance auditing
  * - High-speed edge status & security telemetry endpoints
  * - Static asset fallback for edge delivery
@@ -51,7 +51,7 @@ const AGENT_CATALOG: Record<string, { id: string; name: string; domain: string; 
   execution: { id: "05", name: "Execution Agent", domain: "OPS", mode: "EXECUTE → ATTEST", pqc: true },
   reverse: { id: "06", name: "Reverse Engineering Agent", domain: "SECURITY", mode: "DECOMPILE → REPORT", pqc: true },
   crypto: { id: "07", name: "Encryption / Cryptography Agent", domain: "SECURITY", mode: "ENCRYPT → ATTEST", pqc: true },
-  errorcorr: { id: "08", name: "Error-Correcting Agent", domain: "RELIABILITY", mode: "DIFF → REPAIR", pqc: true },
+  errorcorr: { id: "08", name: "Self-Healing Agent", domain: "RELIABILITY", mode: "DIFF → REPAIR", pqc: true },
   trend: { id: "09", name: "Trend Spotting Agent", domain: "INTELLIGENCE", mode: "CLUSTER → FORECAST", pqc: true },
   market: { id: "10", name: "Market Research Agent", domain: "INTELLIGENCE", mode: "SCRAPE → SYNTHESIZE", pqc: true },
   codescan: { id: "11", name: "Code-Scanning Agent", domain: "SECURITY", mode: "AST-PARSE → FLAG", pqc: true },
@@ -68,6 +68,7 @@ const AGENT_CATALOG: Record<string, { id: string; name: string; domain: string; 
   systemoptimizing: { id: "22", name: "System-Optimizing Agent", domain: "INFRA", mode: "PROFILE → TUNE", pqc: true },
   finops: { id: "23", name: "FinTech Ops Agent", domain: "FINTECH · PAYMENTS", mode: "VALIDATE → RECONCILE → ROUTE", pqc: true },
   contractintel: { id: "24", name: "Contract Intelligence Agent", domain: "SECURITY · COMPLIANCE", mode: "PARSE → CLASSIFY → FLAG", pqc: true },
+  missedcalltextback: { id: "25", name: "Missed Call / Text Back Agent", domain: "COMMS", mode: "DETECT → COMPOSE → DISPATCH", pqc: true },
 };
 
 function jsonResponse(data: unknown, status = 200, customHeaders: Record<string, string> = {}): Response {
