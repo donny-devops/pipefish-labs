@@ -64,49 +64,10 @@ window.seekToTime = function(seconds) {
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preload" as="image" href="/hero-logo.png" type="image/png" fetchpriority="high">
-  <!-- Hero layout: 2-col grid, logo in TOP-RIGHT, clean proportions -->
   <style>
-    .hero-grid-layout {
-      display: grid !important;
-      grid-template-columns: 1.35fr 0.65fr !important;
-      gap: 36px !important;
-      align-items: flex-start !important;
-    }
-    .hero-logo-col {
-      display: flex !important;
-      justify-content: flex-end !important;
-      align-items: flex-start !important;
-      width: 100% !important;
-    }
-    .hero-logo-frame {
-      max-width: 320px !important;
-      width: 100% !important;
-      margin-left: auto !important;
-      margin-right: 0 !important;
-      animation: none !important;
-      transform: none !important;
-      border-radius: var(--r-lg) !important;
-      background: var(--surface) !important;
-      border: 1px solid var(--border-strong) !important;
-      padding: 16px !important;
-      box-shadow: 0 0 40px rgba(0, 212, 255, 0.2), 0 0 80px rgba(224, 64, 255, 0.12) !important;
-    }
-    .hero-logo-img {
-      max-width: 100% !important;
-      max-height: 250px !important;
-      width: 100% !important;
-      height: auto !important;
-      display: block !important;
-      object-fit: contain !important;
-    }
-    .hero-main-col { width: 100% !important; }
-    @media (max-width: 768px) {
-      .hero-grid-layout { grid-template-columns: 1fr !important; gap: 28px !important; }
-      .hero-logo-col { order: 2 !important; justify-content: center !important; margin: 16px auto 0 !important; }
-      .hero-logo-frame { max-width: 220px !important; margin: 0 auto !important; }
-      .hero-logo-img { max-height: 170px !important; }
-    }
+    .hero-grid-layout { display: block !important; }
+    .hero-main-col { width: 100% !important; max-width: 920px !important; }
+    .hero-logo-col { display: none !important; }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -372,12 +333,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="hstat-n glow-m">$1.4M+</div>
               <div class="hstat-l">Avg. Enterprise ROI Generated</div>
             </div>
-          </div>
-        </div>
-
-        <div class="hero-logo-col">
-          <div class="hero-logo-frame">
-            <img src="/hero-logo.png" alt="PipeFish Labs" class="hero-logo-img" width="320" height="254" loading="eager" decoding="async">
           </div>
         </div>
 
