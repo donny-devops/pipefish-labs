@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -8,16 +11,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-MXVGLPPD');</script>
 <!-- End Google Tag Manager -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Securing Model Context Protocol (MCP) Servers in Production - PipeFish Labs Blog</title>
-  <meta name="description" content="Best practices for authenticating custom MCP tool servers, enforcing schema validation, and preventing prompt injection exploits in multi-agent networks.">
+  <title>Securing MCP Servers in Production | PipeFish Labs</title>
+  <meta name="description" content="Best practices for authenticating MCP server integrations, enforcing schema validation, and preventing prompt injection in multi-agent AI systems.">>
   <meta name="author" content="PipeFish Labs">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#00D4FF">
+  <meta name="keywords" content="MCP server integration, autonomous AI agents, multi-agent AI systems, enterprise AI orchestration, zero-trust AI security, agentic AI platform, AI workflow automation, Mistral AI native handoffs, enterprise AI automation">
   <link rel="canonical" href="https://pipefishlabs.io/blog/model-context-protocol-mcp-server-security/">
   <link rel="stylesheet" href="../../assets/pfl.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript></noscript>
   <style>
     .art-header { padding-top: 40px; margin-bottom: 40px; }
     .art-meta { display: flex; gap: 16px; font-family: var(--font-fm); font-size: 13px; color: var(--cyan); margin-top: 16px; }
@@ -28,6 +34,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .art-body li { margin-bottom: 8px; }
     .art-body code { font-family: var(--font-fm); font-size: 14px; background: rgba(0,212,255,0.08); color: var(--cyan); padding: 2px 6px; border-radius: 4px; }
   </style>
+<meta property="og:title" content="Securing MCP Servers in Production AI Systems | PipeFish Labs">
+<meta property="og:description" content="Security architecture for Model Context Protocol (MCP) servers: authentication, sandboxing, rate limiting, and zero-trust integration patterns.">
+<meta property="og:url" content="https://pipefishlabs.io/blog/model-context-protocol-mcp-server-security/">
+<meta property="og:image" content="https://pipefishlabs.io/hero-logo.webp">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PipeFish Labs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Securing MCP Servers in Production AI Systems | PipeFish Labs">
+<meta name="twitter:description" content="Security architecture for Model Context Protocol (MCP) servers: authentication, sandboxing, rate limiting, and zero-trust integration patterns.">
+<meta name="twitter:image" content="https://pipefishlabs.io/hero-logo.webp">
+<meta name="twitter:site" content="@PipeFishLabs">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
