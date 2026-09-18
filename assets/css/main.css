@@ -364,58 +364,63 @@ section { padding-block: var(--sec-y); }
 }
 .hero-grid-layout {
   display: grid;
-  grid-template-columns: 1.4fr 0.7fr;
+  grid-template-columns: 1.6fr 0.5fr;
   gap: 48px;
   align-items: center;
 }
 .hero-logo-col {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  overflow: hidden;
+  max-width: 300px;
 }
 .hero-logo-frame {
   position: relative;
   width: 100%;
-  max-width: 420px;
+  max-width: 280px;
   border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--border-strong);
-  padding: 16px;
+  padding: 12px;
   box-shadow: 0 0 50px rgba(0, 212, 255, 0.25), 0 0 100px rgba(224, 64, 255, 0.18);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-  animation: floatHeroLogo 6s ease-in-out infinite alternate;
+  overflow: hidden;
 }
 .hero-logo-frame:hover {
-  transform: translateY(-6px) scale(1.02);
   box-shadow: 0 0 75px rgba(0, 212, 255, 0.38), 0 0 120px rgba(224, 64, 255, 0.3);
   border-color: var(--cyan);
 }
 .hero-logo-img {
   width: 100%;
+  max-width: 256px;
+  max-height: 210px;
   height: auto;
   display: block;
   border-radius: var(--r-md);
   object-fit: contain;
-  max-height: 360px;
-}
-@keyframes floatHeroLogo {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-12px); }
 }
 @media (max-width: 1024px) {
   .hero-grid-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
   }
   .hero-logo-col {
-    order: 1; /* logo goes AFTER text on mobile, not before */
+    order: 1;
+    max-width: 220px;
+    margin: 0 auto;
   }
   .hero-logo-frame {
-    max-width: 320px;
+    max-width: 200px;
   }
   .hero-logo-img {
-    max-height: 280px;
+    max-height: 164px;
+    max-width: 176px;
   }
+}
+@media (max-width: 480px) {
+  .hero-logo-col { max-width: 160px; }
+  .hero-logo-frame { max-width: 148px; }
+  .hero-logo-img { max-height: 120px; max-width: 124px; }
 }
 .hero-eye {
   display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px;
