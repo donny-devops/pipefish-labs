@@ -38,6 +38,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" as="image" href="/hero-logo.webp" type="image/webp" fetchpriority="high">
+  <!-- Critical hero logo size override — ensures correct size regardless of CSS cache -->
+  <style>
+    .hero-grid-layout{grid-template-columns:1.4fr 0.7fr!important}
+    .hero-logo-frame{max-width:420px!important;padding:16px!important;width:100%!important}
+    .hero-logo-img{max-height:360px!important;width:100%!important;height:auto!important}
+    @media(max-width:1024px){
+      .hero-grid-layout{grid-template-columns:1fr!important}
+      .hero-logo-col{order:1!important}
+      .hero-logo-frame{max-width:320px!important}
+      .hero-logo-img{max-height:260px!important}
+    }
+    @media(max-width:480px){
+      .hero-logo-frame{max-width:240px!important}
+      .hero-logo-img{max-height:200px!important}
+    }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Non-blocking Google Fonts: preload + onload swap prevents render-blocking -->
