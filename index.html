@@ -38,23 +38,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" as="image" href="/hero-logo.webp" type="image/webp" fetchpriority="high">
-  <!-- Critical hero logo size — hard cap, no animation overflow -->
+  <!-- Hero: single-column full-width layout -->
   <style>
-    .hero-grid-layout{grid-template-columns:1.6fr 0.5fr!important}
-    .hero-logo-col{overflow:hidden!important;max-width:300px!important;align-items:flex-start!important}
-    .hero-logo-frame{max-width:280px!important;width:100%!important;overflow:hidden!important;animation:none!important;transform:none!important}
-    .hero-logo-img{max-width:256px!important;max-height:210px!important;width:100%!important;height:auto!important;display:block!important}
-    @media(max-width:1024px){
-      .hero-grid-layout{grid-template-columns:1fr!important}
-      .hero-logo-col{order:1!important;max-width:220px!important;margin:0 auto!important}
-      .hero-logo-frame{max-width:200px!important}
-      .hero-logo-img{max-height:164px!important;max-width:176px!important}
-    }
-    @media(max-width:480px){
-      .hero-logo-col{max-width:160px!important}
-      .hero-logo-frame{max-width:148px!important}
-      .hero-logo-img{max-height:120px!important;max-width:124px!important}
-    }
+    .hero-grid-layout{display:block!important}
+    .hero-logo-col{display:none!important}
+    .hero-main-col{width:100%!important;max-width:860px!important}
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -323,14 +311,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
 
-        <div class="hero-logo-col" style="display:flex;justify-content:center;align-items:flex-start;overflow:hidden;max-width:300px;">
-          <div class="hero-logo-frame" style="max-width:280px;width:100%;overflow:hidden;box-sizing:border-box;animation:none;transform:none;">
-            <picture>
-              <source srcset="/hero-logo.webp" type="image/webp">
-              <img src="/hero-logo.png" alt="PipeFish Labs Logo Badge" class="hero-logo-img" width="280" height="222" style="max-width:256px;max-height:210px;width:100%;height:auto;display:block;" fetchpriority="high" decoding="async">
-            </picture>
-          </div>
-        </div>
       </div>
     </div>
   </div>
