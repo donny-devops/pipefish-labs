@@ -290,8 +290,11 @@ window.addEventListener('scroll',()=>{document.getElementById('nav').classList.t
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.1})
 document.querySelectorAll('.ai').forEach(el=>io.observe(el))
 
-// Configurable Webhook Endpoint
-const MAKE_WEBHOOK_URL = window.MAKE_WEBHOOK_URL || "";
+// Configurable Webhook Endpoints
+const MAKE_WEBHOOK_URLS = window.MAKE_WEBHOOK_URLS || [
+  "https://hook.us2.make.com/322w2sl8p4drdh53f474vzyfx5l7fyst",
+  "https://hook.us2.make.com/dp3a97tqy2lrjgyj32odiyjqekr6v9h0"
+];
 
 async function handleSubmit(e){
   e.preventDefault();
@@ -335,18 +338,17 @@ async function handleSubmit(e){
     company: data.company || 'Unknown'
   });
 
-  // Post to Webhook if configured
-  if (MAKE_WEBHOOK_URL) {
-    try {
-      await fetch(MAKE_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    } catch (err) {
-      console.warn("Webhook delivery deferred:", err);
-    }
-  }
+  // Post to Webhooks
+  const endpoints = Array.isArray(MAKE_WEBHOOK_URLS) ? MAKE_WEBHOOK_URLS : [MAKE_WEBHOOK_URLS];
+  endpoints.filter(Boolean).forEach(url => {
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(err => {
+      console.warn("Webhook delivery deferred:", url, err);
+    });
+  });
 
   document.getElementById('form-container').style.display = 'none';
   document.getElementById('success-msg').style.display = 'block';

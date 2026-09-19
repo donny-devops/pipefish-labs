@@ -14,9 +14,19 @@ Your contact form (`/book-a-demo-contact/`) is already programmed to capture for
 3. Click **Add** and copy the generated Webhook URL (e.g., `https://hook.us1.make.com/xxxxxxxxx`).
 
 ### Step 1.2: Connect Webhook to Your Site
-You can activate your webhook on your site in 2 ways:
-- **Option A (HTML Global Variable)**: Place `<script>window.MAKE_WEBHOOK_URL = "https://hook.us1.make.com/xxxxxxxxx";</script>` in your page head.
-- **Option B (Cloudflare Worker Environment Variable)**: Proxy requests or configure header redirects.
+The site is pre-configured to dispatch form submissions to your primary and secondary Make.com webhooks:
+- Primary Webhook: `https://hook.us2.make.com/322w2sl8p4drdh53f474vzyfx5l7fyst`
+- Secondary / Enclave Webhook: `https://hook.us2.make.com/dp3a97tqy2lrjgyj32odiyjqekr6v9h0`
+
+You can also override them via window object in page head:
+```html
+<script>
+  window.MAKE_WEBHOOK_URLS = [
+    "https://hook.us2.make.com/322w2sl8p4drdh53f474vzyfx5l7fyst",
+    "https://hook.us2.make.com/dp3a97tqy2lrjgyj32odiyjqekr6v9h0"
+  ];
+</script>
+```
 
 ---
 
