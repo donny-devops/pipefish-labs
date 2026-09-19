@@ -629,6 +629,248 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ─── ASaaS INTERACTIVE PRICING CALCULATOR ─── -->
+<section id="pricing" style="padding:80px 0;background:linear-gradient(180deg,rgba(4,6,12,0.95) 0%,rgba(8,14,28,0.98) 100%);border-top:1px solid rgba(0,212,255,0.2);position:relative;">
+  <div class="container">
+    <div style="text-align:center;max-width:760px;margin:0 auto 50px auto;">
+      <div style="font-family:var(--font-fm, monospace);font-size:11.5px;font-weight:800;color:var(--magenta,#E040FF);letter-spacing:0.14em;text-transform:uppercase;background:rgba(224,64,255,0.1);border:1px solid rgba(224,64,255,0.3);border-radius:4px;padding:4px 12px;display:inline-block;margin-bottom:12px;">
+        ⚡ Transparent Enterprise ASaaS Economics
+      </div>
+      <h2 style="font-size:36px;font-weight:900;color:var(--text-strong,#FFFFFF);letter-spacing:-0.02em;margin:0 0 14px 0;">
+        ASaaS Interactive Pricing &amp; ROI Calculator
+      </h2>
+      <p style="font-size:16px;color:var(--text-dim,#99AAB5);line-height:1.65;margin:0;">
+        Replace fragmented SaaS tools and overwhelmed headcount with autonomous agent swarms. Model your operational volume, customized swarm tier, and net monthly savings below.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:32px;align-items:start;">
+      <!-- Left Configurator Column -->
+      <div style="background:rgba(6,10,20,0.85);border:1px solid rgba(0,212,255,0.3);border-radius:16px;padding:28px;box-shadow:0 0 35px rgba(0,212,255,0.06);">
+        <!-- Volume Slider -->
+        <div style="margin-bottom:28px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
+            <label for="pricing-vol-slider" style="font-size:13px;font-weight:700;color:var(--text-strong,#FFF);font-family:var(--font-fm,monospace);text-transform:uppercase;">
+              Monthly Operations / Lead Inquiries
+            </label>
+            <span id="pricing-vol-display" style="font-family:var(--font-fm,monospace);font-size:18px;font-weight:800;color:var(--cyan,#00D4FF);">
+              3,000 / mo
+            </span>
+          </div>
+          <input type="range" id="pricing-vol-slider" min="500" max="25000" step="250" value="3000" oninput="updatePricingCalc()" style="width:100%;accent-color:var(--cyan,#00D4FF);cursor:pointer;height:6px;background:rgba(255,255,255,0.1);border-radius:6px;">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-dim,#888);margin-top:6px;font-family:var(--font-fm,monospace);">
+            <span>500 ops</span>
+            <span>10,000 ops</span>
+            <span>25,000+ ops</span>
+          </div>
+        </div>
+
+        <!-- Tier Selection -->
+        <div style="margin-bottom:26px;">
+          <label style="font-size:13px;font-weight:700;color:var(--text-strong,#FFF);font-family:var(--font-fm,monospace);text-transform:uppercase;display:block;margin-bottom:12px;">
+            Select Agent Swarm Deployment Tier
+          </label>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <!-- Starter Tier -->
+            <label class="tier-card" style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);border:1px solid var(--border,rgba(255,255,255,0.1));border-radius:10px;padding:14px 16px;cursor:pointer;transition:border-color 0.2s;" id="tier-card-starter">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <input type="radio" name="asaas-tier" value="starter" onchange="updatePricingCalc()" style="accent-color:var(--cyan,#00D4FF);cursor:pointer;">
+                <div>
+                  <div style="font-weight:800;font-size:14.5px;color:var(--text-strong,#FFF);">Starter Swarm (2 Swarms)</div>
+                  <div style="font-size:12px;color:var(--text-dim,#888);">Receptionist &amp; Text-Back + Sales Enablement</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--font-fm,monospace);font-weight:800;font-size:16px;color:var(--cyan,#00D4FF);">$499</div>
+                <div style="font-size:10px;color:var(--text-dim,#888);">/ month</div>
+              </div>
+            </label>
+
+            <!-- Growth Tier (Recommended) -->
+            <label class="tier-card" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,212,255,0.04);border:1px solid var(--cyan,#00D4FF);border-radius:10px;padding:14px 16px;cursor:pointer;position:relative;" id="tier-card-growth">
+              <span style="position:absolute;top:-9px;right:16px;background:var(--cyan,#00D4FF);color:#04060C;font-size:9.5px;font-weight:800;padding:2px 8px;border-radius:100px;font-family:var(--font-fm,monospace);text-transform:uppercase;">Most Popular</span>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <input type="radio" name="asaas-tier" value="growth" checked onchange="updatePricingCalc()" style="accent-color:var(--cyan,#00D4FF);cursor:pointer;">
+                <div>
+                  <div style="font-weight:800;font-size:14.5px;color:var(--text-strong,#FFF);">Growth Swarm (5 Swarms)</div>
+                  <div style="font-size:12px;color:var(--text-dim,#888);">Comms, Sales, Market Intel, Docs &amp; Monitoring</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--font-fm,monospace);font-weight:800;font-size:16px;color:var(--cyan,#00D4FF);">$1,499</div>
+                <div style="font-size:10px;color:var(--text-dim,#888);">/ month</div>
+              </div>
+            </label>
+
+            <!-- Enterprise Tier -->
+            <label class="tier-card" style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);border:1px solid var(--border,rgba(255,255,255,0.1));border-radius:10px;padding:14px 16px;cursor:pointer;transition:border-color 0.2s;" id="tier-card-enterprise">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <input type="radio" name="asaas-tier" value="enterprise" onchange="updatePricingCalc()" style="accent-color:var(--cyan,#00D4FF);cursor:pointer;">
+                <div>
+                  <div style="font-weight:800;font-size:14.5px;color:var(--text-strong,#FFF);">Enterprise Full Mesh (All 8 Swarms)</div>
+                  <div style="font-size:12px;color:var(--text-dim,#888);">All 25 Nodes, Custom MCP Tools &amp; Dedicated Enclave</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--font-fm,monospace);font-weight:800;font-size:16px;color:var(--cyan,#00D4FF);">$3,999</div>
+                <div style="font-size:10px;color:var(--text-dim,#888);">/ month</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Add-on Toggle -->
+        <div style="padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="pricing-pqc-addon" onchange="updatePricingCalc()" style="accent-color:var(--magenta,#E040FF);width:16px;height:16px;cursor:pointer;">
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text-strong,#FFF);">Add Mission-Critical 99.999% SLA + Dedicated PQC Enclave</div>
+              <div style="font-size:11.5px;color:var(--text-dim,#888);">NIST FIPS 203 ML-KEM-768 hardware isolation and sub-millisecond failover (+ $500/mo)</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Right ROI Breakdown Column -->
+      <div style="background:radial-gradient(ellipse at top right,rgba(0,212,255,0.12) 0%,rgba(6,10,20,0.92) 75%);border:2px solid rgba(0,212,255,0.35);border-radius:16px;padding:32px;box-shadow:0 0 45px rgba(0,212,255,0.1);display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-family:var(--font-fm,monospace);font-size:11px;font-weight:800;color:var(--cyan,#00D4FF);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">
+            Estimated Net Monthly Savings
+          </div>
+          <div id="pricing-savings-display" style="font-family:var(--font-fm,monospace);font-size:42px;font-weight:900;color:#00FF66;text-shadow:0 0 20px rgba(0,255,102,0.35);line-height:1.1;margin-bottom:6px;">
+            $11,501 / mo
+          </div>
+          <div id="pricing-pct-display" style="font-size:13.5px;font-weight:700;color:var(--text-strong,#FFF);margin-bottom:24px;">
+            Equivalent to an 88.5% cost reduction vs. human intake
+          </div>
+
+          <!-- Comparison Metrics -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,80,80,0.3);border-radius:8px;padding:12px;">
+              <div style="font-size:10.5px;color:#FF8888;font-family:var(--font-fm,monospace);text-transform:uppercase;">Traditional Headcount Cost</div>
+              <div id="pricing-fte-cost" style="font-size:18px;font-weight:800;color:#FFAAAA;margin-top:2px;">$13,500 / mo</div>
+              <div id="pricing-fte-label" style="font-size:10px;color:var(--text-dim,#888);margin-top:2px;">3 FTE @ $4,500/mo</div>
+            </div>
+
+            <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.35);border-radius:8px;padding:12px;">
+              <div style="font-size:10.5px;color:var(--cyan,#00D4FF);font-family:var(--font-fm,monospace);text-transform:uppercase;">PipeFish ASaaS Investment</div>
+              <div id="pricing-total-cost" style="font-size:18px;font-weight:800;color:var(--text-strong,#FFF);margin-top:2px;">$1,499 / mo</div>
+              <div id="pricing-plan-label" style="font-size:10px;color:var(--cyan,#00D4FF);margin-top:2px;">Growth Swarm Tier</div>
+            </div>
+          </div>
+
+          <!-- Bullet Attestations -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:28px;font-size:12.5px;color:var(--text-dim,#888);">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:#00FF66;font-weight:800;">✓</span>
+              <span><strong>Sub-3s Response SLA:</strong> Engages 100% of missed calls and leads instantly</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:#00FF66;font-weight:800;">✓</span>
+              <span><strong>Zero-Data Retention (ZDR):</strong> 0-byte disk storage with RAM-only enclaves</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:#00FF66;font-weight:800;">✓</span>
+              <span><strong>Native Mistral Handoffs:</strong> Autonomous state synchronization across all nodes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Action -->
+        <div>
+          <a id="pricing-cta-btn" href="/book-a-demo-contact/?tier=growth&amp;ops=3000" class="btn btn-p" style="display:block;text-align:center;padding:14px 20px;font-size:14.5px;font-weight:800;box-shadow:0 0 25px var(--cyan-glow,rgba(0,212,255,0.4));text-decoration:none;">
+            🚀 Lock In Growth Swarm &amp; Book Scoping Call &rarr;
+          </a>
+          <div style="text-align:center;font-size:11px;color:var(--text-dim,#888);margin-top:8px;">
+            Month-to-month contracts · No vendor lock-in · 14-day proof of concept
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function updatePricingCalc() {
+  var slider = document.getElementById('pricing-vol-slider');
+  var volDisplay = document.getElementById('pricing-vol-display');
+  var tierRadios = document.getElementsByName('asaas-tier');
+  var pqcAddon = document.getElementById('pricing-pqc-addon');
+  
+  var savingsDisplay = document.getElementById('pricing-savings-display');
+  var pctDisplay = document.getElementById('pricing-pct-display');
+  var fteCostDisplay = document.getElementById('pricing-fte-cost');
+  var fteLabel = document.getElementById('pricing-fte-label');
+  var totalCostDisplay = document.getElementById('pricing-total-cost');
+  var planLabel = document.getElementById('pricing-plan-label');
+  var ctaBtn = document.getElementById('pricing-cta-btn');
+
+  var vol = parseInt(slider.value, 10);
+  volDisplay.textContent = vol.toLocaleString() + ' / mo';
+
+  var selectedTier = 'growth';
+  for (var i = 0; i < tierRadios.length; i++) {
+    if (tierRadios[i].checked) selectedTier = tierRadios[i].value;
+  }
+
+  // Update card border styles
+  ['starter', 'growth', 'enterprise'].forEach(function(t) {
+    var card = document.getElementById('tier-card-' + t);
+    if (card) {
+      if (t === selectedTier) {
+        card.style.borderColor = 'var(--cyan, #00D4FF)';
+        card.style.background = 'rgba(0, 212, 255, 0.05)';
+      } else {
+        card.style.borderColor = 'var(--border, rgba(255, 255, 255, 0.1))';
+        card.style.background = 'rgba(255, 255, 255, 0.02)';
+      }
+    }
+  });
+
+  // Base costs
+  var basePrice = 1499;
+  var tierName = 'Growth Swarm';
+  if (selectedTier === 'starter') {
+    basePrice = 499;
+    tierName = 'Starter Swarm';
+  } else if (selectedTier === 'enterprise') {
+    basePrice = 3999;
+    tierName = 'Enterprise Full Mesh';
+  }
+
+  // High volume usage overage allowance
+  var overage = 0;
+  if (selectedTier === 'starter' && vol > 5000) {
+    overage = Math.ceil((vol - 5000) / 1000) * 80;
+  } else if (selectedTier === 'growth' && vol > 15000) {
+    overage = Math.ceil((vol - 15000) / 1000) * 60;
+  }
+
+  var pqcCost = (pqcAddon && pqcAddon.checked) ? 500 : 0;
+  var pipefishTotal = basePrice + overage + pqcCost;
+
+  // Traditional FTE calculation: 1 FTE per ~1,200 complex inquiries, minimum 2 FTE for 24/7 coverage
+  var fteNeeded = Math.max(2, Math.ceil(vol / 1200));
+  var fteCost = fteNeeded * 4500;
+
+  var savings = fteCost - pipefishTotal;
+  var savingsPct = ((savings / fteCost) * 100).toFixed(1);
+
+  savingsDisplay.textContent = '$' + savings.toLocaleString() + ' / mo';
+  pctDisplay.textContent = 'Equivalent to an ' + savingsPct + '% cost reduction vs. human intake';
+  fteCostDisplay.textContent = '$' + fteCost.toLocaleString() + ' / mo';
+  fteLabel.textContent = fteNeeded + ' FTE @ $4,500/mo ($' + (fteCost * 12).toLocaleString() + '/yr)';
+  totalCostDisplay.textContent = '$' + pipefishTotal.toLocaleString() + ' / mo';
+  planLabel.textContent = tierName + (pqcCost > 0 ? ' + PQC Enclave' : '');
+
+  if (ctaBtn) {
+    ctaBtn.textContent = '🚀 Lock In ' + tierName + ' & Book Scoping Call →';
+    ctaBtn.href = '/book-a-demo-contact/?tier=' + selectedTier + '&ops=' + vol + (pqcCost > 0 ? '&pqc=true' : '');
+  }
+}
+document.addEventListener('DOMContentLoaded', updatePricingCalc);
+</script>
+
 <!-- ── FOOTER ── -->
 <footer>
   <div class="container">

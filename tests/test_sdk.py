@@ -114,5 +114,28 @@ class TestPipeFishAgentMesh(unittest.TestCase):
             self.assertTrue(res["mcp_connectors_verified"])
             self.assertEqual(res["zdr_enclave_retention_bytes"], 0)
 
+    def test_opentelemetry_span_instrumentation(self):
+        """Verifies OpenTelemetry W3C tracecontext and 8-node DAG span generation."""
+        res = self.client.trigger_graph_execution("receptionist", {"call_type": "inbound_voice"})
+        self.assertIn("trace_context", res)
+        trace_ctx = res["trace_context"]
+        self.assertEqual(len(trace_ctx["trace_id"]), 32)
+        self.assertTrue(trace_ctx["traceparent"].startswith("00-"))
+        self.assertEqual(trace_ctx["spans_count"], 9)  # 1 root + 8 node child spans
+        self.assertEqual(len(res["spans"]), 9)
+        
+        # Verify root span
+        root_span = res["spans"][0]
+        self.assertEqual(root_span["name"], "pipefish.mesh.receptionist")
+        self.assertIsNone(root_span["parent_span_id"])
+        
+        # Verify 8 node spans
+        for i in range(1, 9):
+            node_span = res["spans"][i]
+            self.assertEqual(node_span["name"], f"pipefish.node.{i}")
+            self.assertEqual(node_span["attributes"]["pipefish.node_index"], i)
+            self.assertTrue(node_span["attributes"]["pipefish.zdr_enclave"])
+            self.assertEqual(node_span["status"], "OK")
+
 if __name__ == "__main__":
     unittest.main()

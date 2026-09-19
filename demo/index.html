@@ -1209,6 +1209,98 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           Channels Enabled: Phone · Email · SMS · UCC/VTC · Payments · APIs
         </div>
       </div>
+
+      <!-- ─── LIVE INTERACTIVE MISSED CALL & TEXT-BACK SIMULATOR (Sub-3s SLA) ─── -->
+      <div id="live-textback-widget" class="live-textback-widget" style="margin-top:28px;background:rgba(6,10,20,0.85);border:1px solid rgba(0,212,255,0.3);border-radius:14px;padding:26px;box-shadow:0 0 35px rgba(0,212,255,0.08);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;right:0;width:240px;height:120px;background:radial-gradient(circle,rgba(224,64,255,0.15) 0%,transparent 70%);pointer-events:none;"></div>
+        
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+          <div>
+            <div style="font-family:var(--font-fm);font-size:11px;font-weight:800;color:var(--magenta);letter-spacing:0.12em;text-transform:uppercase;background:rgba(224,64,255,0.1);border:1px solid rgba(224,64,255,0.3);border-radius:4px;padding:4px 10px;display:inline-block;margin-bottom:6px;">
+              ⚡ Autonomous Comms Swarm · 2.4-Second SLA
+            </div>
+            <h3 style="font-size:22px;font-weight:800;color:var(--text-strong);margin:0 0 4px 0;">Live Missed Call &amp; AI Text-Back Simulator</h3>
+            <p style="font-size:13.5px;color:var(--text-dim);margin:0;max-width:640px;">
+              67% of customers hang up and call a competitor when sent to voicemail. PipeFish's Comms Swarm intercepts dropped rings and engages the lead via personalized SMS in under 3 seconds.
+            </p>
+          </div>
+          <div style="text-align:right;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);border-radius:10px;padding:10px 18px;">
+            <div style="font-family:var(--font-fm);font-size:10px;color:var(--cyan);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;">Response Speed</div>
+            <div id="sim-timer-display" style="font-family:var(--font-fm);font-size:32px;font-weight:900;color:var(--cyan);text-shadow:0 0 16px rgba(0,212,255,0.4);line-height:1.1;">0.00s</div>
+            <div id="sim-status-label" style="font-size:11px;font-weight:700;color:var(--text-dim);">Status: Standby</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;align-items:start;">
+          <!-- Controls Column -->
+          <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:18px;">
+            <label for="sim-caller-input" style="font-size:12px;font-weight:700;color:var(--text-strong);display:block;margin-bottom:6px;font-family:var(--font-fm);text-transform:uppercase;letter-spacing:0.05em;">
+              1. Inbound Caller Number
+            </label>
+            <div style="display:flex;gap:8px;margin-bottom:12px;">
+              <input type="text" id="sim-caller-input" value="+1 (415) 890-2341" style="flex:1;background:rgba(4,6,12,0.9);border:1px solid var(--border-strong);border-radius:6px;padding:10px 12px;color:var(--text-strong);font-family:var(--font-fm);font-size:13.5px;" placeholder="+1 (555) 000-0000">
+              <button type="button" onclick="fillSamplePhone()" class="btn btn-o" style="font-size:11px;padding:8px 12px;white-space:nowrap;">Sample #</button>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <label style="font-size:12px;font-weight:700;color:var(--text-strong);display:block;margin-bottom:6px;font-family:var(--font-fm);text-transform:uppercase;letter-spacing:0.05em;">
+                2. Simulated Call Disposition
+              </label>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <button type="button" id="sim-disp-noanswer" onclick="setCallDisp('No Answer / Ring Timeout', this)" class="btn btn-o active" style="font-size:11px;padding:7px 10px;border-color:var(--cyan);color:var(--cyan);">📞 Ring Timeout</button>
+                <button type="button" id="sim-disp-busy" onclick="setCallDisp('Line Busy / After Hours', this)" class="btn btn-o" style="font-size:11px;padding:7px 10px;">🌙 After-Hours</button>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="button" id="sim-trigger-call-btn" onclick="triggerSimulatedCall()" class="btn btn-p" style="flex:1;min-width:200px;font-size:13px;padding:12px 18px;font-weight:800;box-shadow:0 0 20px var(--cyan-glow);">
+                📞 Simulate Missed Call
+              </button>
+              <button type="button" onclick="resetSimulatedCall()" class="btn btn-o" style="font-size:12px;padding:10px 14px;">
+                🔄 Reset
+              </button>
+            </div>
+
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div style="background:rgba(0,0,0,0.3);padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);">
+                <div style="font-size:10.5px;color:var(--text-dim);font-family:var(--font-fm);">LEAD CAPTURE RATE</div>
+                <div style="font-size:16px;font-weight:800;color:#00FF66;margin-top:2px;">94.2% (+310%)</div>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);">
+                <div style="font-size:10.5px;color:var(--text-dim);font-family:var(--font-fm);">DISK RETENTION</div>
+                <div style="font-size:16px;font-weight:800;color:var(--cyan);margin-top:2px;">0 Bytes (ZDR)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Smartphone Screen Simulator Column -->
+          <div style="background:rgba(4,6,12,0.95);border:2px solid rgba(0,212,255,0.25);border-radius:18px;padding:16px;box-shadow:0 12px 40px rgba(0,0,0,0.6);display:flex;flex-direction:column;min-height:360px;">
+            <!-- Mobile Top Bar -->
+            <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;margin-bottom:12px;">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00FF66;box-shadow:0 0 6px #00FF66;"></span>
+                <span style="font-family:var(--font-fm);font-size:11px;font-weight:700;color:var(--text-strong);">PipeFish Autonomous Intake</span>
+              </div>
+              <span style="font-family:var(--font-fm);font-size:10px;color:var(--text-dim);">5G · Encrypted</span>
+            </div>
+
+            <!-- Messages Stream -->
+            <div id="sim-messages-stream" style="flex:1;display:flex;flex-direction:column;gap:10px;overflow-y:auto;padding:4px 2px;max-height:240px;">
+              <div style="font-size:12px;color:var(--text-dim);text-align:center;padding:24px 12px;font-style:italic;">
+                No call simulated yet. Click "Simulate Missed Call" to trigger the sub-3s text-back pipeline.
+              </div>
+            </div>
+
+            <!-- Interactive Reply Bar -->
+            <div id="sim-reply-container" style="margin-top:12px;display:none;border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;">
+              <form onsubmit="handleSimReply(event)" style="display:flex;gap:6px;">
+                <input type="text" id="sim-reply-text" placeholder="Type a reply (e.g. 'Can I book a consultation?')" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(0,212,255,0.3);border-radius:6px;padding:8px 10px;color:var(--text-strong);font-size:12.5px;">
+                <button type="submit" class="btn btn-p" style="font-size:11px;padding:8px 12px;font-weight:700;">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 <footer>
@@ -1949,6 +2041,152 @@ function resetDemoGraph() {
 }
 
 document.addEventListener('DOMContentLoaded', renderDemoRows);
+</script>
+
+<!-- ─── LIVE INTERACTIVE MISSED CALL & TEXT-BACK SIMULATOR SCRIPT ─── -->
+<script>
+(function() {
+  var activeDisp = 'No Answer / Ring Timeout';
+  var simInterval = null;
+  var simStartTime = 0;
+
+  window.fillSamplePhone = function() {
+    var samples = ['+1 (415) 890-2341', '+1 (650) 419-7720', '+1 (212) 555-0199', '+1 (512) 883-9012'];
+    var input = document.getElementById('sim-caller-input');
+    if (input) {
+      var next = samples[Math.floor(Math.random() * samples.length)];
+      input.value = next;
+    }
+  };
+
+  window.setCallDisp = function(disp, btn) {
+    activeDisp = disp;
+    var b1 = document.getElementById('sim-disp-noanswer');
+    var b2 = document.getElementById('sim-disp-busy');
+    if (b1) { b1.classList.remove('active'); b1.style.color = ''; b1.style.borderColor = ''; }
+    if (b2) { b2.classList.remove('active'); b2.style.color = ''; b2.style.borderColor = ''; }
+    if (btn) {
+      btn.classList.add('active');
+      btn.style.color = 'var(--cyan)';
+      btn.style.borderColor = 'var(--cyan)';
+    }
+  };
+
+  window.triggerSimulatedCall = function() {
+    var input = document.getElementById('sim-caller-input');
+    var phone = (input && input.value.trim()) || '+1 (415) 890-2341';
+    var stream = document.getElementById('sim-messages-stream');
+    var timerDisplay = document.getElementById('sim-timer-display');
+    var statusLabel = document.getElementById('sim-status-label');
+    var replyContainer = document.getElementById('sim-reply-container');
+    var triggerBtn = document.getElementById('sim-trigger-call-btn');
+
+    if (!stream) return;
+    if (simInterval) clearInterval(simInterval);
+    if (replyContainer) replyContainer.style.display = 'none';
+    if (triggerBtn) triggerBtn.disabled = true;
+
+    stream.innerHTML = '';
+    simStartTime = Date.now();
+    statusLabel.textContent = 'Status: Detecting Call Drop...';
+    statusLabel.style.color = 'var(--cyan)';
+
+    simInterval = setInterval(function() {
+      var elapsed = ((Date.now() - simStartTime) / 1000).toFixed(2);
+      if (timerDisplay) timerDisplay.textContent = elapsed + 's';
+    }, 50);
+
+    // Event 1: Call Drop (at 200ms)
+    setTimeout(function() {
+      var dropItem = document.createElement('div');
+      dropItem.style.cssText = 'background:rgba(255,80,80,0.1);border-left:3px solid #FF5050;padding:8px 10px;border-radius:4px;font-size:11.5px;color:#FFB0B0;line-height:1.4;';
+      dropItem.innerHTML = '<strong>⚠️ Inbound Voice Call Dropped</strong><br>' + phone + ' · ' + activeDisp + ' (0.21s)';
+      stream.appendChild(dropItem);
+      stream.scrollTop = stream.scrollHeight;
+      if (statusLabel) statusLabel.textContent = 'Status: Comms Swarm Qualifying...';
+    }, 200);
+
+    // Event 2: Enclave State Handoff (at 850ms)
+    setTimeout(function() {
+      var nodeItem = document.createElement('div');
+      nodeItem.style.cssText = 'background:rgba(0,212,255,0.08);border-left:3px solid var(--cyan);padding:8px 10px;border-radius:4px;font-size:11.5px;color:var(--text-strong);line-height:1.4;';
+      nodeItem.innerHTML = '<strong>⚡ Node 01 &rarr; 03: Intent &amp; CRM Routing</strong><br>Mistral Native Handoff generated personalized SMS token (0.85s)';
+      stream.appendChild(nodeItem);
+      stream.scrollTop = stream.scrollHeight;
+      if (statusLabel) statusLabel.textContent = 'Status: SMS Dispatched to Gateway';
+    }, 850);
+
+    // Event 3: Text-Back Arrives (at 1840ms - well under 3.0s!)
+    setTimeout(function() {
+      clearInterval(simInterval);
+      if (timerDisplay) timerDisplay.textContent = '1.84s';
+      if (statusLabel) {
+        statusLabel.textContent = 'Status: ✅ Sub-3s Lead Secured!';
+        statusLabel.style.color = '#00FF66';
+      }
+
+      var smsItem = document.createElement('div');
+      smsItem.style.cssText = 'background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(224,64,255,0.12));border:1px solid rgba(0,212,255,0.4);padding:10px 12px;border-radius:10px 10px 10px 2px;font-size:12.5px;color:#FFFFFF;line-height:1.5;box-shadow:0 4px 15px rgba(0,212,255,0.1);';
+      smsItem.innerHTML = '<div style="font-family:var(--font-fm);font-size:10px;color:var(--cyan);margin-bottom:4px;font-weight:700;">💬 OUTBOUND SMS · 1.84s</div>' +
+        'Hi! Sorry we missed your call just now. I\'m PipeFish\'s autonomous intake agent. How can our AI engineering swarm assist your business today?';
+      stream.appendChild(smsItem);
+      stream.scrollTop = stream.scrollHeight;
+
+      if (replyContainer) replyContainer.style.display = 'block';
+      if (triggerBtn) triggerBtn.disabled = false;
+      var replyInput = document.getElementById('sim-reply-text');
+      if (replyInput) replyInput.focus();
+    }, 1840);
+  };
+
+  window.handleSimReply = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var input = document.getElementById('sim-reply-text');
+    var stream = document.getElementById('sim-messages-stream');
+    if (!input || !input.value.trim() || !stream) return;
+
+    var text = input.value.trim();
+    input.value = '';
+
+    // User message bubble
+    var userBubble = document.createElement('div');
+    userBubble.style.cssText = 'align-self:flex-end;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);padding:9px 12px;border-radius:10px 10px 2px 10px;font-size:12.5px;color:#FFFFFF;max-width:85%;line-height:1.4;';
+    userBubble.innerHTML = '<div style="font-family:var(--font-fm);font-size:9.5px;color:var(--text-dim);margin-bottom:2px;text-align:right;">YOU (SMS)</div>' +
+      text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    stream.appendChild(userBubble);
+    stream.scrollTop = stream.scrollHeight;
+
+    // AI Instant Follow-up response (<500ms)
+    setTimeout(function() {
+      var aiBubble = document.createElement('div');
+      aiBubble.style.cssText = 'background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(224,64,255,0.12));border:1px solid rgba(0,212,255,0.4);padding:10px 12px;border-radius:10px 10px 10px 2px;font-size:12.5px;color:#FFFFFF;line-height:1.5;box-shadow:0 4px 15px rgba(0,212,255,0.1);max-width:90%;';
+      aiBubble.innerHTML = '<div style="font-family:var(--font-fm);font-size:10px;color:var(--cyan);margin-bottom:4px;font-weight:700;">⚡ PIPEFISH COMMS SWARM · 0.38s</div>' +
+        'Understood! I\'ve logged your inquiry and matched your requirements with our Solutions Architecture team. You can book an executive briefing directly or we\'ll follow up in under 5 minutes.';
+      stream.appendChild(aiBubble);
+      stream.scrollTop = stream.scrollHeight;
+    }, 400);
+  };
+
+  window.resetSimulatedCall = function() {
+    if (simInterval) clearInterval(simInterval);
+    var timerDisplay = document.getElementById('sim-timer-display');
+    var statusLabel = document.getElementById('sim-status-label');
+    var stream = document.getElementById('sim-messages-stream');
+    var replyContainer = document.getElementById('sim-reply-container');
+    var triggerBtn = document.getElementById('sim-trigger-call-btn');
+
+    if (timerDisplay) timerDisplay.textContent = '0.00s';
+    if (statusLabel) {
+      statusLabel.textContent = 'Status: Standby';
+      statusLabel.style.color = 'var(--text-dim)';
+    }
+    if (stream) {
+      stream.innerHTML = '<div style="font-size:12px;color:var(--text-dim);text-align:center;padding:24px 12px;font-style:italic;">No call simulated yet. Click "Simulate Missed Call" to trigger the sub-3s text-back pipeline.</div>';
+    }
+    if (replyContainer) replyContainer.style.display = 'none';
+    if (triggerBtn) triggerBtn.disabled = false;
+  };
+})();
 </script>
 
 <!-- ─── SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS ─── -->
