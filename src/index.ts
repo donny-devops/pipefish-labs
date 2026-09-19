@@ -41,28 +41,29 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+  "Cross-Origin-Opener-Policy": "same-origin",
 };
 
 const AGENT_CATALOG: Record<string, { id: string; name: string; domain: string; mode: string; pqc: boolean }> = {
-  receptionist: { id: "01", name: "Receptionist Agent", domain: "COMMS", mode: "TRANSFORM → ROUTE", pqc: true },
-  sales: { id: "02", name: "Sales Enablement Agent", domain: "SALES", mode: "ANALYZE → GENERATE", pqc: true },
+  receptionist: { id: "01", name: "AI Receptionist & Missed Call / Text Back Swarm", domain: "COMMS", mode: "TRANSFORM → ROUTE", pqc: true },
+  sales: { id: "02", name: "Sales Enablement & Growth Strategy Swarm", domain: "SALES · REVENUE", mode: "ANALYZE → GENERATE", pqc: true },
   logistics: { id: "03", name: "Logistics / Supply Chain Agent", domain: "OPS", mode: "POLL → DISPATCH", pqc: true },
-  integration: { id: "04", name: "Integration Agent", domain: "INFRA", mode: "SYNC → TRANSLATE", pqc: true },
-  execution: { id: "05", name: "Execution Agent", domain: "OPS", mode: "EXECUTE → ATTEST", pqc: true },
+  integration: { id: "04", name: "Integration & Execution Swarm", domain: "INFRA", mode: "SYNC → TRANSLATE", pqc: true },
+  quantum: { id: "05", name: "Execution Agent", domain: "OPS · ENCLAVE", mode: "EXECUTE → ATTEST", pqc: true },
   reverse: { id: "06", name: "Reverse Engineering Agent", domain: "SECURITY", mode: "DECOMPILE → REPORT", pqc: true },
   crypto: { id: "07", name: "Encryption / Cryptography Agent", domain: "SECURITY", mode: "ENCRYPT → ATTEST", pqc: true },
-  errorcorr: { id: "08", name: "Self-Healing Agent", domain: "RELIABILITY", mode: "DIFF → REPAIR", pqc: true },
+  errorcorr: { id: "08", name: "Self-Healing & Self-Improving Swarm", domain: "RELIABILITY", mode: "DIFF → REPAIR", pqc: true },
   trend: { id: "09", name: "Trend Spotting Agent", domain: "INTELLIGENCE", mode: "CLUSTER → FORECAST", pqc: true },
-  market: { id: "10", name: "Market Research Agent", domain: "INTELLIGENCE", mode: "SCRAPE → SYNTHESIZE", pqc: true },
+  market: { id: "10", name: "Market Research & FinTech Ops Swarm", domain: "INTELLIGENCE", mode: "SCRAPE → SYNTHESIZE", pqc: true },
   codescan: { id: "11", name: "Code-Scanning Agent", domain: "SECURITY", mode: "AST-PARSE → FLAG", pqc: true },
-  docs: { id: "12", name: "Documentation Agent", domain: "ENG", mode: "PARSE → PUBLISH", pqc: true },
-  observability: { id: "13", name: "Monitoring / Observability Agent", domain: "OPS", mode: "INGEST → ALERT", pqc: true },
-  growth: { id: "14", name: "Growth Strategy Agent", domain: "STRATEGY", mode: "ANALYZE → RECOMMEND", pqc: true },
-  research: { id: "15", name: "Research Agent", domain: "INTELLIGENCE", mode: "SEARCH → SYNTHESIZE", pqc: true },
-  analysis: { id: "16", name: "Analysis Agent", domain: "STRATEGY", mode: "MODEL → PREDICT", pqc: true },
+  docs: { id: "12", name: "Documentation & Contract Intelligence Swarm", domain: "ENG", mode: "PARSE → PUBLISH", pqc: true },
+  observability: { id: "13", name: "Observability, Monitoring & Log Triage Swarm", domain: "OPS", mode: "INGEST → ALERT", pqc: true },
+  revops: { id: "14", name: "Growth Strategy Agent", domain: "STRATEGY", mode: "ANALYZE → RECOMMEND", pqc: true },
+  analytics: { id: "15", name: "Research & Analysis Swarm", domain: "INTELLIGENCE", mode: "SEARCH → SYNTHESIZE", pqc: true },
+  auditing: { id: "16", name: "Analysis Agent", domain: "COMPLIANCE · AUDIT", mode: "MODEL → PREDICT", pqc: true },
   logtriage: { id: "17", name: "Log Triage Agent", domain: "OPS", mode: "STREAM → CLASSIFY", pqc: true },
-  audit: { id: "18", name: "Audit Agent", domain: "COMPLIANCE", mode: "VERIFY → SEAL", pqc: true },
-  trafficrouter: { id: "19", name: "Traffic Router Agent", domain: "NETWORKING", mode: "EVALUATE → SWITCH", pqc: true },
+  erp: { id: "18", name: "Enterprise Resource Planning (ERP) Agent", domain: "ENTERPRISE", mode: "EXTRACT → RECONCILE", pqc: true },
+  trafficrouter: { id: "19", name: "Traffic Routing & Network Dispatch Swarm", domain: "NETWORKING", mode: "EVALUATE → SWITCH", pqc: true },
   networkdispatch: { id: "20", name: "Network Dispatch Agent", domain: "NETWORKING", mode: "DISPATCH → MONITOR", pqc: true },
   selfimproving: { id: "21", name: "Self-Improving Agent", domain: "AI-META", mode: "EVALUATE → REFINE", pqc: true },
   systemoptimizing: { id: "22", name: "System-Optimizing Agent", domain: "INFRA", mode: "PROFILE → TUNE", pqc: true },
@@ -70,6 +71,19 @@ const AGENT_CATALOG: Record<string, { id: string; name: string; domain: string; 
   contractintel: { id: "24", name: "Contract Intelligence Agent", domain: "SECURITY · COMPLIANCE", mode: "PARSE → CLASSIFY → FLAG", pqc: true },
   missedcalltextback: { id: "25", name: "Missed Call / Text Back Agent", domain: "COMMS", mode: "DETECT → COMPOSE → DISPATCH", pqc: true },
 };
+
+const AGENT_ALIASES: Record<string, string> = {
+  execution: "quantum",
+  growth: "revops",
+  research: "analytics",
+  analysis: "auditing",
+  audit: "auditing",
+};
+
+function resolveAgentKey(key: string): string {
+  const normalized = key.toLowerCase();
+  return AGENT_ALIASES[normalized] ?? normalized;
+}
 
 function jsonResponse(data: unknown, status = 200, customHeaders: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(data, null, 2), {
@@ -84,7 +98,7 @@ function jsonResponse(data: unknown, status = 200, customHeaders: Record<string,
 }
 
 async function verifyHmacSha256(
-  secret: string,
+  secretsConfig: string,
   payload: string,
   signatureHeader: string | null
 ): Promise<{ valid: boolean; reason?: string }> {
@@ -112,24 +126,28 @@ async function verifyHmacSha256(
 
   const encoder = new TextEncoder();
   const signedPayload = `${timestamp}.${payload}`;
-  const key = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign", "verify"]
-  );
+  const candidateSecrets = secretsConfig.split(",").map((s) => s.trim()).filter(Boolean);
 
-  const signatureBytes = await crypto.subtle.sign("HMAC", key, encoder.encode(signedPayload));
-  const expectedHash = Array.from(new Uint8Array(signatureBytes))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
+  for (const secret of candidateSecrets) {
+    const key = await crypto.subtle.importKey(
+      "raw",
+      encoder.encode(secret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign", "verify"]
+    );
 
-  if (expectedHash !== parts.v1) {
-    return { valid: false, reason: "HMAC signature mismatch" };
+    const signatureBytes = await crypto.subtle.sign("HMAC", key, encoder.encode(signedPayload));
+    const expectedHash = Array.from(new Uint8Array(signatureBytes))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+
+    if (expectedHash === parts.v1) {
+      return { valid: true };
+    }
   }
 
-  return { valid: true };
+  return { valid: false, reason: "HMAC signature mismatch" };
 }
 
 export default {
@@ -181,7 +199,8 @@ export default {
 
     // 4. Agent Spec API for individual node
     if (url.pathname.startsWith("/api/v1/agents/") && request.method === "GET") {
-      const agentKey = url.pathname.split("/").pop()?.toLowerCase();
+      const rawKey = url.pathname.split("/").pop()?.toLowerCase();
+      const agentKey = rawKey ? resolveAgentKey(rawKey) : undefined;
       if (agentKey && AGENT_CATALOG[agentKey]) {
         return jsonResponse({
           key: agentKey,
@@ -197,9 +216,10 @@ export default {
 
     // 5. Inbound Webhook Handler (/api/v1/webhooks/:agent_key)
     if (url.pathname.startsWith("/api/v1/webhooks/") && request.method === "POST") {
-      const agentKey = url.pathname.split("/").pop()?.toLowerCase() || "receptionist";
+      const rawKey = url.pathname.split("/").pop()?.toLowerCase() || "receptionist";
+      const agentKey = resolveAgentKey(rawKey);
       if (!AGENT_CATALOG[agentKey]) {
-        return jsonResponse({ error: `Invalid target agent node: ${agentKey}` }, 400);
+        return jsonResponse({ error: `Invalid target agent node: ${rawKey}` }, 400);
       }
 
       const rawBody = await request.text();
@@ -260,14 +280,26 @@ export default {
 
         let targetKey = "receptionist";
         const lowerText = (subject + " " + bodyText).toLowerCase();
-        if (lowerText.includes("invoice") || lowerText.includes("wire") || lowerText.includes("payment") || lowerText.includes("reconciliation")) {
+        if (lowerText.includes("invoice") || lowerText.includes("wire") || lowerText.includes("payment") || lowerText.includes("reconciliation") || lowerText.includes("finops") || lowerText.includes("spend")) {
           targetKey = "finops";
-        } else if (lowerText.includes("contract") || lowerText.includes("nda") || lowerText.includes("sow") || lowerText.includes("compliance")) {
+        } else if (lowerText.includes("contract") || lowerText.includes("nda") || lowerText.includes("sow") || lowerText.includes("compliance") || lowerText.includes("legal")) {
           targetKey = "contractintel";
-        } else if (lowerText.includes("bug") || lowerText.includes("error") || lowerText.includes("exception")) {
+        } else if (lowerText.includes("bug") || lowerText.includes("error") || lowerText.includes("exception") || lowerText.includes("corruption")) {
           targetKey = "errorcorr";
         } else if (lowerText.includes("missed call") || lowerText.includes("no answer") || lowerText.includes("voicemail") || lowerText.includes("call back") || lowerText.includes("text back")) {
           targetKey = "missedcalltextback";
+        } else if (lowerText.includes("demo") || lowerText.includes("pricing") || lowerText.includes("sales") || lowerText.includes("lead") || lowerText.includes("proposal")) {
+          targetKey = "sales";
+        } else if (lowerText.includes("latency") || lowerText.includes("bgp") || lowerText.includes("sd-wan") || lowerText.includes("packet loss") || lowerText.includes("route")) {
+          targetKey = "trafficrouter";
+        } else if (lowerText.includes("sec") || lowerText.includes("10-k") || lowerText.includes("research") || lowerText.includes("audit")) {
+          targetKey = "analytics";
+        } else if (lowerText.includes("log") || lowerText.includes("kubernetes") || lowerText.includes("pod") || lowerText.includes("crashloop")) {
+          targetKey = "logtriage";
+        } else if (lowerText.includes("sap") || lowerText.includes("erp") || lowerText.includes("odata") || lowerText.includes("inventory")) {
+          targetKey = "erp";
+        } else if (lowerText.includes("cve") || lowerText.includes("vulnerability") || lowerText.includes("code scan") || lowerText.includes("ast")) {
+          targetKey = "codescan";
         }
 
         const livEnvelope = {
@@ -325,7 +357,8 @@ export default {
     // 7b. Graph Execution Simulation API (/api/v1/graphs/:scenario/execute)
     if (url.pathname.startsWith("/api/v1/graphs/") && url.pathname.endsWith("/execute") && request.method === "POST") {
       const parts = url.pathname.split("/");
-      const scenarioKey = parts[parts.length - 2]?.toLowerCase() || "receptionist";
+      const rawKey = parts[parts.length - 2]?.toLowerCase() || "receptionist";
+      const scenarioKey = resolveAgentKey(rawKey);
       const agentInfo = AGENT_CATALOG[scenarioKey] || AGENT_CATALOG.receptionist;
 
       return jsonResponse({

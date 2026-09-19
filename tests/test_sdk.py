@@ -96,5 +96,23 @@ class TestPipeFishAgentMesh(unittest.TestCase):
         self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
         self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
 
+    def test_trigger_all_25_scenario_graphs(self):
+        """Verifies that all 25 canonical scenario keys execute an 8-node graph with 0-byte retention."""
+        canonical_keys = [
+            "receptionist", "sales", "logistics", "integration", "quantum",
+            "reverse", "crypto", "errorcorr", "trend", "market", "codescan",
+            "docs", "observability", "revops", "analytics", "auditing",
+            "logtriage", "erp", "trafficrouter", "networkdispatch",
+            "selfimproving", "systemoptimizing", "finops", "contractintel",
+            "missedcalltextback"
+        ]
+        for key in canonical_keys:
+            res = self.client.trigger_graph_execution(key, {"test_probe": True})
+            self.assertEqual(res["scenario"], key)
+            self.assertEqual(res["status"], "COMPLETED")
+            self.assertEqual(res["nodes_executed"], 8)
+            self.assertTrue(res["mcp_connectors_verified"])
+            self.assertEqual(res["zdr_enclave_retention_bytes"], 0)
+
 if __name__ == "__main__":
     unittest.main()

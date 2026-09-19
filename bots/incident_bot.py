@@ -25,8 +25,23 @@ class IncidentTriageBot:
         severity = raw_alert.get("severity", "P3").upper()
         service = raw_alert.get("service", "core-ingress")
 
-        # 1. Trigger the appropriate 8-node agent graph
-        scenario = "systemoptimizing" if "latency" in alert_name.lower() or "cpu" in alert_name.lower() else "logtriage"
+        # 1. Trigger the appropriate 8-node agent graph based on telemetry keywords
+        lower_alert = (alert_name + " " + service).lower()
+        if "network" in lower_alert or "bgp" in lower_alert or "sd-wan" in lower_alert or "packet" in lower_alert:
+            scenario = "trafficrouter"
+        elif "latency" in lower_alert or "cpu" in lower_alert or "memory" in lower_alert:
+            scenario = "systemoptimizing"
+        elif "corruption" in lower_alert or "shard" in lower_alert or "parity" in lower_alert:
+            scenario = "errorcorr"
+        elif "cost" in lower_alert or "spend" in lower_alert or "quota" in lower_alert or "token" in lower_alert:
+            scenario = "finops"
+        elif "compliance" in lower_alert or "audit" in lower_alert or "soc2" in lower_alert:
+            scenario = "auditing"
+        elif "vulnerability" in lower_alert or "cve" in lower_alert:
+            scenario = "codescan"
+        else:
+            scenario = "logtriage"
+
         execution_result = self.client.trigger_graph_execution(
             scenario_key=scenario,
             payload=raw_alert

@@ -7,7 +7,7 @@ Features: HMAC-SHA256, Ed25519 signature validation, Replay Attack Defense (Time
 import time
 import hmac
 import hashlib
-from typing import Union
+from typing import Union, List
 
 class WebhookVerificationError(Exception):
     """Base exception for webhook verification failures."""
@@ -24,24 +24,42 @@ class WebhookSignatureMismatchError(WebhookVerificationError):
 class WebhookVerifier:
     """
     Verifies cryptographic signatures on inbound webhook payloads to prevent
-    unauthorized execution and replay attacks.
+    unauthorized execution and replay attacks. Supports single or multiple secrets
+    for zero-downtime key rotation.
     """
 
-    def __init__(self, secret_key: Union[str, bytes], default_tolerance_seconds: int = 300):
+    def __init__(
+        self,
+        secret_key: Union[str, bytes, List[Union[str, bytes]]],
+        default_tolerance_seconds: int = 300
+    ):
         if not secret_key:
             raise ValueError("Secret key cannot be empty.")
-        if isinstance(secret_key, str):
-            self.secret_key = secret_key.encode("utf-8")
+
+        if isinstance(secret_key, (str, bytes)):
+            raw_keys = [secret_key]
         else:
-            self.secret_key = secret_key
+            raw_keys = list(secret_key)
+
+        self.secret_keys = [
+            k.encode("utf-8") if isinstance(k, str) else k
+            for k in raw_keys
+            if k
+        ]
+
+        if not self.secret_keys:
+            raise ValueError("At least one valid secret key must be provided.")
+
+        self.secret_key = self.secret_keys[0]
         self.default_tolerance_seconds = default_tolerance_seconds
 
-    def compute_signature(self, payload: bytes, timestamp: int) -> str:
+    def compute_signature(self, payload: bytes, timestamp: int, secret_idx: int = 0) -> str:
         """
-        Computes HMAC-SHA256 signature using the standard format: t={timestamp}.v1={hex_digest}
+        Computes HMAC-SHA256 signature using the standard format: t={timestamp},v1={hex_digest}
         """
+        key = self.secret_keys[secret_idx] if secret_idx < len(self.secret_keys) else self.secret_key
         signed_payload = f"{timestamp}.".encode("utf-8") + payload
-        digest = hmac.new(self.secret_key, signed_payload, hashlib.sha256).hexdigest()
+        digest = hmac.new(key, signed_payload, hashlib.sha256).hexdigest()
         return f"t={timestamp},v1={digest}"
 
     def verify(
@@ -52,7 +70,8 @@ class WebhookVerifier:
     ) -> bool:
         """
         Verifies that an incoming webhook payload matches the signature header and
-        is within the acceptable timestamp drift window.
+        is within the acceptable timestamp drift window. Iterates through all candidate
+        secret keys to support zero-downtime rotation.
         """
         if tolerance_seconds is None:
             tolerance_seconds = self.default_tolerance_seconds
@@ -84,15 +103,14 @@ class WebhookVerifier:
                 f"Webhook timestamp expired. Drift ({abs(current_time - timestamp)}s) exceeds tolerance ({tolerance_seconds}s)."
             )
 
-        # Compute expected signature
+        # Iterate over all candidate keys (current & rollover secrets)
         signed_payload = f"{timestamp}.".encode("utf-8") + payload
-        expected_sig = hmac.new(self.secret_key, signed_payload, hashlib.sha256).hexdigest()
+        for candidate_key in self.secret_keys:
+            expected_sig = hmac.new(candidate_key, signed_payload, hashlib.sha256).hexdigest()
+            if hmac.compare_digest(expected_sig, received_sig):
+                return True
 
-        # Constant-time comparison to prevent timing attacks
-        if not hmac.compare_digest(expected_sig, received_sig):
-            raise WebhookSignatureMismatchError("Computed signature does not match received signature.")
-
-        return True
+        raise WebhookSignatureMismatchError("Computed signature does not match received signature.")
 
 if __name__ == "__main__":
     secret = "whsec_test_secret_9941"
