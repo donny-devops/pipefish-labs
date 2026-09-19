@@ -120,11 +120,20 @@ and the deploy workflow re-checks `dist/` before it ships.
 ### Local preview
 
 ```bash
+make serve
+```
+
+This builds `dist/` and serves it on `http://127.0.0.1:8787` with Python's
+stdlib HTTP server. Use that when you only need the static pages (including
+Cloud Agent VMs).
+
+```bash
 make preview
 ```
 
-This builds `dist/` and runs the site on `http://127.0.0.1:8787` with the real
-edge routing, headers, and redirects applied.
+This also builds `dist/`, then runs `npx wrangler dev` so you get the real
+edge routing, headers, and redirects. Wrangler is fetched on first use; a
+global npm install is not required.
 
 ### Deploying
 

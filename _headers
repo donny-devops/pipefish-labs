@@ -2,7 +2,9 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://*.google-analytics.com https://google-analytics.com https://*.googletagmanager.com https://googletagmanager.com https://*.g.doubleclick.net https://*.google.com; media-src 'self'; connect-src 'self' https://api.pipefishlabs.io https://*.google-analytics.com https://google-analytics.com https://*.analytics.google.com https://analytics.google.com https://*.googletagmanager.com https://googletagmanager.com https://*.g.doubleclick.net https://stats.g.doubleclick.net https://*.google.com https://www.google.com; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
 # HTML pages — revalidate immediately
 /*.html
