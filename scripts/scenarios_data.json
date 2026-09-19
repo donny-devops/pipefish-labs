@@ -3,58 +3,58 @@
     "category": "beginner",
     "icon": "\ud83d\udcde",
     "badge": "\u2b50 Beginner Friendly",
-    "friendlyName": "Emergency Support Call & Live Booking",
-    "techName": "Receptionist Agent (Voice & Text)",
-    "friendlyProblem": "A customer calls in panic at 2:00 AM because an API is returning errors on their production account.",
-    "friendlyGoal": "Understand caller, verify account, locate on-call engineer, file a P1 ticket, book an emergency triage meeting, and send an SMS confirmation\u2014all in under 3 seconds.",
-    "friendlyTakeaway": "Instead of putting the caller on hold for 30 minutes or waiting for business hours, 8 specialized AI agents pass the baton in seconds to resolve the emergency with zero human data entry.",
+    "friendlyName": "AI Receptionist, Inbound Voice/SMS & Missed Call Text-Back",
+    "techName": "AI Receptionist & Missed Call / Text Back Swarm",
+    "friendlyProblem": "A potential customer or VIP client calls, fills out a form, or reaches out after hours — if nobody answers immediately, 62% of leads go cold and disappear forever.",
+    "friendlyGoal": "Capture every inbound call, form, email, and chat; transcribe voicemails, identify callers, trigger instant <3s text-backs, classify buyer intent, verify accounts, and schedule calendar callbacks automatically.",
+    "friendlyTakeaway": "PipeFish Labs installs an AI receptionist on your website that captures, qualifies, and answers every inbound lead - forms, email, and chat - so no prospect goes cold and no deal slips through. Live in 14 days. Transparent pricing. Zero code on your side.",
     "nodes": [
       {
-        "name": "Voice Ingestion",
-        "friendlyTitle": "\ud83d\udc42 1. Listen & Transcribe Voice Call",
-        "friendlyDesc": "Listens to the caller's voice message, transcribes every word with 100% accuracy, and extracts their contact details.",
-        "tools": "\ud83d\udcde Phone System \u00b7 Speech AI"
+        "name": "Inbound Voice & Call Ingestion",
+        "friendlyTitle": "\ud83d\udcde 1. Ingest Inbound Call / Message",
+        "friendlyDesc": "Listens to caller voice, captures inbound forms/chats, and catches dropped or missed call webhooks immediately.",
+        "tools": "\ud83d\udcde Phone System \u00b7 Speech AI \u00b7 Telephony Webhook"
       },
       {
-        "name": "Intent Classifier",
-        "friendlyTitle": "\ud83c\udfaf 2. Understand Urgency & Severity",
-        "friendlyDesc": "Analyzes the problem and flags it as a high-priority 'P0 Outage' because the customer is an enterprise VIP.",
+        "name": "Caller ID & CRM Resolver",
+        "friendlyTitle": "\ud83d\udd0d 2. Look Up Caller Identity",
+        "friendlyDesc": "Resolves phone number or email to verified CRM contact and past interaction history.",
+        "tools": "\ud83d\udcda Caller ID API \u00b7 CRM Bridge"
+      },
+      {
+        "name": "Intent & Urgency Classifier",
+        "friendlyTitle": "\ud83c\udfaf 3. Classify Buyer Intent & Urgency",
+        "friendlyDesc": "Analyzes caller urgency and inquiry type to route to the appropriate swarm node.",
         "tools": "\ud83e\udde0 Intent Engine \u00b7 SLA Rules"
       },
       {
-        "name": "Account Verifier",
-        "friendlyTitle": "\ud83d\udd10 3. Verify Customer Account",
+        "name": "Instant SMS Text-Back",
+        "friendlyTitle": "\ud83d\udcac 4. Dispatch Personalized Text-Back (<3s)",
+        "friendlyDesc": "Fires personalized SMS response within 3 seconds so the caller gets an instant reply before they hang up.",
+        "tools": "\ud83d\udcf1 Twilio SMS API \u00b7 Carrier Gateway"
+      },
+      {
+        "name": "Calendar & Callback Scheduler",
+        "friendlyTitle": "\ud83d\udcc5 5. Schedule Meeting & Video Link",
+        "friendlyDesc": "Books an emergency triage bridge or sales consultation on Google Calendar with meeting invites.",
+        "tools": "\ud83d\udcc6 Google Calendar \u00b7 Zoom Bridge"
+      },
+      {
+        "name": "Account & Intake Verifier",
+        "friendlyTitle": "\ud83d\udd10 6. Verify Customer Account",
         "friendlyDesc": "Checks the database securely to make sure the caller is an active customer and matches their phone number.",
         "tools": "\ud83d\uddc4\ufe0f Database Bridge \u00b7 Zero-Trust Auth"
       },
       {
-        "name": "Engineer Router",
-        "friendlyTitle": "\ud83d\udc65 4. Find Active On-Call Engineer",
-        "friendlyDesc": "Scans the team's schedule to find the exact on-call engineer awake and available right now.",
-        "tools": "\ud83d\udcac Slack \u00b7 PagerDuty Schedule"
+        "name": "CRM & Retainer Bridge",
+        "friendlyTitle": "\ud83d\udcca 7. Update CRM with Full Record",
+        "friendlyDesc": "Creates a complete CRM entry: call timestamp, SMS sent, callback scheduled, and voicemail transcript attached.",
+        "tools": "\ud83d\uddc4\ufe0f CRM Bridge \u00b7 Activity Logger"
       },
       {
-        "name": "Ticket Generator",
-        "friendlyTitle": "\ud83c\udfab 5. Open Official Support Ticket",
-        "friendlyDesc": "Automatically files a complete support ticket with error logs attached so the engineer doesn't have to ask questions.",
-        "tools": "\ud83d\udccb Jira \u00b7 Helpdesk Bridge"
-      },
-      {
-        "name": "Calendar Sync",
-        "friendlyTitle": "\ud83d\udcc5 6. Schedule Meeting & Video Link",
-        "friendlyDesc": "Books an emergency triage bridge on Google Calendar and sends a Zoom link to both the engineer and the customer.",
-        "tools": "\ud83d\udcc6 Google Calendar \u00b7 Zoom Bridge"
-      },
-      {
-        "name": "SMS Responder",
-        "friendlyTitle": "\ud83d\udcac 7. Text Customer Back Instantly",
-        "friendlyDesc": "Texts the customer a clear confirmation with their ticket number, ETA, and calendar invite within 2 seconds.",
-        "tools": "\ud83d\udcf1 SMS Carrier \u00b7 Voice Synthesizer"
-      },
-      {
-        "name": "Audit Logger",
+        "name": "Audit & Recovery Attestation",
         "friendlyTitle": "\ud83d\udee1\ufe0f 8. Seal Tamper-Proof Audit Log",
-        "friendlyDesc": "Permanently logs every single step and handoff into an encrypted audit record for 100% compliance and accountability.",
+        "friendlyDesc": "Stamps a tamper-proof audit record proving the entire recovery chain completed in under 3 seconds for compliance.",
         "tools": "\ud83d\udd12 Encrypted Audit Log \u00b7 Webhook"
       }
     ]
