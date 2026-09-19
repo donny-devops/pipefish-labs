@@ -4,12 +4,12 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# HTML pages — short cache, revalidate quickly
+# HTML pages — revalidate immediately
 /*.html
-  Cache-Control: public, max-age=60, s-maxage=300, stale-while-revalidate=3600
+  Cache-Control: public, max-age=0, must-revalidate
 
 /
-  Cache-Control: public, max-age=60, s-maxage=300, stale-while-revalidate=3600
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Immutable static assets (images, fonts, media) — 1 year
 /*.webp
