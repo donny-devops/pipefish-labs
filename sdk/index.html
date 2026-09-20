@@ -184,6 +184,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     th { background: #111524; font-family: 'Orbitron', monospace; font-size: 0.8rem; color: #00D4FF; }
     td { color: #8A99AD; }
     td code { font-family: 'JetBrains Mono', monospace; color: #E040FF; background: rgba(224, 64, 255, 0.08); padding: 2px 6px; border-radius: 4px; }
+    .mcp-tab-btn {
+      background: rgba(0, 212, 255, 0.06);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      color: #8A99AD;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mcp-tab-btn:hover {
+      border-color: #00D4FF;
+      color: #F0F4FF;
+    }
+    .mcp-tab-btn.active {
+      background: rgba(0, 212, 255, 0.2);
+      border-color: #00D4FF;
+      color: #00D4FF;
+    }
   </style>
 </head>
 <body>
@@ -250,13 +270,17 @@ python sdk/mcp_server.py
 # - get_agent_spec
 # - verify_enclave_status</code></pre>
         <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/mcp_server.py" class="btn" target="_blank">View MCP Server</a>
+        <button onclick="openMcpModal()" class="btn" style="background:rgba(224,64,255,0.15);border-color:#E040FF;color:#E040FF;margin-top:8px;">⚡ Generate Claude / Cursor Config</button>
       </div>
     </div>
 
     <h2 class="section-title">OpenAPI 3.1.0 REST Contract</h2>
-    <p style="color:#8A99AD;margin-bottom:1rem;">
-      Full machine-readable specification available at <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/openapi.yaml" target="_blank"><code>sdk/openapi.yaml</code></a>. Base URL: <code>https://api.pipefishlabs.io/v1</code>
-    </p>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:1rem;">
+      <p style="color:#8A99AD;margin-bottom:0;">
+        Full machine-readable specification available at <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/openapi.yaml" target="_blank"><code>sdk/openapi.yaml</code></a>. Base URL: <code>https://api.pipefishlabs.io/v1</code>
+      </p>
+      <a href="/api-docs/" class="btn" style="background:#00D4FF;color:#06070C;font-size:0.82rem;padding:8px 16px;">Interactive API Playground (/docs) ↗</a>
+    </div>
 
     <table>
       <thead>
@@ -323,6 +347,113 @@ python sdk/mcp_server.py
       </div>
     </div>
   </main>
+  <!-- MCP Config Generator Modal -->
+  <div id="mcp-config-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(3,5,10,0.85);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1.5rem;">
+    <div style="background:#0B0F19;border:1px solid rgba(0,212,255,0.35);border-radius:14px;max-width:700px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.8),0 0 30px rgba(0,212,255,0.15);overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;border-bottom:1px solid rgba(0,212,255,0.15);background:rgba(17,21,36,0.6);">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.3rem;">⚡</span>
+          <span style="font-family:'Orbitron',monospace;font-size:1.05rem;font-weight:700;color:#F0F4FF;letter-spacing:0.06em;">Connect PipeFish Mesh via MCP</span>
+        </div>
+        <button onclick="closeMcpModal()" style="background:transparent;border:none;color:#8A99AD;font-size:1.5rem;cursor:pointer;line-height:1;padding:4px 8px;" title="Close (Esc)">&times;</button>
+      </div>
+      <div style="padding:1.5rem;">
+        <p style="color:#8A99AD;font-size:0.88rem;margin-bottom:1.2rem;">
+          Select your client to generate instant configuration connecting directly to PipeFish Labs' 25-agent mesh on Cloudflare Edge (<code style="color:#00D4FF;">/api/v1/mcp/sse</code>):
+        </p>
+        <div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;">
+          <button class="mcp-tab-btn active" onclick="switchMcpTab('claude-desktop', this)">Claude Desktop</button>
+          <button class="mcp-tab-btn" onclick="switchMcpTab('cursor', this)">Cursor IDE</button>
+          <button class="mcp-tab-btn" onclick="switchMcpTab('claude-code', this)">Claude Code CLI</button>
+          <button class="mcp-tab-btn" onclick="switchMcpTab('python-stdio', this)">Local Python</button>
+        </div>
+        <div style="position:relative;background:#05070B;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:1.2rem;margin-bottom:1.2rem;">
+          <pre style="margin:0;max-height:220px;overflow-y:auto;"><code id="mcp-code-snippet" style="font-family:'JetBrains Mono',monospace;font-size:0.84rem;color:#00D4FF;line-height:1.5;white-space:pre-wrap;"></code></pre>
+          <button id="mcp-copy-btn" onclick="copyMcpConfig()" style="position:absolute;top:10px;right:10px;background:#111524;border:1px solid #00D4FF;color:#00D4FF;padding:5px 12px;border-radius:4px;font-family:'Orbitron',monospace;font-size:0.75rem;cursor:pointer;transition:all 0.2s;">Copy Config</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:#8A99AD;flex-wrap:wrap;gap:8px;">
+          <span id="mcp-dest-hint">📁 Target: <code>claude_desktop_config.json</code></span>
+          <a href="/api-docs/" target="_blank" style="color:#E040FF;">View 8 Tools Schema ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const MCP_CONFIGS = {
+    'claude-desktop': {
+      hint: '📁 macOS: ~/Library/Application Support/Claude/claude_desktop_config.json | Windows: %APPDATA%/Claude/claude_desktop_config.json',
+      code: `{\n  "mcpServers": {\n    "pipefish-agent-mesh": {\n      "command": "npx",\n      "args": [\n        "-y",\n        "mcp-remote",\n        "https://pipefishlabs.io/api/v1/mcp/sse"\n      ]\n    }\n  }\n}`
+    },
+    'cursor': {
+      hint: '📁 Place in your workspace root: .cursor/mcp.json',
+      code: `{\n  "mcpServers": {\n    "pipefish-agent-mesh": {\n      "url": "https://pipefishlabs.io/api/v1/mcp/sse"\n    }\n  }\n}`
+    },
+    'claude-code': {
+      hint: '💻 Run in terminal (Claude Code CLI):',
+      code: `claude mcp add pipefish-mesh https://pipefishlabs.io/api/v1/mcp/sse`
+    },
+    'python-stdio': {
+      hint: '📁 Local Python MCP Server configuration:',
+      code: `{\n  "mcpServers": {\n    "pipefish-local": {\n      "command": "python",\n      "args": ["-m", "sdk.mcp_server"]\n    }\n  }\n}`
+    }
+  };
+
+  let currentMcpTab = 'claude-desktop';
+
+  function openMcpModal() {
+    const modal = document.getElementById('mcp-config-modal');
+    if (modal) {
+      modal.style.display = 'flex';
+      renderMcpTab(currentMcpTab);
+    }
+  }
+
+  function closeMcpModal() {
+    const modal = document.getElementById('mcp-config-modal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function switchMcpTab(tabKey, btn) {
+    currentMcpTab = tabKey;
+    document.querySelectorAll('.mcp-tab-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderMcpTab(tabKey);
+  }
+
+  function renderMcpTab(tabKey) {
+    const item = MCP_CONFIGS[tabKey];
+    if (!item) return;
+    const codeElem = document.getElementById('mcp-code-snippet');
+    const hintElem = document.getElementById('mcp-dest-hint');
+    if (codeElem) codeElem.textContent = item.code;
+    if (hintElem) hintElem.innerHTML = item.hint;
+  }
+
+  function copyMcpConfig() {
+    const codeElem = document.getElementById('mcp-code-snippet');
+    const copyBtn = document.getElementById('mcp-copy-btn');
+    if (codeElem && navigator.clipboard) {
+      navigator.clipboard.writeText(codeElem.textContent).then(() => {
+        if (copyBtn) {
+          const prevText = copyBtn.textContent;
+          copyBtn.textContent = '✓ Copied!';
+          copyBtn.style.background = '#00D4FF';
+          copyBtn.style.color = '#06070C';
+          setTimeout(() => {
+            copyBtn.textContent = prevText;
+            copyBtn.style.background = '#111524';
+            copyBtn.style.color = '#00D4FF';
+          }, 2000);
+        }
+      });
+    }
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMcpModal();
+  });
+  </script>
 
   <!-- SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS -->
   <script>

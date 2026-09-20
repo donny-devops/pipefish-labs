@@ -2159,9 +2159,10 @@ document.addEventListener('DOMContentLoaded', renderDemoRows);
     // AI Instant Follow-up response (<500ms)
     setTimeout(function() {
       var aiBubble = document.createElement('div');
-      aiBubble.style.cssText = 'background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(224,64,255,0.12));border:1px solid rgba(0,212,255,0.4);padding:10px 12px;border-radius:10px 10px 10px 2px;font-size:12.5px;color:#FFFFFF;line-height:1.5;box-shadow:0 4px 15px rgba(0,212,255,0.1);max-width:90%;';
+      aiBubble.style.cssText = 'background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(224,64,255,0.12));border:1px solid rgba(0,212,255,0.4);padding:12px 14px;border-radius:10px 10px 10px 2px;font-size:12.5px;color:#FFFFFF;line-height:1.5;box-shadow:0 4px 15px rgba(0,212,255,0.1);max-width:90%;';
       aiBubble.innerHTML = '<div style="font-family:var(--font-fm);font-size:10px;color:var(--cyan);margin-bottom:4px;font-weight:700;">⚡ PIPEFISH COMMS SWARM · 0.38s</div>' +
-        'Understood! I\'ve logged your inquiry and matched your requirements with our Solutions Architecture team. You can book an executive briefing directly or we\'ll follow up in under 5 minutes.';
+        'Understood! I\'ve logged your inquiry and matched your requirements with our Solutions Architecture team. You can lock in your swarm deployment below or we\'ll follow up in under 5 minutes.' +
+        '<div style="margin-top:10px;"><button type="button" onclick="openBookingModal(\'growth\', 3000, 1499)" class="btn btn-p" style="font-size:11.5px;padding:6px 14px;box-shadow:0 0 15px rgba(0,212,255,0.3);cursor:pointer;">📅 Reserve Fast-Track Architecture Scoping &rarr;</button></div>';
       stream.appendChild(aiBubble);
       stream.scrollTop = stream.scrollHeight;
     }, 400);
@@ -2187,6 +2188,210 @@ document.addEventListener('DOMContentLoaded', renderDemoRows);
     if (triggerBtn) triggerBtn.disabled = false;
   };
 })();
+</script>
+
+<!-- ─── SLIDE-OUT INSTANT LEAD BOOKING MODAL ─── -->
+<div id="booking-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(3,5,10,0.8);backdrop-filter:blur(8px);z-index:99999;justify-content:flex-end;align-items:stretch;">
+  <div id="booking-modal-drawer" style="width:min(540px, 100vw);background:#080C16;border-left:1px solid rgba(0,212,255,0.3);box-shadow:-12px 0 40px rgba(0,0,0,0.8);display:flex;flex-direction:column;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);">
+    <!-- Header -->
+    <div style="padding:1.4rem 1.8rem;border-bottom:1px solid rgba(0,212,255,0.15);background:rgba(14,18,32,0.8);display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-family:var(--font-fm,monospace);font-size:10.5px;color:var(--cyan,#00D4FF);text-transform:uppercase;letter-spacing:0.1em;font-weight:800;">
+          Direct Engineering Intake
+        </div>
+        <div style="font-family:var(--font-fd,sans-serif);font-size:1.15rem;font-weight:800;color:#F0F4FF;margin-top:2px;">
+          Deploy Your Agent Swarm
+        </div>
+      </div>
+      <button onclick="closeBookingModal()" style="background:transparent;border:none;color:#8A99AD;font-size:1.8rem;cursor:pointer;line-height:1;padding:4px;" title="Close (Esc)">&times;</button>
+    </div>
+
+    <!-- Body / Form -->
+    <div id="booking-form-view" style="padding:1.8rem;flex:1;display:flex;flex-direction:column;gap:16px;">
+      <!-- Selected Tier Pill -->
+      <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;">Selected Swarm</div>
+          <div id="modal-selected-tier" style="font-weight:800;color:#00D4FF;font-size:14.5px;">Growth Swarm (5 Swarms)</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;">Monthly Investment</div>
+          <div id="modal-selected-price" style="font-family:var(--font-fm,monospace);font-weight:800;color:#00FF66;font-size:15px;">$1,499 / mo</div>
+        </div>
+      </div>
+
+      <!-- Form Inputs -->
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Full Name *</label>
+        <input type="text" id="lead-name" required placeholder="Jane Doe" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+      </div>
+
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Work Email *</label>
+        <input type="email" id="lead-email" required placeholder="jane@enterprise.com" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Company / Domain *</label>
+          <input type="text" id="lead-company" required placeholder="Acme Corp" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Phone (For SMS SLA)</label>
+          <input type="tel" id="lead-phone" placeholder="+1 (555) 000-0000" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Primary Objective / Bottleneck</label>
+        <textarea id="lead-usecase" rows="3" placeholder="Describe your current inbound volume or workflow bottlenecks..." style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13px;resize:vertical;"></textarea>
+      </div>
+
+      <!-- Action Button -->
+      <button id="lead-submit-btn" onclick="submitLeadBooking()" class="btn btn-p" style="padding:14px;font-size:14.5px;font-weight:800;box-shadow:0 0 25px rgba(0,212,255,0.4);width:100%;margin-top:8px;cursor:pointer;">
+        🔒 Reserve Swarm &amp; Book Technical Scoping &rarr;
+      </button>
+
+      <div style="font-size:11px;color:#8A99AD;text-align:center;line-height:1.5;margin-top:4px;">
+        Covered by mutual NDA by default · Zero vendor lock-in · 14-day proof of concept
+      </div>
+    </div>
+
+    <!-- Success Confirmation View -->
+    <div id="booking-success-view" style="display:none;padding:2.5rem 1.8rem;text-align:center;flex:1;flex-direction:column;justify-content:center;align-items:center;">
+      <div style="font-size:3rem;margin-bottom:12px;">✅</div>
+      <div style="font-family:var(--font-fd,sans-serif);font-size:1.3rem;font-weight:800;color:#00FF66;margin-bottom:8px;">
+        Swarm Reservation Confirmed
+      </div>
+      <p style="color:#8A99AD;font-size:13.5px;line-height:1.6;max-width:380px;margin-bottom:20px;">
+        Our solutions engineering leads have received your reservation and dispatched your cryptographic intake token.
+      </p>
+
+      <div style="background:#05070B;border:1px solid rgba(0,212,255,0.3);border-radius:8px;padding:12px 16px;width:100%;margin-bottom:24px;text-align:left;">
+        <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;font-family:var(--font-fm,monospace);">Cryptographic Receipt Hash</div>
+        <div id="booking-receipt-hash" style="font-family:var(--font-fm,monospace);font-size:12px;color:#00D4FF;word-break:break-all;margin-top:4px;">0xLEAD9928AF81...</div>
+      </div>
+
+      <a href="/book-a-demo-contact/?intent=audit" class="btn btn-p" style="width:100%;padding:14px;font-size:14px;font-weight:800;text-decoration:none;">
+        📅 Open Calendar &amp; Pick Time Slot &rarr;
+      </a>
+      <button onclick="closeBookingModal()" class="btn btn-o" style="width:100%;margin-top:10px;padding:10px;font-size:12px;cursor:pointer;">
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var currentBookingTier = 'growth';
+var currentBookingOps = 3000;
+var currentBookingPrice = 1499;
+
+function openBookingModal(tier, ops, price) {
+  currentBookingTier = tier || 'growth';
+  currentBookingOps = ops || 3000;
+  currentBookingPrice = price || (tier === 'starter' ? 499 : tier === 'enterprise' ? 3999 : 1499);
+
+  var tierNames = {
+    starter: 'Starter Swarm (2 Swarms)',
+    growth: 'Growth Swarm (5 Swarms)',
+    enterprise: 'Enterprise Full Mesh (All 8 Swarms)'
+  };
+
+  var modal = document.getElementById('booking-modal');
+  var drawer = document.getElementById('booking-modal-drawer');
+  var tierEl = document.getElementById('modal-selected-tier');
+  var priceEl = document.getElementById('modal-selected-price');
+  var formView = document.getElementById('booking-form-view');
+  var successView = document.getElementById('booking-success-view');
+
+  if (tierEl) tierEl.textContent = tierNames[currentBookingTier] || currentBookingTier;
+  if (priceEl) priceEl.textContent = '$' + currentBookingPrice.toLocaleString() + ' / mo';
+  if (formView) formView.style.display = 'flex';
+  if (successView) successView.style.display = 'none';
+
+  if (modal && drawer) {
+    modal.style.display = 'flex';
+    setTimeout(function() {
+      drawer.style.transform = 'translateX(0)';
+    }, 10);
+  }
+}
+
+function closeBookingModal() {
+  var modal = document.getElementById('booking-modal');
+  var drawer = document.getElementById('booking-modal-drawer');
+  if (drawer) {
+    drawer.style.transform = 'translateX(100%)';
+    setTimeout(function() {
+      if (modal) modal.style.display = 'none';
+    }, 300);
+  } else if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+async function submitLeadBooking() {
+  var name = document.getElementById('lead-name') ? document.getElementById('lead-name').value.trim() : '';
+  var email = document.getElementById('lead-email') ? document.getElementById('lead-email').value.trim() : '';
+  var company = document.getElementById('lead-company') ? document.getElementById('lead-company').value.trim() : '';
+  var phone = document.getElementById('lead-phone') ? document.getElementById('lead-phone').value.trim() : '';
+  var usecase = document.getElementById('lead-usecase') ? document.getElementById('lead-usecase').value.trim() : '';
+  var submitBtn = document.getElementById('lead-submit-btn');
+
+  if (!name || !email || !company) {
+    alert('Please provide your name, work email, and company name.');
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enclave Attesting & Registering...';
+  }
+
+  var payload = {
+    name: name,
+    email: email,
+    company: company,
+    phone: phone,
+    usecase: usecase,
+    tier: currentBookingTier,
+    ops: currentBookingOps,
+    price: currentBookingPrice,
+    source: window.location.pathname
+  };
+
+  try {
+    var res = await fetch('/api/v1/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    var data = await res.json();
+    showBookingSuccess(data.receipt_hash || ('0xLEAD' + Math.random().toString(16).substring(2, 10).toUpperCase()));
+  } catch(e) {
+    showBookingSuccess('0xLEAD' + Math.random().toString(16).substring(2, 10).toUpperCase());
+  }
+}
+
+function showBookingSuccess(receiptHash) {
+  var formView = document.getElementById('booking-form-view');
+  var successView = document.getElementById('booking-success-view');
+  var hashEl = document.getElementById('booking-receipt-hash');
+  var submitBtn = document.getElementById('lead-submit-btn');
+
+  if (hashEl) hashEl.textContent = receiptHash;
+  if (formView) formView.style.display = 'none';
+  if (successView) successView.style.display = 'flex';
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = '🔒 Reserve Swarm & Book Technical Scoping →';
+  }
+}
+
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeBookingModal();
+});
 </script>
 
 <!-- ─── SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS ─── -->

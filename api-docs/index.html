@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipeFish Labs — Agent Orchestration API &amp; MCP Reference</title>
+  <meta name="description" content="Interactive OpenAPI 3.1 &amp; MCP reference for the PipeFish Labs Autonomous Multi-Agent Mesh and Zero-Trust Edge Gateway.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --scalar-color-1: #FFFFFF;
+      --scalar-color-2: #99AAB5;
+      --scalar-color-3: #5865F2;
+      --scalar-color-accent: #00D4FF;
+      --scalar-background-1: #04060C;
+      --scalar-background-2: #080D1A;
+      --scalar-background-3: #0F172A;
+      --scalar-border-color: rgba(0, 212, 255, 0.2);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #04060C;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .pfl-docs-banner {
+      background: rgba(8, 13, 26, 0.95);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    .pfl-docs-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .pfl-docs-brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+    .pfl-docs-brand span {
+      font-family: 'Orbitron', monospace;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color: #00D4FF;
+      text-transform: uppercase;
+    }
+    .pfl-docs-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .pfl-docs-links a {
+      color: #99AAB5;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .pfl-docs-links a:hover {
+      color: #00D4FF;
+    }
+    .pfl-badge-pqc {
+      background: rgba(224, 64, 255, 0.12);
+      border: 1px solid rgba(224, 64, 255, 0.35);
+      color: #E040FF;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <header class="pfl-docs-banner">
+    <a href="/" class="pfl-docs-brand">
+      <img src="/logo.png" alt="PipeFish Labs Logo">
+      <span>PipeFish Labs <small style="color:#FFF;font-size:11px;opacity:0.7">API Reference</small></span>
+    </a>
+    <div class="pfl-docs-links">
+      <span class="pfl-badge-pqc">v2.4.0 · PQC Hardened</span>
+      <a href="/sdk/">Python &amp; TS SDK</a>
+      <a href="/api/v1/mcp/sse" target="_blank">Remote MCP SSE</a>
+      <a href="/services-solutions/#pricing">Pricing</a>
+      <a href="/book-a-demo-contact/" style="color:#00D4FF;border:1px solid rgba(0,212,255,0.4);padding:5px 12px;border-radius:6px;">Book Scoping Call &rarr;</a>
+    </div>
+  </header>
+
+  <script
+    id="api-reference"
+    data-url="/sdk/openapi.yaml"
+    data-configuration='{
+      "theme": "deepSpace",
+      "darkMode": true,
+      "layout": "modern",
+      "showSidebar": true,
+      "searchHotKey": "k",
+      "defaultHttpClient": {
+        "targetKey": "shell",
+        "clientKey": "curl"
+      }
+    }'>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.25.106"></script>
+</body>
+</html>

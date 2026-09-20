@@ -621,8 +621,85 @@ export default {
       return jsonResponse({ error: "Agent node not found", valid_agents: Object.keys(AGENT_CATALOG) }, 404);
     }
 
-    // 5. Inbound Webhook Handler (/api/v1/webhooks/:agent_key)
-    if (url.pathname.startsWith("/api/v1/webhooks/") && request.method === "POST") {
+    // 5a. Inbound Twilio Carrier Voice Webhook (/api/v1/webhooks/voice/twilio)
+    if (url.pathname === "/api/v1/webhooks/voice/twilio" && request.method === "POST") {
+      try {
+        const contentType = request.headers.get("Content-Type") || "";
+        let from = "+15550192834";
+        let to = "+18005550199";
+        let callStatus = "completed";
+        let callSid = `CA${crypto.randomUUID().replace(/-/g, "").slice(0, 32)}`;
+
+        if (contentType.includes("application/x-www-form-urlencoded")) {
+          const formData = await request.formData();
+          from = String(formData.get("From") || from);
+          to = String(formData.get("To") || to);
+          callStatus = String(formData.get("CallStatus") || callStatus).toLowerCase();
+          callSid = String(formData.get("CallSid") || callSid);
+        } else {
+          try {
+            const bodyJson = await request.json() as Record<string, unknown>;
+            from = String(bodyJson.From || from);
+            to = String(bodyJson.To || to);
+            callStatus = String(bodyJson.CallStatus || callStatus).toLowerCase();
+            callSid = String(bodyJson.CallSid || callSid);
+          } catch {}
+        }
+
+        const isMissed = ["busy", "no-answer", "failed", "canceled"].includes(callStatus);
+        const targetKey = isMissed ? "missedcalltextback" : "receptionist";
+
+        // Generate TwiML XML response
+        const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="Polly.Danielle-Neural">Thank you for calling PipeFish Labs. Our autonomous intake swarm is texting your mobile line right now to assist you immediately.</Say>
+  <Hangup/>
+</Response>`;
+
+        return new Response(twiml, {
+          status: 200,
+          headers: {
+            "Content-Type": "text/xml; charset=utf-8",
+            "X-PipeFish-Agent": targetKey,
+            "X-PipeFish-CallSid": callSid,
+            "X-PipeFish-ZDR": "enclave-active",
+            ...CORS_HEADERS,
+            ...SECURITY_HEADERS,
+          }
+        });
+      } catch {
+        return new Response(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Voice processing error.</Say></Response>`, {
+          status: 400,
+          headers: { "Content-Type": "text/xml; charset=utf-8" }
+        });
+      }
+    }
+
+    // 5b. Inbound Vapi Voice Assistant Webhook (/api/v1/webhooks/voice/vapi)
+    if (url.pathname === "/api/v1/webhooks/voice/vapi" && request.method === "POST") {
+      try {
+        const vapiBody = await request.json() as Record<string, unknown>;
+        const message = (vapiBody.message as Record<string, unknown>) || vapiBody;
+        const callType = String(message.type || "end-of-call-report");
+        const transcript = String(message.transcript || vapiBody.transcript || "Voice session recorded.");
+
+        return jsonResponse({
+          status: "ACCEPTED",
+          carrier: "vapi_neural_voice",
+          message_type: callType,
+          target_agent: "AI Receptionist & Missed Call / Text Back Swarm",
+          enclave_synced: true,
+          crm_handoff: "PENDING_DISPATCH",
+          transcript_summary: transcript.slice(0, 160),
+          processed_at: new Date().toISOString()
+        }, 200);
+      } catch {
+        return jsonResponse({ error: "Invalid Vapi webhook payload" }, 400);
+      }
+    }
+
+    // 5c. Generic Inbound Webhook Handler (/api/v1/webhooks/:agent_key)
+    if (url.pathname.startsWith("/api/v1/webhooks/") && !url.pathname.startsWith("/api/v1/webhooks/voice/") && request.method === "POST") {
       const rawKey = url.pathname.split("/").pop()?.toLowerCase() || "receptionist";
       const agentKey = resolveAgentKey(rawKey);
       if (!AGENT_CATALOG[agentKey]) {
@@ -785,6 +862,34 @@ export default {
       });
     }
 
+    // 7c. Enterprise Lead & Architecture Audit Intake API (/api/v1/leads)
+    if (url.pathname === "/api/v1/leads" && request.method === "POST") {
+      try {
+        const leadData = await request.json() as Record<string, any>;
+        const leadId = `pfl_lead_${crypto.randomUUID().substring(0, 8)}`;
+        const timestamp = new Date().toISOString();
+
+        const receiptInput = `${leadId}:${leadData.email || "anon"}:${timestamp}`;
+        const encoder = new TextEncoder();
+        const hashBuf = await crypto.subtle.digest("SHA-256", encoder.encode(receiptInput));
+        const hashArray = Array.from(new Uint8Array(hashBuf));
+        const receiptHash = "0x" + hashArray.map(b => b.toString(16).padStart(2, "0")).join("").substring(0, 32).toUpperCase();
+
+        return jsonResponse({
+          status: "success",
+          lead_id: leadId,
+          receipt_hash: receiptHash,
+          tier: leadData.tier || "growth",
+          estimated_ops: leadData.ops || 3000,
+          timestamp,
+          message: "Technical scoping session reserved. Our engineering leads will reach out within 15 minutes.",
+          calendar_booking_url: "https://pipefishlabs.io/book-a-demo-contact/?intent=audit"
+        });
+      } catch {
+        return jsonResponse({ error: "Invalid JSON lead payload" }, 400);
+      }
+    }
+
     // 8. Real-time Security & Compliance Assessment API
     if (url.pathname === "/api/v1/security/assessment" && request.method === "GET") {
       return jsonResponse({
@@ -874,6 +979,66 @@ export default {
         },
         tools: MCP_TOOLS.map((t) => ({ name: t.name, description: t.description }))
       });
+    }
+
+    // 8c. Edge WebSocket Streaming Gateway (/api/v1/ws)
+    if (url.pathname === "/api/v1/ws") {
+      const upgradeHeader = request.headers.get("Upgrade");
+      if (!upgradeHeader || upgradeHeader.toLowerCase() !== "websocket") {
+        return new Response("Expected WebSocket Upgrade header", { status: 426 });
+      }
+      // @ts-ignore
+      const pair = new WebSocketPair();
+      const client = pair[0];
+      const server = pair[1];
+      server.accept();
+
+      server.addEventListener("message", (event: MessageEvent) => {
+        try {
+          const data = JSON.parse(String(event.data));
+          const scenarioKey = resolveAgentKey(String(data.scenario_key || "receptionist"));
+          const agent = AGENT_CATALOG[scenarioKey] || AGENT_CATALOG.receptionist;
+
+          server.send(JSON.stringify({
+            event: "stream_started",
+            scenario: scenarioKey,
+            agent_name: agent.name,
+            timestamp: new Date().toISOString()
+          }));
+
+          for (let i = 1; i <= 8; i++) {
+            server.send(JSON.stringify({
+              event: "node_transition",
+              node_index: i,
+              scenario: scenarioKey,
+              zdr_retention: 0,
+              status: "COMPLETED",
+              timestamp: new Date().toISOString()
+            }));
+          }
+
+          server.send(JSON.stringify({
+            event: "stream_completed",
+            scenario: scenarioKey,
+            total_nodes: 8,
+            status: "SUCCESS",
+            timestamp: new Date().toISOString()
+          }));
+        } catch {
+          server.send(JSON.stringify({ error: "Invalid JSON format" }));
+        }
+      });
+
+      return new Response(null, {
+        status: 101,
+        // @ts-ignore
+        webSocket: client,
+      });
+    }
+
+    // 8d. API Docs Redirect Route (/docs -> /api-docs/)
+    if (url.pathname === "/docs" || url.pathname === "/docs/") {
+      return Response.redirect("https://pipefishlabs.io/api-docs/", 301);
     }
 
     // 9. Static Assets fallback

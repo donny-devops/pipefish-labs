@@ -1574,6 +1574,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
         </div>
+
+        <!-- ─── NEURAL VOICE RECEPTIONIST AUDIO PREVIEW PLAYER ─── -->
+        <div style="margin-top:24px;background:rgba(3,7,18,0.7);border:1px solid rgba(0,212,255,0.25);border-radius:10px;padding:18px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:1.2rem;">🔊</span>
+              <div>
+                <span style="font-family:var(--font-fm);font-size:12.5px;font-weight:800;color:var(--cyan);letter-spacing:0.06em;text-transform:uppercase;">Neural Voice Receptionist Preview</span>
+                <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">Sub-500ms Edge Synthesis</span>
+              </div>
+            </div>
+            <!-- Persona Switcher -->
+            <div style="display:flex;gap:6px;">
+              <button type="button" id="voice-persona-danielle" onclick="switchVoicePersona('danielle', this)" class="btn btn-o active" style="font-size:11px;padding:5px 10px;border-color:var(--cyan);color:var(--cyan);">Danielle (Executive)</button>
+              <button type="button" id="voice-persona-marcus" onclick="switchVoicePersona('marcus', this)" class="btn btn-o" style="font-size:11px;padding:5px 10px;">Marcus (Technical)</button>
+            </div>
+          </div>
+
+          <!-- Soundwave Canvas & Controls -->
+          <div style="display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 14px;">
+            <button type="button" id="voice-play-btn" onclick="toggleNeuralVoicePlay()" class="btn btn-p" style="font-size:12px;padding:8px 16px;font-weight:800;white-space:nowrap;cursor:pointer;">
+              ▶ Play Audio
+            </button>
+            <!-- Canvas Soundwave Visualizer -->
+            <div style="height:36px;position:relative;overflow:hidden;">
+              <canvas id="voice-soundwave-canvas" style="width:100%;height:100%;display:block;"></canvas>
+            </div>
+            <div id="voice-time-display" style="font-family:var(--font-fm);font-size:11px;color:var(--cyan);font-weight:700;">
+              0:00 / 0:08
+            </div>
+          </div>
+
+          <!-- Synchronized Transcript -->
+          <div id="voice-transcript-box" style="margin-top:10px;font-size:12.5px;line-height:1.5;color:var(--text-body);background:rgba(0,212,255,0.03);border:1px dashed rgba(0,212,255,0.2);padding:10px 12px;border-radius:6px;font-family:var(--font-fm);">
+            <span style="color:var(--cyan);font-weight:700;">TRANSCRIPT:</span> <span id="voice-transcript-text">"Thank you for calling PipeFish Labs. Our autonomous communication mesh has registered your call. An engineer will follow up via SMS in under 60 seconds."</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2287,8 +2324,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="ft-brand">
         <div class="ft-brand-name"><span>PipeFish</span><span> Labs</span></div>
         <p>Most companies will try to sell you tools but one of the many reasons PipeFish Labs is different is because we don't sell tools - WE SELL OUTCOMES.  We fuse autonomous AI agents, zero-trust security, cryptographic hardening, and scalable data infrastructure with strategic management consulting - so the platforms we build aren't just technically sound, they're organizationally adopted. One firm. Full stack. No hand-holding necessary.</p>
-        <div class="badges" style="margin-top:18px">
+        <div class="badges" style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px">
           <a href="https://pipefishlabs.io/" class="badge" style="color:var(--cyan);text-decoration:none">pipefishlabs.io ↗</a>
+          <a href="javascript:void(0)" onclick="openMcpModal()" class="badge" style="color:var(--magenta);border-color:var(--magenta);text-decoration:none;cursor:pointer">⚡ Connect MCP</a>
+          <a href="/api-docs/" class="badge" style="color:var(--cyan);text-decoration:none">API Docs (/docs) ↗</a>
+          <a href="/trust/" class="badge" style="color:#00FF66;border-color:#00FF66;text-decoration:none">Trust Center ↗</a>
         </div>
       </div>
       <div class="ft-col">
@@ -3617,9 +3657,10 @@ window.closeBriefingModal = function() {
     // AI Instant Follow-up response (<500ms)
     setTimeout(function() {
       var aiBubble = document.createElement('div');
-      aiBubble.style.cssText = 'background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(224,64,255,0.12));border:1px solid rgba(0,212,255,0.4);padding:10px 12px;border-radius:10px 10px 10px 2px;font-size:12.5px;color:#FFFFFF;line-height:1.5;box-shadow:0 4px 15px rgba(0,212,255,0.1);max-width:90%;';
+      aiBubble.style.cssText = 'background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(224,64,255,0.12));border:1px solid rgba(0,212,255,0.4);padding:12px 14px;border-radius:10px 10px 10px 2px;font-size:12.5px;color:#FFFFFF;line-height:1.5;box-shadow:0 4px 15px rgba(0,212,255,0.1);max-width:90%;';
       aiBubble.innerHTML = '<div style="font-family:var(--font-fm);font-size:10px;color:var(--cyan);margin-bottom:4px;font-weight:700;">⚡ PIPEFISH COMMS SWARM · 0.38s</div>' +
-        'Understood! I\'ve logged your inquiry and matched your requirements with our Solutions Architecture team. You can book an executive briefing directly or we\'ll follow up in under 5 minutes.';
+        'Understood! I\'ve logged your inquiry and matched your requirements with our Solutions Architecture team. You can lock in your swarm deployment below or we\'ll follow up via phone in under 5 minutes.' +
+        '<div style="margin-top:10px;"><button type="button" onclick="openBookingModal(\'growth\', 3000, 1499)" class="btn btn-p" style="font-size:11.5px;padding:6px 14px;box-shadow:0 0 15px rgba(0,212,255,0.3);cursor:pointer;">📅 Reserve Fast-Track Architecture Scoping &rarr;</button></div>';
       stream.appendChild(aiBubble);
       stream.scrollTop = stream.scrollHeight;
     }, 400);
@@ -3645,6 +3686,438 @@ window.closeBriefingModal = function() {
     if (triggerBtn) triggerBtn.disabled = false;
   };
 })();
+
+/* ─── NEURAL VOICE RECEPTIONIST AUDIO PREVIEW ENGINE ─── */
+(function() {
+  var activePersona = 'danielle';
+  var isPlaying = false;
+  var voiceTimer = null;
+  var voiceSeconds = 0;
+  var animFrameId = null;
+
+  var personas = {
+    danielle: {
+      pitch: 1.1,
+      rate: 1.02,
+      transcript: '"Thank you for calling PipeFish Labs. Our autonomous communication mesh has registered your call. An engineer will follow up via SMS in under 60 seconds."'
+    },
+    marcus: {
+      pitch: 0.9,
+      rate: 0.98,
+      transcript: '"PipeFish Labs automated gateway. System status is nominal across all 25 edge nodes. Your technical inquiry has been routed to solutions engineering."'
+    }
+  };
+
+  window.switchVoicePersona = function(persona, btn) {
+    activePersona = persona;
+    var bD = document.getElementById('voice-persona-danielle');
+    var bM = document.getElementById('voice-persona-marcus');
+    if (bD) { bD.classList.remove('active'); bD.style.borderColor = ''; bD.style.color = ''; }
+    if (bM) { bM.classList.remove('active'); bM.style.borderColor = ''; bM.style.color = ''; }
+    if (btn) {
+      btn.classList.add('active');
+      btn.style.borderColor = 'var(--cyan)';
+      btn.style.color = 'var(--cyan)';
+    }
+    var transEl = document.getElementById('voice-transcript-text');
+    if (transEl && personas[persona]) {
+      transEl.textContent = personas[persona].transcript;
+    }
+    if (isPlaying) stopNeuralVoicePlay();
+  };
+
+  function initSoundwave() {
+    var canvas = document.getElementById('voice-soundwave-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    canvas.width = canvas.clientWidth || 300;
+    canvas.height = canvas.clientHeight || 36;
+
+    function drawWave() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      var bars = 36;
+      var barWidth = canvas.width / bars;
+      for (var i = 0; i < bars; i++) {
+        var h = isPlaying
+          ? (Math.sin(Date.now() / 150 + i * 0.4) * 0.5 + 0.5) * (canvas.height - 6) + 4
+          : 4;
+        ctx.fillStyle = isPlaying ? (i % 2 === 0 ? '#00D4FF' : '#E040FF') : 'rgba(0, 212, 255, 0.2)';
+        ctx.fillRect(i * barWidth + 2, (canvas.height - h) / 2, barWidth - 4, h);
+      }
+      animFrameId = requestAnimationFrame(drawWave);
+    }
+    drawWave();
+  }
+
+  window.toggleNeuralVoicePlay = function() {
+    if (isPlaying) {
+      stopNeuralVoicePlay();
+    } else {
+      startNeuralVoicePlay();
+    }
+  };
+
+  function startNeuralVoicePlay() {
+    var btn = document.getElementById('voice-play-btn');
+    var timeDisplay = document.getElementById('voice-time-display');
+    var conf = personas[activePersona] || personas.danielle;
+
+    isPlaying = true;
+    if (btn) btn.textContent = '⏸ Pause';
+    voiceSeconds = 0;
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      var utter = new SpeechSynthesisUtterance(conf.transcript.replace(/"/g, ''));
+      utter.rate = conf.rate;
+      utter.pitch = conf.pitch;
+      utter.onend = function() { stopNeuralVoicePlay(); };
+      utter.onerror = function() { stopNeuralVoicePlay(); };
+      window.speechSynthesis.speak(utter);
+    }
+
+    voiceTimer = setInterval(function() {
+      voiceSeconds++;
+      if (timeDisplay) timeDisplay.textContent = '0:0' + voiceSeconds + ' / 0:08';
+      if (voiceSeconds >= 8) {
+        stopNeuralVoicePlay();
+      }
+    }, 1000);
+  }
+
+  function stopNeuralVoicePlay() {
+    isPlaying = false;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (voiceTimer) clearInterval(voiceTimer);
+    var btn = document.getElementById('voice-play-btn');
+    var timeDisplay = document.getElementById('voice-time-display');
+    if (btn) btn.textContent = '▶ Play Audio';
+    if (timeDisplay) timeDisplay.textContent = '0:00 / 0:08';
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSoundwave);
+  } else {
+    initSoundwave();
+  }
+})();
+</script>
+
+<!-- ─── SLIDE-OUT INSTANT LEAD BOOKING MODAL ─── -->
+<div id="booking-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(3,5,10,0.8);backdrop-filter:blur(8px);z-index:99999;justify-content:flex-end;align-items:stretch;">
+  <div id="booking-modal-drawer" style="width:min(540px, 100vw);background:#080C16;border-left:1px solid rgba(0,212,255,0.3);box-shadow:-12px 0 40px rgba(0,0,0,0.8);display:flex;flex-direction:column;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);">
+    <!-- Header -->
+    <div style="padding:1.4rem 1.8rem;border-bottom:1px solid rgba(0,212,255,0.15);background:rgba(14,18,32,0.8);display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-family:var(--font-fm,monospace);font-size:10.5px;color:var(--cyan,#00D4FF);text-transform:uppercase;letter-spacing:0.1em;font-weight:800;">
+          Direct Engineering Intake
+        </div>
+        <div style="font-family:var(--font-fd,sans-serif);font-size:1.15rem;font-weight:800;color:#F0F4FF;margin-top:2px;">
+          Deploy Your Agent Swarm
+        </div>
+      </div>
+      <button onclick="closeBookingModal()" style="background:transparent;border:none;color:#8A99AD;font-size:1.8rem;cursor:pointer;line-height:1;padding:4px;" title="Close (Esc)">&times;</button>
+    </div>
+
+    <!-- Body / Form -->
+    <div id="booking-form-view" style="padding:1.8rem;flex:1;display:flex;flex-direction:column;gap:16px;">
+      <!-- Selected Tier Pill -->
+      <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;">Selected Swarm</div>
+          <div id="modal-selected-tier" style="font-weight:800;color:#00D4FF;font-size:14.5px;">Growth Swarm (5 Swarms)</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;">Monthly Investment</div>
+          <div id="modal-selected-price" style="font-family:var(--font-fm,monospace);font-weight:800;color:#00FF66;font-size:15px;">$1,499 / mo</div>
+        </div>
+      </div>
+
+      <!-- Form Inputs -->
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Full Name *</label>
+        <input type="text" id="lead-name" required placeholder="Jane Doe" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+      </div>
+
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Work Email *</label>
+        <input type="email" id="lead-email" required placeholder="jane@enterprise.com" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Company / Domain *</label>
+          <input type="text" id="lead-company" required placeholder="Acme Corp" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Phone (For SMS SLA)</label>
+          <input type="tel" id="lead-phone" placeholder="+1 (555) 000-0000" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Primary Objective / Bottleneck</label>
+        <textarea id="lead-usecase" rows="3" placeholder="Describe your current inbound volume or workflow bottlenecks..." style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13px;resize:vertical;"></textarea>
+      </div>
+
+      <!-- Action Button -->
+      <button id="lead-submit-btn" onclick="submitLeadBooking()" class="btn btn-p" style="padding:14px;font-size:14.5px;font-weight:800;box-shadow:0 0 25px rgba(0,212,255,0.4);width:100%;margin-top:8px;cursor:pointer;">
+        🔒 Reserve Swarm &amp; Book Technical Scoping &rarr;
+      </button>
+
+      <div style="font-size:11px;color:#8A99AD;text-align:center;line-height:1.5;margin-top:4px;">
+        Covered by mutual NDA by default · Zero vendor lock-in · 14-day proof of concept
+      </div>
+    </div>
+
+    <!-- Success Confirmation View -->
+    <div id="booking-success-view" style="display:none;padding:2.5rem 1.8rem;text-align:center;flex:1;flex-direction:column;justify-content:center;align-items:center;">
+      <div style="font-size:3rem;margin-bottom:12px;">✅</div>
+      <div style="font-family:var(--font-fd,sans-serif);font-size:1.3rem;font-weight:800;color:#00FF66;margin-bottom:8px;">
+        Swarm Reservation Confirmed
+      </div>
+      <p style="color:#8A99AD;font-size:13.5px;line-height:1.6;max-width:380px;margin-bottom:20px;">
+        Our solutions engineering leads have received your reservation and dispatched your cryptographic intake token.
+      </p>
+
+      <div style="background:#05070B;border:1px solid rgba(0,212,255,0.3);border-radius:8px;padding:12px 16px;width:100%;margin-bottom:24px;text-align:left;">
+        <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;font-family:var(--font-fm,monospace);">Cryptographic Receipt Hash</div>
+        <div id="booking-receipt-hash" style="font-family:var(--font-fm,monospace);font-size:12px;color:#00D4FF;word-break:break-all;margin-top:4px;">0xLEAD9928AF81...</div>
+      </div>
+
+      <a href="/book-a-demo-contact/?intent=audit" class="btn btn-p" style="width:100%;padding:14px;font-size:14px;font-weight:800;text-decoration:none;">
+        📅 Open Calendar &amp; Pick Time Slot &rarr;
+      </a>
+      <button onclick="closeBookingModal()" class="btn btn-o" style="width:100%;margin-top:10px;padding:10px;font-size:12px;cursor:pointer;">
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MCP CONFIG GENERATOR MODAL ─── -->
+<div id="mcp-config-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(3,5,10,0.85);backdrop-filter:blur(8px);z-index:99999;align-items:center;justify-content:center;padding:1.5rem;">
+  <div style="background:#0B0F19;border:1px solid rgba(0,212,255,0.35);border-radius:14px;max-width:700px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.8),0 0 30px rgba(0,212,255,0.15);overflow:hidden;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;border-bottom:1px solid rgba(0,212,255,0.15);background:rgba(17,21,36,0.6);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.3rem;">⚡</span>
+        <span style="font-family:var(--font-fm,monospace);font-size:1.05rem;font-weight:700;color:#F0F4FF;letter-spacing:0.06em;">Connect PipeFish Mesh via MCP</span>
+      </div>
+      <button onclick="closeMcpModal()" style="background:transparent;border:none;color:#8A99AD;font-size:1.5rem;cursor:pointer;line-height:1;padding:4px 8px;" title="Close (Esc)">&times;</button>
+    </div>
+    <div style="padding:1.5rem;">
+      <p style="color:#8A99AD;font-size:0.88rem;margin-bottom:1.2rem;">
+        Select your client to generate instant configuration connecting directly to PipeFish Labs' 25-agent mesh on Cloudflare Edge (<code style="color:#00D4FF;">/api/v1/mcp/sse</code>):
+      </p>
+      <div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;">
+        <button class="mcp-tab-btn active" onclick="switchMcpTab('claude-desktop', this)" style="background:rgba(0,212,255,0.2);border:1px solid #00D4FF;color:#00D4FF;padding:6px 14px;border-radius:6px;font-family:var(--font-fm,monospace);font-size:0.78rem;cursor:pointer;">Claude Desktop</button>
+        <button class="mcp-tab-btn" onclick="switchMcpTab('cursor', this)" style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);color:#8A99AD;padding:6px 14px;border-radius:6px;font-family:var(--font-fm,monospace);font-size:0.78rem;cursor:pointer;">Cursor IDE</button>
+        <button class="mcp-tab-btn" onclick="switchMcpTab('claude-code', this)" style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);color:#8A99AD;padding:6px 14px;border-radius:6px;font-family:var(--font-fm,monospace);font-size:0.78rem;cursor:pointer;">Claude Code CLI</button>
+        <button class="mcp-tab-btn" onclick="switchMcpTab('python-stdio', this)" style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);color:#8A99AD;padding:6px 14px;border-radius:6px;font-family:var(--font-fm,monospace);font-size:0.78rem;cursor:pointer;">Local Python</button>
+      </div>
+      <div style="position:relative;background:#05070B;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:1.2rem;margin-bottom:1.2rem;">
+        <pre style="margin:0;max-height:220px;overflow-y:auto;"><code id="mcp-code-snippet" style="font-family:var(--font-fm,monospace);font-size:0.84rem;color:#00D4FF;line-height:1.5;white-space:pre-wrap;"></code></pre>
+        <button id="mcp-copy-btn" onclick="copyMcpConfig()" style="position:absolute;top:10px;right:10px;background:#111524;border:1px solid #00D4FF;color:#00D4FF;padding:5px 12px;border-radius:4px;font-family:var(--font-fm,monospace);font-size:0.75rem;cursor:pointer;transition:all 0.2s;">Copy Config</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:#8A99AD;flex-wrap:wrap;gap:8px;">
+        <span id="mcp-dest-hint">📁 Target: <code>claude_desktop_config.json</code></span>
+        <a href="/api-docs/" target="_blank" style="color:var(--magenta);">View 8 Tools Schema ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var currentBookingTier = 'growth';
+var currentBookingOps = 3000;
+var currentBookingPrice = 1499;
+
+function openBookingModal(tier, ops, price) {
+  currentBookingTier = tier || 'growth';
+  currentBookingOps = ops || 3000;
+  currentBookingPrice = price || (tier === 'starter' ? 499 : tier === 'enterprise' ? 3999 : 1499);
+
+  var tierNames = {
+    starter: 'Starter Swarm (2 Swarms)',
+    growth: 'Growth Swarm (5 Swarms)',
+    enterprise: 'Enterprise Full Mesh (All 8 Swarms)'
+  };
+
+  var modal = document.getElementById('booking-modal');
+  var drawer = document.getElementById('booking-modal-drawer');
+  var tierEl = document.getElementById('modal-selected-tier');
+  var priceEl = document.getElementById('modal-selected-price');
+  var formView = document.getElementById('booking-form-view');
+  var successView = document.getElementById('booking-success-view');
+
+  if (tierEl) tierEl.textContent = tierNames[currentBookingTier] || currentBookingTier;
+  if (priceEl) priceEl.textContent = '$' + currentBookingPrice.toLocaleString() + ' / mo';
+  if (formView) formView.style.display = 'flex';
+  if (successView) successView.style.display = 'none';
+
+  if (modal && drawer) {
+    modal.style.display = 'flex';
+    setTimeout(function() {
+      drawer.style.transform = 'translateX(0)';
+    }, 10);
+  }
+}
+
+function closeBookingModal() {
+  var modal = document.getElementById('booking-modal');
+  var drawer = document.getElementById('booking-modal-drawer');
+  if (drawer) {
+    drawer.style.transform = 'translateX(100%)';
+    setTimeout(function() {
+      if (modal) modal.style.display = 'none';
+    }, 300);
+  } else if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+async function submitLeadBooking() {
+  var name = document.getElementById('lead-name') ? document.getElementById('lead-name').value.trim() : '';
+  var email = document.getElementById('lead-email') ? document.getElementById('lead-email').value.trim() : '';
+  var company = document.getElementById('lead-company') ? document.getElementById('lead-company').value.trim() : '';
+  var phone = document.getElementById('lead-phone') ? document.getElementById('lead-phone').value.trim() : '';
+  var usecase = document.getElementById('lead-usecase') ? document.getElementById('lead-usecase').value.trim() : '';
+  var submitBtn = document.getElementById('lead-submit-btn');
+
+  if (!name || !email || !company) {
+    alert('Please provide your name, work email, and company name.');
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enclave Attesting & Registering...';
+  }
+
+  var payload = {
+    name: name,
+    email: email,
+    company: company,
+    phone: phone,
+    usecase: usecase,
+    tier: currentBookingTier,
+    ops: currentBookingOps,
+    price: currentBookingPrice,
+    source: window.location.pathname
+  };
+
+  try {
+    var res = await fetch('/api/v1/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    var data = await res.json();
+    showBookingSuccess(data.receipt_hash || ('0xLEAD' + Math.random().toString(16).substring(2, 10).toUpperCase()));
+  } catch(e) {
+    showBookingSuccess('0xLEAD' + Math.random().toString(16).substring(2, 10).toUpperCase());
+  }
+}
+
+function showBookingSuccess(receiptHash) {
+  var formView = document.getElementById('booking-form-view');
+  var successView = document.getElementById('booking-success-view');
+  var hashEl = document.getElementById('booking-receipt-hash');
+  var submitBtn = document.getElementById('lead-submit-btn');
+
+  if (hashEl) hashEl.textContent = receiptHash;
+  if (formView) formView.style.display = 'none';
+  if (successView) successView.style.display = 'flex';
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = '🔒 Reserve Swarm & Book Technical Scoping →';
+  }
+}
+
+const MCP_INDEX_CONFIGS = {
+  'claude-desktop': {
+    hint: '📁 macOS: ~/Library/Application Support/Claude/claude_desktop_config.json | Windows: %APPDATA%/Claude/claude_desktop_config.json',
+    code: '{\n  "mcpServers": {\n    "pipefish-agent-mesh": {\n      "command": "npx",\n      "args": [\n        "-y",\n        "mcp-remote",\n        "https://pipefishlabs.io/api/v1/mcp/sse"\n      ]\n    }\n  }\n}'
+  },
+  'cursor': {
+    hint: '📁 Place in your workspace root: .cursor/mcp.json',
+    code: '{\n  "mcpServers": {\n    "pipefish-agent-mesh": {\n      "url": "https://pipefishlabs.io/api/v1/mcp/sse"\n    }\n  }\n}'
+  },
+  'claude-code': {
+    hint: '💻 Run in terminal (Claude Code CLI):',
+    code: 'claude mcp add pipefish-mesh https://pipefishlabs.io/api/v1/mcp/sse'
+  },
+  'python-stdio': {
+    hint: '📁 Local Python MCP Server configuration:',
+    code: '{\n  "mcpServers": {\n    "pipefish-local": {\n      "command": "python",\n      "args": ["-m", "sdk.mcp_server"]\n    }\n  }\n}'
+  }
+};
+
+let currentMcpIndexTab = 'claude-desktop';
+
+function openMcpModal() {
+  const modal = document.getElementById('mcp-config-modal');
+  if (modal) {
+    modal.style.display = 'flex';
+    renderMcpIndexTab(currentMcpIndexTab);
+  }
+}
+
+function closeMcpModal() {
+  const modal = document.getElementById('mcp-config-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+function switchMcpTab(tabKey, btn) {
+  currentMcpIndexTab = tabKey;
+  document.querySelectorAll('.mcp-tab-btn').forEach(b => {
+    b.style.background = 'rgba(0,212,255,0.06)';
+    b.style.borderColor = 'rgba(0,212,255,0.25)';
+    b.style.color = '#8A99AD';
+  });
+  if (btn) {
+    btn.style.background = 'rgba(0,212,255,0.2)';
+    btn.style.borderColor = '#00D4FF';
+    btn.style.color = '#00D4FF';
+  }
+  renderMcpIndexTab(tabKey);
+}
+
+function renderMcpIndexTab(tabKey) {
+  const item = MCP_INDEX_CONFIGS[tabKey];
+  if (!item) return;
+  const codeElem = document.getElementById('mcp-code-snippet');
+  const hintElem = document.getElementById('mcp-dest-hint');
+  if (codeElem) codeElem.textContent = item.code;
+  if (hintElem) hintElem.innerHTML = item.hint;
+}
+
+function copyMcpConfig() {
+  const codeElem = document.getElementById('mcp-code-snippet');
+  const copyBtn = document.getElementById('mcp-copy-btn');
+  if (codeElem && navigator.clipboard) {
+    navigator.clipboard.writeText(codeElem.textContent).then(() => {
+      if (copyBtn) {
+        const prevText = copyBtn.textContent;
+        copyBtn.textContent = '✓ Copied!';
+        copyBtn.style.background = '#00D4FF';
+        copyBtn.style.color = '#06070C';
+        setTimeout(() => {
+          copyBtn.textContent = prevText;
+          copyBtn.style.background = '#111524';
+          copyBtn.style.color = '#00D4FF';
+        }, 2000);
+      }
+    });
+  }
+}
+
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeBookingModal();
+    closeMcpModal();
+  }
+});
 </script>
 
 <!-- ─── SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS ─── -->

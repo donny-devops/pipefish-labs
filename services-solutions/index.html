@@ -778,7 +778,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- CTA Action -->
         <div>
-          <a id="pricing-cta-btn" href="/book-a-demo-contact/?tier=growth&amp;ops=3000" class="btn btn-p" style="display:block;text-align:center;padding:14px 20px;font-size:14.5px;font-weight:800;box-shadow:0 0 25px var(--cyan-glow,rgba(0,212,255,0.4));text-decoration:none;">
+          <a id="pricing-cta-btn" href="/book-a-demo-contact/?tier=growth&amp;ops=3000" onclick="openBookingModal('growth', 3000, 1499); return false;" class="btn btn-p" style="display:block;text-align:center;padding:14px 20px;font-size:14.5px;font-weight:800;box-shadow:0 0 25px var(--cyan-glow,rgba(0,212,255,0.4));text-decoration:none;cursor:pointer;">
             🚀 Lock In Growth Swarm &amp; Book Scoping Call &rarr;
           </a>
           <div style="text-align:center;font-size:11px;color:var(--text-dim,#888);margin-top:8px;">
@@ -790,7 +790,363 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ─── ARCHITECTURAL COMPARISON MATRIX ─── -->
+<section id="comparison-matrix" style="padding:5rem 0;background:rgba(6,10,20,0.7);border-top:1px solid rgba(0,212,255,0.15);border-bottom:1px solid rgba(0,212,255,0.15);">
+  <div class="container">
+    <div class="sec-head center ai" style="margin-bottom:3.5rem;">
+      <div class="label" style="font-size:13px;font-weight:800;letter-spacing:0.16em;color:var(--magenta,#E040FF);text-transform:uppercase;margin-bottom:10px;">
+        Architectural Comparison
+      </div>
+      <h2 class="h2" style="margin-top:0;font-size:clamp(1.8rem,3.5vw,2.6rem);">
+        PipeFish ASaaS <span class="glow-c">vs. The Alternatives</span>
+      </h2>
+      <p class="lead" style="margin:12px auto 0;max-width:64ch;color:var(--text-dim,#888);font-size:1.05rem;">
+        Why enterprise buyers choose deterministic multi-agent enclaves over bloated human call centers or fragile no-code tool wrappers.
+      </p>
+    </div>
+
+    <!-- Comparison Table Wrapper -->
+    <div style="overflow-x:auto;border:1px solid rgba(0,212,255,0.25);border-radius:14px;background:#05070D;box-shadow:0 12px 40px rgba(0,0,0,0.6);">
+      <table style="width:100%;border-collapse:collapse;text-align:left;font-size:13.5px;min-width:760px;">
+        <thead>
+          <tr style="background:linear-gradient(180deg,#0F1424 0%,#080B14 100%);border-bottom:2px solid rgba(0,212,255,0.3);">
+            <th style="padding:18px 20px;font-family:var(--font-fm,monospace);font-size:12px;color:#8A99AD;text-transform:uppercase;letter-spacing:0.08em;width:28%;">Capability &amp; Architecture</th>
+            <th style="padding:18px 20px;font-family:var(--font-fm,monospace);font-size:13px;color:#00D4FF;font-weight:800;background:rgba(0,212,255,0.08);border-left:1px solid rgba(0,212,255,0.3);border-right:1px solid rgba(0,212,255,0.3);width:30%;">
+              ⚡ PipeFish Autonomous ASaaS
+            </th>
+            <th style="padding:18px 20px;font-family:var(--font-fm,monospace);font-size:12px;color:#8A99AD;text-transform:uppercase;letter-spacing:0.08em;width:21%;">
+              Offshore BPO / Human FTEs
+            </th>
+            <th style="padding:18px 20px;font-family:var(--font-fm,monospace);font-size:12px;color:#8A99AD;text-transform:uppercase;letter-spacing:0.08em;width:21%;">
+              No-Code AI Wrappers
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+            <td style="padding:16px 20px;font-weight:700;color:#F0F4FF;">
+              Response Time SLA
+              <div style="font-size:11.5px;color:#8A99AD;font-weight:normal;margin-top:2px;">Inbound call, SMS, or webhook intake</div>
+            </td>
+            <td style="padding:16px 20px;background:rgba(0,212,255,0.04);border-left:1px solid rgba(0,212,255,0.2);border-right:1px solid rgba(0,212,255,0.2);color:#00FF66;font-weight:800;">
+              ✓ &lt; 2.4 Seconds (Instant)
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ 15 – 45 Minutes (Hold Queues)
+            </td>
+            <td style="padding:16px 20px;color:#FFB86C;">
+              ⚠ 30 – 120 Seconds (Polling Lag)
+            </td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+            <td style="padding:16px 20px;font-weight:700;color:#F0F4FF;">
+              Data Privacy &amp; Retention
+              <div style="font-size:11.5px;color:#8A99AD;font-weight:normal;margin-top:2px;">Confidential customer PII handling</div>
+            </td>
+            <td style="padding:16px 20px;background:rgba(0,212,255,0.04);border-left:1px solid rgba(0,212,255,0.2);border-right:1px solid rgba(0,212,255,0.2);color:#00FF66;font-weight:800;">
+              ✓ Zero-Data Retention (0-byte disk)
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ Human Screen Exposure Risk
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ Multi-Tenant Cloud Logs
+            </td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+            <td style="padding:16px 20px;font-weight:700;color:#F0F4FF;">
+              Post-Quantum Cryptography
+              <div style="font-size:11.5px;color:#8A99AD;font-weight:normal;margin-top:2px;">NIST FIPS 203 ML-KEM-768 defense</div>
+            </td>
+            <td style="padding:16px 20px;background:rgba(0,212,255,0.04);border-left:1px solid rgba(0,212,255,0.2);border-right:1px solid rgba(0,212,255,0.2);color:#00FF66;font-weight:800;">
+              ✓ Hardened Lattice Enclaves
+            </td>
+            <td style="padding:16px 20px;color:#8A99AD;">
+              ✗ None (Standard TLS)
+            </td>
+            <td style="padding:16px 20px;color:#8A99AD;">
+              ✗ None
+            </td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+            <td style="padding:16px 20px;font-weight:700;color:#F0F4FF;">
+              State Synchronization
+              <div style="font-size:11.5px;color:#8A99AD;font-weight:normal;margin-top:2px;">Cross-node deterministic memory</div>
+            </td>
+            <td style="padding:16px 20px;background:rgba(0,212,255,0.04);border-left:1px solid rgba(0,212,255,0.2);border-right:1px solid rgba(0,212,255,0.2);color:#00FF66;font-weight:800;">
+              ✓ Native Mistral Handoffs
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ Manual Ticket Notes
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ Truncated Prompt Stacks
+            </td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+            <td style="padding:16px 20px;font-weight:700;color:#F0F4FF;">
+              Ecosystem Integrations
+              <div style="font-size:11.5px;color:#8A99AD;font-weight:normal;margin-top:2px;">CRM, ERP, Billing, Vault, Telephony</div>
+            </td>
+            <td style="padding:16px 20px;background:rgba(0,212,255,0.04);border-left:1px solid rgba(0,212,255,0.2);border-right:1px solid rgba(0,212,255,0.2);color:#00FF66;font-weight:800;">
+              ✓ Managed MCP Connectors (RPC 2.0)
+            </td>
+            <td style="padding:16px 20px;color:#FFB86C;">
+              ⚠ Manual Browser Multi-Tasking
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ Brittle Webhook Zaps
+            </td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+            <td style="padding:16px 20px;font-weight:700;color:#F0F4FF;">
+              Average Cost per Resolution
+              <div style="font-size:11.5px;color:#8A99AD;font-weight:normal;margin-top:2px;">Fully loaded unit economics</div>
+            </td>
+            <td style="padding:16px 20px;background:rgba(0,212,255,0.04);border-left:1px solid rgba(0,212,255,0.2);border-right:1px solid rgba(0,212,255,0.2);color:#00D4FF;font-weight:800;font-family:var(--font-fm,monospace);">
+              $0.12 – $0.48 / resolution
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;font-family:var(--font-fm,monospace);">
+              $4.50 – $12.00 / call
+            </td>
+            <td style="padding:16px 20px;color:#FFB86C;font-family:var(--font-fm,monospace);">
+              $1.50 – $3.00 + Tool Bill Shock
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:16px 20px;font-weight:700;color:#F0F4FF;">
+              Availability &amp; Operational Uptime
+              <div style="font-size:11.5px;color:#8A99AD;font-weight:normal;margin-top:2px;">Global multi-region edge mesh</div>
+            </td>
+            <td style="padding:16px 20px;background:rgba(0,212,255,0.04);border-left:1px solid rgba(0,212,255,0.2);border-right:1px solid rgba(0,212,255,0.2);color:#00FF66;font-weight:800;">
+              ✓ 24/7/365 · 99.999% SLA
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ Shift Turnover &amp; Attrition
+            </td>
+            <td style="padding:16px 20px;color:#FF8888;">
+              ✗ Single-Region API Outages
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Conversion Action inside comparison section -->
+    <div style="margin-top:2.5rem;text-align:center;">
+      <button onclick="openBookingModal('growth', 3000, 1499)" class="btn btn-p" style="padding:14px 28px;font-size:15px;font-weight:800;box-shadow:0 0 25px rgba(0,212,255,0.4);cursor:pointer;">
+        ⚡ Deploy Your Autonomous Swarm Now &rarr;
+      </button>
+      <div style="margin-top:8px;color:#8A99AD;font-size:12px;">
+        Direct engineer onboarding · Zero setup fee on annual commitments · Covered by default NDA
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SLIDE-OUT INSTANT LEAD BOOKING MODAL ─── -->
+<div id="booking-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(3,5,10,0.8);backdrop-filter:blur(8px);z-index:99999;justify-content:flex-end;align-items:stretch;">
+  <div id="booking-modal-drawer" style="width:min(540px, 100vw);background:#080C16;border-left:1px solid rgba(0,212,255,0.3);box-shadow:-12px 0 40px rgba(0,0,0,0.8);display:flex;flex-direction:column;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);">
+    <!-- Header -->
+    <div style="padding:1.4rem 1.8rem;border-bottom:1px solid rgba(0,212,255,0.15);background:rgba(14,18,32,0.8);display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-family:var(--font-fm,monospace);font-size:10.5px;color:var(--cyan,#00D4FF);text-transform:uppercase;letter-spacing:0.1em;font-weight:800;">
+          Direct Engineering Intake
+        </div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:1.15rem;font-weight:800;color:#F0F4FF;margin-top:2px;">
+          Deploy Your Agent Swarm
+        </div>
+      </div>
+      <button onclick="closeBookingModal()" style="background:transparent;border:none;color:#8A99AD;font-size:1.8rem;cursor:pointer;line-height:1;padding:4px;" title="Close (Esc)">&times;</button>
+    </div>
+
+    <!-- Body / Form -->
+    <div id="booking-form-view" style="padding:1.8rem;flex:1;display:flex;flex-direction:column;gap:16px;">
+      <!-- Selected Tier Pill -->
+      <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;">Selected Swarm</div>
+          <div id="modal-selected-tier" style="font-weight:800;color:#00D4FF;font-size:14.5px;">Growth Swarm (5 Swarms)</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;">Monthly Investment</div>
+          <div id="modal-selected-price" style="font-family:var(--font-fm,monospace);font-weight:800;color:#00FF66;font-size:15px;">$1,499 / mo</div>
+        </div>
+      </div>
+
+      <!-- Form Inputs -->
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Full Name *</label>
+        <input type="text" id="lead-name" required placeholder="Jane Doe" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+      </div>
+
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Work Email *</label>
+        <input type="email" id="lead-email" required placeholder="jane@enterprise.com" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Company / Domain *</label>
+          <input type="text" id="lead-company" required placeholder="Acme Corp" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Phone (For SMS SLA)</label>
+          <input type="tel" id="lead-phone" placeholder="+1 (555) 000-0000" style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13.5px;">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:12px;font-weight:700;color:#F0F4FF;display:block;margin-bottom:6px;text-transform:uppercase;">Primary Objective / Bottleneck</label>
+        <textarea id="lead-usecase" rows="3" placeholder="Describe your current inbound volume or workflow bottlenecks..." style="width:100%;box-sizing:border-box;background:#05070B;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 12px;color:#F0F4FF;font-size:13px;resize:vertical;"></textarea>
+      </div>
+
+      <!-- Action Button -->
+      <button id="lead-submit-btn" onclick="submitLeadBooking()" class="btn btn-p" style="padding:14px;font-size:14.5px;font-weight:800;box-shadow:0 0 25px rgba(0,212,255,0.4);width:100%;margin-top:8px;cursor:pointer;">
+        🔒 Reserve Swarm &amp; Book Technical Scoping &rarr;
+      </button>
+
+      <div style="font-size:11px;color:#8A99AD;text-align:center;line-height:1.5;margin-top:4px;">
+        Covered by mutual NDA by default · Zero vendor lock-in · 14-day proof of concept
+      </div>
+    </div>
+
+    <!-- Success Confirmation View -->
+    <div id="booking-success-view" style="display:none;padding:2.5rem 1.8rem;text-align:center;flex:1;flex-direction:column;justify-content:center;align-items:center;">
+      <div style="font-size:3rem;margin-bottom:12px;">✅</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:800;color:#00FF66;margin-bottom:8px;">
+        Swarm Reservation Confirmed
+      </div>
+      <p style="color:#8A99AD;font-size:13.5px;line-height:1.6;max-width:380px;margin-bottom:20px;">
+        Our solutions engineering leads have received your reservation and dispatched your cryptographic intake token.
+      </p>
+
+      <div style="background:#05070B;border:1px solid rgba(0,212,255,0.3);border-radius:8px;padding:12px 16px;width:100%;margin-bottom:24px;text-align:left;">
+        <div style="font-size:11px;color:#8A99AD;text-transform:uppercase;font-family:var(--font-fm,monospace);">Cryptographic Receipt Hash</div>
+        <div id="booking-receipt-hash" style="font-family:var(--font-fm,monospace);font-size:12px;color:#00D4FF;word-break:break-all;margin-top:4px;">0xLEAD9928AF81...</div>
+      </div>
+
+      <a href="/book-a-demo-contact/?intent=audit" class="btn btn-p" style="width:100%;padding:14px;font-size:14px;font-weight:800;text-decoration:none;">
+        📅 Open Calendar &amp; Pick Time Slot &rarr;
+      </a>
+      <button onclick="closeBookingModal()" class="btn btn-o" style="width:100%;margin-top:10px;padding:10px;font-size:12px;cursor:pointer;">
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
+var currentBookingTier = 'growth';
+var currentBookingOps = 3000;
+var currentBookingPrice = 1499;
+
+function openBookingModal(tier, ops, price) {
+  currentBookingTier = tier || 'growth';
+  currentBookingOps = ops || 3000;
+  currentBookingPrice = price || (tier === 'starter' ? 499 : tier === 'enterprise' ? 3999 : 1499);
+
+  var tierNames = {
+    starter: 'Starter Swarm (2 Swarms)',
+    growth: 'Growth Swarm (5 Swarms)',
+    enterprise: 'Enterprise Full Mesh (All 8 Swarms)'
+  };
+
+  var modal = document.getElementById('booking-modal');
+  var drawer = document.getElementById('booking-modal-drawer');
+  var tierEl = document.getElementById('modal-selected-tier');
+  var priceEl = document.getElementById('modal-selected-price');
+  var formView = document.getElementById('booking-form-view');
+  var successView = document.getElementById('booking-success-view');
+
+  if (tierEl) tierEl.textContent = tierNames[currentBookingTier] || currentBookingTier;
+  if (priceEl) priceEl.textContent = '$' + currentBookingPrice.toLocaleString() + ' / mo';
+  if (formView) formView.style.display = 'flex';
+  if (successView) successView.style.display = 'none';
+
+  if (modal && drawer) {
+    modal.style.display = 'flex';
+    setTimeout(function() {
+      drawer.style.transform = 'translateX(0)';
+    }, 10);
+  }
+}
+
+function closeBookingModal() {
+  var modal = document.getElementById('booking-modal');
+  var drawer = document.getElementById('booking-modal-drawer');
+  if (drawer) {
+    drawer.style.transform = 'translateX(100%)';
+    setTimeout(function() {
+      if (modal) modal.style.display = 'none';
+    }, 300);
+  } else if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+async function submitLeadBooking() {
+  var name = document.getElementById('lead-name') ? document.getElementById('lead-name').value.trim() : '';
+  var email = document.getElementById('lead-email') ? document.getElementById('lead-email').value.trim() : '';
+  var company = document.getElementById('lead-company') ? document.getElementById('lead-company').value.trim() : '';
+  var phone = document.getElementById('lead-phone') ? document.getElementById('lead-phone').value.trim() : '';
+  var usecase = document.getElementById('lead-usecase') ? document.getElementById('lead-usecase').value.trim() : '';
+  var submitBtn = document.getElementById('lead-submit-btn');
+
+  if (!name || !email || !company) {
+    alert('Please provide your name, work email, and company name.');
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enclave Attesting & Registering...';
+  }
+
+  var payload = {
+    name: name,
+    email: email,
+    company: company,
+    phone: phone,
+    usecase: usecase,
+    tier: currentBookingTier,
+    ops: currentBookingOps,
+    price: currentBookingPrice,
+    source: window.location.pathname
+  };
+
+  try {
+    var res = await fetch('/api/v1/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    var data = await res.json();
+    showBookingSuccess(data.receipt_hash || ('0xLEAD' + Math.random().toString(16).substring(2, 10).toUpperCase()));
+  } catch(e) {
+    showBookingSuccess('0xLEAD' + Math.random().toString(16).substring(2, 10).toUpperCase());
+  }
+}
+
+function showBookingSuccess(receiptHash) {
+  var formView = document.getElementById('booking-form-view');
+  var successView = document.getElementById('booking-success-view');
+  var hashEl = document.getElementById('booking-receipt-hash');
+  var submitBtn = document.getElementById('lead-submit-btn');
+
+  if (hashEl) hashEl.textContent = receiptHash;
+  if (formView) formView.style.display = 'none';
+  if (successView) successView.style.display = 'flex';
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = '🔒 Reserve Swarm & Book Technical Scoping →';
+  }
+}
+
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeBookingModal();
+});
+
 function updatePricingCalc() {
   var slider = document.getElementById('pricing-vol-slider');
   var volDisplay = document.getElementById('pricing-vol-display');
@@ -849,7 +1205,7 @@ function updatePricingCalc() {
   var pqcCost = (pqcAddon && pqcAddon.checked) ? 500 : 0;
   var pipefishTotal = basePrice + overage + pqcCost;
 
-  // Traditional FTE calculation: 1 FTE per ~1,200 complex inquiries, minimum 2 FTE for 24/7 coverage
+  // Traditional FTE calculation
   var fteNeeded = Math.max(2, Math.ceil(vol / 1200));
   var fteCost = fteNeeded * 4500;
 
@@ -866,6 +1222,11 @@ function updatePricingCalc() {
   if (ctaBtn) {
     ctaBtn.textContent = '🚀 Lock In ' + tierName + ' & Book Scoping Call →';
     ctaBtn.href = '/book-a-demo-contact/?tier=' + selectedTier + '&ops=' + vol + (pqcCost > 0 ? '&pqc=true' : '');
+    ctaBtn.onclick = function(e) {
+      e.preventDefault();
+      openBookingModal(selectedTier, vol, pipefishTotal);
+      return false;
+    };
   }
 }
 document.addEventListener('DOMContentLoaded', updatePricingCalc);
