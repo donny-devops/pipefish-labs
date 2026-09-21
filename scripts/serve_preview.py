@@ -48,7 +48,8 @@ def ensure_dist() -> None:
 
 
 def is_ready(port: int, host: str = "127.0.0.1") -> bool:
-    url = f"http://{host}:{port}/"
+    formatted_host = f"[{host}]" if ":" in host else host
+    url = f"http://{formatted_host}:{port}/"
     try:
         with urllib.request.urlopen(url, timeout=1) as response:
             return 200 <= response.status < 500
@@ -57,18 +58,18 @@ def is_ready(port: int, host: str = "127.0.0.1") -> bool:
 
 
 def port_bound(port: int, host: str = "127.0.0.1") -> bool:
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        sock.settimeout(0.2)
-        try:
-            sock.connect((host, port))
-        except OSError:
-            return False
-    return True
+    try:
+        with socket.create_connection((host, port), timeout=0.2):
+            return True
+    except OSError:
+        return False
 
 
 def probe_host(bind: str) -> str:
     if bind == "0.0.0.0":
         return "127.0.0.1"
+    if bind == "::":
+        return "::1"
     return bind
 
 
