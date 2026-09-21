@@ -66,6 +66,12 @@ def port_bound(port: int, host: str = "127.0.0.1") -> bool:
     return True
 
 
+def probe_host(bind: str) -> str:
+    if bind == "0.0.0.0":
+        return "127.0.0.1"
+    return bind
+
+
 def serve_forever(bind: str, port: int, directory: Path) -> None:
     handler = partial(QuietRequestHandler, directory=str(directory))
     try:
@@ -73,7 +79,7 @@ def serve_forever(bind: str, port: int, directory: Path) -> None:
     except OSError as exc:
         if exc.errno != errno.EADDRINUSE:
             raise
-        wait_ready(port)
+        wait_ready(port, probe_host(bind))
         print(f"preview already running on :{port}")
         return
     httpd.serve_forever()
@@ -98,9 +104,9 @@ def spawn_detached(bind: str, port: int) -> None:
     )
 
 
-def wait_ready(port: int, attempts: int = 50) -> None:
+def wait_ready(port: int, host: str = "127.0.0.1", attempts: int = 50) -> None:
     for _ in range(attempts):
-        if is_ready(port):
+        if is_ready(port, host):
             print(f"preview ready on :{port}")
             return
         time.sleep(0.1)
@@ -117,16 +123,17 @@ def main() -> int:
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     parser.add_argument("--bind", default=DEFAULT_BIND)
     args = parser.parse_args()
+    host = probe_host(args.bind)
 
     os.chdir(ROOT)
     ensure_dist()
 
-    if is_ready(args.port):
+    if is_ready(args.port, host):
         print(f"preview already running on :{args.port}")
         return 0
 
-    if port_bound(args.port):
-        wait_ready(args.port)
+    if port_bound(args.port, host):
+        wait_ready(args.port, host)
         return 0
 
     if args.foreground:
@@ -134,7 +141,7 @@ def main() -> int:
         return 0
 
     spawn_detached(args.bind, args.port)
-    wait_ready(args.port)
+    wait_ready(args.port, host)
     return 0
 
 
