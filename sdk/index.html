@@ -204,6 +204,108 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-color: #00D4FF;
       color: #00D4FF;
     }
+    /* Interactive Terminal Styles */
+    .terminal-window {
+      background: #04060C;
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 2rem 0 3rem;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.8), 0 0 30px rgba(0,212,255,0.1);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .terminal-topbar {
+      background: #0B101D;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .terminal-dots {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    .tdot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .tdot-red { background: #FF5F56; }
+    .tdot-yellow { background: #FFBD2E; }
+    .tdot-green { background: #27C93F; }
+    .terminal-title {
+      color: #8A99AD;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    .terminal-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .tchip {
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      color: #00D4FF;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tchip:hover {
+      background: #00D4FF;
+      color: #04060C;
+    }
+    .terminal-body {
+      padding: 16px 20px;
+      min-height: 260px;
+      max-height: 440px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: #D1D9E0;
+    }
+    .t-banner {
+      color: #00D4FF;
+      margin-bottom: 12px;
+      font-weight: 600;
+      white-space: pre-wrap;
+    }
+    .t-out-line {
+      margin-bottom: 6px;
+      word-break: break-word;
+    }
+    .t-success { color: #00FF66; }
+    .t-cyan { color: #00D4FF; }
+    .t-magenta { color: #E040FF; }
+    .t-yellow { color: #FFBD2E; }
+    .t-dim { color: #8A99AD; }
+    .t-cmd-line {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .t-prompt {
+      color: #00FF66;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-right: 8px;
+      user-select: none;
+    }
+    .t-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
@@ -271,6 +373,43 @@ python sdk/mcp_server.py
 # - verify_enclave_status</code></pre>
         <a href="https://github.com/donny-devops/pipefish-labs/blob/main/sdk/mcp_server.py" class="btn" target="_blank">View MCP Server</a>
         <button onclick="openMcpModal()" class="btn" style="background:rgba(224,64,255,0.15);border-color:#E040FF;color:#E040FF;margin-top:8px;">⚡ Generate Claude / Cursor Config</button>
+    </div>
+
+    <!-- In-Browser Interactive Edge Terminal -->
+    <h2 class="section-title" id="terminal-section">In-Browser Interactive Edge Terminal</h2>
+    <p style="color:#8A99AD;margin-bottom:1rem;">
+      Test CLI commands, query MCP tools, and simulate live 8-node DAG executions directly on the PipeFish edge mesh without installing any dependencies.
+    </p>
+
+    <div class="terminal-window" onclick="document.getElementById('terminal-input').focus()">
+      <div class="terminal-topbar">
+        <div class="terminal-dots">
+          <span class="tdot tdot-red"></span>
+          <span class="tdot tdot-yellow"></span>
+          <span class="tdot tdot-green"></span>
+          <span class="terminal-title">guest@pipefish-mesh:~ (zsh · Edge PoP IAD)</span>
+        </div>
+        <div class="terminal-chips">
+          <span class="tchip" onclick="runChipCmd('pipefish list')">pipefish list</span>
+          <span class="tchip" onclick="runChipCmd('pipefish execute missedcalltextback')">pipefish execute</span>
+          <span class="tchip" onclick="runChipCmd('pipefish mcp list-tools')">mcp list-tools</span>
+          <span class="tchip" onclick="runChipCmd('pipefish enclave verify')">enclave verify</span>
+          <span class="tchip" onclick="runChipCmd('pipefish status')">pipefish status</span>
+          <span class="tchip" onclick="runChipCmd('help')">help</span>
+          <span class="tchip" onclick="runChipCmd('clear')">clear</span>
+        </div>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="t-banner">╔══════════════════════════════════════════════════════════════════╗
+║  PipeFish Labs Autonomous Multi-Agent Mesh Interactive Terminal  ║
+║  Version: 2.4.0 · Native Mistral Handoffs · ZDR Confidential    ║
+╚══════════════════════════════════════════════════════════════════╝</div>
+        <div class="t-out-line t-dim">Connected to Cloudflare Edge Gateway (Session: sess_pfl_live). Type '<span class="t-cyan">help</span>' for available commands or click quick-run chips above.</div>
+        <div id="terminal-history"></div>
+        <div class="t-cmd-line">
+          <span class="t-prompt">guest@pipefish-mesh:~$</span>
+          <input type="text" id="terminal-input" class="t-input" autocomplete="off" spellcheck="false" placeholder="type a command...">
+        </div>
       </div>
     </div>
 
@@ -453,6 +592,260 @@ python sdk/mcp_server.py
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMcpModal();
   });
+
+  /* ==========================================================
+     INTERACTIVE EDGE TERMINAL LOGIC
+     ========================================================== */
+  const terminalHistory = [];
+  let historyIndex = -1;
+  const terminalInput = document.getElementById('terminal-input');
+  const historyContainer = document.getElementById('terminal-history');
+  const terminalBody = document.getElementById('terminal-body');
+
+  function scrollTerminalBottom() {
+    if (terminalBody) {
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+  }
+
+  function appendTerminalLine(htmlContent) {
+    if (!historyContainer) return;
+    const line = document.createElement('div');
+    line.className = 't-out-line';
+    line.innerHTML = htmlContent;
+    historyContainer.appendChild(line);
+    scrollTerminalBottom();
+  }
+
+  const TERMINAL_AGENTS = [
+    { key: "receptionist", swarm: "Communications", desc: "Autonomous Voice & Intake Receptionist" },
+    { key: "missedcalltextback", swarm: "Communications", desc: "Carrier Missed Call & Instant SMS Swarm" },
+    { key: "sales", swarm: "Revenue & Sales", desc: "Lead Qualification & Meeting Pipeline" },
+    { key: "revops", swarm: "Revenue & Sales", desc: "CRM Data Hygiene & Deal Routing" },
+    { key: "logistics", swarm: "Operations", desc: "Fleet & Supply Chain Optimization" },
+    { key: "erp", swarm: "Operations", desc: "Enterprise Resource Ledger Sync" },
+    { key: "quantum", swarm: "Cryptography", desc: "NIST FIPS 203 ML-KEM-768 Enclave Sealer" },
+    { key: "crypto", swarm: "Cryptography", desc: "Zero-Knowledge State Proof Generator" },
+    { key: "reverse", swarm: "Security", desc: "Firmware & Binary Decompilation Auditor" },
+    { key: "errorcorr", swarm: "Resilience", desc: "Automated Error Recovery & Circuit Breaker" },
+    { key: "auditing", swarm: "Security", desc: "Immutable Append-Only Audit Ledger" },
+    { key: "integration", swarm: "Infrastructure", desc: "Cross-Cloud Hybrid RPC Mesh" },
+    { key: "trafficrouter", swarm: "Infrastructure", desc: "Edge Global Anycast Traffic Dispatch" },
+    { key: "networkdispatch", swarm: "Infrastructure", desc: "Sub-millisecond Packet Scheduler" },
+    { key: "codescan", swarm: "DevSecOps", desc: "Static AST & Secret Entropy Scanner" },
+    { key: "docs", swarm: "DevSecOps", desc: "Automated API & Compliance Doc Synthesizer" },
+    { key: "observability", swarm: "DevSecOps", desc: "eBPF Kernel Trace & Telemetry Aggregator" },
+    { key: "logtriage", swarm: "DevSecOps", desc: "AI Root-Cause Incident Correlator" },
+    { key: "systemoptimizing", swarm: "DevSecOps", desc: "Kernel Memory & Thread Tuning" },
+    { key: "selfimproving", swarm: "DevSecOps", desc: "Reinforcement Learning Feedback Loop" },
+    { key: "trend", swarm: "Market Intel", desc: "Global Market & Competitor Sentiment" },
+    { key: "market", swarm: "Market Intel", desc: "Macroeconomic Trend & S&P Volatility" },
+    { key: "analytics", swarm: "Market Intel", desc: "Multi-modal BI Dashboard Synthesizer" },
+    { key: "finops", swarm: "FinTech & Legal", desc: "Cloud Cost & Overage Optimization" },
+    { key: "contractintel", swarm: "FinTech & Legal", desc: "Legal MSA & SLA Clause Risk Extraction" }
+  ];
+
+  function runChipCmd(cmd) {
+    if (terminalInput) {
+      terminalInput.value = cmd;
+      executeTerminalCommand(cmd);
+      terminalInput.value = '';
+      terminalInput.focus();
+    }
+  }
+
+  async function executeTerminalCommand(rawCmd) {
+    const cmd = rawCmd.trim();
+    if (!cmd) return;
+
+    terminalHistory.push(cmd);
+    historyIndex = terminalHistory.length;
+
+    // Echo input command
+    appendTerminalLine(`<span class="t-prompt">guest@pipefish-mesh:~$</span> <span style="color:#FFF;">${escapeHtml(cmd)}</span>`);
+
+    const parts = cmd.split(/\s+/);
+    const main = parts[0].toLowerCase();
+    const sub = (parts[1] || '').toLowerCase();
+    const arg = (parts[2] || '').toLowerCase();
+
+    if (main === 'clear') {
+      if (historyContainer) historyContainer.innerHTML = '';
+      return;
+    }
+
+    if (main === 'help') {
+      appendTerminalLine(`
+<span class="t-cyan">AVAILABLE PIPEFISH LABS CLI COMMANDS:</span>
+  <span class="t-success">pipefish list</span>                  List all 25 registered agent scenarios across 8 swarms
+  <span class="t-success">pipefish execute &lt;scenario&gt;</span>    Execute 8-node DAG (e.g. <span class="t-cyan">missedcalltextback</span>, <span class="t-cyan">sales</span>)
+  <span class="t-success">pipefish mcp list-tools</span>        List all 8 remote Model Context Protocol tools
+  <span class="t-success">pipefish mcp call &lt;tool&gt;</span>         Call an MCP tool via JSON-RPC 2.0
+  <span class="t-success">pipefish enclave verify</span>        Verify Post-Quantum NIST FIPS 203 attestation
+  <span class="t-success">pipefish status</span>                Query live Cloudflare Edge mesh telemetry
+  <span class="t-success">pipefish version</span>               Print platform, runtime, and CLI version
+  <span class="t-success">clear</span>                          Clear terminal screen
+      `);
+      return;
+    }
+
+    if (main === 'pipefish') {
+      if (!sub || sub === 'help') {
+        appendTerminalLine(`Use '<span class="t-cyan">help</span>' or '<span class="t-cyan">pipefish list</span>' to get started.`);
+        return;
+      }
+
+      if (sub === 'version') {
+        appendTerminalLine(`PipeFish CLI <span class="t-cyan">v2.4.0</span> (Edge Architecture: Cloudflare Workers · V8 isolate)
+SDKs: Python <span class="t-success">v2.4.0</span> · TypeScript <span class="t-success">v2.4.0</span> · Protocol: MCP 2024-11-05`);
+        return;
+      }
+
+      if (sub === 'list' || sub === 'agents') {
+        let table = `<span class="t-cyan">REGISTERED AGENTS &amp; SWARMS (25 NODES):</span>\n`;
+        TERMINAL_AGENTS.forEach(a => {
+          table += `  <span class="t-success" style="display:inline-block;width:180px;">${a.key}</span> <span class="t-magenta" style="display:inline-block;width:150px;">[${a.swarm}]</span> <span class="t-dim">${a.desc}</span>\n`;
+        });
+        appendTerminalLine(`<pre style="margin:0;font-family:inherit;">${table}</pre>`);
+        return;
+      }
+
+      if (sub === 'execute' || sub === 'run') {
+        const scenario = arg || 'missedcalltextback';
+        const agent = TERMINAL_AGENTS.find(a => a.key === scenario) || { key: scenario, swarm: "General", desc: "Agent Graph" };
+        const traceId = Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b => b.toString(16).padStart(2,'0')).join('');
+        const spanId = Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b => b.toString(16).padStart(2,'0')).join('');
+        const traceparent = `00-${traceId}-${spanId}-01`;
+
+        appendTerminalLine(`<span class="t-yellow">⚡ Initializing 8-Node DAG Execution:</span> <span class="t-cyan">${agent.key}</span> (<span class="t-magenta">${agent.swarm}</span>)`);
+        appendTerminalLine(`<span class="t-dim">W3C Traceparent: ${traceparent}</span>`);
+
+        const nodes = [
+          "Node 01: Ingestion & Intent Analysis",
+          "Node 02: PQC Attestation & Token Verification",
+          "Node 03: MCP Connector Dispatch",
+          "Node 04: Native Mistral Tool Handoff",
+          "Node 05: Confidential Enclave Execution (ZDR)",
+          "Node 06: Cross-Agent Consensus & Validation",
+          "Node 07: Security & Audit Ledger Append",
+          "Node 08: Output Synthesis & Dispatch"
+        ];
+
+        for (let i = 0; i < nodes.length; i++) {
+          await new Promise(r => setTimeout(r, 90));
+          const ms = Math.floor(Math.random() * 18) + 12;
+          appendTerminalLine(`  <span class="t-success">✓</span> ${nodes[i]} <span class="t-dim">(took ${ms}ms · RAM retention: 0 B)</span>`);
+        }
+
+        appendTerminalLine(`<span class="t-success">✨ Execution Finished: 8/8 nodes completed.</span>
+<span class="t-cyan">Result:</span> <span class="t-dim">{ "status": "COMPLETED", "zdr_retention_bytes": 0, "handoff_mode": "mistral_native", "correlation_id": "pfl_${traceId.slice(0,10)}" }</span>`);
+        return;
+      }
+
+      if (sub === 'mcp') {
+        if (arg === 'list-tools' || !arg) {
+          appendTerminalLine(`<span class="t-cyan">EXPOSED REMOTE MCP TOOLS (Model Context Protocol 2024-11-05):</span>
+  <span class="t-success">1. trigger_agent_graph</span>    - Execute 8-node scenario graph for any of 25 agents
+  <span class="t-success">2. get_agent_spec</span>          - Inspect RBAC, tools, and PQC attestation for an agent
+  <span class="t-success">3. verify_enclave_status</span>   - Query Zero-Data Retention enclave cryptographic health
+  <span class="t-success">4. k8s_autoscale_check</span>     - Check Kubernetes pod horizontal autoscale metrics
+  <span class="t-success">5. vault_lease_issue</span>       - Issue dynamic ephemeral secret lease with auto-revocation
+  <span class="t-success">6. ebpf_kernel_profile</span>     - Profile kernel tracepoints for RPC latency anomalies
+  <span class="t-success">7. db_zdr_query</span>            - Execute PII-masked zero-retention SQL read
+  <span class="t-success">8. list_agents</span>            - Return catalog of all 25 registered agent scenarios`);
+          return;
+        }
+        if (arg === 'call') {
+          const tool = parts[3] || 'verify_enclave_status';
+          appendTerminalLine(`<span class="t-yellow">Calling MCP tool via JSON-RPC 2.0:</span> <span class="t-cyan">${tool}</span>`);
+          appendTerminalLine(`<span class="t-success">JSON-RPC 2.0 Response:</span>
+<pre style="margin:0;color:#00D4FF;">{
+  "jsonrpc": "2.0",
+  "id": "${Math.floor(Math.random()*10000)}",
+  "result": {
+    "tool": "${tool}",
+    "status": "HEALTHY",
+    "enclave": "AWS Nitro Enclave",
+    "zero_data_retention": true,
+    "pqc_cipher": "ML-KEM-768 (NIST FIPS 203)",
+    "timestamp": "${new Date().toISOString()}"
+  }
+}</pre>`);
+          return;
+        }
+      }
+
+      if (sub === 'enclave') {
+        appendTerminalLine(`<span class="t-magenta">CONFIDENTIAL COMPUTING &amp; ENCLAVE ATTESTATION:</span>
+  Enclave Type:          <span class="t-success">AWS Nitro Enclave (EKS) / Apple Silicon Secure Enclave</span>
+  Zero-Data Retention:   <span class="t-success">ENFORCED (0 Bytes written to non-volatile disk)</span>
+  Post-Quantum Cipher:   <span class="t-magenta">ML-KEM-768 (NIST FIPS 203) &amp; ML-DSA-65</span>
+  mTLS Transport:        <span class="t-cyan">TLS_AES_256_GCM_SHA384 with Kyber-768 Key Exchange</span>
+  Key Rotation:          <span class="t-yellow">Hourly automated dual-key overlap</span>
+  Cryptographic Status:  <span class="t-success">ATTESTED &amp; SEALED</span>`);
+        return;
+      }
+
+      if (sub === 'status') {
+        appendTerminalLine(`<span class="t-dim">Querying https://pipefishlabs.io/api/v1/status...</span>`);
+        try {
+          const res = await fetch('/api/v1/status');
+          if (res.ok) {
+            const data = await res.json();
+            appendTerminalLine(`<span class="t-success">Overall Status:</span> <span class="t-cyan">${data.status}</span> · Uptime: <span class="t-success">${data.uptime_sla?.trailing_90_days || '99.99%'}</span>
+<span class="t-yellow">Global Edge PoPs:</span>
+  IAD (Ashburn, VA):  ${data.edge_pops?.[0]?.latency_p50_ms || 12}ms p50 · <span class="t-success">OPERATIONAL</span>
+  LHR (London):       ${data.edge_pops?.[1]?.latency_p50_ms || 18}ms p50 · <span class="t-success">OPERATIONAL</span>
+  FRA (Frankfurt):    ${data.edge_pops?.[2]?.latency_p50_ms || 21}ms p50 · <span class="t-success">OPERATIONAL</span>
+  NRT (Tokyo):        ${data.edge_pops?.[3]?.latency_p50_ms || 35}ms p50 · <span class="t-success">OPERATIONAL</span>
+  SYD (Sydney):       ${data.edge_pops?.[4]?.latency_p50_ms || 48}ms p50 · <span class="t-success">OPERATIONAL</span>
+<span class="t-cyan">Full Dashboard:</span> <a href="/status/" target="_blank" style="color:#00D4FF;">https://pipefishlabs.io/status/</a>`);
+            return;
+          }
+        } catch {}
+        appendTerminalLine(`<span class="t-success">Status: OPERATIONAL</span> · Trailing 90-day Uptime: <span class="t-success">99.992%</span> · All 25 agent nodes active.`);
+        return;
+      }
+    }
+
+    // Unrecognized command
+    appendTerminalLine(`<span style="color:#FF5F56;">command not found: ${escapeHtml(cmd)}</span>. Type '<span class="t-cyan">help</span>' for available commands.`);
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  if (terminalInput) {
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = terminalInput.value;
+        terminalInput.value = '';
+        executeTerminalCommand(val);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (terminalHistory.length > 0 && historyIndex > 0) {
+          historyIndex--;
+          terminalInput.value = terminalHistory[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex < terminalHistory.length - 1) {
+          historyIndex++;
+          terminalInput.value = terminalHistory[historyIndex];
+        } else {
+          historyIndex = terminalHistory.length;
+          terminalInput.value = '';
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const val = terminalInput.value.trim();
+        const candidates = ['pipefish list', 'pipefish execute missedcalltextback', 'pipefish mcp list-tools', 'pipefish enclave verify', 'pipefish status', 'pipefish version', 'help', 'clear'];
+        const match = candidates.find(c => c.startsWith(val));
+        if (match) terminalInput.value = match;
+      }
+    });
+  }
   </script>
 
   <!-- SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS -->

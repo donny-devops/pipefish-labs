@@ -1469,6 +1469,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
 
+      <!-- Visual DAG Canvas Container -->
+      <div id="demo-dag-canvas-container" style="display:block;margin-bottom:24px;background:rgba(6,7,12,0.95);border:1px solid rgba(0,212,255,0.3);border-radius:12px;padding:20px;overflow-x:auto;">
+        <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#00D4FF;letter-spacing:0.1em;margin-bottom:12px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;">
+          <span>🌐 INTERACTIVE ASYNCHRONOUS DAG EXECUTION CANVAS</span>
+          <span style="font-size:11px;color:#00FF66;font-family:'JetBrains Mono',monospace">● ZERO-RETENTION ENCLAVE ACTIVE</span>
+        </div>
+        <div id="dag-svg-wrapper" style="min-width:760px;width:100%;height:320px;position:relative;"></div>
+      </div>
+
       <!-- Agent Chain Rows (Nodes 01 - 08) -->
       <div class="demo-rows" id="demo-rows-container">
         <!-- Rendered dynamically via JS -->
@@ -2990,6 +2999,77 @@ function renderDemoRows() {
       </div>
     `;
   }
+  renderDagCanvas();
+}
+
+window.inspectNode = function(index) {
+  const row = document.getElementById(`demo-row-${index}`);
+  if (row) {
+    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    row.style.boxShadow = '0 0 20px #00D4FF';
+    setTimeout(() => { row.style.boxShadow = ''; }, 2000);
+  }
+};
+
+function renderDagCanvas() {
+  const wrapper = document.getElementById('dag-svg-wrapper');
+  if (!wrapper) return;
+  const sc = demoScenarios[currentDemoScenario];
+  if (!sc || !sc.nodes) return;
+  const total = sc.nodes.length;
+  const nodeWidth = 140;
+  const nodeHeight = 70;
+
+  const positions = [
+    { x: 20, y: 30 },
+    { x: 210, y: 30 },
+    { x: 400, y: 30 },
+    { x: 590, y: 30 },
+    { x: 590, y: 200 },
+    { x: 400, y: 200 },
+    { x: 210, y: 200 },
+    { x: 20, y: 200 }
+  ];
+
+  let svgHtml = `<svg width="100%" height="320" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+    <defs>
+      <filter id="dag-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>`;
+
+  for (let i = 0; i < total - 1; i++) {
+    const p1 = positions[i];
+    const p2 = positions[i + 1];
+    let pathD = '';
+    if (i === 3) {
+      pathD = `M ${p1.x + nodeWidth / 2} ${p1.y + nodeHeight} C ${p1.x + nodeWidth / 2 + 50} ${p1.y + 115}, ${p2.x + nodeWidth / 2 + 50} ${p2.y - 45}, ${p2.x + nodeWidth / 2} ${p2.y}`;
+    } else if (i < 3) {
+      pathD = `M ${p1.x + nodeWidth} ${p1.y + nodeHeight / 2} L ${p2.x} ${p2.y + nodeHeight / 2}`;
+    } else {
+      pathD = `M ${p1.x} ${p1.y + nodeHeight / 2} L ${p2.x + nodeWidth} ${p2.y + nodeHeight / 2}`;
+    }
+    svgHtml += `<path id="dag-svg-edge-${i}" d="${pathD}" fill="none" stroke="rgba(0,212,255,0.25)" stroke-width="2.5" stroke-dasharray="6,4"/>`;
+  }
+
+  sc.nodes.forEach((nd, i) => {
+    const p = positions[i];
+    svgHtml += `
+      <g id="dag-svg-node-${i}" class="dag-node-group" onclick="inspectNode(${i})" style="cursor:pointer;transition:all 0.3s ease;">
+        <rect x="${p.x}" y="${p.y}" width="${nodeWidth}" height="${nodeHeight}" rx="8" fill="#0C0E18" stroke="rgba(0,212,255,0.25)" stroke-width="1.5" id="dag-svg-rect-${i}" />
+        <text x="${p.x + 10}" y="${p.y + 22}" fill="#00D4FF" font-family="'Orbitron',monospace" font-size="10.5" font-weight="700">${nd.n}</text>
+        <text x="${p.x + nodeWidth - 10}" y="${p.y + 22}" fill="#8A99AD" font-family="'JetBrains Mono',monospace" font-size="9" text-anchor="end" id="dag-svg-stat-${i}">STANDBY</text>
+        <text x="${p.x + 10}" y="${p.y + 44}" fill="#F0F4FF" font-family="'Inter',sans-serif" font-size="10" font-weight="600">
+          ${nd.name.length > 17 ? nd.name.substring(0, 16) + '…' : nd.name}
+        </text>
+        <text x="${p.x + 10}" y="${p.y + 58}" fill="#7F8EA3" font-family="'JetBrains Mono',monospace" font-size="8">HMAC Signed (Inspect)</text>
+      </g>
+    `;
+  });
+
+  svgHtml += `</svg>`;
+  wrapper.innerHTML = svgHtml;
 }
 
 window.copyDemoPayload = function() {
@@ -3080,6 +3160,24 @@ function runDemoGraph() {
         prevStat.innerText = `State handoff complete ✓ [Native Mistral Handoff · MCP Tool Verified ${nextNodeText}]`;
         prevBadge.innerText = 'PASSED';
       }
+
+      // Update SVG DAG canvas
+      const prevSvgRect = document.getElementById(`dag-svg-rect-${prevIdx}`);
+      const prevSvgStat = document.getElementById(`dag-svg-stat-${prevIdx}`);
+      const prevSvgEdge = document.getElementById(`dag-svg-edge-${prevIdx}`);
+      if (prevSvgRect) {
+        prevSvgRect.setAttribute('stroke', '#00D4FF');
+        prevSvgRect.setAttribute('fill', 'rgba(0,212,255,0.12)');
+      }
+      if (prevSvgStat) {
+        prevSvgStat.textContent = 'PASSED ✓';
+        prevSvgStat.setAttribute('fill', '#00D4FF');
+      }
+      if (prevSvgEdge) {
+        prevSvgEdge.setAttribute('stroke', '#00D4FF');
+        prevSvgEdge.setAttribute('stroke-width', '3');
+        prevSvgEdge.removeAttribute('stroke-dasharray');
+      }
     }
 
     if (step < sc.nodes.length) {
@@ -3092,6 +3190,20 @@ function runDemoGraph() {
         curStat.innerText = `Processing agent execution & state verification…`;
         curBadge.innerText = 'EXECUTING';
       }
+
+      // Update SVG DAG canvas
+      const currSvgRect = document.getElementById(`dag-svg-rect-${step}`);
+      const currSvgStat = document.getElementById(`dag-svg-stat-${step}`);
+      if (currSvgRect) {
+        currSvgRect.setAttribute('stroke', '#E040FF');
+        currSvgRect.setAttribute('fill', 'rgba(224,64,255,0.15)');
+        currSvgRect.setAttribute('filter', 'url(#dag-glow)');
+      }
+      if (currSvgStat) {
+        currSvgStat.textContent = 'EXECUTING';
+        currSvgStat.setAttribute('fill', '#E040FF');
+      }
+
       const statusBar = document.getElementById('demo-status-bar-text');
       if (statusBar) statusBar.innerText = `Executing graph: Node 0${step + 1} (${sc.nodes[step].name}) active...`;
       step++;

@@ -52,7 +52,24 @@ def test_endpoints():
     assert vapi_resp.get("carrier") == "vapi_neural_voice"
     print(f"[PASS] 5. POST /api/v1/webhooks/voice/vapi   -> HTTP {res.getcode()} (Carrier: {vapi_resp['carrier']}, Status: {vapi_resp['status']})")
 
-    print("\nALL 5 LIVE PRODUCTION EDGE ENDPOINTS VERIFIED SUCCESSFULLY!")
+    # 6. Status Page UI
+    req = urllib.request.Request(f'{base}/status/', headers={'User-Agent': 'PipeFishVerifier/1.0'})
+    res = urllib.request.urlopen(req, timeout=10)
+    status_body = res.read().decode('utf-8')
+    assert res.getcode() == 200, f"Expected 200, got {res.getcode()}"
+    assert "Live Edge Mesh Status" in status_body, "Status page title missing"
+    print(f"[PASS] 6. GET  /status/                      -> HTTP {res.getcode()} (Status Dashboard rendered, {len(status_body)} bytes)")
+
+    # 7. Mesh Status API Endpoint
+    req = urllib.request.Request(f'{base}/api/v1/status', headers={'User-Agent': 'PipeFishVerifier/1.0'})
+    res = urllib.request.urlopen(req, timeout=10)
+    api_status = json.loads(res.read().decode('utf-8'))
+    assert res.getcode() == 200, f"Expected 200, got {res.getcode()}"
+    assert api_status.get("status") == "OPERATIONAL"
+    assert api_status.get("total_registered_agents") == 25
+    print(f"[PASS] 7. GET  /api/v1/status                 -> HTTP {res.getcode()} (Mesh: {api_status['status']}, Swarms: {len(api_status['swarms'])}, Agents: {api_status['total_registered_agents']})")
+
+    print("\nALL 7 LIVE PRODUCTION EDGE ENDPOINTS VERIFIED SUCCESSFULLY!")
 
 if __name__ == '__main__':
     test_endpoints()
