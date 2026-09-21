@@ -16,7 +16,7 @@ class TestSecretScannerManager(unittest.TestCase):
         self.assertTrue(is_allowlisted("mock_api_key_12345"))
         self.assertTrue(is_allowlisted("test_token_secret_value"))
         self.assertTrue(is_allowlisted("placeholder_secret"))
-        self.assertFalse(is_allowlisted("AKIAIOSFODNN7RANDOMKEY"))
+        self.assertFalse(is_allowlisted("unauthorized_production_key_sample"))
 
     def test_repo_scan_is_clean(self):
         findings = self.manager.scan()
