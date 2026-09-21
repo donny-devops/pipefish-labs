@@ -31,7 +31,7 @@ TOOLS = [
                         "docs", "observability", "revops", "analytics", "auditing",
                         "logtriage", "erp", "trafficrouter", "networkdispatch",
                         "selfimproving", "systemoptimizing", "finops", "contractintel",
-                        "missedcalltextback"
+                        "missedcalltextback", "llmops"
                     ],
                     "description": "The specific agent scenario graph to execute."
                 },
@@ -137,8 +137,27 @@ TOOLS = [
         }
     },
     {
+        "name": "llmops_eval_run",
+        "description": "Execute continuous prompt evaluation, semantic drift detection, and canary benchmark routing across frontier LLMs.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "prompt_template": {
+                    "type": "string",
+                    "description": "The prompt template or system instruction identifier to evaluate."
+                },
+                "models": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Frontier models to benchmark (e.g. ['gemini-2.5-flash', 'mistral-large-2411', 'claude-3-7-sonnet'])."
+                }
+            },
+            "required": ["prompt_template"]
+        }
+    },
+    {
         "name": "list_agents",
-        "description": "List all 25 registered PipeFish Labs autonomous agent scenario keys with their domain and execution mode metadata.",
+        "description": "List all 26 registered PipeFish Labs autonomous agent scenario keys with their domain and execution mode metadata.",
         "inputSchema": {
             "type": "object",
             "properties": {},
@@ -272,6 +291,32 @@ def handle_call_tool(params: Dict[str, Any]) -> Dict[str, Any]:
                 }
             ]
         }
+    elif name == "llmops_eval_run":
+        prompt_template = args.get("prompt_template", "enterprise_system_prompt_v2")
+        models = args.get("models") or ["gemini-2.5-flash", "mistral-large-2411", "claude-3-7-sonnet"]
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": json.dumps({
+                        "prompt_template": prompt_template,
+                        "eval_metrics": {
+                            "semantic_drift_score": 0.012,
+                            "hallucination_rate": 0.000,
+                            "groundedness_index": 0.994,
+                            "latency_p95_ms": 184
+                        },
+                        "benchmark_routing": {
+                            "primary_model": "gemini-2.5-flash",
+                            "fallback_model": "mistral-large-2411",
+                            "cost_reduction_pct": 42.5
+                        },
+                        "evaluated_models": models,
+                        "status": "EVALUATED_OPTIMAL"
+                    }, indent=2)
+                }
+            ]
+        }
     elif name == "list_agents":
         agents = [
             {"key": "receptionist",     "domain": "COMMS",                  "mode": "TRANSFORM → ROUTE"},
@@ -299,6 +344,7 @@ def handle_call_tool(params: Dict[str, Any]) -> Dict[str, Any]:
             {"key": "finops",           "domain": "FINTECH · PAYMENTS",     "mode": "VALIDATE → RECONCILE → ROUTE"},
             {"key": "contractintel",    "domain": "SECURITY · COMPLIANCE",  "mode": "PARSE → CLASSIFY → FLAG"},
             {"key": "missedcalltextback", "domain": "COMMS",               "mode": "DETECT → COMPOSE → DISPATCH"},
+            {"key": "llmops",           "domain": "AI-INFRA · SRE",         "mode": "EVALUATE → BENCHMARK → ROUTE"},
         ]
         return {
             "content": [

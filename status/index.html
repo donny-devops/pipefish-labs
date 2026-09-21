@@ -639,7 +639,7 @@
         <div class="incident-icon">✓</div>
         <div class="incident-text">
           <h4>No Incidents Reported in the Last 90 Days</h4>
-          <p>All 25 autonomous agent nodes, remote MCP SSE endpoints, and edge WebSocket gateways maintained continuous availability.</p>
+          <p>All 26 autonomous agent nodes, remote MCP SSE endpoints, and edge WebSocket gateways maintained continuous availability.</p>
         </div>
       </div>
     </div>
@@ -682,7 +682,7 @@
       "Logistics & Operations": { agents: ["logistics", "erp"], latency_avg_ms: 140, active_sessions: 15 },
       "Post-Quantum Cryptography & Enclave Security": { agents: ["quantum", "crypto", "reverse", "errorcorr", "auditing"], latency_avg_ms: 95, active_sessions: 88 },
       "Autonomous Infrastructure & Edge Routing": { agents: ["integration", "trafficrouter", "networkdispatch"], latency_avg_ms: 65, active_sessions: 120 },
-      "DevSecOps & SRE Autonomous": { agents: ["codescan", "docs", "observability", "logtriage", "systemoptimizing", "selfimproving"], latency_avg_ms: 110, active_sessions: 31 },
+      "DevSecOps & SRE Autonomous": { agents: ["codescan", "docs", "observability", "logtriage", "systemoptimizing", "selfimproving", "llmops"], latency_avg_ms: 110, active_sessions: 31 },
       "Market Intelligence": { agents: ["trend", "market", "analytics"], latency_avg_ms: 310, active_sessions: 14 },
       "Enterprise Legal & Cloud FinOps": { agents: ["finops", "contractintel"], latency_avg_ms: 240, active_sessions: 9 }
     };
@@ -796,7 +796,7 @@
 
         setTimeout(() => {
           const t2 = new Date().toLocaleTimeString();
-          log.innerHTML = `<div style="color:#27C93F;">[${t2}] [RECOVERY COMPLETE] Mesh self-healed in ${latency}ms. Zero dropped frames. 25/25 nodes OPERATIONAL.</div>` + log.innerHTML;
+          log.innerHTML = `<div style="color:#27C93F;">[${t2}] [RECOVERY COMPLETE] Mesh self-healed in ${latency}ms. Zero dropped frames. 26/26 nodes OPERATIONAL.</div>` + log.innerHTML;
           badge.style.background = 'rgba(39,201,63,0.15)';
           badge.style.borderColor = '#27C93F';
           badge.style.color = '#27C93F';

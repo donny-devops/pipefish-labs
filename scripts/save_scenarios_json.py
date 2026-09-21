@@ -484,6 +484,86 @@ SCENARIOS_DATA = {
             {"name": "Envoy Pool Tuner", "friendlyTitle": "🌐 7. Optimize Connection Pools", "friendlyDesc": "Expands connection pools on edge proxies to eliminate TCP handshakes.", "tools": "🔧 Envoy Proxy API"},
             {"name": "Tuning Certificate", "friendlyTitle": "✅ 8. Issue System Performance Seal", "friendlyDesc": "Certifies that average server latency dropped to 18ms.", "tools": "📜 Performance Seal"}
         ]
+    },
+    "finops": {
+        "category": "finance",
+        "icon": "💰",
+        "badge": "Finance & Legal",
+        "friendlyName": "Multi-Cloud FinOps & Token Spend Optimization",
+        "techName": "FinTech Ops Agent",
+        "friendlyProblem": "Runaway LLM token spend across multi-cloud infrastructure threatens monthly margins.",
+        "friendlyGoal": "Ingest real-time token telemetry across AWS, GCP, and Azure, right-size frontier models, enforce hard spend quotas, and reconcile departmental chargebacks.",
+        "friendlyTakeaway": "Automated FinOps agents eliminate cloud overages before they occur, slashing token costs by up to 40% with zero downtime.",
+        "nodes": [
+            {"name": "Billing Ingestion", "friendlyTitle": "📊 1. Ingest Multi-Cloud Billing Streams", "friendlyDesc": "Aggregates real-time cost telemetry from AWS, GCP, and Azure simultaneously.", "tools": "☁️ Cloud Billing API"},
+            {"name": "Cost Normalizer", "friendlyTitle": "🔄 2. Normalize Currency & Usage", "friendlyDesc": "Normalizes disparate usage formats into unified JSON cost metrics.", "tools": "⚙️ OpenCost Prometheus"},
+            {"name": "Model Rightsizer", "friendlyTitle": "🎯 3. Calculate Model Rightsizing", "friendlyDesc": "Evaluates task complexity and recommends smaller, cost-effective frontier models.", "tools": "🧠 Unit Economics AI"},
+            {"name": "Spend Quota Enforcer", "friendlyTitle": "🛑 4. Enforce Departmental Budgets", "friendlyDesc": "Applies automated circuit breakers before monthly spend caps are breached.", "tools": "🔒 Vault Quota Leases"},
+            {"name": "Anomaly Detector", "friendlyTitle": "⚠️ 5. Detect Sudden Spending Surges", "friendlyDesc": "Identifies abnormal query volume spikes and flags potential runaway loops.", "tools": "📈 Statistical Profiler"},
+            {"name": "ERP Chargeback", "friendlyTitle": "💼 6. Allocate Departmental Costs", "friendlyDesc": "Generates immutable chargeback logs directly mapped to cost center IDs.", "tools": "🗄️ ERP Reconciliation"},
+            {"name": "Financial Ledger", "friendlyTitle": "📋 7. Post Double-Entry Journal Records", "friendlyDesc": "Posts verified balance records to corporate accounting systems.", "tools": "📜 Financial Ledger Bridge"},
+            {"name": "FinOps Certificate", "friendlyTitle": "🛡️ 8. Seal Audit-Ready Efficiency Proof", "friendlyDesc": "Generates cryptographic proof of compliance with FinOps governance mandates.", "tools": "🔒 PQC Signed Receipt"}
+        ]
+    },
+    "contractintel": {
+        "category": "finance",
+        "icon": "📜",
+        "badge": "Finance & Legal",
+        "friendlyName": "Autonomous Contract Intelligence & Compliance Redlining",
+        "techName": "Contract Intelligence Agent",
+        "friendlyProblem": "Vendor Master Services Agreements and DPAs take weeks for legal teams to manually review and redline.",
+        "friendlyGoal": "Parse legal contracts into structured clause registries, classify regulatory risk, flag uncapped liabilities, extract milestone deadlines, and generate protective redlines.",
+        "friendlyTakeaway": "Automated contract intelligence accelerates turnaround from weeks to seconds while eliminating hidden liability exposures.",
+        "nodes": [
+            {"name": "Document Ingestion", "friendlyTitle": "📄 1. Parse Legal PDF & DOCX Files", "friendlyDesc": "Converts unstructured legal agreements into standardized JSON ASTs.", "tools": "📑 Multimodal OCR"},
+            {"name": "Clause Extractor", "friendlyTitle": "🔍 2. Extract Key Contract Clauses", "friendlyDesc": "Identifies indemnification, limitation of liability, and governing law sections.", "tools": "🧠 Legal Clause Classifier"},
+            {"name": "Regulatory Auditor", "friendlyTitle": "⚖️ 3. Audit Regulatory Frameworks", "friendlyDesc": "Verifies compliance against GDPR, HIPAA, SOC 2, and CCPA standards.", "tools": "🛡️ Compliance Engine"},
+            {"name": "Risk Scorer", "friendlyTitle": "⚠️ 4. Score Liability Exposures", "friendlyDesc": "Flags uncapped indemnification and high-risk terms with P0-P3 severity tags.", "tools": "📊 Risk Matrix Engine"},
+            {"name": "Deadline Tracker", "friendlyTitle": "📅 5. Map Milestones & Renewal Dates", "friendlyDesc": "Extracts auto-renewal dates and syncs them to executive calendars.", "tools": "📆 Calendar & CLM Bridge"},
+            {"name": "Redline Generator", "friendlyTitle": "✏️ 6. Generate Protective Redlines", "friendlyDesc": "Drafts customized compromise language protecting enterprise interests.", "tools": "📝 Redline Synthesizer"},
+            {"name": "CLM Synchronization", "friendlyTitle": "💼 7. Sync with DocuSign & CLM", "friendlyDesc": "Publishes redlines and approval packages to enterprise contract repositories.", "tools": "☁️ DocuSign CLM API"},
+            {"name": "Cryptographic Seal", "friendlyTitle": "🔒 8. Apply PQC Cryptographic Seal", "friendlyDesc": "Seals verified document state using NIST ML-KEM-768 quantum-safe signatures.", "tools": "🛡️ NIST FIPS 203 Seal"}
+        ]
+    },
+    "missedcalltextback": {
+        "category": "beginner",
+        "icon": "📱",
+        "badge": "⭐ Beginner Friendly",
+        "friendlyName": "Autonomous Missed Call Recovery & Sub-3s Text-Back",
+        "techName": "Missed Call / Text Back Agent",
+        "friendlyProblem": "67% of inbound callers hang up when directed to voicemail and immediately contact competitors.",
+        "friendlyGoal": "Intercept dropped or unanswered calls, transcribe voicemail audio, identify the prospect via CRM, compose a personalized text-back, and dispatch it via SMS in under 3 seconds.",
+        "friendlyTakeaway": "Instant sub-3s text responses boost inbound lead recovery by over 300% with 0 bytes of persistent disk storage.",
+        "nodes": [
+            {"name": "Telephony Ingestion", "friendlyTitle": "📞 1. Detect Missed Inbound Ring", "friendlyDesc": "Picks up unanswered telephony webhook within 120ms of carrier disconnect.", "tools": "📱 Twilio / Telnyx Webhook"},
+            {"name": "Caller Resolver", "friendlyTitle": "🔍 2. Resolve Contact Identity", "friendlyDesc": "Matches caller number against HubSpot CRM to personalize the outreach.", "tools": "🗄️ HubSpot CRM Bridge"},
+            {"name": "Audio Transcriber", "friendlyTitle": "🎙️ 3. Transcribe Voicemail Audio", "friendlyDesc": "Transcribes caller audio message and flags intent and urgency.", "tools": "⚡ Speech-to-Text AI"},
+            {"name": "SMS Composer", "friendlyTitle": "💬 4. Compose Personalized SMS", "friendlyDesc": "Drafts context-specific greeting offering callback or appointment booking.", "tools": "🧠 Dynamic Context Engine"},
+            {"name": "Carrier Dispatcher", "friendlyTitle": "🚀 5. Dispatch SMS Sub-3s", "friendlyDesc": "Sends text response through cellular carrier within 2.4s total SLA.", "tools": "📱 Carrier Messaging API"},
+            {"name": "Calendar Scheduler", "friendlyTitle": "📅 6. Coordinate Callback Slot", "friendlyDesc": "Provides 1-click scheduling link matching representative availability.", "tools": "📆 Google Calendar Sync"},
+            {"name": "CRM Logger", "friendlyTitle": "💼 7. Log Activity Record", "friendlyDesc": "Records full transcript, SMS status, and callback slot in CRM history.", "tools": "☁️ CRM Activity API"},
+            {"name": "SLA Verifier", "friendlyTitle": "🛡️ 8. Seal Recovery Attestation", "friendlyDesc": "Verifies sub-3s SLA delivery in RAM-only enclave with zero disk retention.", "tools": "🔒 Cryptographic Proof"}
+        ]
+    },
+    "llmops": {
+        "category": "it",
+        "icon": "🧪",
+        "badge": "AI Reliability",
+        "friendlyName": "Continuous Prompt Evaluation & Canary Benchmark Router",
+        "techName": "LLMOps & Prompt Evaluation Agent",
+        "friendlyProblem": "Frontier model updates silently break system prompts, introduce hallucinations, and degrade response quality in production.",
+        "friendlyGoal": "Run continuous prompt evaluations across golden benchmarks, detect semantic drift, evaluate hallucination rate, and dynamically route traffic to the highest-performing frontier model.",
+        "friendlyTakeaway": "Automated prompt ops ensures enterprise AI workflows never silently break, cutting token costs by 42% while guaranteeing zero hallucination drift.",
+        "nodes": [
+            {"name": "Prompt Ingestion", "friendlyTitle": "📥 1. Ingest Prompt Template", "friendlyDesc": "Loads system prompt and test dataset from version-controlled repository.", "tools": "📂 Git Repository Hook"},
+            {"name": "Drift Engine", "friendlyTitle": "📐 2. Calculate Semantic Drift", "friendlyDesc": "Computes cosine distance embeddings against baseline response distributions.", "tools": "🧠 Vector Distance AI"},
+            {"name": "Hallucination Verifier", "friendlyTitle": "🛡️ 3. Verify Groundedness Index", "friendlyDesc": "Evaluates RAG context faithfulness and ensures zero hallucination leakage.", "tools": "🔬 RAG Triad Evaluator"},
+            {"name": "Canary Benchmarker", "friendlyTitle": "⚡ 4. Benchmark Frontier Models", "friendlyDesc": "Tests Gemini 2.5 Flash, Mistral Large, and Claude 3.7 Sonnet on latency and quality.", "tools": "🚀 Frontier Model API"},
+            {"name": "Pareto Router", "friendlyTitle": "⚖️ 5. Optimize Cost-Latency Frontier", "friendlyDesc": "Dynamically selects optimal model, achieving 42% cost reduction within SLA.", "tools": "📊 Pareto Frontier Router"},
+            {"name": "Prompt Mutator", "friendlyTitle": "🔧 6. Autotune Prompt via DSPy", "friendlyDesc": "Employs reflection loops to patch weak instructions and eliminate edge-case failures.", "tools": "⚙️ DSPy Teleprompter"},
+            {"name": "CI/CD Gatekeeper", "friendlyTitle": "🚦 7. Block Regression in CI/CD", "friendlyDesc": "Fails GitHub Actions check if quality drops below 99.0% threshold.", "tools": "☁️ GitHub Actions Gate"},
+            {"name": "Attestation Verifier", "friendlyTitle": "📜 8. Seal Benchmark Attestation", "friendlyDesc": "Generates verifiable cryptographic receipt of model evaluation compliance.", "tools": "🔒 Enclave Attestation Seal"}
+        ]
     }
 }
 

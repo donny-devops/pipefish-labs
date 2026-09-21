@@ -256,7 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Category Filter Chips -->
     <div class="category-filter-chips ai">
-      <button class="cat-chip active" onclick="filterCategory('all', this)">🌐 All Scenarios (25)</button>
+      <button class="cat-chip active" onclick="filterCategory('all', this)">🌐 All Scenarios (26)</button>
       <button class="cat-chip" onclick="filterCategory('beginner', this)">⭐ Beginner Favorites</button>
       <button class="cat-chip" onclick="filterCategory('sales', this)">💼 Sales &amp; Growth</button>
       <button class="cat-chip" onclick="filterCategory('security', this)">🛡️ Security &amp; Privacy</button>
@@ -290,6 +290,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="demo-tab" onclick="switchDemo('finops', this)">FinTech Ops &amp; Market Research Swarm</button>
       <button class="demo-tab" onclick="switchDemo('contractintel', this)">Contract Intelligence &amp; Documentation Swarm</button>
       <button class="demo-tab" onclick="switchDemo('missedcalltextback', this)">Missed Call / Text Back Agent</button>
+      <button class="demo-tab" onclick="switchDemo('llmops', this)">LLMOps &amp; Prompt Evaluation Agent</button>
     </div>
 
 
@@ -1143,6 +1144,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div><strong style="color:var(--magenta)">Emits:</strong> <span style="color:var(--text-strong)">Personalized SMS payload, CRM activity record, callback calendar event, lead recovery attestation, audit log entry, Receptionist Agent (01) handoff signal</span></div>
               </div>
             </div>
+
+            <!-- 26: LLMOps & Prompt Evaluation Agent -->
+            <div class="agent-grid-card" style="background:rgba(12,14,24,0.85);border:1px solid var(--border-strong);border-radius:var(--r-md);padding:20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(0,0,0,0.25);transition:transform .25s,border-color .25s">
+              <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                  <span style="font-family:var(--font-mono);font-size:13.5px;font-weight:800;color:var(--cyan);letter-spacing:0.04em">26 — LLMOps &amp; Prompt Evaluation Agent</span>
+                  <span style="font-family:var(--font-mono);font-size:10px;color:var(--cyan);background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);padding:2px 7px;border-radius:4px">NODE 26</span>
+                </div>
+                <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--magenta);margin-bottom:10px;line-height:1.35">Continuous Prompt Evaluation, Semantic Drift Detection &amp; Canary Benchmark Router</div>
+                <p style="font-size:12.5px;line-height:1.6;color:var(--text-body);margin-bottom:14px">Continuously tests prompt templates against golden ground-truth evaluation suites, detects semantic drift and hallucination rate anomalies, benchmarks latency and cost across frontier models (Gemini 2.5 Flash, Mistral Large, Claude 3.7 Sonnet), and dynamically routes traffic to the optimal model while blocking regressions in CI/CD.</p>
+                <table style="width:100%;border-collapse:collapse;font-size:11px;font-family:var(--font-mono);margin-bottom:14px;background:rgba(3,7,18,0.6);border-radius:4px;overflow:hidden">
+                  <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05)"><td style="padding:5px 8px;color:var(--text-dim);font-weight:600;width:38%">Domain</td><td style="padding:5px 8px;color:var(--text-strong);font-weight:700">AI-INFRA · SRE</td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05)"><td style="padding:5px 8px;color:var(--text-dim);font-weight:600;width:38%">Trigger</td><td style="padding:5px 8px;color:var(--text-strong);font-weight:700">EVENT-DRIVEN · CI/CD WEBHOOK · TELEMETRY STREAM</td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05)"><td style="padding:5px 8px;color:var(--text-dim);font-weight:600;width:38%">I/O Mode</td><td style="padding:5px 8px;color:var(--text-strong);font-weight:700">EVALUATE → BENCHMARK → ROUTE</td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05)"><td style="padding:5px 8px;color:var(--text-dim);font-weight:600;width:38%">Channel</td><td style="padding:5px 8px;color:var(--text-strong);font-weight:700">DSPY · FRONTIER LLMS · GITHUB ACTIONS · PROMETHEUS</td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05)"><td style="padding:5px 8px;color:var(--text-dim);font-weight:600;width:38%">Sub-Agents</td><td style="padding:5px 8px;color:var(--text-strong);font-weight:700">PROMPT INGESTOR · DRIFT ANALYZER · BENCHMARKER · PARETO ROUTER</td></tr>
+                    <tr><td style="padding:5px 8px;color:var(--text-dim);font-weight:600;width:38%">Latency Target</td><td style="padding:5px 8px;color:var(--text-strong);font-weight:700">&lt; 180ms (Drift Scoring) · &lt; 2.5s (Canary Eval)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="background:rgba(3,7,18,0.75);border:1px solid rgba(0,212,255,0.15);border-radius:6px;padding:10px 12px;font-size:11.5px;line-height:1.55;font-family:var(--font-mono)">
+                <div style="margin-bottom:6px"><strong style="color:var(--cyan)">Consumes:</strong> <span style="color:var(--text-body)">Prompt template, golden evaluation test suite, model output completions, RAG retrieval context, cost/latency budget thresholds, prior benchmark baseline</span></div>
+                <div><strong style="color:var(--magenta)">Emits:</strong> <span style="color:var(--text-strong)">Semantic drift score, hallucination/groundedness index, Pareto optimal routing directive, DSPy prompt patch candidate, CI/CD PR status check seal, OpenTelemetry trace payload</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1732,6 +1759,20 @@ const scenarios = {
       { num: "Node 07", title: "CRM Activity & Transcript Logger", desc: "Creates a complete activity record with missed call timestamp, SMS sent confirmation, callback scheduled, and transcript." },
       { num: "Node 08", title: "SLA Recovery Attestation Verifier", desc: "Seals a tamper-proof audit log proving the full recovery pipeline completed within SLA for compliance reporting." }
     ]
+  },
+  llmops: {
+    type: "LIVE INBOUND SIGNAL - AI-INFRA & SRE LLMOPS ENGINE",
+    payload: 'LLMOPS EVALUATION TRIGGER - "Evaluate prompt template enterprise_system_prompt_v2 across golden evaluation test suite (2,400 runs). Benchmark latency, semantic drift, hallucination rate, and compute cost across Gemini 2.5 Flash, Mistral Large, and Claude 3.7 Sonnet."',
+    nodes: [
+      { num: "Node 01", title: "Prompt Ingestion Agent", desc: "Loads prompt template and golden benchmark datasets from version-controlled git repositories." },
+      { num: "Node 02", title: "Semantic Drift Engine", desc: "Computes cosine distance embeddings and flags semantic divergence against baseline distributions." },
+      { num: "Node 03", title: "Hallucination Verifier", desc: "Evaluates RAG context faithfulness, groundedness, and answer relevance to ensure zero hallucinations." },
+      { num: "Node 04", title: "Canary Benchmarker", desc: "Runs parallel canary executions across Gemini 2.5 Flash, Mistral Large, and Claude 3.7 Sonnet." },
+      { num: "Node 05", title: "Pareto Frontier Router", desc: "Optimizes cost-latency tradeoff, routing production traffic to the lowest-cost model meeting accuracy thresholds." },
+      { num: "Node 06", title: "Automated Prompt Mutator", desc: "Employs reflection loops and DSPy optimization to patch edge-case reasoning failures." },
+      { num: "Node 07", title: "CI/CD Gatekeeper", desc: "Blocks breaking pull requests in GitHub Actions if quality scores fall below 99.0%." },
+      { num: "Node 08", title: "Attestation Verifier", desc: "Seals cryptographic verification receipt of prompt safety and cost metrics in zero-retention enclave." }
+    ]
   }
 };
 
@@ -1949,6 +1990,65 @@ window.copyDemoPayload = function() {
       setTimeout(() => { btn.innerText = orig; }, 2000);
     }
   });
+};
+
+window.agentCategoryMap = {
+  receptionist: 'beginner',
+  sales: 'sales',
+  logistics: 'beginner',
+  integration: 'it',
+  quantum: 'security',
+  reverse: 'security',
+  crypto: 'security',
+  errorcorr: 'it',
+  trend: 'sales',
+  market: 'finance',
+  codescan: 'security',
+  docs: 'it',
+  observability: 'it',
+  revops: 'sales',
+  analytics: 'finance',
+  auditing: 'finance',
+  logtriage: 'it',
+  erp: 'finance',
+  trafficrouter: 'it',
+  networkdispatch: 'it',
+  selfimproving: 'it',
+  systemoptimizing: 'it',
+  finops: 'finance',
+  contractintel: 'finance',
+  missedcalltextback: 'beginner',
+  llmops: 'it'
+};
+
+window.filterCategory = function(cat, btn) {
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const tabs = document.querySelectorAll('.demo-tab');
+  let firstVisible = null;
+  tabs.forEach(tab => {
+    const onclickStr = tab.getAttribute('onclick') || '';
+    const m = onclickStr.match(/['"]([^'"]+)['"]/);
+    const key = m ? m[1] : '';
+    if (!key) return;
+
+    let match = (cat === 'all');
+    if (!match && window.agentCategoryMap) {
+      match = (window.agentCategoryMap[key] === cat);
+    }
+    if (match) {
+      tab.style.display = 'inline-block';
+      if (!firstVisible) firstVisible = tab;
+    } else {
+      tab.style.display = 'none';
+    }
+  });
+
+  const activeTab = document.querySelector('.demo-tab.active');
+  if (activeTab && activeTab.style.display === 'none' && firstVisible) {
+    firstVisible.click();
+  }
 };
 
 function switchDemo(key, btn) {

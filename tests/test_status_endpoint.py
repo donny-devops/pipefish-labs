@@ -11,14 +11,14 @@ Verifies:
 import unittest
 from datetime import datetime, timezone
 
-# Canonical 25 agent keys
-ALL_25_AGENTS = {
+# Canonical 26 agent keys
+ALL_26_AGENTS = {
     "receptionist", "sales", "logistics", "integration", "quantum",
     "reverse", "crypto", "errorcorr", "trend", "market",
     "codescan", "docs", "observability", "revops", "analytics",
     "auditing", "logtriage", "erp", "trafficrouter", "networkdispatch",
     "selfimproving", "systemoptimizing", "finops", "contractintel",
-    "missedcalltextback"
+    "missedcalltextback", "llmops"
 }
 
 # 8 Core Swarms
@@ -28,7 +28,7 @@ EXPECTED_SWARMS = {
     "Logistics & Operations": ["logistics", "erp"],
     "Post-Quantum Cryptography & Enclave Security": ["quantum", "crypto", "reverse", "errorcorr", "auditing"],
     "Autonomous Infrastructure & Edge Routing": ["integration", "trafficrouter", "networkdispatch"],
-    "DevSecOps & SRE Autonomous": ["codescan", "docs", "observability", "logtriage", "systemoptimizing", "selfimproving"],
+    "DevSecOps & SRE Autonomous": ["codescan", "docs", "observability", "logtriage", "systemoptimizing", "selfimproving", "llmops"],
     "Market Intelligence": ["trend", "market", "analytics"],
     "Enterprise Legal & Cloud FinOps": ["finops", "contractintel"]
 }
@@ -70,7 +70,7 @@ def build_status_payload() -> dict:
             "pqc_key_rotation_schedule": "HOURLY",
             "active_pqc_cipher": "ML-KEM-768 (NIST FIPS 203)"
         },
-        "total_registered_agents": 25,
+        "total_registered_agents": 26,
         "timestamp": timestamp
     }
 
@@ -86,10 +86,10 @@ class TestStatusEndpoint(unittest.TestCase):
         sla = self.status_data["uptime_sla"]
         self.assertIn("99.99", sla["current_month"])
         self.assertEqual(sla["incidents_last_90_days"], 0)
-        self.assertEqual(self.status_data["total_registered_agents"], 25)
+        self.assertEqual(self.status_data["total_registered_agents"], 26)
 
-    def test_all_25_agents_accounted_in_swarms(self):
-        """Ensure all 25 canonical agent keys are assigned across the 8 swarms without duplicates or omissions."""
+    def test_all_26_agents_accounted_in_swarms(self):
+        """Ensure all 26 canonical agent keys are assigned across the 8 swarms without duplicates or omissions."""
         swarms = self.status_data["swarms"]
         self.assertEqual(len(swarms), 8)
 
@@ -99,8 +99,8 @@ class TestStatusEndpoint(unittest.TestCase):
             self.assertTrue(len(swarm_info["agents"]) >= 2)
             aggregated_agents.extend(swarm_info["agents"])
 
-        self.assertEqual(len(aggregated_agents), 25)
-        self.assertEqual(set(aggregated_agents), ALL_25_AGENTS)
+        self.assertEqual(len(aggregated_agents), 26)
+        self.assertEqual(set(aggregated_agents), ALL_26_AGENTS)
 
     def test_edge_pops_coverage_and_latencies(self):
         """Ensure all 5 global edge PoPs are healthy and sub-100ms."""

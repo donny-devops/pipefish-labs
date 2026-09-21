@@ -66,7 +66,7 @@ def test_endpoints():
     api_status = json.loads(res.read().decode('utf-8'))
     assert res.getcode() == 200, f"Expected 200, got {res.getcode()}"
     assert api_status.get("status") == "OPERATIONAL"
-    assert api_status.get("total_registered_agents") == 25
+    assert api_status.get("total_registered_agents") == 26
     print(f"[PASS] 7. GET  /api/v1/status                 -> HTTP {res.getcode()} (Mesh: {api_status['status']}, Swarms: {len(api_status['swarms'])}, Agents: {api_status['total_registered_agents']})")
 
     # 8. Chaos Status API Endpoint

@@ -5,7 +5,7 @@
  * Edge Capabilities:
  * - Inbound Webhook Router with HMAC-SHA256 signature verification & anti-replay
  * - Inbound Mailhook parser converting email triggers to Inbound Telemetry Payloads (LIV)
- * - Autonomous Multi-Agent DAG Execution Graph Dispatcher (25 Nodes)
+ * - Autonomous Multi-Agent DAG Execution Graph Dispatcher (26 Nodes)
  * - Cron Trigger Scheduled Task Handler for periodic log triage & compliance auditing
  * - High-speed edge status & security telemetry endpoints
  * - Static asset fallback for edge delivery
@@ -70,6 +70,7 @@ const AGENT_CATALOG: Record<string, { id: string; name: string; domain: string; 
   finops: { id: "23", name: "FinTech Ops Agent", domain: "FINTECH · PAYMENTS", mode: "VALIDATE → RECONCILE → ROUTE", pqc: true },
   contractintel: { id: "24", name: "Contract Intelligence Agent", domain: "SECURITY · COMPLIANCE", mode: "PARSE → CLASSIFY → FLAG", pqc: true },
   missedcalltextback: { id: "25", name: "Missed Call / Text Back Agent", domain: "COMMS", mode: "DETECT → COMPOSE → DISPATCH", pqc: true },
+  llmops: { id: "26", name: "LLMOps & Prompt Evaluation Agent", domain: "AI-INFRA · SRE", mode: "EVALUATE → BENCHMARK → ROUTE", pqc: true },
 };
 
 const AGENT_ALIASES: Record<string, string> = {
@@ -78,6 +79,9 @@ const AGENT_ALIASES: Record<string, string> = {
   research: "analytics",
   analysis: "auditing",
   audit: "auditing",
+  prompt: "llmops",
+  evals: "llmops",
+  llm: "llmops",
 };
 
 function resolveAgentKey(key: string): string {
@@ -100,7 +104,7 @@ const MCP_TOOLS = [
             "docs", "observability", "revops", "analytics", "auditing",
             "logtriage", "erp", "trafficrouter", "networkdispatch",
             "selfimproving", "systemoptimizing", "finops", "contractintel",
-            "missedcalltextback"
+            "missedcalltextback", "llmops"
           ],
           description: "The specific agent scenario graph to execute."
         },
@@ -206,8 +210,27 @@ const MCP_TOOLS = [
     }
   },
   {
+    name: "llmops_eval_run",
+    description: "Execute continuous prompt evaluation, semantic drift detection, and canary benchmark routing across frontier LLMs.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        prompt_template: {
+          type: "string",
+          description: "The prompt template or system instruction identifier to evaluate."
+        },
+        models: {
+          type: "array",
+          items: { type: "string" },
+          description: "Frontier models to benchmark (e.g. ['gemini-2.5-flash', 'mistral-large-2411', 'claude-3-7-sonnet'])."
+        }
+      },
+      required: ["prompt_template"]
+    }
+  },
+  {
     name: "list_agents",
-    description: "List all 25 registered PipeFish Labs autonomous agent scenario keys with their domain and execution mode metadata.",
+    description: "List all 26 registered PipeFish Labs autonomous agent scenario keys with their domain and execution mode metadata.",
     inputSchema: {
       type: "object",
       properties: {},
@@ -442,6 +465,40 @@ function handleMcpJsonRpc(req: JsonRpcRequest): Record<string, unknown> | null {
                 disk_writes_bytes: 0,
                 enclave_isolation: "RAM_ONLY",
                 status: "EXECUTED"
+              }, null, 2)
+            }
+          ]
+        }
+      };
+    }
+
+    if (toolName === "llmops_eval_run") {
+      const promptTemplate = String(args.prompt_template || "enterprise_system_prompt_v2");
+      const modelList = Array.isArray(args.models) && args.models.length > 0
+        ? args.models
+        : ["gemini-2.5-flash", "mistral-large-2411", "claude-3-7-sonnet"];
+      return {
+        jsonrpc: "2.0",
+        id,
+        result: {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify({
+                prompt_template: promptTemplate,
+                eval_metrics: {
+                  semantic_drift_score: 0.012,
+                  hallucination_rate: 0.000,
+                  groundedness_index: 0.994,
+                  latency_p95_ms: 184
+                },
+                benchmark_routing: {
+                  primary_model: "gemini-2.5-flash",
+                  fallback_model: "mistral-large-2411",
+                  cost_reduction_pct: 42.5
+                },
+                evaluated_models: modelList,
+                status: "EVALUATED_OPTIMAL"
               }, null, 2)
             }
           ]
@@ -779,6 +836,8 @@ export default {
           targetKey = "erp";
         } else if (lowerText.includes("cve") || lowerText.includes("vulnerability") || lowerText.includes("code scan") || lowerText.includes("ast")) {
           targetKey = "codescan";
+        } else if (lowerText.includes("prompt") || lowerText.includes("llm") || lowerText.includes("eval") || lowerText.includes("drift") || lowerText.includes("benchmark")) {
+          targetKey = "llmops";
         }
 
         const livEnvelope = {
@@ -1002,7 +1061,7 @@ export default {
           },
           "DevSecOps & SRE Autonomous": {
             status: "OPERATIONAL",
-            agents: ["codescan", "docs", "observability", "logtriage", "systemoptimizing", "selfimproving"],
+            agents: ["codescan", "docs", "observability", "logtriage", "systemoptimizing", "selfimproving", "llmops"],
             latency_avg_ms: 110,
             active_sessions: 31
           },
@@ -1027,7 +1086,7 @@ export default {
           pqc_key_rotation_schedule: "HOURLY",
           active_pqc_cipher: "ML-KEM-768 (NIST FIPS 203)"
         },
-        total_registered_agents: 25,
+        total_registered_agents: 26,
         timestamp
       });
     }
@@ -1252,7 +1311,7 @@ export default {
           },
           mesh_status: "SELF_HEALED",
           active_swarms_healthy: 8,
-          total_agents_operational: 25,
+          total_agents_operational: 26,
           timestamp: new Date().toISOString()
         });
       } catch {

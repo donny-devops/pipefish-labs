@@ -40,8 +40,8 @@ class TestRemoteMCPProtocol(unittest.TestCase):
         self.assertEqual(init_response["result"]["serverInfo"]["name"], "pipefish-agent-mesh")
 
     def test_remote_tools_list_schema(self):
-        """Ensure all 8 remote tools are registered with valid input schemas."""
-        self.assertEqual(len(TOOLS), 8)
+        """Ensure all 9 remote tools are registered with valid input schemas."""
+        self.assertEqual(len(TOOLS), 9)
         names = {t["name"] for t in TOOLS}
         expected = {
             "trigger_agent_graph",
@@ -51,9 +51,26 @@ class TestRemoteMCPProtocol(unittest.TestCase):
             "vault_lease_issue",
             "ebpf_kernel_profile",
             "db_zdr_query",
+            "llmops_eval_run",
             "list_agents"
         }
         self.assertEqual(names, expected)
+
+    def test_llmops_eval_run_tool(self):
+        """Test llmops_eval_run tool execution for prompt evaluation and model benchmarking."""
+        call_params = {
+            "name": "llmops_eval_run",
+            "arguments": {
+                "prompt_template": "prod_system_v2",
+                "models": ["gemini-2.5-flash", "mistral-large-2411"]
+            }
+        }
+        res = handle_call_tool(call_params)
+        self.assertFalse(res.get("isError", False))
+        content = json.loads(res["content"][0]["text"])
+        self.assertEqual(content["status"], "EVALUATED_OPTIMAL")
+        self.assertEqual(content["eval_metrics"]["hallucination_rate"], 0.0)
+        self.assertIn("gemini-2.5-flash", content["evaluated_models"])
 
     def test_trigger_agent_graph_missed_call(self):
         """Test trigger_agent_graph tool execution for missedcalltextback agent."""
@@ -73,18 +90,19 @@ class TestRemoteMCPProtocol(unittest.TestCase):
         self.assertEqual(content["zdr_retention_bytes"], 0)
 
     def test_list_agents_complete_mesh(self):
-        """Test list_agents tool returns all 25 agent nodes."""
+        """Test list_agents tool returns all 26 agent nodes."""
         call_params = {"name": "list_agents", "arguments": {}}
         res = handle_call_tool(call_params)
         self.assertFalse(res.get("isError", False))
         content = json.loads(res["content"][0]["text"])
-        self.assertEqual(content["total_agents"], 25)
+        self.assertEqual(content["total_agents"], 26)
         keys = {a["key"] for a in content["agents"]}
         self.assertIn("receptionist", keys)
         self.assertIn("missedcalltextback", keys)
         self.assertIn("finops", keys)
         self.assertIn("contractintel", keys)
         self.assertIn("quantum", keys)
+        self.assertIn("llmops", keys)
 
     def test_verify_enclave_status_attestation(self):
         """Test verify_enclave_status tool attestation."""

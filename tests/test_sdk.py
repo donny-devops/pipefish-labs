@@ -96,15 +96,33 @@ class TestPipeFishAgentMesh(unittest.TestCase):
         self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
         self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
 
-    def test_trigger_all_25_scenario_graphs(self):
-        """Verifies that all 25 canonical scenario keys execute an 8-node graph with 0-byte retention."""
+    def test_trigger_graph_execution_llmops(self):
+        """Agent 26 — LLMOps & Prompt Evaluation; AI-INFRA · SRE domain."""
+        payload = {
+            "prompt_template": "enterprise_system_prompt_v2",
+            "eval_suite": "golden_benchmark_v1",
+            "max_drift_threshold": 0.05
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="llmops",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "llmops")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
+    def test_trigger_all_26_scenario_graphs(self):
+        """Verifies that all 26 canonical scenario keys execute an 8-node graph with 0-byte retention."""
         canonical_keys = [
             "receptionist", "sales", "logistics", "integration", "quantum",
             "reverse", "crypto", "errorcorr", "trend", "market", "codescan",
             "docs", "observability", "revops", "analytics", "auditing",
             "logtriage", "erp", "trafficrouter", "networkdispatch",
             "selfimproving", "systemoptimizing", "finops", "contractintel",
-            "missedcalltextback"
+            "missedcalltextback", "llmops"
         ]
         for key in canonical_keys:
             res = self.client.trigger_graph_execution(key, {"test_probe": True})

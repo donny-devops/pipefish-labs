@@ -37,7 +37,8 @@ export type AgentScenarioKey =
   | "systemoptimizing"
   | "finops"
   | "contractintel"
-  | "missedcalltextback";
+  | "missedcalltextback"
+  | "llmops";
 
 /**
  * Remote MCP tools exposed by the PipeFish Agent Mesh.
@@ -50,6 +51,7 @@ export type RemoteMcpTool =
   | "vault_lease_issue"
   | "ebpf_kernel_profile"
   | "db_zdr_query"
+  | "llmops_eval_run"
   | "list_agents";
 
 /**
@@ -307,7 +309,7 @@ export class PipeFishAgentMesh {
       zeroDataRetention: true,
       pqcAlgorithm: "ML-KEM-768 (NIST FIPS 203)",
       mtlsCipher: "TLS_AES_256_GCM_SHA384",
-      activeAgents: 25,
+      activeAgents: 26,
       lastAttestedTimestamp: new Date().toISOString()
     };
   }
@@ -342,7 +344,7 @@ export class PipeFishAgentMesh {
   }
 
   /**
-   * Returns list of all 25 registered agent scenarios supported by the mesh.
+   * Returns list of all 26 registered agent scenarios supported by the mesh.
    */
   public listAgents(): Array<{ key: AgentScenarioKey; domain: string }> {
     return [
@@ -370,7 +372,8 @@ export class PipeFishAgentMesh {
       { key: "systemoptimizing", domain: "Kernel & Systems" },
       { key: "finops", domain: "Cloud FinOps" },
       { key: "contractintel", domain: "Legal & Contracts" },
-      { key: "missedcalltextback", domain: "Carrier Voice & Comms" }
+      { key: "missedcalltextback", domain: "Carrier Voice & Comms" },
+      { key: "llmops", domain: "AI-INFRA · SRE" }
     ];
   }
 
@@ -381,7 +384,7 @@ export class PipeFishAgentMesh {
     return {
       status: "healthy",
       version: VERSION,
-      nodes: 25
+      nodes: 26
     };
   }
 }

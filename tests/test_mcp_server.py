@@ -4,7 +4,7 @@ from sdk.mcp_server import TOOLS, handle_call_tool
 
 class TestMCPServer(unittest.TestCase):
     def test_tools_list(self):
-        self.assertEqual(len(TOOLS), 8)
+        self.assertEqual(len(TOOLS), 9)
         tool_names = [t["name"] for t in TOOLS]
         self.assertIn("trigger_agent_graph", tool_names)
         self.assertIn("get_agent_spec", tool_names)
@@ -13,6 +13,7 @@ class TestMCPServer(unittest.TestCase):
         self.assertIn("vault_lease_issue", tool_names)
         self.assertIn("ebpf_kernel_profile", tool_names)
         self.assertIn("db_zdr_query", tool_names)
+        self.assertIn("llmops_eval_run", tool_names)
         self.assertIn("list_agents", tool_names)
 
     def test_call_k8s_autoscale_check(self):
@@ -60,13 +61,14 @@ class TestMCPServer(unittest.TestCase):
         params = {"name": "list_agents", "arguments": {}}
         res = handle_call_tool(params)
         data = json.loads(res["content"][0]["text"])
-        self.assertEqual(data["total_agents"], 25)
+        self.assertEqual(data["total_agents"], 26)
         keys = [a["key"] for a in data["agents"]]
         self.assertIn("missedcalltextback", keys)
         self.assertIn("finops", keys)
         self.assertIn("contractintel", keys)
         self.assertIn("receptionist", keys)
         self.assertIn("systemoptimizing", keys)
+        self.assertIn("llmops", keys)
 
     def test_call_unknown_tool_returns_error(self):
         params = {"name": "nonexistent_tool", "arguments": {}}
