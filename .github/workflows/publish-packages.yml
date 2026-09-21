@@ -3,6 +3,9 @@ name: Publish Packages (PyPI & npm)
 on:
   release:
     types: [published]
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
     inputs:
       publish_pypi:
@@ -67,7 +70,12 @@ jobs:
           mkdir -p dist
           npx -y typescript@latest pipefish_sdk.ts --declaration --outDir dist/ || cp pipefish_sdk.ts dist/index.js
 
-      - name: Publish to npm
-        run: npm publish --access public
+      - name: Publish to npm (with Provenance)
+        run: |
+          if [ -n "${{ secrets.NPM_TOKEN }}" ]; then
+            npm publish --access public --provenance || npm publish --access public
+          else
+            echo "::warning::NPM_TOKEN not configured. Skipping npm publish."
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

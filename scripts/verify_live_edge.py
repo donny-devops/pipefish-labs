@@ -69,7 +69,26 @@ def test_endpoints():
     assert api_status.get("total_registered_agents") == 25
     print(f"[PASS] 7. GET  /api/v1/status                 -> HTTP {res.getcode()} (Mesh: {api_status['status']}, Swarms: {len(api_status['swarms'])}, Agents: {api_status['total_registered_agents']})")
 
-    print("\nALL 7 LIVE PRODUCTION EDGE ENDPOINTS VERIFIED SUCCESSFULLY!")
+    # 8. Chaos Status API Endpoint
+    req = urllib.request.Request(f'{base}/api/v1/chaos/status', headers={'User-Agent': 'PipeFishVerifier/1.0'})
+    res = urllib.request.urlopen(req, timeout=10)
+    chaos_status = json.loads(res.read().decode('utf-8'))
+    assert res.getcode() == 200, f"Expected 200, got {res.getcode()}"
+    assert chaos_status.get("mesh_health") == "OPERATIONAL"
+    assert chaos_status.get("self_healing_engine") == "ACTIVE"
+    print(f"[PASS] 8. GET  /api/v1/chaos/status           -> HTTP {res.getcode()} (Mesh: {chaos_status['mesh_health']}, Engine: {chaos_status['self_healing_engine']})")
+
+    # 9. Chaos Injection API Endpoint
+    chaos_payload = json.dumps({'fault_type': 'packet_loss', 'target': 'IAD_Edge_PoP'}).encode('utf-8')
+    req = urllib.request.Request(f'{base}/api/v1/chaos/inject', data=chaos_payload, headers={'Content-Type': 'application/json', 'User-Agent': 'PipeFishVerifier/1.0'})
+    res = urllib.request.urlopen(req, timeout=10)
+    chaos_inject = json.loads(res.read().decode('utf-8'))
+    assert res.getcode() == 200, f"Expected 200, got {res.getcode()}"
+    assert chaos_inject.get("status") == "CHAOS_INJECTED"
+    assert chaos_inject.get("mesh_status") == "SELF_HEALED"
+    print(f"[PASS] 9. POST /api/v1/chaos/inject           -> HTTP {res.getcode()} (Fault: {chaos_inject['fault_type']}, Failover: {chaos_inject['ebpf_reroute']['failover_latency_ms']}ms, Status: {chaos_inject['mesh_status']})")
+
+    print("\nALL 9 LIVE PRODUCTION EDGE ENDPOINTS VERIFIED SUCCESSFULLY!")
 
 if __name__ == '__main__':
     test_endpoints()

@@ -413,6 +413,101 @@ python sdk/mcp_server.py
       </div>
     </div>
 
+    <h2 class="section-title" id="developer-portals">Developer Portals &amp; Key Generators</h2>
+    <p style="color:#8A99AD;margin-bottom:1.5rem;">
+      PipeFish Labs autonomous agent swarms integrate with leading foundation model providers and financial infrastructure. Use the official developer portals below to provision API keys for your MCP connectors and agent nodes.
+    </p>
+
+    <div class="table-container" style="overflow-x:auto;margin-bottom:2.5rem;">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Portal Link</th>
+            <th>Key Prefix / Format</th>
+            <th>Enclave Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong style="color:#F0F4FF;display:flex;align-items:center;gap:8px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4285F4;"></span>
+                Google Gemini
+              </strong>
+            </td>
+            <td>
+              <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color:#00D4FF;text-decoration:none;font-weight:500;">
+                Google AI Studio API Keys ↗
+              </a>
+            </td>
+            <td><code style="color:#27C93F;background:rgba(39,201,63,0.1);padding:3px 8px;border-radius:4px;">AIzaSy...</code></td>
+            <td style="color:#8A99AD;font-size:0.85rem;">Free tier &amp; pay-as-you-go tiers available; supports multimodal vision &amp; audio.</td>
+          </tr>
+          <tr>
+            <td>
+              <strong style="color:#F0F4FF;display:flex;align-items:center;gap:8px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10A37F;"></span>
+                OpenAI
+              </strong>
+            </td>
+            <td>
+              <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" style="color:#00D4FF;text-decoration:none;font-weight:500;">
+                OpenAI API Keys Dashboard ↗
+              </a>
+            </td>
+            <td><code style="color:#27C93F;background:rgba(39,201,63,0.1);padding:3px 8px;border-radius:4px;">sk-proj-...</code> or <code style="color:#27C93F;background:rgba(39,201,63,0.1);padding:3px 8px;border-radius:4px;">sk-...</code></td>
+            <td style="color:#8A99AD;font-size:0.85rem;">Scoped project-level keys recommended for least-privilege enclave access.</td>
+          </tr>
+          <tr>
+            <td>
+              <strong style="color:#F0F4FF;display:flex;align-items:center;gap:8px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#D97706;"></span>
+                Anthropic (Claude)
+              </strong>
+            </td>
+            <td>
+              <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener noreferrer" style="color:#00D4FF;text-decoration:none;font-weight:500;">
+                Anthropic Console Keys ↗
+              </a>
+            </td>
+            <td><code style="color:#27C93F;background:rgba(39,201,63,0.1);padding:3px 8px;border-radius:4px;">sk-ant-api03-...</code></td>
+            <td style="color:#8A99AD;font-size:0.85rem;">High-context reasoning models; native MCP tool caller support.</td>
+          </tr>
+          <tr>
+            <td>
+              <strong style="color:#F0F4FF;display:flex;align-items:center;gap:8px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E040FF;"></span>
+                Mistral AI
+              </strong>
+            </td>
+            <td>
+              <a href="https://console.mistral.ai/api-keys/" target="_blank" rel="noopener noreferrer" style="color:#00D4FF;text-decoration:none;font-weight:500;">
+                Mistral La Plateforme Keys ↗
+              </a>
+            </td>
+            <td><code style="color:#27C93F;background:rgba(39,201,63,0.1);padding:3px 8px;border-radius:4px;">Standard alphanumeric</code></td>
+            <td style="color:#8A99AD;font-size:0.85rem;">Powers PipeFish Native Handoffs with zero wait states across 25 nodes.</td>
+          </tr>
+          <tr>
+            <td>
+              <strong style="color:#F0F4FF;display:flex;align-items:center;gap:8px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#6366F1;"></span>
+                Stripe
+              </strong>
+            </td>
+            <td>
+              <a href="https://dashboard.stripe.com/apikeys" target="_blank" rel="noopener noreferrer" style="color:#00D4FF;text-decoration:none;font-weight:500;">
+                Stripe Dashboard API Keys ↗
+              </a>
+            </td>
+            <td><code style="color:#00D4FF;background:rgba(0,212,255,0.1);padding:3px 8px;border-radius:4px;">pk_test_...</code> / <code style="color:#E040FF;background:rgba(224,64,255,0.1);padding:3px 8px;border-radius:4px;">sk_test_...</code></td>
+            <td style="color:#8A99AD;font-size:0.85rem;">FinOps Agent billing and payment webhook automation. Use restricted keys in prod.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2 class="section-title">OpenAPI 3.1.0 REST Contract</h2>
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:1rem;">
       <p style="color:#8A99AD;margin-bottom:0;">

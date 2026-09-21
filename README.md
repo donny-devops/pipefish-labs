@@ -67,6 +67,23 @@ print(result)
 
 ---
 
+## 🔑 Developer Portals & Key Generators
+
+To configure PipeFish Agent Mesh connectors and execute multi-agent workflows with third-party foundation models and payment rails, provision keys from the official developer portals below:
+
+| Provider | Portal Link | Key Prefix / Format | Notes |
+|---|---|---|---|
+| **Google Gemini** | [Google AI Studio API Keys](https://aistudio.google.com/app/apikey) | `AIzaSy...` | Free and pay-as-you-go tiers; multimodal vision and audio support |
+| **OpenAI** | [OpenAI API Keys Dashboard](https://platform.openai.com/api-keys) | `sk-proj-...` or `sk-...` | Scoped project keys recommended for zero-data retention enclaves |
+| **Anthropic (Claude)** | [Anthropic Console Keys](https://console.anthropic.com/settings/keys) | `sk-ant-api03-...` | Native MCP tool caller integration |
+| **Mistral AI** | [Mistral La Plateforme Keys](https://console.mistral.ai/api-keys/) | Standard alphanumeric | Powers PipeFish Native Handoffs with zero wait states |
+| **Stripe** | [Stripe Dashboard API Keys](https://dashboard.stripe.com/apikeys) | `pk_test_...` / `sk_test_...` | FinOps Agent billing and payment webhook automation |
+
+> [!NOTE]
+> All credentials used with PipeFish Labs are processed exclusively inside RAM-only confidential enclaves. Never commit active credentials to Git repositories; use our automated pre-commit hook (`python security/secret_scanner_manager.py --install-hook`).
+
+---
+
 ## 🛠️ Repository Architecture
 
 | Path | Description |
