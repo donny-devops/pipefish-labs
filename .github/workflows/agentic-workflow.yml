@@ -89,7 +89,7 @@ jobs:
 
       - name: Upload Agentic Report Artifact
         if: ${{ !cancelled() && hashFiles('agentic_report.md') != '' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pipefish-agentic-report
           path: agentic_report.md
