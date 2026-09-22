@@ -561,6 +561,15 @@ function jsonResponse(data: unknown, status = 200, customHeaders: Record<string,
   });
 }
 
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let c = 0;
+  for (let i = 0; i < a.length; i++) {
+    c |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return c === 0;
+}
+
 async function verifyHmacSha256(
   secretsConfig: string,
   payload: string,
@@ -606,7 +615,7 @@ async function verifyHmacSha256(
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
 
-    if (expectedHash === parts.v1) {
+    if (timingSafeEqual(expectedHash, parts.v1)) {
       return { valid: true };
     }
   }
@@ -720,9 +729,13 @@ export default {
           }
         });
       } catch {
+        const errRef = `err_${crypto.randomUUID().slice(0, 8)}`;
         return new Response(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Voice processing error.</Say></Response>`, {
           status: 400,
-          headers: { "Content-Type": "text/xml; charset=utf-8" }
+          headers: {
+            "Content-Type": "text/xml; charset=utf-8",
+            "X-PipeFish-Error-Ref": errRef,
+          }
         });
       }
     }

@@ -9,7 +9,7 @@
 export const VERSION = "2.4.0";
 
 /**
- * Union type of all 25 valid agent scenario keys supported by the PipeFish Labs
+ * Union type of all 26 valid agent scenario keys supported by the PipeFish Labs
  * execution graph API.
  */
 export type AgentScenarioKey =
