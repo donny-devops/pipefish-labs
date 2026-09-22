@@ -38,5 +38,122 @@ class TestPipeFishAgentMesh(unittest.TestCase):
         self.assertEqual(result["status"], "COMPLETED")
         self.assertEqual(result["nodes_executed"], 8)
 
+    def test_trigger_graph_execution_missedcalltextback(self):
+        """Agent 25 — missed call / text-back; COMMS domain."""
+        payload = {
+            "caller_id": "+15559876543",
+            "channel": "voice",
+            "event": "missed_call",
+            "priority": "P1"
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="missedcalltextback",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "missedcalltextback")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertIn("Mistral Native Handoff", result["handoff_mode"])
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
+    def test_trigger_graph_execution_finops(self):
+        """Agent 23 — FinTech Ops; FINTECH · PAYMENTS domain."""
+        payload = {
+            "transaction_id": "txn_9Kq1fR2w",
+            "amount_cents": 500000,
+            "currency": "usd",
+            "reconciliation_required": True
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="finops",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "finops")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
+    def test_trigger_graph_execution_contractintel(self):
+        """Agent 24 — Contract Intelligence; SECURITY · COMPLIANCE domain."""
+        payload = {
+            "document_id": "doc_NDA_2026_001",
+            "document_type": "NDA",
+            "parties": ["PipeFish Labs", "Acme Corp"],
+            "flag_pii": True
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="contractintel",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "contractintel")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
+    def test_trigger_graph_execution_llmops(self):
+        """Agent 26 — LLMOps & Prompt Evaluation; AI-INFRA · SRE domain."""
+        payload = {
+            "prompt_template": "enterprise_system_prompt_v2",
+            "eval_suite": "golden_benchmark_v1",
+            "max_drift_threshold": 0.05
+        }
+        result = self.client.trigger_graph_execution(
+            scenario_key="llmops",
+            payload=payload
+        )
+        self.assertEqual(result["scenario"], "llmops")
+        self.assertEqual(result["status"], "COMPLETED")
+        self.assertEqual(result["nodes_executed"], 8)
+        self.assertTrue(result["mcp_connectors_verified"])
+        self.assertEqual(result["zdr_enclave_retention_bytes"], 0)
+        self.assertEqual(result["execution_summary"]["inbound_telemetry"], payload)
+
+    def test_trigger_all_26_scenario_graphs(self):
+        """Verifies that all 26 canonical scenario keys execute an 8-node graph with 0-byte retention."""
+        canonical_keys = [
+            "receptionist", "sales", "logistics", "integration", "quantum",
+            "reverse", "crypto", "errorcorr", "trend", "market", "codescan",
+            "docs", "observability", "revops", "analytics", "auditing",
+            "logtriage", "erp", "trafficrouter", "networkdispatch",
+            "selfimproving", "systemoptimizing", "finops", "contractintel",
+            "missedcalltextback", "llmops"
+        ]
+        for key in canonical_keys:
+            res = self.client.trigger_graph_execution(key, {"test_probe": True})
+            self.assertEqual(res["scenario"], key)
+            self.assertEqual(res["status"], "COMPLETED")
+            self.assertEqual(res["nodes_executed"], 8)
+            self.assertTrue(res["mcp_connectors_verified"])
+            self.assertEqual(res["zdr_enclave_retention_bytes"], 0)
+
+    def test_opentelemetry_span_instrumentation(self):
+        """Verifies OpenTelemetry W3C tracecontext and 8-node DAG span generation."""
+        res = self.client.trigger_graph_execution("receptionist", {"call_type": "inbound_voice"})
+        self.assertIn("trace_context", res)
+        trace_ctx = res["trace_context"]
+        self.assertEqual(len(trace_ctx["trace_id"]), 32)
+        self.assertTrue(trace_ctx["traceparent"].startswith("00-"))
+        self.assertEqual(trace_ctx["spans_count"], 9)  # 1 root + 8 node child spans
+        self.assertEqual(len(res["spans"]), 9)
+        
+        # Verify root span
+        root_span = res["spans"][0]
+        self.assertEqual(root_span["name"], "pipefish.mesh.receptionist")
+        self.assertIsNone(root_span["parent_span_id"])
+        
+        # Verify 8 node spans
+        for i in range(1, 9):
+            node_span = res["spans"][i]
+            self.assertEqual(node_span["name"], f"pipefish.node.{i}")
+            self.assertEqual(node_span["attributes"]["pipefish.node_index"], i)
+            self.assertTrue(node_span["attributes"]["pipefish.zdr_enclave"])
+            self.assertEqual(node_span["status"], "OK")
+
 if __name__ == "__main__":
     unittest.main()

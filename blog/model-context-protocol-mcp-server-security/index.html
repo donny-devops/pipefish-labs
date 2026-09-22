@@ -1,45 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTNJ73LVX1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTNJ73LVX1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
 
-    // Google Consent Mode v2
-    var pflConsent = localStorage.getItem('pfl_consent_mode');
-    if (pflConsent === 'granted') {
-      gtag('consent', 'default', {
-        'ad_storage': 'granted',
-        'ad_user_data': 'granted',
-        'ad_personalization': 'granted',
-        'analytics_storage': 'granted'
-      });
-    } else {
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied',
-        'wait_for_update': 500
-      });
-    }
+      // Google Consent Mode v2
+      var pflConsent = localStorage.getItem('pfl_consent_mode');
+      if (pflConsent === 'granted') {
+        gtag('consent', 'default', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted',
+          'analytics_storage': 'granted'
+        });
+      } else {
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'analytics_storage': 'denied',
+          'wait_for_update': 500
+        });
+      }
 
-    gtag('js', new Date());
-    gtag('config', 'G-NTNJ73LVX1');
-  </script>
-  <script defer src="/assets/consent-banner.js"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Securing Model Context Protocol (MCP) Servers in Production - PipeFish Labs Blog</title>
-  <meta name="description" content="Best practices for authenticating custom MCP tool servers, enforcing schema validation, and preventing prompt injection exploits in multi-agent networks.">
+      gtag('js', new Date());
+      gtag('config', 'G-NTNJ73LVX1');
+    </script>
+    <script defer src="/assets/consent-banner.js"></script>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MXVGLPPD');</script>
+<!-- End Google Tag Manager -->
+  <title>Securing MCP Servers in Production | PipeFish Labs</title>
+  <meta name="description" content="Best practices for authenticating MCP server integrations, enforcing schema validation, and preventing prompt injection in multi-agent AI systems.">>
   <meta name="author" content="PipeFish Labs">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#00D4FF">
+  <meta name="keywords" content="MCP server integration, autonomous AI agents, multi-agent AI systems, enterprise AI orchestration, zero-trust AI security, agentic AI platform, AI workflow automation, Mistral AI native handoffs, enterprise AI automation">
   <link rel="canonical" href="https://pipefishlabs.io/blog/model-context-protocol-mcp-server-security/">
   <link rel="stylesheet" href="../../assets/pfl.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript></noscript>
   <style>
     .art-header { padding-top: 40px; margin-bottom: 40px; }
     .art-meta { display: flex; gap: 16px; font-family: var(--font-fm); font-size: 13px; color: var(--cyan); margin-top: 16px; }
@@ -50,15 +64,30 @@
     .art-body li { margin-bottom: 8px; }
     .art-body code { font-family: var(--font-fm); font-size: 14px; background: rgba(0,212,255,0.08); color: var(--cyan); padding: 2px 6px; border-radius: 4px; }
   </style>
+<meta property="og:title" content="Securing MCP Servers in Production AI Systems | PipeFish Labs">
+<meta property="og:description" content="Security architecture for Model Context Protocol (MCP) servers: authentication, sandboxing, rate limiting, and zero-trust integration patterns.">
+<meta property="og:url" content="https://pipefishlabs.io/blog/model-context-protocol-mcp-server-security/">
+<meta property="og:image" content="https://pipefishlabs.io/hero-logo.webp">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PipeFish Labs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Securing MCP Servers in Production AI Systems | PipeFish Labs">
+<meta name="twitter:description" content="Security architecture for Model Context Protocol (MCP) servers: authentication, sandboxing, rate limiting, and zero-trust integration patterns.">
+<meta name="twitter:image" content="https://pipefishlabs.io/hero-logo.webp">
+<meta name="twitter:site" content="@PipeFishLabs">
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXVGLPPD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <nav id="nav"><div class="container nav-inner"><a href="/" class="logo" aria-label="PipeFish Labs"><img src="/logo.png" alt="PipeFish Labs" onerror="this.style.display='none'"><span>PipeFish</span><span> Labs</span></a><div class="nav-links"><a href="/services-solutions/">Services</a><a href="/case-studies-results/">Case Studies</a><a href="/benefits-testimonials/">Benefits</a><a href="/blog/" class="active">Blog</a><a href="/book-a-demo-contact/">Contact</a></div></div></nav>
 
 <article class="container">
   <header class="art-header">
     <div class="lbl">Agent Security &amp; Tools</div>
     <h1 class="h1">Securing Model Context Protocol (MCP) Servers in Production</h1>
-    <div class="art-meta"><span>By Jason F., Founder &amp; CISO</span><span>•</span><span>Published August 20, 2026</span><span>•</span><span>7 min read</span></div>
+    <div class="art-meta"><span>By Chris F., CISO</span><span>•</span><span>Published August 20, 2026</span><span>•</span><span>7 min read</span></div>
   </header>
   <div class="art-body">
     <p>Model Context Protocol (MCP) is rapidly becoming the open standard for connecting AI agent models to internal enterprise databases, file systems, and SaaS tools. However, unhardened MCP tool endpoints present severe prompt injection and unauthorized command execution risks if left unprotected.</p>
@@ -76,7 +105,36 @@
   </div>
 </article>
 
-<footer><div class="container"><div class="ft-grid"><div class="ft-brand"><div class="ft-name"><span>PipeFish</span> <span>Labs</span></div><p>The only firm delivering AI automation, zero-trust security, autonomous multi-agent systems, and strategic consulting as a single integrated platform.</p></div><div class="ft-col"><h4>Services</h4><a href="/services-solutions/">All Services</a><a href="/demo/">Live Simulator</a></div><div class="ft-col"><h4>Company</h4><a href="/benefits-testimonials/">Benefits</a><a href="/case-studies-results/">Case Studies</a><a href="/blog/" class="active">Blog</a></div><div class="ft-col"><h4>Legal</h4><a href="/legal-privacy-policy/">Privacy Policy</a><a href="/.well-known/security.txt">security.txt</a></div><div class="ft-col"><h4>Downloads</h4><a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download>EU AI Act Checklist</a><a href="/downloads/zero-trust-architecture-assessment-template.txt" download>Zero-Trust Assessment</a>
+<footer><div class="container"><div class="ft-grid"><div class="ft-brand"><div class="ft-name"><span>PipeFish</span> <span>Labs</span></div><p>Most companies will try to sell you tools but one of the many reasons PipeFish Labs is different is because we don't sell tools - WE SELL OUTCOMES.  We fuse autonomous AI agents, zero-trust security, cryptographic hardening, and scalable data infrastructure with strategic management consulting - so the platforms we build aren't just technically sound, they're organizationally adopted. One firm. Full stack. No hand-holding necessary.</p></div><div class="ft-col"><h4>Services</h4><a href="/services-solutions/">All Services</a><a href="/demo/">Live Simulator</a></div><div class="ft-col"><h4>Company</h4><a href="/benefits-testimonials/">Benefits</a><a href="/case-studies-results/">Case Studies</a><a href="/blog/" class="active">Blog</a></div><div class="ft-col"><h4>Legal</h4><a href="/legal-privacy-policy/">Privacy Policy</a><a href="/.well-known/security.txt">security.txt</a></div><div class="ft-col"><h4>Downloads</h4><a href="/downloads/eu-ai-act-compliance-readiness-checklist.txt" download>EU AI Act Checklist</a><a href="/downloads/zero-trust-architecture-assessment-template.txt" download>Zero-Trust Assessment</a>
         <a href="/downloads/post-quantum-cryptography-migration-blueprint.txt" download>PQC Migration Blueprint</a></div></div><div class="ft-bot"><p>© 2026 PipeFish Labs. All rights reserved.</p></div></div></footer>
+<!-- ─── SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS ─── -->
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'];
+  var utmQuery = [];
+  utmKeys.forEach(function(k) {
+    if (params.has(k)) utmQuery.push(k + '=' + encodeURIComponent(params.get(k)));
+  });
+  if (utmQuery.length > 0) {
+    var qs = utmQuery.join('&');
+    document.querySelectorAll('a[href^="/"]').forEach(function(a) {
+      var href = a.getAttribute('href');
+      if (href && !href.includes('utm_')) {
+        a.setAttribute('href', href + (href.includes('?') ? '&' : '?') + qs);
+      }
+    });
+  }
+
+  window.sharePage = function(platform) {
+    var url = encodeURIComponent(window.location.href);
+    var title = encodeURIComponent(document.title);
+    var target = '';
+    if (platform === 'linkedin') target = 'https://www.linkedin.com/sharing/share-offsite/?url=' + url;
+    if (platform === 'twitter') target = 'https://twitter.com/intent/tweet?url=' + url + '&text=' + title;
+    if (target) window.open(target, '_blank', 'width=600,height=400');
+  };
+})();
+</script>
 </body>
 </html>

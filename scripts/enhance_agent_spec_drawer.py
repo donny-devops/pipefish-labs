@@ -80,7 +80,7 @@ spec_data = {
     "rbac": "Role: CryptoArchitectBot | Perms: kms.rotate, cert.issue, enclave.encrypt"
   },
   "errorcorr": {
-    "title": "Error-Correcting Agent",
+    "title": "Self-Healing Agent",
     "duties": "• Error Detection and Monitoring: Continuously scans distributed vector database shards and inbound telemetry streams to detect byte corruption rates and anomalous payloads.<br>• Reed-Solomon and LDPC Decoding: Utilizes error-correcting codes such as Reed-Solomon byte repair, LDPC parity checkers, and syndrome calculations to reconstruct damaged data payloads.<br>• Polynomial Evaluation: Employs specialized components like the Error Locator Polynomial Agent (Berlekamp-Massey) and Chien Search &amp; Evaluator Agent to isolate and correct transmission faults.<br>• Automated Data Integrity Verification: Validates restored data chunks through sequential pipeline handoffs before downstream synchronization or storage ingestion.",
     "skills": "reed-solomon-repair, ldpc-parity-checker, berlekamp-massey-locator, vector-shard-rebuilder",
     "mcp": "mcp-server-reed-solomon, mcp-server-vector-shard-manager, mcp-server-parity",
@@ -242,6 +242,39 @@ spec_data = {
     "apis": "eBPF Kernel Profiler, PostgreSQL EXPLAIN API, Kubernetes Metrics Server API",
     "a2a": "Mistral Native Handoff (Kernel Telemetry Stream with K8s HPA Scaling Connector)",
     "rbac": "Role: SystemOptimizerBot | Perms: k8s.autoscale (K8s HPA Connector), query.optimize, cache.flush (Zero-Trust Scoped)"
+  },
+  "finops": {
+    "title": "FinTech Ops Agent (Cloud & Token Spend Optimization)",
+    "duties": "The FinTech Ops Agent monitors per-chain token consumption, infrastructure spend, and compute allocation across all execution graphs. Emits rightsizing directives, enforces spend caps, and triggers cost-aware optimization loops.<br><br>• Real-Time Spend Tracking: Ingests telemetry directly from the LIV envelope and cloud billing streams across AWS, GCP, and Azure simultaneously.<br>• Unit Economics Optimization: Computes exact cost-per-task and recommends model right-sizing (e.g. Mistral Small vs Large) to reduce inference spend by up to 40%.<br>• Automated Cap Enforcement: Prevents runaway inference costs by applying hard budget quotas and circuit breakers before overage events occur.<br>• Anomaly Detection: Flags unusual spending spikes using kernel-level cost metrics and dispatches alerts before they escalate.<br>• Audit &amp; ERP Reconciliation: Generates immutable cost logs for ERP chargebacks, accounting review, and financial compliance reporting.",
+    "skills": "token-cost-telemetry, cloud-billing-aggregator, inference-roi-calculator, spend-cap-enforcer, anomaly-detector",
+    "mcp": "Managed Mistral MCP Connectors: mcp-server-opencost, mcp-server-aws-cost-explorer, mcp-server-stripe-billing, mcp-server-gcp-billing",
+    "webhooks": "https://api.pipefishlabs.io/v1/webhooks/finops-telemetry | billing://alerts@pipefishlabs.io",
+    "secrets": "AWS IAM CostRole ARN (Vault), GCP Service Account Key (Vault KV v2), Stripe Restricted Keys, Azure Cost Management API Key",
+    "apis": "AWS Cost Explorer API, GCP Cloud Billing API, Stripe Invoicing API, OpenCost Prometheus API, Azure Consumption REST API",
+    "a2a": "Mistral Native Handoff (Tool Call State Persistence across 8-Node Cost Optimization Graph without Middleware)",
+    "rbac": "Role: FinTechOpsBot | Perms: finops.view, finops.enforce_quota, billing.reconcile (Zero-Trust Scoped)"
+  },
+  "contractintel": {
+    "title": "Contract Intelligence Agent (Legal Document Parsing & Regulatory Risk)",
+    "duties": "The Contract Intelligence Agent ingests contracts, NDAs, SOWs, compliance policies, and regulatory filings — extracting structured clause data, flagging non-standard or high-risk terms, tracking obligation deadlines, and emitting compliance gap reports against configurable legal frameworks.<br><br>• Multimodal Legal Parsing: Ingests unstructured PDFs, scans, and DOCX files into structured JSON ASTs using advanced OCR and document AI.<br>• Regulatory Compliance Mapping: Evaluates every clause against GDPR, HIPAA, SOC 2, CCPA, and FAR/DFARS standards with automated gap scoring.<br>• Risk Scoring: Flags unlimited liability clauses, problematic indemnification terms, and high-penalty provisions with a prioritized risk matrix.<br>• Obligation &amp; SLA Tracking: Dispatches automated calendar events for renewals, termination notices, and contractual milestones before deadlines hit.<br>• Redline Generation: Produces protective clause amendments ready for executive approval and legal team review.<br>• Cryptographic Integrity: Applies post-quantum cryptographic signatures before persisting to confidential document enclaves.",
+    "skills": "legal-clause-parser, regulatory-risk-classifier, obligation-deadline-extractor, redline-generator, pqc-document-seal",
+    "mcp": "Managed Mistral MCP Connectors: mcp-server-docusign, mcp-server-adobe-sign, mcp-server-sharepoint-legal, mcp-server-ironclad-clm",
+    "webhooks": "https://api.pipefishlabs.io/v1/webhooks/contract-ingest | docushare://legal-ops@pipefishlabs.io",
+    "secrets": "DocuSign Integration Key / RSA Private Key (Vault KV v2), SharePoint App Client Secret, Adobe Sign OAuth2 Token",
+    "apis": "DocuSign eSignature API, Adobe Sign REST API, Box Legal API, Ironclad CLM API, SharePoint REST API",
+    "a2a": "Mistral Native Handoff (Tool Call State Persistence across 8-Node Contract Review Graph without Middleware)",
+    "rbac": "Role: LegalContractBot | Perms: contract.parse, contract.classify_risk, legal.seal_pqc (Zero-Trust Scoped)"
+  },
+  "missedcalltextback": {
+    "title": "Missed Call / Text Back Agent",
+    "duties": "The Missed Call / Text Back Agent autonomously recovers lost leads by detecting unanswered calls and instantly dispatching personalized SMS responses:<br><br>• Missed Call Detection: Monitors telephony webhooks for unanswered, overflow, and abandoned call events across all inbound lines 24/7/365.<br>• Caller Identity Resolution: Resolves incoming phone numbers against CRM records, caller ID databases, and past interaction history to personalize every response.<br>• Voicemail Transcription &amp; Intent Analysis: Transcribes voicemail audio using Speech-to-Text AI and classifies caller intent to determine urgency and routing priority.<br>• Personalized SMS Composition: Drafts warm, context-aware text-back messages using the caller's name, company, and reason for calling — never a generic template.<br>• Sub-3-Second Dispatch: Fires the personalized SMS through carrier APIs within 3 seconds of the missed call event, before the caller moves on.<br>• Callback Scheduling: Automatically books a follow-up call slot on the next available representative's calendar.<br>• CRM Activity Logging: Creates a complete activity record with missed call timestamp, SMS sent confirmation, callback scheduled, and voicemail transcript attached.<br>• Recovery Chain Attestation: Seals a tamper-proof audit log proving the full recovery pipeline completed within SLA for compliance reporting.",
+    "skills": "telephony-webhook-listener, caller-id-resolver, voicemail-transcriber, sms-composer, callback-scheduler, crm-activity-logger",
+    "mcp": "mcp-server-telephony (Twilio/Telnyx), mcp-server-google-calendar, mcp-server-hubspot, mcp-server-sms-gateway",
+    "webhooks": "https://api.pipefishlabs.io/v1/webhooks/missed-call-event | https://api.pipefishlabs.io/v1/webhooks/sms-delivery-status",
+    "secrets": "Twilio Account SID/Auth Token (HashiCorp Vault KV v2), CRM OAuth2 Refresh Tokens, SMS Gateway API Keys",
+    "apis": "Twilio Voice & SMS API, Google Calendar API v3, HubSpot CRM API, Telnyx Messaging API, CallerID.com API",
+    "a2a": "Mistral Native Handoff (Telephony Event → SMS Dispatch → CRM Sync → Calendar Booking Chain)",
+    "rbac": "Role: MissedCallRecoveryBot | Perms: sms.send, calendar.read_write, crm.activity.create (ZDR Enclave)"
   }
 }
 
@@ -249,21 +282,20 @@ spec_data = {
 with open('index.html', 'r', encoding='utf-8') as fp:
     index_content = fp.read()
 
-old_json_str = index_content.split('window.agentSpecsData = ')[1].split(';\nconst demoScenarios =')[0]
+import re
 new_json_str = json.dumps(spec_data)
-index_content = index_content.replace(old_json_str, new_json_str)
-
-with open('index.html', 'w', encoding='utf-8') as fp:
-    fp.write(index_content)
-print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into index.html")
+if 'window.agentSpecsData = ' in index_content:
+    index_content = re.sub(r'window\.agentSpecsData\s*=\s*\{.*?\};', f'window.agentSpecsData = {new_json_str};', index_content, flags=re.DOTALL)
+    with open('index.html', 'w', encoding='utf-8') as fp:
+        fp.write(index_content)
+    print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into index.html")
 
 # 2. Update demo/index.html
 with open('demo/index.html', 'r', encoding='utf-8') as fp:
     demo_content = fp.read()
 
-old_demo_json_str = demo_content.split('window.agentSpecsData = ')[1].split(';\nconst scenarios =')[0]
-demo_content = demo_content.replace(old_demo_json_str, new_json_str)
-
-with open('demo/index.html', 'w', encoding='utf-8') as fp:
-    fp.write(demo_content)
-print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into demo/index.html")
+if 'window.agentSpecsData = ' in demo_content:
+    demo_content = re.sub(r'window\.agentSpecsData\s*=\s*\{.*?\};', f'window.agentSpecsData = {new_json_str};', demo_content, flags=re.DOTALL)
+    with open('demo/index.html', 'w', encoding='utf-8') as fp:
+        fp.write(demo_content)
+    print("Successfully injected updated Mistral Native Handoffs & Managed MCP Connectors spec_data into demo/index.html")

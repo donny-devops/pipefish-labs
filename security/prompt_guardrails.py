@@ -24,13 +24,21 @@ class PromptGuardrail:
         r"(?i)you\s+are\s+now\s+in\s+developer\s+mode",
         r"(?i)system\s+override\s*:\s*disable\s+guardrails",
         r"(?i)bypass\s+all\s+ethical\s+constraints",
-        r"(?i)reveal\s+your\s+(initial|system)\s+prompt"
+        r"(?i)reveal\s+your\s+(initial|system)\s+prompt",
+        r"(?i)\bDAN\s+mode\b",
+        r"(?i)\bjailbreak\b",
+        r"(?i)do\s+anything\s+now",
+        r"(?i)pretend\s+you\s+are\s+(an\s+)?unrestricted",
+        r"(?i)output\s+system\s+instructions\s+verbatim",
+        r"(?i)base64\s+(decode|bypass)\s+instructions"
     ]
 
     # Regular expressions for PII detection
     SSN_PATTERN = r"\b\d{3}-\d{2}-\d{4}\b"
     CREDIT_CARD_PATTERN = r"\b(?:\d{4}[-\s]?){3}\d{4}\b"
     PRIVATE_KEY_PATTERN = r"-----BEGIN\s+(?:RSA\s+)?PRIVATE\s+KEY-----"
+    EMAIL_PATTERN = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
+    PHONE_PATTERN = r"\b(?:\+?1[-.\s]?)?\(?[2-9]\d{2}\)?[-.\s]?[2-9]\d{2}[-.\s]?\d{4}\b"
 
     @classmethod
     def check_prompt_injection(cls, prompt_text: str) -> bool:
@@ -43,9 +51,10 @@ class PromptGuardrail:
         return True
 
     @classmethod
-    def sanitize_pii(cls, text: str) -> Tuple[str, int]:
+    def sanitize_pii(cls, text: str, redact_contact_info: bool = False) -> Tuple[str, int]:
         """
         Redacts SSNs, credit cards, and private keys with [REDACTED_PII].
+        Optionally redacts emails and phone numbers when redact_contact_info=True.
         Returns (sanitized_text, redaction_count).
         """
         redactions = 0
@@ -61,6 +70,12 @@ class PromptGuardrail:
         # Redact Private Keys
         text, n3 = re.subn(cls.PRIVATE_KEY_PATTERN, "[REDACTED_PRIVATE_KEY]", text)
         redactions += n3
+
+        if redact_contact_info:
+            text, n4 = re.subn(cls.EMAIL_PATTERN, "[REDACTED_EMAIL]", text)
+            redactions += n4
+            text, n5 = re.subn(cls.PHONE_PATTERN, "[REDACTED_PHONE]", text)
+            redactions += n5
 
         return text, redactions
 

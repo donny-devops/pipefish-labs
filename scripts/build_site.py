@@ -51,6 +51,7 @@ EXCLUDED_DIRS = frozenset(
         ".git",
         ".github",
         ".githooks",
+        ".venv",
         ".wrangler",
         "__pycache__",
         "node_modules",
@@ -65,6 +66,7 @@ EXCLUDED_DIRS = frozenset(
         "linkedin",
         "mcp",
         "postman",
+        "pipefish_labs.egg-info",
         "sales",
         "scripts",
         "security",
@@ -83,14 +85,28 @@ EXTRA_FILES = (
     "admin/config.yml",
     "sdk/openapi.yaml",
     "sdk/asyncapi.yaml",
+    "site.webmanifest",
+    ".well-known/security.txt",
 )
 
 # Cloudflare rejects any single static asset larger than this.
 MAX_ASSET_BYTES = 25 * 1024 * 1024
 
 
+# Specific files (repo-relative paths) that must never be published.
+# Use this for large duplicate assets where only one format is served.
+EXCLUDED_FILES = frozenset(
+    {
+        # Only briefing-video-poster.webp is referenced in HTML; skip the
+        # heavier PNG (1.7 MB) and JPG (449 KB) variants to keep dist lean.
+        "briefing-video-poster.png",
+        "briefing-video-poster.jpg",
+    }
+)
+
+
 def is_publishable(path: Path) -> bool:
-    return path.suffix.lower() in ALLOWED_SUFFIXES
+    return path.suffix.lower() in ALLOWED_SUFFIXES and path.name not in EXCLUDED_FILES
 
 
 def iter_site_files(root: Path, out_dir: Path):

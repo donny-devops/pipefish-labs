@@ -25,6 +25,10 @@
     { "pattern": "www.pipefishlabs.io", "custom_domain": true }
   ],
 
+  "triggers": {
+    "crons": ["0 */6 * * *"]
+  },
+
   "vars": {
     "ENVIRONMENT": "production"
   },

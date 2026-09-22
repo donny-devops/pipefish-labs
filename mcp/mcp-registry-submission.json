@@ -1,7 +1,7 @@
 {
   "$schema": "https://modelcontextprotocol.io/schema/server.json",
   "name": "pipefish-labs-mcp-server",
-  "description": "Enterprise Model Context Protocol (MCP) server for the PipeFish Labs autonomous multi-agent mesh. Supports 22 scenario graphs, Native Mistral Handoffs, zero-trust Vault leases, eBPF kernel telemetry, and NIST FIPS 203 ML-KEM-768 post-quantum cryptographic verification.",
+  "description": "Enterprise Model Context Protocol (MCP) server for the PipeFish Labs autonomous multi-agent mesh. Supports 25 scenario graphs, Native Mistral Handoffs, zero-trust Vault leases, eBPF kernel telemetry, and NIST FIPS 203 ML-KEM-768 post-quantum cryptographic verification.",
   "version": "2.4.0",
   "repository": {
     "type": "git",

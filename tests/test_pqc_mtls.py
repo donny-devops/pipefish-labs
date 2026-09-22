@@ -29,5 +29,13 @@ class TestPQCKeyManager(unittest.TestCase):
         self.assertNotEqual(old_key, new_key)
         self.assertFalse(self.mgr.is_expired())
 
+    def test_nonce_replay_attack_rejected(self):
+        ticket = self.mgr.sign_a2a_ticket("node-test-03", "digest_replay_test")
+        self.assertIn("nonce", ticket)
+        # First verification succeeds
+        self.assertTrue(self.mgr.verify_ticket(ticket))
+        # Immediate second verification of identical ticket is rejected as a replay attack
+        self.assertFalse(self.mgr.verify_ticket(ticket))
+
 if __name__ == "__main__":
     unittest.main()

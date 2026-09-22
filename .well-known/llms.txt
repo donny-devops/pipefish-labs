@@ -25,6 +25,14 @@
 
 - [`sdk/pipefish_sdk.py`](https://github.com/donny-devops/pipefish-labs/blob/main/sdk/pipefish_sdk.py): Python SDK (v2.4.0) for programmatic access to the PipeFish Labs autonomous multi-agent orchestration platform. Supports Native Mistral Handoffs, Managed MCP Connectors, and ZDR Confidential Enclave State Sync.
 
+## Supported AI & Infrastructure Developer Portals
+
+- **Google Gemini**: [Google AI Studio API Keys](https://aistudio.google.com/app/apikey) (Prefix: `AIzaSy...`)
+- **OpenAI**: [OpenAI API Keys Dashboard](https://platform.openai.com/api-keys) (Prefix: `sk-proj-...` or `sk-...`)
+- **Anthropic (Claude)**: [Anthropic Console Keys](https://console.anthropic.com/settings/keys) (Prefix: `sk-ant-api03-...`)
+- **Mistral AI**: [Mistral La Plateforme Keys](https://console.mistral.ai/api-keys/) (Native Mistral Handoffs)
+- **Stripe**: [Stripe Dashboard API Keys](https://dashboard.stripe.com/apikeys) (Prefix: `pk_test_...` / `sk_test_...`)
+
 ## CI/CD Security Pipeline
 
 - **CodeQL**: Semantic static analysis and vulnerability scanning on every push and pull request.
@@ -45,9 +53,9 @@
 
 ## Executive Leadership
 
-- **Jason F.** — Founder in Principal | Chief Executive & Financial Officer | Sales Administrator
-- **Donny J.** — Co-Founder | Chief Information & Operations Officer | DevOps & Automation Engineer
-- **Chris F.** — Chief Information Security Officer | Encryption Specialist
+- **Chris F.** — Chief Administrative, Digital, & Information Security Officer | Encryption Specialist | AES / TDES / ECC / FPE | Threat Defense Strategist
+- **Donny J.** — Chief Innovation, Technology, & Operations Officer | DevOps & Automation Engineer | Distributed DAG Systems Specialist | SRE & Edge Infrastructure Lead
+- **Jason F.** — Chief Information, Revenue, & Financial Officer | Financial Consultant | Data Management Specialist | Enterprise RevOps Architect | Fiscal & Capital Strategist
 
 ## Contact & Audit Booking
 

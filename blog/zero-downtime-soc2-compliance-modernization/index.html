@@ -1,42 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTNJ73LVX1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTNJ73LVX1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
 
-    // Google Consent Mode v2
-    var pflConsent = localStorage.getItem('pfl_consent_mode');
-    if (pflConsent === 'granted') {
-      gtag('consent', 'default', {
-        'ad_storage': 'granted',
-        'ad_user_data': 'granted',
-        'ad_personalization': 'granted',
-        'analytics_storage': 'granted'
-      });
-    } else {
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied',
-        'wait_for_update': 500
-      });
-    }
+      // Google Consent Mode v2
+      var pflConsent = localStorage.getItem('pfl_consent_mode');
+      if (pflConsent === 'granted') {
+        gtag('consent', 'default', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted',
+          'analytics_storage': 'granted'
+        });
+      } else {
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'analytics_storage': 'denied',
+          'wait_for_update': 500
+        });
+      }
 
-    gtag('js', new Date());
-    gtag('config', 'G-NTNJ73LVX1');
-  </script>
-  <script defer src="/assets/consent-banner.js"></script>
+      gtag('js', new Date());
+      gtag('config', 'G-NTNJ73LVX1');
+    </script>
+    <script defer src="/assets/consent-banner.js"></script>
 <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zero-Downtime SOC 2 Compliance Modernization for Legacy Infrastructure | PipeFish Labs Blog</title>
-<meta name="description" content="Engineering strategy for migrating legacy monolithic workloads to SOC 2 Type II aligned zero-trust architectures with zero operational downtime and automated mTLS key rotation.">
-<meta name="keywords" content="zero downtime SOC 2 compliance, infrastructure modernization, mTLS key rotation, HashiCorp Vault, eBPF threat monitoring, PipeFish Labs">
+<title>Zero-Downtime SOC 2 Compliance for Legacy Systems | PipeFish Labs</title>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MXVGLPPD');</script>
+<!-- End Google Tag Manager -->
+
+<title>Zero-Downtime SOC 2 Compliance Modernization | PipeFish Labs</title>
+<meta name="description" content="How to modernize legacy infrastructure to full SOC 2 Type II compliance with zero downtime using AI agents, automated audit trails, and cryptographic sealing.">>
+<meta name="author" content="PipeFish Labs">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#00D4FF">
+<meta name="keywords" content="zero-trust AI security, autonomous AI agents, enterprise AI orchestration, multi-agent AI systems, post-quantum cryptography, AI workflow automation, enterprise AI automation, agentic AI platform, MCP server integration">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"></noscript></noscript>
 <link rel="stylesheet" href="../../assets/pfl.css">
 <link rel="canonical" href="https://pipefishlabs.io/blog/zero-downtime-soc2-compliance-modernization/">
 <script type="application/ld+json">
@@ -45,7 +62,7 @@
   "@type": "BlogPosting",
   "headline": "Zero-Downtime SOC 2 Compliance Modernization for Legacy Infrastructure",
   "description": "How PipeFish Labs modernizes enterprise security postures without operational interruption.",
-  "author": {"@type": "Person", "name": "Jason F.", "jobTitle": "Chief Information Security Officer"},
+  "author": {"@type": "Person", "name": "Chris F.", "jobTitle": "Chief Information Security Officer"},
   "publisher": {"@type": "Organization", "name": "PipeFish Labs", "logo": "https://pipefishlabs.io/logo.png"},
   "datePublished": "2026-08-28",
   "mainEntityOfPage": "https://pipefishlabs.io/blog/zero-downtime-soc2-compliance-modernization/"
@@ -69,8 +86,23 @@
   .art-content ul { margin-bottom: 24px; padding-left: 20px; }
   .art-content li { font-size: 14.5px; line-height: 1.7; color: var(--text-body); margin-bottom: 8px; }
 </style>
+<meta property="og:title" content="Zero-Downtime SOC 2 Compliance for Legacy Infrastructure | PipeFish Labs">
+<meta property="og:description" content="How to modernize legacy infrastructure to full SOC 2 Type II compliance with zero downtime using AI agents, automated audit trails, and cryptographic sealing.">
+<meta property="og:url" content="https://pipefishlabs.io/blog/zero-downtime-soc2-compliance-modernization/">
+<meta property="og:image" content="https://pipefishlabs.io/hero-logo.webp">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PipeFish Labs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zero-Downtime SOC 2 Compliance for Legacy Infrastructure | PipeFish Labs">
+<meta name="twitter:description" content="How to modernize legacy infrastructure to full SOC 2 Type II compliance with zero downtime using AI agents, automated audit trails, and cryptographic sealing.">
+<meta name="twitter:image" content="https://pipefishlabs.io/hero-logo.webp">
+<meta name="twitter:site" content="@PipeFishLabs">
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXVGLPPD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <nav>
   <div class="container nav-inner">
@@ -93,7 +125,7 @@
     <div class="lbl">Enterprise Case Breakdown</div>
     <h1 class="h1">Zero-Downtime SOC 2 Compliance Modernization for Legacy Infrastructure</h1>
     <div class="art-meta">
-      <span>By Jason F., Chief Information Security Officer</span>
+      <span>By Chris F., Chief Information Security Officer</span>
       <span>•</span>
       <span>August 28, 2026</span>
       <span>•</span>
@@ -129,5 +161,34 @@
   </div>
 </footer>
 
+<!-- ─── SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS ─── -->
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'];
+  var utmQuery = [];
+  utmKeys.forEach(function(k) {
+    if (params.has(k)) utmQuery.push(k + '=' + encodeURIComponent(params.get(k)));
+  });
+  if (utmQuery.length > 0) {
+    var qs = utmQuery.join('&');
+    document.querySelectorAll('a[href^="/"]').forEach(function(a) {
+      var href = a.getAttribute('href');
+      if (href && !href.includes('utm_')) {
+        a.setAttribute('href', href + (href.includes('?') ? '&' : '?') + qs);
+      }
+    });
+  }
+
+  window.sharePage = function(platform) {
+    var url = encodeURIComponent(window.location.href);
+    var title = encodeURIComponent(document.title);
+    var target = '';
+    if (platform === 'linkedin') target = 'https://www.linkedin.com/sharing/share-offsite/?url=' + url;
+    if (platform === 'twitter') target = 'https://twitter.com/intent/tweet?url=' + url + '&text=' + title;
+    if (target) window.open(target, '_blank', 'width=600,height=400');
+  };
+})();
+</script>
 </body>
 </html>
