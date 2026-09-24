@@ -508,6 +508,113 @@ python sdk/mcp_server.py
       </table>
     </div>
 
+    <h2 class="section-title" id="webhook-sandbox">Interactive Webhook Inspector &amp; Code Exporter</h2>
+    <p style="color:#8A99AD;margin-bottom:1.5rem;">
+      Simulate live inbound webhook signals, verify real-time HMAC-SHA256 signatures, test autonomous swarm execution, and export ready-to-run integration snippets across 4 programming languages.
+    </p>
+
+    <div class="webhook-sandbox-card" style="background:#0B0E17;border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:1.5rem;margin-bottom:3rem;box-shadow:0 8px 32px rgba(0,0,0,0.5);">
+      <!-- Presets Toolbar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:1rem;">
+        <div>
+          <span style="font-size:0.85rem;color:#8A99AD;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-right:10px;">Select Payload Preset:</span>
+          <div class="terminal-chips" style="display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle;">
+            <span class="tchip active" id="chip-preset-twilio" onclick="selectWebhookPreset('twilio')">Twilio Voice Missed Call</span>
+            <span class="tchip" id="chip-preset-vapi" onclick="selectWebhookPreset('vapi')">Vapi Call Transcript</span>
+            <span class="tchip" id="chip-preset-stripe" onclick="selectWebhookPreset('stripe')">Stripe Payment (FinOps)</span>
+            <span class="tchip" id="chip-preset-github" onclick="selectWebhookPreset('github')">GitHub CVE Advisory</span>
+            <span class="tchip" id="chip-preset-custom" onclick="selectWebhookPreset('custom')">Custom Enclave JSON</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#27C93F;"></span>
+          <span style="font-size:0.8rem;color:#27C93F;font-family:monospace;font-weight:600;">EDGE GATEWAY LIVE</span>
+        </div>
+      </div>
+
+      <!-- Main Dual-Pane Grid -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;">
+        <!-- Left Column: Request Builder -->
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div>
+            <label style="display:block;font-size:0.8rem;color:#8A99AD;margin-bottom:6px;font-weight:600;">TARGET EDGE ENDPOINT</label>
+            <div style="display:flex;background:#06070C;border:1px solid rgba(255,255,255,0.12);border-radius:6px;overflow:hidden;">
+              <span style="background:rgba(0,212,255,0.15);color:#00D4FF;padding:8px 12px;font-size:0.85rem;font-weight:700;font-family:monospace;display:flex;align-items:center;">POST</span>
+              <input type="text" id="webhook-endpoint-url" value="/api/v1/webhooks/voice/twilio" style="flex:1;background:transparent;border:none;color:#F0F4FF;padding:8px 12px;font-family:monospace;font-size:0.85rem;outline:none;">
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <label style="font-size:0.8rem;color:#8A99AD;font-weight:600;">HMAC-SHA256 SIGNING SECRET</label>
+              <button onclick="regenerateSignature()" style="background:none;border:none;color:#00D4FF;font-size:0.75rem;cursor:pointer;text-decoration:underline;">Re-compute Signature</button>
+            </div>
+            <input type="text" id="webhook-secret-input" value="whsec_pipefish_labs_default_edge_secret" style="width:100%;box-sizing:border-box;background:#06070C;border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#8A99AD;padding:7px 10px;font-family:monospace;font-size:0.8rem;outline:none;">
+            <div style="margin-top:6px;font-size:0.75rem;color:#8A99AD;font-family:monospace;word-break:break-all;">
+              <span style="color:#E040FF;">X-PipeFish-Signature:</span> <span id="webhook-computed-sig" style="color:#27C93F;">Computing...</span>
+            </div>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;">
+            <label style="font-size:0.8rem;color:#8A99AD;margin-bottom:6px;font-weight:600;">INBOUND SIGNAL PAYLOAD</label>
+            <textarea id="webhook-payload-body" rows="9" style="width:100%;box-sizing:border-box;background:#06070C;border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#00D4FF;padding:10px;font-family:monospace;font-size:0.82rem;line-height:1.5;resize:vertical;outline:none;" spellcheck="false"></textarea>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button id="btn-dispatch-webhook" onclick="dispatchWebhookRequest()" class="btn" style="background:#00D4FF;color:#06070C;font-weight:700;padding:10px 20px;font-size:0.85rem;border-radius:6px;cursor:pointer;">
+              Dispatch Webhook to Edge →
+            </button>
+            <button onclick="switchRightTab('code')" class="btn" style="background:rgba(255,255,255,0.06);color:#F0F4FF;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;font-size:0.85rem;border-radius:6px;cursor:pointer;">
+              Export Code Snippet ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Response & Code Exporter -->
+        <div style="display:flex;flex-direction:column;background:#06070C;border:1px solid rgba(255,255,255,0.12);border-radius:8px;overflow:hidden;">
+          <!-- Sub-Nav Tabs -->
+          <div style="display:flex;background:#0B0E17;border-bottom:1px solid rgba(255,255,255,0.1);">
+            <button id="tab-btn-response" onclick="switchRightTab('response')" style="flex:1;background:transparent;border:none;border-bottom:2px solid #00D4FF;color:#00D4FF;padding:10px;font-size:0.85rem;font-weight:600;cursor:pointer;">
+              Live Response Inspector
+            </button>
+            <button id="tab-btn-code" onclick="switchRightTab('code')" style="flex:1;background:transparent;border:none;border-bottom:2px solid transparent;color:#8A99AD;padding:10px;font-size:0.85rem;font-weight:600;cursor:pointer;">
+              Code Exporter
+            </button>
+          </div>
+
+          <!-- Tab Content: Live Response -->
+          <div id="panel-response-view" style="padding:1rem;flex:1;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span id="response-status-badge" style="background:rgba(39,201,63,0.15);color:#27C93F;padding:3px 8px;border-radius:4px;font-size:0.78rem;font-weight:700;font-family:monospace;">READY</span>
+                <span id="response-latency-badge" style="color:#8A99AD;font-size:0.78rem;font-family:monospace;">Latency: -- ms</span>
+              </div>
+              <span style="color:#00D4FF;font-size:0.75rem;font-family:monospace;background:rgba(0,212,255,0.1);padding:3px 8px;border-radius:4px;">ZDR: RAM Enclave Active</span>
+            </div>
+
+            <pre id="response-body-viewer" style="margin:0;flex:1;min-height:220px;background:#090B10;border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:12px;color:#F0F4FF;font-family:monospace;font-size:0.8rem;line-height:1.5;overflow:auto;white-space:pre-wrap;">Click "Dispatch Webhook to Edge" to execute request and stream response from Cloudflare Worker.</pre>
+          </div>
+
+          <!-- Tab Content: Code Exporter -->
+          <div id="panel-code-view" style="padding:1rem;flex:1;display:none;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+              <div class="terminal-chips" style="display:flex;gap:6px;">
+                <span class="tchip active" id="chip-lang-curl" onclick="selectExportLang('curl')">cURL</span>
+                <span class="tchip" id="chip-lang-node" onclick="selectExportLang('node')">Node.js</span>
+                <span class="tchip" id="chip-lang-python" onclick="selectExportLang('python')">Python</span>
+                <span class="tchip" id="chip-lang-go" onclick="selectExportLang('go')">Go</span>
+              </div>
+              <button id="btn-copy-snippet" onclick="copySnippetToClipboard()" class="btn" style="background:#00D4FF;color:#06070C;padding:4px 12px;font-size:0.75rem;font-weight:700;border-radius:4px;cursor:pointer;">
+                Copy Snippet
+              </button>
+            </div>
+
+            <pre id="code-snippet-pre" style="margin:0;flex:1;min-height:220px;background:#090B10;border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:12px;color:#27C93F;font-family:monospace;font-size:0.8rem;line-height:1.5;overflow:auto;white-space:pre;"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h2 class="section-title">OpenAPI 3.1.0 REST Contract</h2>
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:1rem;">
       <p style="color:#8A99AD;margin-bottom:0;">
@@ -940,7 +1047,312 @@ SDKs: Python <span class="t-success">v2.4.0</span> · TypeScript <span class="t-
         if (match) terminalInput.value = match;
       }
     });
+  // ==========================================
+  // Interactive Webhook Inspector & Code Exporter
+  // ==========================================
+  const WEBHOOK_PRESETS = {
+    twilio: {
+      url: '/api/v1/webhooks/voice/twilio',
+      contentType: 'application/x-www-form-urlencoded',
+      body: 'From=%2B14155550199&To=%2B18005550100&CallSid=CA4a9b2c8e1f0d3a5b&CallStatus=no-answer'
+    },
+    vapi: {
+      url: '/api/v1/webhooks/voice/vapi',
+      contentType: 'application/json',
+      body: JSON.stringify({
+        message: {
+          type: "end-of-call-report",
+          call: {
+            id: "vapi_call_9a8b7c",
+            customer: { number: "+14155550199" }
+          },
+          transcript: "Inquiring about PipeFish Labs autonomous agent mesh pricing and enterprise SOC 2 compliance."
+        }
+      }, null, 2)
+    },
+    stripe: {
+      url: '/api/v1/webhooks/finops',
+      contentType: 'application/json',
+      body: JSON.stringify({
+        event: "invoice.payment_failed",
+        data: {
+          customer_id: "cus_99812",
+          amount_due_usd: 14500,
+          attempt_count: 2,
+          invoice_id: "in_1N2e4fG0"
+        },
+        action_required: "automated_reconciliation_and_dunning"
+      }, null, 2)
+    },
+    github: {
+      url: '/api/v1/webhooks/codescan',
+      contentType: 'application/json',
+      body: JSON.stringify({
+        event: "security_advisory",
+        repository: "enterprise-corp/core-api",
+        cve_id: "CVE-2026-4412",
+        severity: "CRITICAL",
+        ecosystem: "npm",
+        package: "jsonwebtoken",
+        affected_range: "<9.0.3"
+      }, null, 2)
+    },
+    custom: {
+      url: '/api/v1/webhooks/receptionist',
+      contentType: 'application/json',
+      body: JSON.stringify({
+        intent: "general_inquiry",
+        caller: "+14155550199",
+        payload: {
+          organization: "Acme Corp",
+          tier: "Enterprise Multi-Agent"
+        }
+      }, null, 2)
+    }
+  };
+
+  let currentPresetKey = 'twilio';
+  let currentExportLang = 'curl';
+  let currentSignature = '';
+
+  async function computeHmacSignature(secret, body) {
+    try {
+      const ts = Math.floor(Date.now() / 1000);
+      const enc = new TextEncoder();
+      const signedPayload = `${ts}.${body}`;
+      const key = await window.crypto.subtle.importKey(
+        'raw',
+        enc.encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' },
+        false,
+        ['sign']
+      );
+      const signatureBytes = await window.crypto.subtle.sign('HMAC', key, enc.encode(signedPayload));
+      const hashHex = Array.from(new Uint8Array(signatureBytes))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+      return `t=${ts},v1=${hashHex}`;
+    } catch {
+      return `t=${Math.floor(Date.now() / 1000)},v1=0xmock_sig_hash`;
+    }
   }
+
+  async function regenerateSignature() {
+    const secret = document.getElementById('webhook-secret-input').value;
+    const body = document.getElementById('webhook-payload-body').value;
+    const sigSpan = document.getElementById('webhook-computed-sig');
+    sigSpan.textContent = 'Computing...';
+    currentSignature = await computeHmacSignature(secret, body);
+    sigSpan.textContent = currentSignature;
+    updateCodeSnippet();
+  }
+
+  window.selectWebhookPreset = async function(key) {
+    currentPresetKey = key;
+    document.querySelectorAll('[id^="chip-preset-"]').forEach(el => el.classList.remove('active'));
+    const activeChip = document.getElementById(`chip-preset-${key}`);
+    if (activeChip) activeChip.classList.add('active');
+
+    const preset = WEBHOOK_PRESETS[key];
+    if (preset) {
+      document.getElementById('webhook-endpoint-url').value = preset.url;
+      document.getElementById('webhook-payload-body').value = preset.body;
+      await regenerateSignature();
+    }
+  };
+
+  window.switchRightTab = function(tab) {
+    const resBtn = document.getElementById('tab-btn-response');
+    const codeBtn = document.getElementById('tab-btn-code');
+    const resPanel = document.getElementById('panel-response-view');
+    const codePanel = document.getElementById('panel-code-view');
+
+    if (tab === 'response') {
+      resBtn.style.borderBottom = '2px solid #00D4FF';
+      resBtn.style.color = '#00D4FF';
+      codeBtn.style.borderBottom = '2px solid transparent';
+      codeBtn.style.color = '#8A99AD';
+      resPanel.style.display = 'flex';
+      codePanel.style.display = 'none';
+    } else {
+      codeBtn.style.borderBottom = '2px solid #00D4FF';
+      codeBtn.style.color = '#00D4FF';
+      resBtn.style.borderBottom = '2px solid transparent';
+      resBtn.style.color = '#8A99AD';
+      codePanel.style.display = 'flex';
+      resPanel.style.display = 'none';
+      updateCodeSnippet();
+    }
+  };
+
+  window.selectExportLang = function(lang) {
+    currentExportLang = lang;
+    document.querySelectorAll('[id^="chip-lang-"]').forEach(el => el.classList.remove('active'));
+    const activeChip = document.getElementById(`chip-lang-${lang}`);
+    if (activeChip) activeChip.classList.add('active');
+    updateCodeSnippet();
+  };
+
+  function updateCodeSnippet() {
+    const url = document.getElementById('webhook-endpoint-url').value;
+    const body = document.getElementById('webhook-payload-body').value;
+    const isJson = body.trim().startsWith('{');
+    const contentType = isJson ? 'application/json' : 'application/x-www-form-urlencoded';
+    const pre = document.getElementById('code-snippet-pre');
+    if (!pre) return;
+
+    if (currentExportLang === 'curl') {
+      pre.textContent = `curl -X POST "https://pipefishlabs.io${url}" \\
+  -H "Content-Type: ${contentType}" \\
+  -H "X-PipeFish-Signature: ${currentSignature}" \\
+  -H "X-Client-ID: developer_sandbox" \\
+  --data '${body.replace(/'/g, "'\\''")}'`;
+    } else if (currentExportLang === 'node') {
+      pre.textContent = `// Node.js 18+ Native Fetch
+const url = 'https://pipefishlabs.io${url}';
+const payload = ${isJson ? body : `'${body}'`};
+
+const response = await fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': '${contentType}',
+    'X-PipeFish-Signature': '${currentSignature}',
+    'X-Client-ID': 'developer_sandbox'
+  },
+  body: ${isJson ? 'JSON.stringify(payload)' : 'payload'}
+});
+
+const result = await ${isJson ? 'response.json()' : 'response.text()'};
+console.log('Edge Status:', response.status);
+console.log('Result:', result);`;
+    } else if (currentExportLang === 'python') {
+      pre.textContent = `# Python 3.10+ Requests SDK Integration
+import requests
+
+url = "https://pipefishlabs.io${url}"
+headers = {
+    "Content-Type": "${contentType}",
+    "X-PipeFish-Signature": "${currentSignature}",
+    "X-Client-ID": "developer_sandbox"
+}
+payload = ${isJson ? body : `"""${body}"""`}
+
+response = requests.post(url, headers=headers, ${isJson ? 'json=payload' : 'data=payload'}, timeout=10)
+print(f"Status: {response.status_code}")
+print(response.text)`;
+    } else if (currentExportLang === 'go') {
+      pre.textContent = `// Go 1.21+ Standard Library HTTP Client
+package main
+
+import (
+\t"bytes"
+\t"fmt"
+\t"io"
+\t"net/http"
+)
+
+func main() {
+\turl := "https://pipefishlabs.io${url}"
+\tpayload := []byte(\`${body.replace(/`/g, '` + "`" + `')}\`)
+
+\treq, _ := http.NewRequest("POST", url, bytes.NewBuffer(payload))
+\treq.Header.Set("Content-Type", "${contentType}")
+\treq.Header.Set("X-PipeFish-Signature", "${currentSignature}")
+\treq.Header.Set("X-Client-ID", "developer_sandbox")
+
+\tclient := &http.Client{}
+\tresp, err := client.Do(req)
+\tif err != nil {
+\t\tpanic(err)
+\t}
+\tdefer resp.Body.Close()
+
+\tbody, _ := io.ReadAll(resp.Body)
+\tfmt.Printf("HTTP Status: %d\\n", resp.StatusCode)
+\tfmt.Println(string(body))
+}`;
+    }
+  }
+
+  window.copySnippetToClipboard = function() {
+    const text = document.getElementById('code-snippet-pre').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('btn-copy-snippet');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.background = '#27C93F';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '#00D4FF';
+      }, 1800);
+    });
+  };
+
+  window.dispatchWebhookRequest = async function() {
+    const url = document.getElementById('webhook-endpoint-url').value;
+    const body = document.getElementById('webhook-payload-body').value;
+    const statusBadge = document.getElementById('response-status-badge');
+    const latencyBadge = document.getElementById('response-latency-badge');
+    const bodyViewer = document.getElementById('response-body-viewer');
+    const dispatchBtn = document.getElementById('btn-dispatch-webhook');
+
+    switchRightTab('response');
+    statusBadge.textContent = 'EXECUTING...';
+    statusBadge.style.color = '#E040FF';
+    statusBadge.style.background = 'rgba(224,64,255,0.15)';
+    latencyBadge.textContent = 'Latency: ...';
+    bodyViewer.textContent = 'Dispatching webhook to Cloudflare Workers edge enclave...';
+    dispatchBtn.disabled = true;
+
+    const isJson = body.trim().startsWith('{');
+    const contentType = isJson ? 'application/json' : 'application/x-www-form-urlencoded';
+
+    const t0 = performance.now();
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': contentType,
+          'X-PipeFish-Signature': currentSignature,
+          'X-Client-ID': 'interactive_sandbox'
+        },
+        body: body
+      });
+      const t1 = performance.now();
+      const elapsed = Math.round(t1 - t0);
+
+      statusBadge.textContent = `HTTP ${res.status} ${res.statusText || (res.ok ? 'OK' : 'ERROR')}`;
+      statusBadge.style.color = res.ok ? '#27C93F' : '#FF5F56';
+      statusBadge.style.background = res.ok ? 'rgba(39,201,63,0.15)' : 'rgba(255,95,86,0.15)';
+      latencyBadge.textContent = `Latency: ${elapsed} ms`;
+
+      const text = await res.text();
+      try {
+        const parsed = JSON.parse(text);
+        bodyViewer.textContent = JSON.stringify(parsed, null, 2);
+      } catch {
+        bodyViewer.textContent = text;
+      }
+    } catch (err) {
+      statusBadge.textContent = 'NETWORK ERROR';
+      statusBadge.style.color = '#FF5F56';
+      statusBadge.style.background = 'rgba(255,95,86,0.15)';
+      bodyViewer.textContent = `Failed to connect to edge: ${err.message}`;
+    } finally {
+      dispatchBtn.disabled = false;
+    }
+  };
+
+  // Initialize Webhook Inspector on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    selectWebhookPreset('twilio');
+    const bodyEl = document.getElementById('webhook-payload-body');
+    if (bodyEl) {
+      bodyEl.addEventListener('input', () => {
+        regenerateSignature();
+      });
+    }
+  });
   </script>
 
   <!-- SEM UTM TRACKING & SMM SOCIAL CONVERSION HOOKS -->
