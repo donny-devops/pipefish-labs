@@ -61,7 +61,7 @@ has_boundary_violation(args) if {
 has_boundary_violation(args) if {
     some key, val in args
     is_string(val)
-    re_match(`[;&|` + "`" + `]`, val)
+    regex.match("[;&|`]", val)
 }
 
 # Explicit denial messages for policy audit feedback
