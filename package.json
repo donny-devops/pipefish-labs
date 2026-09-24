@@ -13,6 +13,9 @@
     "verify:dom": "node scripts/verify_dom_integrity.js",
     "verify:all": "node scripts/verify_dom_integrity.js && node scripts/build_site.js && node --test tests/**/*.test.js tests/**/*.test.mjs && node scripts/verify_live_edge.js"
   },
+  "bin": {
+    "pipefish-mcp": "./bin/mcp-server.js"
+  },
   "keywords": [
     "pipefish-labs",
     "multi-agent",
