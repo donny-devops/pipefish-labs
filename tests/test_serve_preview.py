@@ -4,6 +4,7 @@ import socket
 import unittest
 from contextlib import redirect_stderr
 from pathlib import Path
+from unittest.mock import patch
 
 _SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "serve_preview.py"
 _SPEC = importlib.util.spec_from_file_location("serve_preview", _SCRIPT)
@@ -42,6 +43,89 @@ class TestPortBound(unittest.TestCase):
         port = sock.getsockname()[1]
         sock.close()
         self.assertFalse(serve_preview.port_bound(port))
+
+
+class TestMain(unittest.TestCase):
+    def test_main_uses_bind_aware_probe_host_for_collision(self):
+        port = 43123
+        with (
+            patch.object(serve_preview, "ensure_dist"),
+            patch.object(
+                serve_preview.sys,
+                "argv",
+                ["serve_preview.py", "--foreground", "--bind", "127.0.0.2", "--port", str(port)],
+            ),
+            patch.object(serve_preview, "is_ready", return_value=False) as is_ready,
+            patch.object(serve_preview, "port_bound", return_value=False) as port_bound,
+            patch.object(
+                serve_preview.http.server,
+                "ThreadingHTTPServer",
+                side_effect=OSError(serve_preview.errno.EADDRINUSE, "Address already in use"),
+            ),
+            patch.object(serve_preview, "wait_ready") as wait_ready,
+        ):
+            self.assertEqual(serve_preview.main(), 0)
+
+        is_ready.assert_called_once_with(port, "127.0.0.2")
+        port_bound.assert_called_once_with(port, "127.0.0.2")
+        wait_ready.assert_called_once_with(port, "127.0.0.2")
+
+    def test_main_maps_wildcard_bind_to_loopback_for_readiness_checks(self):
+        port = 43124
+        with (
+            patch.object(serve_preview, "ensure_dist"),
+            patch.object(serve_preview.sys, "argv", ["serve_preview.py", "--bind", "0.0.0.0", "--port", str(port)]),
+            patch.object(serve_preview, "is_ready", return_value=False) as is_ready,
+            patch.object(serve_preview, "port_bound", return_value=False) as port_bound,
+            patch.object(serve_preview, "spawn_detached"),
+            patch.object(serve_preview, "wait_ready") as wait_ready,
+        ):
+            self.assertEqual(serve_preview.main(), 0)
+
+        is_ready.assert_called_once_with(port, "127.0.0.1")
+        port_bound.assert_called_once_with(port, "127.0.0.1")
+        wait_ready.assert_called_once_with(port, "127.0.0.1")
+
+    def test_main_maps_ipv6_wildcard_bind_to_loopback_for_readiness_checks(self):
+        port = 43125
+        with (
+            patch.object(serve_preview, "ensure_dist"),
+            patch.object(serve_preview.sys, "argv", ["serve_preview.py", "--bind", "::", "--port", str(port)]),
+            patch.object(serve_preview, "is_ready", return_value=False) as is_ready,
+            patch.object(serve_preview, "port_bound", return_value=False) as port_bound,
+            patch.object(serve_preview, "spawn_detached"),
+            patch.object(serve_preview, "wait_ready") as wait_ready,
+        ):
+            self.assertEqual(serve_preview.main(), 0)
+
+        is_ready.assert_called_once_with(port, "::1")
+        port_bound.assert_called_once_with(port, "::1")
+        wait_ready.assert_called_once_with(port, "::1")
+
+    def test_main_waits_on_requested_bind_for_non_http_occupied_port(self):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        sock.bind(("127.0.0.1", 0))
+        sock.listen(1)
+        port = sock.getsockname()[1]
+        try:
+            with (
+                patch.object(serve_preview, "ensure_dist"),
+                patch.object(
+                    serve_preview.sys,
+                    "argv",
+                    ["serve_preview.py", "--bind", "127.0.0.1", "--port", str(port)],
+                ),
+                patch.object(serve_preview, "is_ready", return_value=False) as is_ready,
+                patch.object(serve_preview, "wait_ready", side_effect=SystemExit("preview failed")) as wait_ready,
+            ):
+                with self.assertRaises(SystemExit):
+                    serve_preview.main()
+
+            is_ready.assert_called_once_with(port, "127.0.0.1")
+            wait_ready.assert_called_once_with(port, "127.0.0.1")
+        finally:
+            sock.close()
 
 
 if __name__ == "__main__":
