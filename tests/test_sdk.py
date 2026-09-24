@@ -150,10 +150,35 @@ class TestPipeFishAgentMesh(unittest.TestCase):
         # Verify 8 node spans
         for i in range(1, 9):
             node_span = res["spans"][i]
-            self.assertEqual(node_span["name"], f"pipefish.node.{i}")
+            node_span_name = f"pipefish.node.{i}"
+            self.assertEqual(node_span["name"], node_span_name)
             self.assertEqual(node_span["attributes"]["pipefish.node_index"], i)
             self.assertTrue(node_span["attributes"]["pipefish.zdr_enclave"])
             self.assertEqual(node_span["status"], "OK")
 
+    def test_list_supported_scenarios(self):
+        scenarios = self.client.list_supported_scenarios()
+        self.assertEqual(len(scenarios), 26)
+        self.assertIn("receptionist", scenarios)
+        self.assertIn("llmops", scenarios)
+        self.assertIn("systemoptimizing", scenarios)
+
+    def test_get_scenario_spec(self):
+        spec = self.client.get_scenario_spec("llmops")
+        self.assertEqual(spec["id"], "26")
+        self.assertEqual(spec["domain"], "AI-INFRA · SRE")
+
+        with self.assertRaises(KeyError):
+            self.client.get_scenario_spec("non_existent_scenario")
+
+    def test_trigger_invalid_scenario_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            self.client.trigger_graph_execution("invalid_scenario", {"test": True})
+
+    def test_trigger_invalid_payload_raises_type_error(self):
+        with self.assertRaises(TypeError):
+            self.client.trigger_graph_execution("receptionist", "not-a-dict") # type: ignore
+
 if __name__ == "__main__":
     unittest.main()
+

@@ -7,7 +7,7 @@
   // Runs before every deploy, including Cloudflare Workers Builds, so dist/ is
   // always regenerated from the committed sources and never has to be checked in.
   "build": {
-    "command": "python3 scripts/build_site.py || python scripts/build_site.py"
+    "command": "node scripts/build_site.js"
   },
 
   // The site is served directly from Cloudflare's edge as static assets.
