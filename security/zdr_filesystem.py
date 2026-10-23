@@ -6,7 +6,7 @@ Features: Cryptographic Overwrite (Multi-Pass Wiping), Ephemeral RAM Scrubber, I
 
 import os
 import secrets
-from typing import List
+
 
 class ZDRFilesystemScrubber:
     """

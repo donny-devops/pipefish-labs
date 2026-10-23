@@ -9,10 +9,10 @@ Enables AI assistants (Claude Desktop, Cursor, Mistral, custom agents) to secure
 discover, query, and execute PipeFish Labs autonomous agent graphs and zero-trust tools.
 """
 
-import sys
 import json
 import logging
-from typing import Dict, Any, List
+import sys
+from typing import Any, Dict
 
 logging.basicConfig(level=logging.ERROR, format="%(asctime)s [%(levelname)s] %(message)s")
 

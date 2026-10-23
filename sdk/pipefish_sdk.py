@@ -9,7 +9,7 @@ import json
 import logging
 import secrets
 import time
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
@@ -117,7 +117,7 @@ class PipeFishAgentMesh:
             raise TypeError(f"Payload must be a dictionary, got {type(payload).__name__}")
 
         logging.info("Triggering Native Mistral Handoff pipeline for scenario: %s", scenario_key)
-        
+
         # W3C TraceContext generation
         trace_id = secrets.token_hex(16)
         root_span_id = secrets.token_hex(8)

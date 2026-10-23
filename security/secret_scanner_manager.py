@@ -11,14 +11,14 @@ Capabilities:
 - JSON and Console Audit Reporting
 """
 
+import argparse
+import json
+import math
 import os
 import re
 import sys
-import math
-import json
-import argparse
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
 
 PATTERNS: Dict[str, Dict[str, Any]] = {
     "pipefish_api_key": {
@@ -145,8 +145,9 @@ class SecretScanFinding:
         }
 
 class SecretScannerManager:
-    def __init__(self, root_dir: str = "."):
-        self.root_dir = Path(root_dir).resolve()
+    def __init__(self, root_dir: Optional[str] = None):
+        default_root = Path(__file__).resolve().parent.parent
+        self.root_dir = Path(root_dir).resolve() if root_dir else default_root
 
     def scan(self) -> List[SecretScanFinding]:
         findings: List[SecretScanFinding] = []
@@ -163,6 +164,7 @@ class SecretScannerManager:
                 # Skip test directories from false positives as defined in allowlist
                 if "tests/" in rel_path or "examples/" in rel_path or "postman/" in rel_path:
                     continue
+                is_test_file = "test" in rel_path.lower()
 
                 try:
                     with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -177,7 +179,7 @@ class SecretScannerManager:
                                     matched_val = match.group(1) if match.groups() else match.group(0)
                                     if is_allowlisted(matched_val) or (is_test_file and is_allowlisted(line_str)):
                                         continue
-                                    
+
                                     findings.append(
                                         SecretScanFinding(
                                             file_path=rel_path,
@@ -244,9 +246,10 @@ def main():
     parser.add_argument("--scan-strict", action="store_true", help="Scan and exit non-zero on any CRITICAL/HIGH violation")
     parser.add_argument("--install-hook", action="store_true", help="Install pre-commit secret scanner hook")
     parser.add_argument("--json", action="store_true", help="Output results in JSON format")
+    parser.add_argument("--root-dir", type=str, default=None, help="Directory to scan (defaults to repository root)")
 
     args = parser.parse_args()
-    manager = SecretScannerManager()
+    manager = SecretScannerManager(root_dir=args.root_dir)
 
     if args.install_hook:
         manager.install_git_hook()
@@ -258,7 +261,7 @@ def main():
     if args.json:
         print(json.dumps(report, indent=2))
     else:
-        print(f"=== PipeFish Labs Secret Scanner Manager v2.4.0 ===")
+        print("=== PipeFish Labs Secret Scanner Manager v2.4.0 ===")
         print(f"Status: {report['status']} | Total Findings: {report['total_findings']}")
         if findings:
             for f in findings:

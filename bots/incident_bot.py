@@ -5,9 +5,11 @@ Connects Slack, Discord, and Opsgenie/PagerDuty alerts to the 8-Node Autonomous 
 """
 
 import json
-from typing import Dict, Any
+from typing import Any, Dict
+
 from sdk.pipefish_sdk import PipeFishAgentMesh
-from sdk.productivity_connectors import SlackAlertConnector, LinearConnector
+from sdk.productivity_connectors import LinearConnector, SlackAlertConnector
+
 
 class IncidentTriageBot:
     """

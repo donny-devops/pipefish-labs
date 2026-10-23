@@ -4,10 +4,11 @@ Version: 2.4.0
 Standards: EU AI Act Annex IV, SOC 2 Type II, HIPAA Security Rule, NIST PQC
 """
 
+import hashlib
 import json
 import time
-import hashlib
-from typing import Dict, Any, List
+from typing import Any, Dict
+
 
 class ComplianceAuditGenerator:
     """

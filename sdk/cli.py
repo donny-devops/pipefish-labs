@@ -5,17 +5,18 @@ Version: 2.4.0
 Usage: pipefish [COMMAND] [OPTIONS]
 """
 
-import sys
-import os
-import json
 import argparse
+import json
+import os
+import sys
 
 # Ensure project root is in path when executed directly
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from sdk.pipefish_sdk import PipeFishAgentMesh
 from sdk.compliance_report import ComplianceAuditGenerator
-from sdk.webhook_verifier import WebhookVerifier, WebhookVerificationError
+from sdk.pipefish_sdk import PipeFishAgentMesh
+from sdk.webhook_verifier import WebhookVerificationError, WebhookVerifier
+
 
 def cmd_simulate(args):
     """Simulates an 8-node agent execution graph."""

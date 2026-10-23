@@ -4,10 +4,11 @@ Version: 2.4.0
 Features: HMAC-SHA256, Ed25519 signature validation, Replay Attack Defense (Timestamp Window)
 """
 
-import time
-import hmac
 import hashlib
-from typing import Union, List
+import hmac
+import time
+from typing import List, Union
+
 
 class WebhookVerificationError(Exception):
     """Base exception for webhook verification failures."""
