@@ -5,8 +5,8 @@ Supported Integrations: Linear, Jira, Slack, Discord, Notion
 Features: Automated Issue Creation, Rich Webhook Alerts, Knowledge Sync
 """
 
-import json
-from typing import Dict, Any, Optional
+from typing import Any, Dict
+
 
 class LinearConnector:
     """
@@ -64,7 +64,7 @@ class SlackAlertConnector:
                             "type": "section",
                             "fields": [
                                 {"type": "mrkdwn", "text": f"*Severity:* {severity}"},
-                                {"type": "mrkdwn", "text": f"*Handoff:* Native Mistral"}
+                                {"type": "mrkdwn", "text": "*Handoff:* Native Mistral"}
                             ]
                         },
                         {

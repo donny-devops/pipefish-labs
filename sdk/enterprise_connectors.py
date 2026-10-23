@@ -5,8 +5,8 @@ Covers: Salesforce, Microsoft 365, Azure Fabric, GCP Workspace, GitLab, Asana, M
 ClickUp, Airtable, Stripe, PayPal, Shopify, Telegram, WhatsApp, PostHog, Mailchimp, Obsidian
 """
 
-import json
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
+
 
 class EnterpriseConnectors:
     """

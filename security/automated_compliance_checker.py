@@ -4,11 +4,12 @@ Version: 2.4.0
 Standards: EU AI Act Annex IV, SOC 2 Type II, HIPAA, NIST CSF, ISO 27001, OWASP Top 10 for LLMs
 """
 
-import os
 import json
+import os
 import sys
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any, Dict
+
 
 class AutomatedComplianceChecker:
     """

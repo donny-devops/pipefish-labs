@@ -4,11 +4,12 @@ Version: 2.4.0
 Features: Ephemeral Key Rotation, Handshake Token Verification, NIST FIPS 203 ML-KEM-768 Simulation
 """
 
-import time
-import hmac
 import hashlib
+import hmac
 import secrets
-from typing import Dict, Any, Optional
+import time
+from typing import Any, Dict
+
 
 class PQCKeyManager:
     """

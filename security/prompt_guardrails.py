@@ -5,7 +5,8 @@ Features: Prompt Injection Blocker, PII Redaction, System Prompt Boundary Protec
 """
 
 import re
-from typing import Tuple, Dict, Any
+from typing import Tuple
+
 
 class PromptInjectionError(Exception):
     """Raised when an adversarial prompt injection pattern is detected."""

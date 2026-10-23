@@ -4,9 +4,10 @@ Version: 2.4.0
 Features: Circuit Breaker, Token Bucket Rate Limiter, In-Memory Zero-Retention Buffer
 """
 
-import time
 import threading
-from typing import Dict, Any, Callable, Optional
+import time
+from typing import Any, Callable, Dict, Optional
+
 
 class CircuitBreakerOpenError(Exception):
     """Raised when an operation is attempted while the circuit breaker is open."""
@@ -33,7 +34,7 @@ class CircuitBreaker:
                 if now - self.last_failure_time > self.cooldown_seconds:
                     self.state = "HALF_OPEN"
                 else:
-                    raise CircuitBreakerOpenError(f"Circuit breaker is OPEN. Fast-failing request.")
+                    raise CircuitBreakerOpenError("Circuit breaker is OPEN. Fast-failing request.")
 
         try:
             result = func(*args, **kwargs)

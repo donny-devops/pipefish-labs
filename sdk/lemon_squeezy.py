@@ -4,10 +4,11 @@ Version: 2.4.0
 Features: Checkout URL Generation, Subscription Lifecycle Management, Webhook HMAC Verification
 """
 
-import hmac
 import hashlib
+import hmac
 import json
-from typing import Dict, Any, Optional
+from typing import Any, Dict
+
 
 class LemonSqueezyError(Exception):
     """Base exception for Lemon Squeezy operations."""
