@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Run Spectral Linter
-        uses: stoplightio/spectral-action@v0.8.10
+        uses: stoplightio/spectral-action@v0.8.13
         with:
           file_glob: 'sdk/openapi.yaml'
           spectral_ruleset: '.spectral.yaml'
