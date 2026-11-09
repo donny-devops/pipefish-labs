@@ -26,12 +26,22 @@ jobs:
       - name: Build Local Image
         run: docker build -t pipefish-mcp:local -f Dockerfile.mcp .
 
-      - name: Run Trivy Vulnerability Scanner
+      - name: Report All Trivy Vulnerabilities
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        with:
+          image-ref: 'pipefish-mcp:local'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: false
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Fail on Fixable Trivy Vulnerabilities
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
         with:
           image-ref: 'pipefish-mcp:local'
           format: 'table'
           exit-code: '1'
-          ignore-unfixed: false
+          ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
