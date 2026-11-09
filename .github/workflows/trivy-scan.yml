@@ -32,6 +32,6 @@ jobs:
           image-ref: 'pipefish-mcp:local'
           format: 'table'
           exit-code: '1'
-          ignore-unfixed: true
+          ignore-unfixed: false
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
