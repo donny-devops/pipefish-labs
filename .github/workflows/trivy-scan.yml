@@ -9,10 +9,11 @@ on:
   pull_request:
     paths:
       - 'Dockerfile.mcp'
+      - 'docker-compose.yml'
+      - '.github/workflows/trivy-scan.yml'
 
 permissions:
   contents: read
-  security-events: write
 
 jobs:
   trivy-scan:
@@ -26,11 +27,11 @@ jobs:
         run: docker build -t pipefish-mcp:local -f Dockerfile.mcp .
 
       - name: Run Trivy Vulnerability Scanner
-        uses: aquasecurity/trivy-action@0.35.0
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
         with:
           image-ref: 'pipefish-mcp:local'
           format: 'table'
-          exit-code: '0'
+          exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
