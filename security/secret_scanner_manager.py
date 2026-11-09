@@ -218,8 +218,8 @@ exit 0
             f.write(hook_script)
 
         try:
-            # Git hooks must be executable; 0755 is the standard mode, not a world-writable secret.
-            os.chmod(hook_file, 0o755)  # nosec B103
+            # Git hooks must be executable; restrict to owner/group and deny access to others.
+            os.chmod(hook_file, 0o750)  # nosec B103
         except Exception:
             pass
 
