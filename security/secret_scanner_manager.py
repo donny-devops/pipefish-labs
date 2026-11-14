@@ -218,7 +218,8 @@ exit 0
             f.write(hook_script)
 
         try:
-            os.chmod(hook_file, 0o755)
+            # Git hooks must be executable; restrict to owner/group and deny access to others.
+            os.chmod(hook_file, 0o750)  # nosec B103
         except Exception:
             pass
 
