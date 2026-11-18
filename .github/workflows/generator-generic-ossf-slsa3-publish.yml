@@ -16,6 +16,9 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,34 +28,31 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # ========================================================
-      #
-      # Step 1: Build your artifacts.
-      #
-      # ========================================================
-      - name: Build artifacts
-        run: |
-            # These are some amazing artifacts.
-            echo "artifact1" > artifact1
-            echo "artifact2" > artifact2
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-      # ========================================================
-      #
-      # Step 2: Add a step to generate the provenance subjects
-      #         as shown below. Update the sha256 sum arguments
-      #         to include all binaries that you generate
-      #         provenance for.
-      #
-      # ========================================================
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+
+      - name: Build Python sdist/wheel and SDK npm tarball
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip build
+          mkdir -p provenance-subjects
+          python -m build --outdir provenance-subjects
+          (cd sdk && npm pack --pack-destination "$GITHUB_WORKSPACE/provenance-subjects")
+          ls -la provenance-subjects
+
       - name: Generate subject for provenance
         id: hash
         run: |
           set -euo pipefail
-
-          # List the artifacts the provenance will refer to.
-          files=$(ls artifact*)
-          # Generate the subjects (base64 encoded).
-          echo "digests=$(sha256sum $files | base64 -w0)" >> "${GITHUB_OUTPUT}"
+          cd provenance-subjects
+          echo "digests=$(sha256sum -- * | base64 -w0)" >> "${GITHUB_OUTPUT}"
 
   provenance:
     needs: [build]

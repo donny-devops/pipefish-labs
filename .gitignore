@@ -51,3 +51,6 @@ agentic_report.md
 # Cloudflare / site build output
 /dist/
 .wrangler/
+
+# SLSA provenance subjects (generated in CI)
+provenance-subjects/
