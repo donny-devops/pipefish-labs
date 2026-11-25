@@ -52,7 +52,16 @@ class WebhookVerifier:
             raise ValueError("At least one valid secret key must be provided.")
 
         self.secret_key = self.secret_keys[0]
-        self.default_tolerance_seconds = default_tolerance_seconds
+        self.default_tolerance_seconds = self._bounded_tolerance(default_tolerance_seconds)
+
+
+    @staticmethod
+    def _bounded_tolerance(tolerance_seconds: int) -> int:
+        if isinstance(tolerance_seconds, bool) or not isinstance(tolerance_seconds, int):
+            raise ValueError("tolerance_seconds must be an integer number of seconds.")
+        if tolerance_seconds < 0 or tolerance_seconds > 86400:
+            raise ValueError("tolerance_seconds must be between 0 and 86400.")
+        return tolerance_seconds
 
     def compute_signature(self, payload: bytes, timestamp: int, secret_idx: int = 0) -> str:
         """
@@ -76,16 +85,21 @@ class WebhookVerifier:
         """
         if tolerance_seconds is None:
             tolerance_seconds = self.default_tolerance_seconds
+        tolerance_seconds = self._bounded_tolerance(tolerance_seconds)
 
         if not signature_header:
             raise WebhookVerificationError("Missing X-PipeFish-Signature header.")
 
-        # Parse header: t=1725240000,v1=abc123...
+        # Parse header: t=1725240000,v1=abc123... First t and v1 win so a
+        # trailing duplicate cannot replace a signature the verifier already saw.
         parts = {}
         for item in signature_header.split(","):
-            if "=" in item:
-                k, v = item.split("=", 1)
-                parts[k.strip()] = v.strip()
+            if "=" not in item:
+                continue
+            k, v = item.split("=", 1)
+            key = k.strip()
+            if key in {"t", "v1"} and key not in parts:
+                parts[key] = v.strip()
 
         if "t" not in parts or "v1" not in parts:
             raise WebhookVerificationError("Malformed X-PipeFish-Signature header format.")
@@ -96,6 +110,8 @@ class WebhookVerifier:
             raise WebhookVerificationError("Invalid timestamp in signature header.")
 
         received_sig = parts["v1"]
+        if len(received_sig) != 64 or any(c not in "0123456789abcdefABCDEF" for c in received_sig):
+            raise WebhookVerificationError("Signature digest must be 64 hex characters.")
 
         # Check timestamp drift to prevent replay attacks
         current_time = int(time.time())
