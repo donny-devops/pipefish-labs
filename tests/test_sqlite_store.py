@@ -34,5 +34,14 @@ class TestSQLiteStore(unittest.TestCase):
         record = self.store.get_execution(eid)
         self.assertIsNotNone(record)
 
+
+    def test_rejects_negative_node_count(self):
+        with self.assertRaises(ValueError):
+            self.store.save_execution("sales", "RUNNING", -1, "mistral_native", {})
+
+    def test_rejects_oversized_payload(self):
+        with self.assertRaises(ValueError):
+            self.store.save_execution("sales", "RUNNING", 1, "mistral_native", {"blob": "x" * 300_000})
+
 if __name__ == "__main__":
     unittest.main()

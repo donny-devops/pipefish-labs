@@ -54,5 +54,17 @@ class TestWebhookVerifier(unittest.TestCase):
         with self.assertRaises(WebhookSignatureMismatchError):
             rotation_verifier.verify(self.payload, invalid_sig)
 
+
+    def test_non_hex_digest_rejected(self):
+        ts = int(time.time())
+        with self.assertRaises(WebhookVerificationError):
+            self.verifier.verify(self.payload, f"t={ts},v1=not-a-digest")
+
+    def test_negative_tolerance_rejected(self):
+        ts = int(time.time())
+        sig = self.verifier.compute_signature(self.payload, ts)
+        with self.assertRaises(ValueError):
+            self.verifier.verify(self.payload, sig, tolerance_seconds=-1)
+
 if __name__ == "__main__":
     unittest.main()
