@@ -7,11 +7,18 @@ Features: Native Mistral Handoffs, Managed MCP Connectors, ZDR Confidential Encl
 
 import json
 import logging
+import re
 import secrets
 import time
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
+from urllib.parse import urlparse
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+
+MAX_PAYLOAD_BYTES = 65_536
+SENSITIVE_KEY = re.compile(r"(api[_-]?key|password|secret|token|credential)", re.IGNORECASE)
+LOCAL_HOSTS = {"localhost", "127.0.0.1", "::1"}
 
 NODE_NAMES = [
     "Node 01: Ingestion & Intent Analysis",
@@ -53,6 +60,48 @@ SUPPORTED_SCENARIOS: Dict[str, Dict[str, str]] = {
     "llmops": {"id": "26", "name": "LLMOps & Prompt Evaluation Agent", "domain": "AI-INFRA · SRE"},
 }
 
+
+def _require_api_key(api_key: str) -> str:
+    if not isinstance(api_key, str) or not api_key.strip() or any(ch in api_key for ch in "\n\r"):
+        raise ValueError("API key must be a single-line non-empty string.")
+    return api_key.strip()
+
+
+def _require_endpoint(endpoint: str) -> str:
+    if not isinstance(endpoint, str):
+        raise ValueError("endpoint must be a URL string.")
+    parsed = urlparse(endpoint.strip())
+    host = (parsed.hostname or "").lower()
+    if parsed.scheme not in {"http", "https"} or not host:
+        raise ValueError("endpoint must be an http(s) URL.")
+    if parsed.scheme != "https" and host not in LOCAL_HOSTS:
+        raise ValueError("endpoint must use https outside localhost.")
+    return endpoint.strip().rstrip("/")
+
+
+def _redact(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {
+            key: "[REDACTED]" if SENSITIVE_KEY.search(str(key)) else _redact(item)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [_redact(item) for item in value]
+    return value
+
+
+def _require_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+    if not isinstance(payload, dict):
+        raise TypeError(f"Payload must be a dictionary, got {type(payload).__name__}")
+    try:
+        encoded = json.dumps(payload)
+    except (TypeError, ValueError) as exc:
+        raise TypeError("Payload must be JSON-serializable.") from exc
+    if len(encoded.encode("utf-8")) > MAX_PAYLOAD_BYTES:
+        raise ValueError("Payload exceeds 64 KiB.")
+    return payload
+
+
 class Span:
     """Represents an OpenTelemetry-compatible trace span."""
     def __init__(self, name: str, trace_id: str, span_id: str, parent_span_id: Optional[str] = None, attributes: Optional[Dict[str, Any]] = None):
@@ -88,10 +137,8 @@ class PipeFishAgentMesh:
     """
 
     def __init__(self, api_key: str, endpoint: str = "https://api.pipefishlabs.io/v1"):
-        if not api_key:
-            raise ValueError("API key must be provided to initialize PipeFishAgentMesh.")
-        self.api_key = api_key
-        self.endpoint = endpoint.rstrip("/")
+        self.api_key = _require_api_key(api_key)
+        self.endpoint = _require_endpoint(endpoint)
         self.last_trace: Optional[Dict[str, Any]] = None
         logging.info("Initialized PipeFishAgentMesh with Native Mistral Handoffs enabled.")
 
@@ -113,8 +160,7 @@ class PipeFishAgentMesh:
         if scenario_key not in SUPPORTED_SCENARIOS:
             raise ValueError(f"Invalid scenario '{scenario_key}'. Supported scenarios: {self.list_supported_scenarios()}")
 
-        if not isinstance(payload, dict):
-            raise TypeError(f"Payload must be a dictionary, got {type(payload).__name__}")
+        payload = _require_payload(payload)
 
         logging.info("Triggering Native Mistral Handoff pipeline for scenario: %s", scenario_key)
 
@@ -171,7 +217,6 @@ class PipeFishAgentMesh:
             "spans": all_spans
         }
 
-        # Simulated Native Mistral Handoff state transition payload
         response = {
             "scenario": scenario_key,
             "status": "COMPLETED",
@@ -186,8 +231,8 @@ class PipeFishAgentMesh:
             },
             "spans": all_spans,
             "execution_summary": {
-                "inbound_telemetry": payload,
-                "completed_at": "2026-09-02T02:35:00Z"
+                "inbound_telemetry": _redact(payload),
+                "completed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
             }
         }
         return response
